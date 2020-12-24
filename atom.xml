@@ -3,11 +3,11 @@
   <title>浅幽丶奈芙莲的个人博客</title>
   
   <subtitle>NephrenCake Blog</subtitle>
-  <link href="http://example.com/atom.xml" rel="self"/>
+  <link href="https://nephrencake.gitee.io/atom.xml" rel="self"/>
   
-  <link href="http://example.com/"/>
-  <updated>2020-12-24T12:59:29.066Z</updated>
-  <id>http://example.com/</id>
+  <link href="https://nephrencake.gitee.io/"/>
+  <updated>2020-12-24T13:19:11.725Z</updated>
+  <id>https://nephrencake.gitee.io/</id>
   
   <author>
     <name>NephrenCake</name>
@@ -18,29 +18,29 @@
   
   <entry>
     <title>Butterfly主题安装和魔改</title>
-    <link href="http://example.com/2021/01/01/Butterfly%E4%B8%BB%E9%A2%98%E5%AE%89%E8%A3%85%E5%92%8C%E9%AD%94%E6%94%B9/"/>
-    <id>http://example.com/2021/01/01/Butterfly%E4%B8%BB%E9%A2%98%E5%AE%89%E8%A3%85%E5%92%8C%E9%AD%94%E6%94%B9/</id>
+    <link href="https://nephrencake.gitee.io/2021/01/01/Butterfly%E4%B8%BB%E9%A2%98%E5%AE%89%E8%A3%85%E5%92%8C%E9%AD%94%E6%94%B9/"/>
+    <id>https://nephrencake.gitee.io/2021/01/01/Butterfly%E4%B8%BB%E9%A2%98%E5%AE%89%E8%A3%85%E5%92%8C%E9%AD%94%E6%94%B9/</id>
     <published>2020-12-31T16:00:00.000Z</published>
-    <updated>2020-12-24T12:59:29.066Z</updated>
+    <updated>2020-12-24T13:19:11.725Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="安装butterfly"><a href="#安装butterfly" class="headerlink" title="安装butterfly"></a>安装butterfly</h1><ol><li>运行<code>git clone https://github.com/jerryc127/hexo-theme-butterfly themes/butterfly</code></li><li>打开_config.yml找到这一行<code>theme: landspace</code>然后将landspace替换butterfly</li><li>安装插件<code>cnpm install hexo-renderer-pug hexo-renderer-stylus</code></li><li>安装插件<code>cnpm install --save hexo-renderer-jade hexo-generator-feed hexo-generator-sitemap hexo-browsersync hexo-generator-archive</code></li></ol><blockquote><p>为了以后升级方便，这里不推荐直接对主题的配置文件进行修改，而是复制配置文件进行修改。个人推荐把主題的配置文件_config.yml复制到 Hexo 工作目录下的source/_data/butterfly.yml，如果目录不存在那就创建一个。</p></blockquote><h1 id="butterfly主题魔改"><a href="#butterfly主题魔改" class="headerlink" title="butterfly主题魔改"></a>butterfly主题魔改</h1><p>自己一开始动手做的时候大部分都参考Dreamy.TZK的博客</p><p><a href="https://www.antmoe.com/posts/75a6347a/index.html">Hexo安装并使用Butterfly主题</a></p><p>但是改到后来就越来越觉得，版本问题导致的主题修改不兼容，问题实在很大。甚至到后来想要获得自己的预期效果时，已经不得不去在源代码上下手<del>，因为还没有学过前端，改的属实面目全非</del>。</p><h2 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h2><p>这里只能为想要自己动手改的小伙伴一些建议，比如想修改文章页，可以结合浏览器的开发者工具来找到相应的参数，来修改对应的值。</p><p>![Butterfly主题安装和魔改/Untitled.png)</p><p><img src="Butterfly%E4%B8%BB%E9%A2%98%E5%AE%89%E8%A3%85%E5%92%8C%E9%AD%94%E6%94%B9%207860b0d7af8c423ebe533074e1184435/Untitled%201.png" alt="Butterfly%E4%B8%BB%E9%A2%98%E5%AE%89%E8%A3%85%E5%92%8C%E9%AD%94%E6%94%B9%207860b0d7af8c423ebe533074e1184435/Untitled%201.png"></p><h2 id="相册的使用"><a href="#相册的使用" class="headerlink" title="相册的使用"></a>相册的使用</h2><p>（由于主题不一样，暂时还在测试中，，，慢慢整这些美化~<br><a href="https://www.cnblogs.com/xljzlw/p/5137622.html">https://www.cnblogs.com/xljzlw/p/5137622.html</a></p>]]></content>
+    <content type="html"><![CDATA[<h1 id="安装butterfly"><a href="#安装butterfly" class="headerlink" title="安装butterfly"></a>安装butterfly</h1><ol><li>运行<code>git clone https://github.com/jerryc127/hexo-theme-butterfly themes/butterfly</code></li><li>打开_config.yml找到这一行<code>theme: landspace</code>然后将landspace替换butterfly</li><li>安装插件<code>cnpm install hexo-renderer-pug hexo-renderer-stylus</code></li><li>安装插件<code>cnpm install --save hexo-renderer-jade hexo-generator-feed hexo-generator-sitemap hexo-browsersync hexo-generator-archive</code></li></ol><blockquote><p>为了以后升级方便，这里不推荐直接对主题的配置文件进行修改，而是复制配置文件进行修改。个人推荐把主題的配置文件_config.yml复制到 Hexo 工作目录下的source/_data/butterfly.yml，如果目录不存在那就创建一个。</p></blockquote><h1 id="butterfly主题魔改"><a href="#butterfly主题魔改" class="headerlink" title="butterfly主题魔改"></a>butterfly主题魔改</h1><p>自己一开始动手做的时候大部分都参考Dreamy.TZK的博客</p><p><a href="https://www.antmoe.com/posts/75a6347a/index.html">Hexo安装并使用Butterfly主题</a></p><p>但是改到后来就越来越觉得，版本问题导致的主题修改不兼容，问题实在很大。甚至到后来想要获得自己的预期效果时，已经不得不去在源代码上下手<del>，因为还没有学过前端，改的属实面目全非</del>。</p><h2 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h2><p>这里只能为想要自己动手改的小伙伴一些建议，比如想修改文章页，可以结合浏览器的开发者工具来找到相应的参数，来修改对应的值。</p><p>![Butterfly主题安装和魔改/Untitled.png)</p><p><img src="Butterfly%E4%B8%BB%E9%A2%98%E5%AE%89%E8%A3%85%E5%92%8C%E9%AD%94%E6%94%B9%207860b0d7af8c423ebe533074e1184435/Untitled%201.png" alt="Butterfly%E4%B8%BB%E9%A2%98%E5%AE%89%E8%A3%85%E5%92%8C%E9%AD%94%E6%94%B9%207860b0d7af8c423ebe533074e1184435/Untitled%201.png"></p><h2 id="相册的使用"><a href="#相册的使用" class="headerlink" title="相册的使用"></a>相册的使用</h2><p><a href="https://blog.ahzoo.cn/2020/07/20/b7201/">https://blog.ahzoo.cn/2020/07/20/b7201/</a></p>]]></content>
     
     
     <summary type="html">Butterfly主题安装和魔改</summary>
     
     
     
-    <category term="Hexo" scheme="http://example.com/categories/Hexo/"/>
+    <category term="Hexo" scheme="https://nephrencake.gitee.io/categories/Hexo/"/>
     
     
-    <category term="hexo" scheme="http://example.com/tags/hexo/"/>
+    <category term="hexo" scheme="https://nephrencake.gitee.io/tags/hexo/"/>
     
   </entry>
   
   <entry>
     <title>Hexo静态博客搭建和部署</title>
-    <link href="http://example.com/2021/01/01/Hexo%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%92%8C%E9%83%A8%E7%BD%B2/"/>
-    <id>http://example.com/2021/01/01/Hexo%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%92%8C%E9%83%A8%E7%BD%B2/</id>
+    <link href="https://nephrencake.gitee.io/2021/01/01/Hexo%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%92%8C%E9%83%A8%E7%BD%B2/"/>
+    <id>https://nephrencake.gitee.io/2021/01/01/Hexo%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%92%8C%E9%83%A8%E7%BD%B2/</id>
     <published>2020-12-31T16:00:00.000Z</published>
     <updated>2020-12-24T12:57:37.694Z</updated>
     
@@ -51,17 +51,17 @@
     
     
     
-    <category term="Hexo" scheme="http://example.com/categories/Hexo/"/>
+    <category term="Hexo" scheme="https://nephrencake.gitee.io/categories/Hexo/"/>
     
     
-    <category term="hexo" scheme="http://example.com/tags/hexo/"/>
+    <category term="hexo" scheme="https://nephrencake.gitee.io/tags/hexo/"/>
     
   </entry>
   
   <entry>
     <title>华为培训第二天</title>
-    <link href="http://example.com/2021/01/01/%E5%8D%8E%E4%B8%BA%E5%9F%B9%E8%AE%AD%E7%AC%AC%E4%BA%8C%E5%A4%A9/"/>
-    <id>http://example.com/2021/01/01/%E5%8D%8E%E4%B8%BA%E5%9F%B9%E8%AE%AD%E7%AC%AC%E4%BA%8C%E5%A4%A9/</id>
+    <link href="https://nephrencake.gitee.io/2021/01/01/%E5%8D%8E%E4%B8%BA%E5%9F%B9%E8%AE%AD%E7%AC%AC%E4%BA%8C%E5%A4%A9/"/>
+    <id>https://nephrencake.gitee.io/2021/01/01/%E5%8D%8E%E4%B8%BA%E5%9F%B9%E8%AE%AD%E7%AC%AC%E4%BA%8C%E5%A4%A9/</id>
     <published>2020-12-31T16:00:00.000Z</published>
     <updated>2020-12-24T13:01:31.573Z</updated>
     
@@ -72,10 +72,10 @@
     
     
     
-    <category term="Linux" scheme="http://example.com/categories/Linux/"/>
+    <category term="Linux" scheme="https://nephrencake.gitee.io/categories/Linux/"/>
     
     
-    <category term="Linux" scheme="http://example.com/tags/Linux/"/>
+    <category term="Linux" scheme="https://nephrencake.gitee.io/tags/Linux/"/>
     
   </entry>
   
