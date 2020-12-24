@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title></title>
+      <link href="2020/12/21/Hexo%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%92%8C%E9%83%A8%E7%BD%B2/"/>
+      <url>2020/12/21/Hexo%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%92%8C%E9%83%A8%E7%BD%B2/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Hexo静态博客搭建和部署"><a href="#Hexo静态博客搭建和部署" class="headerlink" title="Hexo静态博客搭建和部署"></a>Hexo静态博客搭建和部署</h1><h1 id="软件安装"><a href="#软件安装" class="headerlink" title="软件安装"></a>软件安装</h1><h2 id="Nodejs"><a href="#Nodejs" class="headerlink" title="Nodejs"></a>Nodejs</h2><p><a href="https://nodejs.org/en/">Node.js</a></p><ul><li>cmd中输入node -v确认nodejs安装成功</li></ul><h2 id="Git-Bash"><a href="#Git-Bash" class="headerlink" title="Git Bash"></a>Git Bash</h2><p><a href="https://www.git-scm.com/download/win">Downloading Git</a></p><ul><li>在最近安装中能打开Git Bash确认Git Bash安装成功</li></ul><blockquote><p>nodejs和git自己选好安装位置之后无脑下一步就行。</p></blockquote><h2 id="cnpm"><a href="#cnpm" class="headerlink" title="cnpm"></a>cnpm</h2><p>在最新版的Nodejs中包含了npm。这里安装淘宝的cnpm管理器，以提高速度。</p><blockquote><p>可选项：</p></blockquote><p>在初次试错踩坑之后，本篇介绍此静态博客网站搭建的全过程</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title></title>
+      <link href="2020/12/21/Butterfly%E4%B8%BB%E9%A2%98%E5%AE%89%E8%A3%85%E5%92%8C%E9%AD%94%E6%94%B9/"/>
+      <url>2020/12/21/Butterfly%E4%B8%BB%E9%A2%98%E5%AE%89%E8%A3%85%E5%92%8C%E9%AD%94%E6%94%B9/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Butterfly主题安装和魔改"><a href="#Butterfly主题安装和魔改" class="headerlink" title="Butterfly主题安装和魔改"></a>Butterfly主题安装和魔改</h1>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title></title>
+      <link href="2020/12/21/%E6%9C%AC%E7%AB%99%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%85%A8%E8%BF%87%E7%A8%8B/"/>
+      <url>2020/12/21/%E6%9C%AC%E7%AB%99%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%85%A8%E8%BF%87%E7%A8%8B/</url>
+      
+        <content type="html"><![CDATA[<h1 id="本站静态博客的实现全过程"><a href="#本站静态博客的实现全过程" class="headerlink" title="本站静态博客的实现全过程"></a>本站静态博客的实现全过程</h1><p>在初次试错踩坑之后，本篇介绍此静态博客网站搭建的全过程</p><h1 id="Hexo静态博客的搭建和部署"><a href="#Hexo静态博客的搭建和部署" class="headerlink" title="Hexo静态博客的搭建和部署"></a>Hexo静态博客的搭建和部署</h1><p><a href="/_posts/Hexo%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%92%8C%E9%83%A8%E7%BD%B2.md">Hexo静态博客搭建和部署</a></p><h1 id="Butterfly主题安装和魔改"><a href="#Butterfly主题安装和魔改" class="headerlink" title="Butterfly主题安装和魔改"></a>Butterfly主题安装和魔改</h1><p><a href="/_posts/Butterfly%E4%B8%BB%E9%A2%98%E5%AE%89%E8%A3%85%E5%92%8C%E9%AD%94%E6%94%B9.md">Butterfly主题安装和魔改</a></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Hello World</title>
+      <link href="2020/12/18/hello-world/"/>
+      <url>2020/12/18/hello-world/</url>
+      
+        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>龟速教程之手把手搭建博客1</title>
+      <link href="2020/07/04/java%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+      <url>2020/07/04/java%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/</url>
+      
+        <content type="html"><![CDATA[<h1 id="java数据结构与算法-50ac87c538be40028598c03001e68c59"><a href="#java数据结构与算法-50ac87c538be40028598c03001e68c59" class="headerlink" title="java数据结构与算法 50ac87c538be40028598c03001e68c59"></a>java数据结构与算法 50ac87c538be40028598c03001e68c59</h1><h1 id="java数据结构与算法"><a href="#java数据结构与算法" class="headerlink" title="java数据结构与算法"></a>java数据结构与算法</h1><h1 id="yes"><a href="#yes" class="headerlink" title="yes"></a>yes</h1><p>y/n?</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 个人博客 </category>
+          
+          <category> 测试 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> hexo </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>华为培训第二天</title>
+      <link href="2020/07/04/%E5%8D%8E%E4%B8%BA%E5%9F%B9%E8%AE%AD%E7%AC%AC%E4%BA%8C%E5%A4%A9%20eb945d2b407e46ea9264eac96d2e2b7d/"/>
+      <url>2020/07/04/%E5%8D%8E%E4%B8%BA%E5%9F%B9%E8%AE%AD%E7%AC%AC%E4%BA%8C%E5%A4%A9%20eb945d2b407e46ea9264eac96d2e2b7d/</url>
+      
+        <content type="html"><![CDATA[<h1 id="openEuler基本命令操作"><a href="#openEuler基本命令操作" class="headerlink" title="openEuler基本命令操作"></a>openEuler基本命令操作</h1><hr><h2 id="1-显示当前目录下的文件或目录"><a href="#1-显示当前目录下的文件或目录" class="headerlink" title="1.显示当前目录下的文件或目录"></a>1.显示当前目录下的文件或目录</h2><p>ls</p><p>ls+空格   （查看指定目录</p><p>ls 显示当前目录下的文件或目录</p><p>ls空格 查看指定目录。例：ls / 查看根目录</p><p>ls -l查看详细信息(或者ll /)</p><p>ls -a查看所有文件（包括隐藏文件</p><p>第一列，三中不同权限，对当前用户，与当前用户组，对其他用户</p><p>第二列，root属于root用户</p><p>第三列，root属于用户组</p><p>第四列，大小</p><p>第五列，时间</p><p>ls 空格  - -help(中间无空格）</p><p>按tab键补全，当不知道什么时候按tab的时候每次都试一下，但是当无论如何都不能补全的时候，应当确认是否有该文件：连按两次tab键可以列出所有关键词对应的文件或目录</p><h2 id="3-切换目录"><a href="#3-切换目录" class="headerlink" title="3.切换目录"></a>3.切换目录</h2><p>cd+空格+目录</p><h3 id="切换到家目录"><a href="#切换到家目录" class="headerlink" title="切换到家目录"></a>切换到家目录</h3><ul><li>cd ~</li><li>cd /root</li><li>cd</li></ul><p>cd ..返回上一目录</p><p>mkdir+空格+目录名   创建目录</p><p>蓝色代表文件夹</p><p>创建多级目录（当多级目录中间有文件夹不存在时） mkdir + 空格 + -p + 空格 + 目录</p><h2 id="4-创建文件"><a href="#4-创建文件" class="headerlink" title="4.创建文件"></a>4.创建文件</h2><p>touch 空格 新文件名</p><h2 id="5-复制文件"><a href="#5-复制文件" class="headerlink" title="5.复制文件"></a>5.复制文件</h2><p>cp+空格+源文件+空格+路径 （文件名不发生改变</p><p>cp+空格+源文件+空格+路径/新文件名  （文件名改变</p><p>复制文件夹cp -r test /mnt/</p><h3 id="当文件复制不加类型时，其也单纯只是文件名的差异"><a href="#当文件复制不加类型时，其也单纯只是文件名的差异" class="headerlink" title="当文件复制不加类型时，其也单纯只是文件名的差异"></a>当文件复制不加类型时，其也单纯只是文件名的差异</h3><h2 id="6-移动命令"><a href="#6-移动命令" class="headerlink" title="6.移动命令"></a>6.移动命令</h2><p>mv+空格+源文件+空格+路径</p><p>mv+空格+源文件+空格+路径/文件</p><p>mv+空格+路径/源文件+空格+路径/文件</p><h3 id="用mv进行重命名"><a href="#用mv进行重命名" class="headerlink" title="用mv进行重命名"></a>用mv进行重命名</h3><p>mv+空格+源文件+空格+新文件名</p><h1 id="7-删除文件"><a href="#7-删除文件" class="headerlink" title="7.删除文件"></a>7.删除文件</h1><p>rm 空格 文件</p><p>rm 空格 空目录</p><p>rm 空格 -r 目录   （删除非空文件夹，无论空或非空都需要确认</p><p>rm 空格 -rf 目录   （删除非空文件夹，无需确认</p><h2 id="8-创建软连接"><a href="#8-创建软连接" class="headerlink" title="8.创建软连接"></a>8.创建软连接</h2><p>相当于快捷方式</p><p>当源文件删除时，该软连接失效</p><p>步骤 11 创建huawei.txt的硬链接到/mnt，并命名为huawei1.txt。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@openeuler ~]#ln  huawei.txt  &#x2F;mnt&#x2F;huawei1.txt</span><br><span class="line">[root@openeuler ~]#ls  -l  &#x2F;mnt</span><br><span class="line">-rw-------. 2 root root 0 Feb 10 14:11 huawei1.txt    &#x2F;&#x2F;此处数字是2</span><br><span class="line"></span><br></pre></td></tr></table></figure><h2 id="9-创建硬链接"><a href="#9-创建硬链接" class="headerlink" title="9.创建硬链接"></a>9.创建硬链接</h2><p>给一个文件多路读取，原路删除不影响其他</p><p>软连接要用绝对路径</p><p> 步骤 12 创建huawei.txt的软链接到/mnt，并命名为huawei2.txt。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@openeuler ~]#ln  -s  huawei.txt  &#x2F;mnt&#x2F;huawei2.txt</span><br><span class="line">[root@openeuler ~]#ls  -l  &#x2F;mnt</span><br><span class="line">-rw-------. 2 root root  0 Feb 10 14:11 huawei1.txt</span><br><span class="line">lrwxrwxrwx. 1 root root 10 Feb 10 14:15 huawei2.txt -&gt; huawei.txt</span><br></pre></td></tr></table></figure><h2 id="10-查看命令"><a href="#10-查看命令" class="headerlink" title="10.查看命令"></a>10.查看命令</h2><p>cat 空格 文件   </p><ul><li>选中复制，右键粘贴，上下切换命令</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 个人博客 </category>
+          
+          <category> 测试2 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> hexo </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>

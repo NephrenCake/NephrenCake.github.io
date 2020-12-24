@@ -1,0 +1,12 @@
+@font-face{
+            font-family: 'HYLeMiaoTiW';
+            src : url('../font/HYLeMiaoTiW.ttf');
+        }
+
+.fontFail {
+            font-family: HYLeMiaoTiW;
+        }
+
+//body{
+//    font-family: "HYLeMiaoTiW";
+//}
