@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://nephrencake.gitee.io/2021/01/01/Butterfly%E4%B8%BB%E9%A2%98%E5%AE%89%E8%A3%85%E5%92%8C%E9%AD%94%E6%94%B9/</loc>
+    
+    <lastmod>2020-12-31</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://nephrencake.gitee.io/2021/01/01/Hexo%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%92%8C%E9%83%A8%E7%BD%B2/</loc>
+    
+    <lastmod>2020-12-31</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://nephrencake.gitee.io/2021/01/01/%E5%8D%8E%E4%B8%BA%E5%9F%B9%E8%AE%AD%E7%AC%AC%E4%BA%8C%E5%A4%A9/</loc>
+    
+    <lastmod>2020-12-31</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://nephrencake.gitee.io/photo/pixiv/index.html</loc>
     
     <lastmod>2020-12-24</lastmod>
@@ -9,28 +30,7 @@
   </url>
   
   <url>
-    <loc>https://nephrencake.gitee.io/2021/01/01/Butterfly%E4%B8%BB%E9%A2%98%E5%AE%89%E8%A3%85%E5%92%8C%E9%AD%94%E6%94%B9/</loc>
-    
-    <lastmod>2020-12-24</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://nephrencake.gitee.io/photo/index.html</loc>
-    
-    <lastmod>2020-12-24</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://nephrencake.gitee.io/2021/01/01/%E5%8D%8E%E4%B8%BA%E5%9F%B9%E8%AE%AD%E7%AC%AC%E4%BA%8C%E5%A4%A9/</loc>
-    
-    <lastmod>2020-12-24</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://nephrencake.gitee.io/2021/01/01/Hexo%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%92%8C%E9%83%A8%E7%BD%B2/</loc>
     
     <lastmod>2020-12-24</lastmod>
     
@@ -60,7 +60,7 @@
 
   <url>
     <loc>https://nephrencake.gitee.io/</loc>
-    <lastmod>2020-12-24</lastmod>
+    <lastmod>2020-12-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -68,14 +68,14 @@
   
   <url>
     <loc>https://nephrencake.gitee.io/tags/hexo/</loc>
-    <lastmod>2020-12-24</lastmod>
+    <lastmod>2020-12-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://nephrencake.gitee.io/tags/Linux/</loc>
-    <lastmod>2020-12-24</lastmod>
+    <lastmod>2020-12-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -83,15 +83,15 @@
 
   
   <url>
-    <loc>https://nephrencake.gitee.io/categories/Hexo/</loc>
-    <lastmod>2020-12-24</lastmod>
+    <loc>https://nephrencake.gitee.io/categories/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</loc>
+    <lastmod>2020-12-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://nephrencake.gitee.io/categories/Linux/</loc>
-    <lastmod>2020-12-24</lastmod>
+    <loc>https://nephrencake.gitee.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2020-12-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
