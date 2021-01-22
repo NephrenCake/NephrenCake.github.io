@@ -1339,7 +1339,7 @@ canvas:not(#ribbon-canvas),
   --tab-botton-color: #1f2d3d;
   --tab-button-hover-bg: #dcdcdc;
   --tab-button-active-bg: #fff;
-  --card-bg: rgba(255,255,255,0.5);
+  --card-bg: rgba(255,255,255,0.7);
   --sidebar-bg: #f6f8fa;
   --btn-hover-color: #ff7242;
   --btn-color: #fff;
@@ -1569,7 +1569,7 @@ img:not([src]) {
   text-decoration: none !important;
 }
 figure.highlight table::-webkit-scrollbar-thumb {
-  background: #06060a;
+  background: #1d202c;
 }
 figure.highlight pre .deletion {
   color: #bf42bf;
@@ -1581,7 +1581,7 @@ figure.highlight pre .meta {
   color: #c792ea;
 }
 figure.highlight pre .comment {
-  color: rgba(101,115,126,0.8);
+  color: #676e95;
 }
 figure.highlight pre .variable,
 figure.highlight pre .attribute,
@@ -1658,8 +1658,8 @@ figure.highlight pre .javascript .function {
 #article-container figure.highlight .gutter pre {
   padding-right: 0.5rem;
   padding-left: 0.5rem;
-  background-color: #0f111a;
-  color: rgba(143,147,162,0.5);
+  background-color: #292d3e;
+  color: rgba(166,172,205,0.5);
   text-align: right;
 }
 #article-container figure.highlight .code pre {
@@ -1672,8 +1672,8 @@ figure.highlight pre .javascript .function {
   overflow: auto;
   margin: 0 0 1rem;
   padding: 0;
-  background: #0f111a;
-  color: #8f93a2;
+  background: #292d3e;
+  color: #a6accd;
   line-height: 1.6;
 }
 blockquote {
@@ -1716,7 +1716,7 @@ blockquote footer cite:before {
 #article-container pre code {
   padding: 0;
   background: none;
-  color: #8f93a2;
+  color: #a6accd;
   text-shadow: none;
 }
 #article-container figure.highlight {
@@ -1737,11 +1737,11 @@ blockquote footer cite:before {
 #article-container figure.highlight .caption a {
   float: right;
   padding-right: 10px;
-  color: #8f93a2;
+  color: #a6accd;
 }
 #article-container figure.highlight figcaption a:hover,
 #article-container figure.highlight .caption a:hover {
-  border-bottom-color: #8f93a2;
+  border-bottom-color: #a6accd;
 }
 #article-container .highlight-tools {
   position: relative;
@@ -1760,8 +1760,8 @@ blockquote footer cite:before {
   overflow: hidden;
   min-height: 1.2rem;
   height: 2.15em;
-  background: #0b0d14;
-  color: #8f93a2;
+  background: #252938;
+  color: #a6accd;
   font-size: 14px;
 }
 #article-container .highlight-tools.closed + table {
