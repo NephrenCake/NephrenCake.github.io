@@ -1,0 +1,205 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PyTorch深度学习实践Part5 | 浅幽丶奈芙莲的个人博客</title><meta name="keywords" content="深度学习"><meta name="author" content="NephrenCake"><meta name="copyright" content="NephrenCake"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="线性回归">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PyTorch深度学习实践Part5">
+<meta property="og:url" content="https://nephrencake.gitee.io/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part5/index.html">
+<meta property="og:site_name" content="浅幽丶奈芙莲的个人博客">
+<meta property="og:description" content="线性回归">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://nephrencake.gitee.io/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part5/%E4%BA%8Ced05.jpg">
+<meta property="article:published_time" content="2021-01-17T03:05:41.000Z">
+<meta property="article:modified_time" content="2021-01-22T03:21:52.263Z">
+<meta property="article:author" content="NephrenCake">
+<meta property="article:tag" content="深度学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://nephrencake.gitee.io/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part5/%E4%BA%8Ced05.jpg"><link rel="shortcut icon" href="/img/favicon.jpg"><link rel="canonical" href="https://nephrencake.gitee.io/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part5/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}
+
+// https://stackoverflow.com/questions/16839698/jquery-getscript-alternative-in-native-javascript
+const getScript = url => new Promise((resolve, reject) => {
+  const script = document.createElement('script')
+  script.src = url
+  script.async = true
+  script.onerror = reject
+  script.onload = script.onreadystatechange = function() {
+    const loadState = this.readyState
+    if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+    script.onload = script.onreadystatechange = null
+    resolve()
+  }
+  document.head.appendChild(script)
+})</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-01-22 11:21:52'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><link rel="stylesheet" href="/css/background.css"><link rel="stylesheet" href="/css/mouse.css"><link rel="stylesheet" href="/css/scrollbar.css"><link rel="stylesheet" href="/css/font.css"><link rel="stylesheet" href="/css/iconfont.css"><meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="浅幽丶奈芙莲的个人博客" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">16</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/photo/"><i class="fa-fw fas fa-heart"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part5/%E4%BA%8Ced05.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">浅幽丶奈芙莲的个人博客</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/photo/"><i class="fa-fw fas fa-heart"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">PyTorch深度学习实践Part5</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-01-17T03:05:41.000Z" title="发表于 2021-01-17 11:05:41">2021-01-17</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-01-22T03:21:52.263Z" title="更新于 2021-01-22 11:21:52">2021-01-22</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5/">PyTorch深度学习实践</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">988</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>4分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="PyTorch深度学习实践Part5——线性回归"><a href="#PyTorch深度学习实践Part5——线性回归" class="headerlink" title="PyTorch深度学习实践Part5——线性回归"></a>PyTorch深度学习实践Part5——线性回归</h1><h2 id="PyTorch周期"><a href="#PyTorch周期" class="headerlink" title="PyTorch周期"></a>PyTorch周期</h2><ol>
+<li>prepare dataset</li>
+<li>design model using Class 目的是为了前馈forward，即计算y hat(预测值)</li>
+<li>Construct loss and optimizer (using PyTorch API) 其中，计算loss是为了进行反向传播，optimizer是为了更新梯度。</li>
+<li>Training cycle (<u><strong><em>forward,backward,update</em></strong></u>)</li>
+</ol>
+<h2 id="广播"><a href="#广播" class="headerlink" title="广播"></a>广播</h2><p>原本w只是1×1的矩阵，比如tensor([0.], requires_grad=True)，很有可能行列数量与xy对不上，这个时候pytorch会进行<strong>广播</strong>，将w<strong>扩展成一个3×1矩阵</strong>。</p>
+<p><img src="/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part5/image-20210117122903497.png" alt="image-20210117122903497"></p>
+<blockquote>
+<p>pytorch直接写“*”表示矩阵<strong>对应位置元素相乘</strong>（哈达玛积），数学上的矩阵乘法有另外的函数torch.matmul</p>
+</blockquote>
+<p>这里x、y的维度都是1（有可能不是1），但是都应当看成一个<strong>矩阵</strong>，而不能是向量。</p>
+<blockquote>
+<p>x、y的列是维度/特征，行是记录/样本</p>
+</blockquote>
+<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><ol>
+<li>要把计算模型定义成一个类，<strong>继承于torch.nn.Model</strong>。（nn：neural network）</li>
+<li>如果有pytorch没有提供的需求，或者其效率不够高，可以从Function中继承，构造自己的计算块。</li>
+<li>Linear类包括成员变量weight和bias，默认bias=True，同样继承于torch.nn.Model，可以进行反向传播。</li>
+<li>权重放在x右边，或者转置放在左边。（不管怎么放都是为了凑矩阵基本积）</li>
+<li>父类实现了callable函数，让其能够被调用。在call中会调用前馈forward()，所以必须重写forward()。</li>
+</ol>
+<p><img src="/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part5/image-20210117132843838.png" alt="image-20210117132843838"></p>
+<p>*args, **kwargs的用法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun</span>(<span class="params">*args, **kwargs</span>):</span></span><br><span class="line">    print(<span class="string">&#x27;args:&#x27;</span>, args)</span><br><span class="line">    print(<span class="string">&#x27;kwargs:&#x27;</span>, kwargs)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">fun(<span class="number">1</span>, <span class="number">2</span>, <span class="number">7</span>, x=<span class="number">6</span>, y=<span class="number">5</span>)</span><br><span class="line"><span class="comment"># args: (1, 2, 7)</span></span><br><span class="line"><span class="comment"># kwargs: &#123;&#x27;x&#x27;: 6&#125;</span></span><br></pre></td></tr></table></figure>
+<h2 id="损失-amp-优化"><a href="#损失-amp-优化" class="headerlink" title="损失&amp;优化"></a>损失&amp;优化</h2><ol>
+<li>计算损失使用现成的类torch.nn.MSELoss。</li>
+<li>一般使用随机梯度下降算法，求和平均是没有必要的，torch.nn.MSELoss(size_average=<strong>False</strong>)</li>
+<li>使用现成的优化器类torch.optim.SGD</li>
+<li><a target="_blank" rel="noopener" href="https://pytorch.org/docs/1.7.0/optim.html">不同的优化器，官方文档</a></li>
+<li>控制训练次数，不能过少（训练不到位），也不能过多（过拟合）</li>
+</ol>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 准备数据，要是矩阵</span></span><br><span class="line">x_data = torch.Tensor([[<span class="number">1.0</span>], [<span class="number">2.0</span>], [<span class="number">3.0</span>]])</span><br><span class="line">y_data = torch.Tensor([[<span class="number">2.0</span>], [<span class="number">4.0</span>], [<span class="number">6.0</span>]])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建模型，继承、重写</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LinearModel</span>(<span class="params">torch.nn.Module</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">super</span>(LinearModel, self).__init__()</span><br><span class="line">        self.linear = torch.nn.Linear(<span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, x</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self.linear(x)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成模型的对象</span></span><br><span class="line">model = LinearModel()</span><br><span class="line">criterion = torch.nn.MSELoss(reduction=<span class="string">&#x27;sum&#x27;</span>)  <span class="comment"># size_average=False已经被弃用</span></span><br><span class="line">optimizer = torch.optim.SGD(model.parameters(), lr=<span class="number">0.01</span>)</span><br><span class="line"></span><br><span class="line">loss_list = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">100</span>):</span><br><span class="line">    y_pred = model(x_data)  <span class="comment"># __call__()调用forward()正向传播计算预测值</span></span><br><span class="line">    loss = criterion(y_pred, y_data)  <span class="comment"># 计算损失</span></span><br><span class="line">    print(epoch, loss.item())  <span class="comment"># 可以直接打印loss，因为调用的是__str__()不会产生计算图</span></span><br><span class="line">    loss_list.append(loss.item())  <span class="comment"># 保存loss</span></span><br><span class="line"></span><br><span class="line">    optimizer.zero_grad()  <span class="comment"># 将梯度归零</span></span><br><span class="line">    loss.backward()  <span class="comment"># 反向传播</span></span><br><span class="line">    optimizer.step()  <span class="comment"># 进行更新</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">&#x27;w = &#x27;</span>, model.linear.weight.item())</span><br><span class="line">print(<span class="string">&#x27;b = &#x27;</span>, model.linear.bias.item())</span><br><span class="line"></span><br><span class="line">x_test = torch.Tensor([[<span class="number">4.0</span>]])</span><br><span class="line">y_test = model(x_test)  <span class="comment"># 使用训练好的模型进行预测</span></span><br><span class="line">print(<span class="string">&#x27;y_pred = &#x27;</span>, y_test.item())</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打印图表</span></span><br><span class="line">plt.plot(<span class="built_in">range</span>(<span class="number">100</span>), loss_list)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;Loss&#x27;</span>)</span><br><span class="line">plt.xlabel(<span class="string">&#x27;Epoch&#x27;</span>)</span><br><span class="line">plt.show()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="课后作业"><a href="#课后作业" class="headerlink" title="课后作业"></a>课后作业</h2><p>测试不同的优化器。除了LBFGS，只需要修改调用对应优化器的构造器。</p>
+<h3 id="Adagrad"><a href="#Adagrad" class="headerlink" title="Adagrad"></a>Adagrad</h3><p>w =  0.20570674538612366</p>
+<p>b =  -0.5057424902915955</p>
+<p>y_pred =  0.31708449125289917</p>
+<p><img src="/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part5/image-20210117152240566.png" alt="image-20210117152240566"></p>
+<h3 id="Adam"><a href="#Adam" class="headerlink" title="Adam"></a>Adam</h3><p>w =  1.466607928276062</p>
+<p>b =  0.14079217612743378</p>
+<p>y_pred =  6.007224082946777</p>
+<p><img src="/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part5/image-20210117152322232.png" alt="image-20210117152322232"></p>
+<h3 id="Adamax"><a href="#Adamax" class="headerlink" title="Adamax"></a>Adamax</h3><p>w =  -0.022818174213171005</p>
+<p>b =  0.9245702028274536</p>
+<p>y_pred =  0.8332974910736084</p>
+<p><img src="/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part5/image-20210117152149494.png" alt="image-20210117152149494"></p>
+<h3 id="ASGD"><a href="#ASGD" class="headerlink" title="ASGD"></a>ASGD</h3><p>w =  1.6153326034545898</p>
+<p>b =  0.87442547082901</p>
+<p>y_pred =  7.335755825042725</p>
+<p><img src="/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part5/image-20210117151915659.png" alt="image-20210117151915659"></p>
+<h3 id="LBFGS"><a href="#LBFGS" class="headerlink" title="LBFGS"></a>LBFGS</h3><p>由于LBFGS算法需要重复多次计算函数，因此需要传入一个闭包去允许它们重新计算模型。这个闭包应当清空梯度， 计算损失，然后返回。</p>
+<p>参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/ys1305/article/details/94332643">一篇关于优化器的博文</a></p>
+<p>训练模型部分代码应修改为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">closure</span>():</span></span><br><span class="line">    optimizer.zero_grad()  <span class="comment"># 将梯度归零</span></span><br><span class="line">    y_pred = model(x_data)  <span class="comment"># __call__()调用forward()正向传播计算预测值</span></span><br><span class="line">    loss = criterion(y_pred, y_data)  <span class="comment"># 计算损失</span></span><br><span class="line">    print(epoch, loss.item())  <span class="comment"># 可以直接打印loss，因为调用的是__str__()不会产生计算图</span></span><br><span class="line">    loss_list.append(loss.item())  <span class="comment"># 保存loss</span></span><br><span class="line">    loss.backward()  <span class="comment"># 反向传播</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">100</span>):</span><br><span class="line">    optimizer.step(closure())  <span class="comment"># 进行更新</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>w =  1.7660775184631348</p>
+<p>b =  0.531760573387146</p>
+<p>y_pred =  7.596070766448975</p>
+<p><img src="/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part5/image-20210117153648037.png" alt="image-20210117153648037"></p>
+<h3 id="RMSprop"><a href="#RMSprop" class="headerlink" title="RMSprop"></a>RMSprop</h3><p>w =  1.734222650527954</p>
+<p>b =  0.5857117176055908</p>
+<p>y_pred =  7.522602081298828</p>
+<p><img src="/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part5/image-20210117150905304.png" alt="image-20210117150905304"></p>
+<h3 id="Rprop"><a href="#Rprop" class="headerlink" title="Rprop"></a>Rprop</h3><p>w =  1.9997763633728027</p>
+<p>b =  0.0004527860146481544</p>
+<p>y_pred =  7.999558448791504</p>
+<p><img src="/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part5/Rprop.png" alt="image-20210117150540886"></p>
+<h3 id="SGD"><a href="#SGD" class="headerlink" title="SGD"></a>SGD</h3><p>w =  1.8483222723007202</p>
+<p>b =  0.3447989821434021</p>
+<p>y_pred =  7.738088130950928</p>
+<p><img src="/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part5/SGD.png" alt="image-20210117150219223"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">NephrenCake</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://nephrencake.gitee.io/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part5/">https://nephrencake.gitee.io/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part5/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://nephrencake.gitee.io" target="_blank">浅幽丶奈芙莲的个人博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a></div><div class="post_share"><div class="social-share" data-image="/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part5/%E4%BA%8Ced05.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part6/"><img class="prev-cover" src="/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part6/%E4%BA%8Ced06.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">PyTorch深度学习实践Part6</div></div></a></div><div class="next-post pull-right"><a href="/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part4/"><img class="next-cover" src="/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part4/%E4%BA%8Ced04.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">PyTorch深度学习实践Part4</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a target="_blank" rel="noopener" href="//2021/01/PyTorch深度学习实践-完结目录/" title="PyTorch深度学习实践-完结目录"><img class="cover" src="/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/%E4%BA%8Cop02.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2021-01-22</div><div class="title">PyTorch深度学习实践-完结目录</div></div></a></div><div><a target="_blank" rel="noopener" href="//2021/01/PyTorch深度学习实践Part13/" title="PyTorch深度学习实践Part13"><img class="cover" src="/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part13/%E4%BA%8CedEND.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2021-01-22</div><div class="title">PyTorch深度学习实践Part13</div></div></a></div><div><a target="_blank" rel="noopener" href="//2021/01/PyTorch深度学习实践Part12/" title="PyTorch深度学习实践Part12"><img class="cover" src="/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part12/%E4%BA%8Ced12.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2021-01-22</div><div class="title">PyTorch深度学习实践Part12</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part5%E2%80%94%E2%80%94%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92"><span class="toc-number">1.</span> <span class="toc-text">PyTorch深度学习实践Part5——线性回归</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#PyTorch%E5%91%A8%E6%9C%9F"><span class="toc-number">1.1.</span> <span class="toc-text">PyTorch周期</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%BF%E6%92%AD"><span class="toc-number">1.2.</span> <span class="toc-text">广播</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.3.</span> <span class="toc-text">模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8D%9F%E5%A4%B1-amp-%E4%BC%98%E5%8C%96"><span class="toc-number">1.4.</span> <span class="toc-text">损失&amp;优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.5.</span> <span class="toc-text">代码实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%BE%E5%90%8E%E4%BD%9C%E4%B8%9A"><span class="toc-number">1.6.</span> <span class="toc-text">课后作业</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Adagrad"><span class="toc-number">1.6.1.</span> <span class="toc-text">Adagrad</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Adam"><span class="toc-number">1.6.2.</span> <span class="toc-text">Adam</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Adamax"><span class="toc-number">1.6.3.</span> <span class="toc-text">Adamax</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ASGD"><span class="toc-number">1.6.4.</span> <span class="toc-text">ASGD</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LBFGS"><span class="toc-number">1.6.5.</span> <span class="toc-text">LBFGS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RMSprop"><span class="toc-number">1.6.6.</span> <span class="toc-text">RMSprop</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Rprop"><span class="toc-number">1.6.7.</span> <span class="toc-text">Rprop</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SGD"><span class="toc-number">1.6.8.</span> <span class="toc-text">SGD</span></a></li></ol></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 By NephrenCake</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">这里是浅幽丶奈芙莲的个人博客~</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> {preloader.endLoading()})</script><div class="js-pjax"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></div></body></html>
