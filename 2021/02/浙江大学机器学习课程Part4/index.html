@@ -1,0 +1,205 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>浙江大学机器学习课程Part4 | 浅幽丶奈芙莲的个人博客</title><meta name="author" content="NephrenCake"><meta name="copyright" content="NephrenCake"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="深度学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浙江大学机器学习课程Part4">
+<meta property="og:url" content="https://nephrencake.gitee.io/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart4/index.html">
+<meta property="og:site_name" content="浅幽丶奈芙莲的个人博客">
+<meta property="og:description" content="深度学习">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://nephrencake.gitee.io/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart4/%E4%BA%8Cop06.jpg">
+<meta property="article:published_time" content="2021-02-10T05:04:17.000Z">
+<meta property="article:modified_time" content="2021-02-10T12:21:49.189Z">
+<meta property="article:author" content="NephrenCake">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://nephrencake.gitee.io/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart4/%E4%BA%8Cop06.jpg"><link rel="shortcut icon" href="/img/favicon.jpg"><link rel="canonical" href="https://nephrencake.gitee.io/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart4/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}
+
+// https://stackoverflow.com/questions/16839698/jquery-getscript-alternative-in-native-javascript
+const getScript = url => new Promise((resolve, reject) => {
+  const script = document.createElement('script')
+  script.src = url
+  script.async = true
+  script.onerror = reject
+  script.onload = script.onreadystatechange = function() {
+    const loadState = this.readyState
+    if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+    script.onload = script.onreadystatechange = null
+    resolve()
+  }
+  document.head.appendChild(script)
+})</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-02-10 20:21:49'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><link rel="stylesheet" href="/css/background.css"><link rel="stylesheet" href="/css/mouse.css"><link rel="stylesheet" href="/css/scrollbar.css"><link rel="stylesheet" href="/css/font.css"><link rel="stylesheet" href="/css/iconfont.css"><meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="浅幽丶奈芙莲的个人博客" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">22</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/photo/"><i class="fa-fw fas fa-heart"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart4/%E4%BA%8Cop06.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">浅幽丶奈芙莲的个人博客</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/photo/"><i class="fa-fw fas fa-heart"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">浙江大学机器学习课程Part4</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-02-10T05:04:17.000Z" title="发表于 2021-02-10 13:04:17">2021-02-10</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-02-10T12:21:49.189Z" title="更新于 2021-02-10 20:21:49">2021-02-10</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B/">浙江大学机器学习课程</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>5分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="浙江大学机器学习课程Part4——深度学习"><a href="#浙江大学机器学习课程Part4——深度学习" class="headerlink" title="浙江大学机器学习课程Part4——深度学习"></a>浙江大学机器学习课程Part4——深度学习</h1><p>[TOC]</p>
+<h2 id="多层神经网络的优劣"><a href="#多层神经网络的优劣" class="headerlink" title="多层神经网络的优劣"></a>多层神经网络的优劣</h2><h3 id="多层神经网络的优势"><a href="#多层神经网络的优势" class="headerlink" title="多层神经网络的优势"></a>多层神经网络的优势</h3><ol>
+<li>基本单元简单，多个基本单元可扩展为非常复杂的非线性函数。因此易于构建，同时模型有很强的表达能力。</li>
+<li>训练和测试的计算并行性非常好，有利于在分布式系统上的应用。</li>
+<li>模型构建来源于对人脑的仿生，话题丰富，各种领域的研究人员都有兴趣，都能做贡献。</li>
+</ol>
+<h3 id="多层神经网络的劣势"><a href="#多层神经网络的劣势" class="headerlink" title="多层神经网络的劣势"></a>多层神经网络的劣势</h3><ol>
+<li>数学不漂亮，优化算法只能获得局部极值，算法性能与初始值有关。</li>
+<li>不可解释。训练神经网络获得的参数与实际任务的关联性非常模糊。</li>
+<li>模型可调整的参数很多 （网络层数、每层神经元个数、非线性函数、学习率、优化方法、终止条件等等），使得训练神经网络变成了一门“艺术”。</li>
+<li>如果要训练相对复杂的网络，需要大量的训练样本。</li>
+</ol>
+<h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><ol>
+<li>Mnist：手写数字数据库（LeCun 在1998年创造）</li>
+<li>ImageNet：（Fei-fei Li等 2007年创造）</li>
+</ol>
+<h2 id="发展历史"><a href="#发展历史" class="headerlink" title="发展历史"></a>发展历史</h2><h3 id="现状"><a href="#现状" class="headerlink" title="现状"></a>现状</h3><p>神经网络是目前处理大数据最优的算法。</p>
+<p>模拟退火和遗传算法还处于沉寂期。</p>
+<h3 id="转机"><a href="#转机" class="headerlink" title="转机"></a>转机</h3><p>2006年是深度学习的起始年，Hinton在SCIENCE上发文，提出一种叫做自动编码机（Auto-encoder）的方法，部分解决了神经网络参数初始化的问题。</p>
+<p>但是目前为止，自动编码机并没有什么用。</p>
+<h2 id="卷积神经网络"><a href="#卷积神经网络" class="headerlink" title="卷积神经网络"></a>卷积神经网络</h2><h3 id="发展"><a href="#发展" class="headerlink" title="发展"></a>发展</h3><p>是深度学习神经网络流行起来最大的因素。</p>
+<p>由手工设计卷积核变成自动学习卷积核。</p>
+<h3 id="如何卷积"><a href="#如何卷积" class="headerlink" title="如何卷积"></a>如何卷积</h3><blockquote>
+<p>一个讲解比较清晰的视频：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1JX4y1K7Dr">什么是卷积？</a></p>
+</blockquote>
+<p>详细图解原理在另一份笔记中，不重复记述：<a href="/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part10/">PyTorch深度学习实践Part10</a></p>
+<p><img src="/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart4/image-20210210160012660.png" alt="image-20210210160012660"></p>
+<p>卷积核的数量等于输出通道数。卷积核的长度等于输入通道数。</p>
+<p>卷积过后得到的叫做特征图。</p>
+<p>在边缘可能会丢失数据的时候，用padding补零。</p>
+<h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><p><img src="/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart4/image-20210210160114566.png" alt="image-20210210160114566"></p>
+<p>卷积神经网络与全连接的区别。</p>
+<ol>
+<li>局部感受野</li>
+<li>权值共享</li>
+</ol>
+<p>卷积虽然复杂，但是计算量更少。</p>
+<h3 id="激活"><a href="#激活" class="headerlink" title="激活"></a>激活</h3><p>在卷积神经网络中，最常用的非线性函数为ReLu。</p>
+<h3 id="后向传播"><a href="#后向传播" class="headerlink" title="后向传播"></a>后向传播</h3><p>导数会平均反向传播。</p>
+<blockquote>
+<p>整个网络的计算速度取决于卷积层，整个网络的参数个数取决于全连接层。</p>
+<p>即：如果要加速神经网络，则在卷积层做文章；如果要让其内存占用更少的话，则在全连接层做文章。</p>
+</blockquote>
+<h2 id="AlexNet"><a href="#AlexNet" class="headerlink" title="AlexNet"></a>AlexNet</h2><h3 id="改进1——ReLU"><a href="#改进1——ReLU" class="headerlink" title="改进1——ReLU"></a>改进1——ReLU</h3><p>以ReLU函数代替sigmoid或tanh函数。</p>
+<p><img src="/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart4/image-20210210163727240.png" alt="image-20210210163727240"></p>
+<p>实践证明，这样做能使网络训练以更快速度收敛。</p>
+<blockquote>
+<p>如果数据是靠近0的正态分布，则每次只激活一半的神经元。</p>
+</blockquote>
+<h3 id="改进2——MaxPooling"><a href="#改进2——MaxPooling" class="headerlink" title="改进2——MaxPooling"></a>改进2——MaxPooling</h3><p><img src="/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart4/image-20210210163808698.png" alt="image-20210210163808698"></p>
+<p>在AlexNet中，提出了最大池化(Max Pooling)的概念，即对每一个邻近像素组成的“池子”，选取像素最大值作为输出。在LeNet中，池化的像素是不重叠的；而在AlexNet中进行的是有重叠的池化。实践表明，有重叠的最大池化能够很好的克服过拟合问题，提升系统性能。</p>
+<p>在反向传播时，只传播最大值，其他都为0。</p>
+<blockquote>
+<p>MaxPooling不仅是一个降采样的操作，同时还是一个非线性操作。只采用最大的神经元，有效降低了激活的神经元个数，从而加快了收敛的速率。</p>
+</blockquote>
+<h3 id="改进3——Dropout"><a href="#改进3——Dropout" class="headerlink" title="改进3——Dropout"></a>改进3——Dropout</h3><p>随机丢弃（Dropout）。为了避免系统参数更新过快导致过拟合，每次利用训练样本更新参数时候，随机的“丢弃”一定比例的神经元，被丢弃的神经元将不参加训练过程，输入和输出该神经元的权重系数也不做更新。这样每次训练时，训练的网络架构都不一样，而这些不同的网络架构却分享共同的权重系数。实验表明，随机丢弃技术减缓了网络收敛速度，也以大概率避免了过拟合的发生。</p>
+<blockquote>
+<p>道理和改进2一样，每次训练都只激活有限个神经元，而不要让整个网络同时改变所有的参数，导致整个网络不稳定。</p>
+</blockquote>
+<h3 id="改进4——增加训练样本"><a href="#改进4——增加训练样本" class="headerlink" title="改进4——增加训练样本"></a>改进4——增加训练样本</h3><p>增加训练样本。尽管ImageNet的训练样本数量有超过120万幅图片，但相对于6亿待估计参数来说，训练图像仍然不够。Alex等人采用了多种方法增加训练样本，包括：1. 将原图水平翻转；2. 将256×256的图像随机选取224×224的片段作为输入图像。运用上面两种方法的组合可以将一幅图像变为2048幅图像。还可以对每幅图片引入一定的噪声，构成新的图像。这样做可以较大规模增加训练样本，避免由于训练样本不够造成的性能损失。</p>
+<h3 id="改进5——GPU加速"><a href="#改进5——GPU加速" class="headerlink" title="改进5——GPU加速"></a>改进5——GPU加速</h3><p>用GPU加速训练过程。采用2片GTX 580 GPU对训练过程进行加速，由于GPU强大的并行计算能力，使得训练过程的时间缩短数十倍，哪怕这样，训练时间仍然用了六天。</p>
+<h2 id="近年来流行的网络结构"><a href="#近年来流行的网络结构" class="headerlink" title="近年来流行的网络结构"></a>近年来流行的网络结构</h2><h3 id="VGGNet-（Simonyan-and-Zisserman-2014）"><a href="#VGGNet-（Simonyan-and-Zisserman-2014）" class="headerlink" title="VGGNet: （Simonyan and Zisserman, 2014）"></a>VGGNet: （Simonyan and Zisserman, 2014）</h3><p>3个叠到一起的3 * 3卷积核，感受野（Receptive Field）是7 * 7,大致可以替代7 * 7卷积核的作用。但这样做可以使参数更少 ，参数比例大致为27:49。</p>
+<p>但是，运算速度会因为卷积核数量的增加而大幅下降。</p>
+<p><img src="/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart4/image-20210210173031450.png" alt="image-20210210173031450"></p>
+<h3 id="GoogLeNet-（Szegedy-2014）"><a href="#GoogLeNet-（Szegedy-2014）" class="headerlink" title="GoogLeNet: （Szegedy, 2014）"></a>GoogLeNet: （Szegedy, 2014）</h3><p>inception 结构，用一些1<em>1, 3</em>3和5*5的小卷积核用固定方式组合到一起，来代替大的卷积核，从而达到增加感受野和减少参数的目的。500万参数，比ALEXNET小了12倍。</p>
+<p><img src="/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart4/image-20210210173440780.png" alt="image-20210210173440780"></p>
+<h3 id="残差网络Residual-Net-ResNet-（He-et-al-2015）"><a href="#残差网络Residual-Net-ResNet-（He-et-al-2015）" class="headerlink" title="残差网络Residual Net(ResNet): （He et al, 2015）"></a>残差网络Residual Net(ResNet): （He et al, 2015）</h3><p>加入了前向输入机制，将前面层获得的特征图作为监督项输入到后面层。用这样的方法使深层网络训练能够更好地收敛。</p>
+<p><img src="/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart4/image-20210210183347601.png" alt="image-20210210183347601"></p>
+<h2 id="神经网络应用"><a href="#神经网络应用" class="headerlink" title="神经网络应用"></a>神经网络应用</h2><p>Transfer Learning </p>
+<p>迁移学习是指，从一个domain训练好的神经网络，加入新的domain的样本进行调优，从而获得一个更好的识别效果。</p>
+<p>例如，训练好的 Alex Net ，在最后的1k个分类后，外加一层全连接神经网络，输出十几种水果的分类，用十种水果进行调优。虽然这原本1k个分类中或许没有很明显的这十几种水果分类，但这样它能很容易排除除了这些水果以外的物品，同时经过调优之后会更容易贴合我们想要分出的十几种水果。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">NephrenCake</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://nephrencake.gitee.io/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart4/">https://nephrencake.gitee.io/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart4/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://nephrencake.gitee.io" target="_blank">浅幽丶奈芙莲的个人博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart4/%E4%BA%8Cop06.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart5/"><img class="prev-cover" src="/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart5/%E4%BA%8Cop07.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">浙江大学机器学习课程Part5</div></div></a></div><div class="next-post pull-right"><a href="/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart3/"><img class="next-cover" src="/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart3/%E4%BA%8Cop05.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">浙江大学机器学习课程Part3</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart4%E2%80%94%E2%80%94%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0"><span class="toc-number">1.</span> <span class="toc-text">浙江大学机器学习课程Part4——深度学习</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E5%B1%82%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E4%BC%98%E5%8A%A3"><span class="toc-number">1.1.</span> <span class="toc-text">多层神经网络的优劣</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E5%B1%82%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="toc-number">1.1.1.</span> <span class="toc-text">多层神经网络的优势</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E5%B1%82%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E5%8A%A3%E5%8A%BF"><span class="toc-number">1.1.2.</span> <span class="toc-text">多层神经网络的劣势</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">1.2.</span> <span class="toc-text">数据库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%91%E5%B1%95%E5%8E%86%E5%8F%B2"><span class="toc-number">1.3.</span> <span class="toc-text">发展历史</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8E%B0%E7%8A%B6"><span class="toc-number">1.3.1.</span> <span class="toc-text">现状</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AC%E6%9C%BA"><span class="toc-number">1.3.2.</span> <span class="toc-text">转机</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="toc-number">1.4.</span> <span class="toc-text">卷积神经网络</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%91%E5%B1%95"><span class="toc-number">1.4.1.</span> <span class="toc-text">发展</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%8D%B7%E7%A7%AF"><span class="toc-number">1.4.2.</span> <span class="toc-text">如何卷积</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8C%BA%E5%88%AB"><span class="toc-number">1.4.3.</span> <span class="toc-text">区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BF%80%E6%B4%BB"><span class="toc-number">1.4.4.</span> <span class="toc-text">激活</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8E%E5%90%91%E4%BC%A0%E6%92%AD"><span class="toc-number">1.4.5.</span> <span class="toc-text">后向传播</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AlexNet"><span class="toc-number">1.5.</span> <span class="toc-text">AlexNet</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%B9%E8%BF%9B1%E2%80%94%E2%80%94ReLU"><span class="toc-number">1.5.1.</span> <span class="toc-text">改进1——ReLU</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%B9%E8%BF%9B2%E2%80%94%E2%80%94MaxPooling"><span class="toc-number">1.5.2.</span> <span class="toc-text">改进2——MaxPooling</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%B9%E8%BF%9B3%E2%80%94%E2%80%94Dropout"><span class="toc-number">1.5.3.</span> <span class="toc-text">改进3——Dropout</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%B9%E8%BF%9B4%E2%80%94%E2%80%94%E5%A2%9E%E5%8A%A0%E8%AE%AD%E7%BB%83%E6%A0%B7%E6%9C%AC"><span class="toc-number">1.5.4.</span> <span class="toc-text">改进4——增加训练样本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%B9%E8%BF%9B5%E2%80%94%E2%80%94GPU%E5%8A%A0%E9%80%9F"><span class="toc-number">1.5.5.</span> <span class="toc-text">改进5——GPU加速</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%91%E5%B9%B4%E6%9D%A5%E6%B5%81%E8%A1%8C%E7%9A%84%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84"><span class="toc-number">1.6.</span> <span class="toc-text">近年来流行的网络结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#VGGNet-%EF%BC%88Simonyan-and-Zisserman-2014%EF%BC%89"><span class="toc-number">1.6.1.</span> <span class="toc-text">VGGNet: （Simonyan and Zisserman, 2014）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GoogLeNet-%EF%BC%88Szegedy-2014%EF%BC%89"><span class="toc-number">1.6.2.</span> <span class="toc-text">GoogLeNet: （Szegedy, 2014）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AE%8B%E5%B7%AE%E7%BD%91%E7%BB%9CResidual-Net-ResNet-%EF%BC%88He-et-al-2015%EF%BC%89"><span class="toc-number">1.6.3.</span> <span class="toc-text">残差网络Residual Net(ResNet): （He et al, 2015）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8"><span class="toc-number">1.7.</span> <span class="toc-text">神经网络应用</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 By NephrenCake</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">这里是浅幽丶奈芙莲的个人博客~</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> {preloader.endLoading()})</script><div class="js-pjax"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></div></body></html>

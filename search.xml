@@ -4,11 +4,106 @@
   
     
     <entry>
+      <title>浙江大学机器学习课程Part5</title>
+      <link href="/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart5/"/>
+      <url>/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart5/</url>
+      
+        <content type="html"><![CDATA[<h1 id="浙江大学机器学习课程Part5——强化学习"><a href="#浙江大学机器学习课程Part5——强化学习" class="headerlink" title="浙江大学机器学习课程Part5——强化学习"></a>浙江大学机器学习课程Part5——强化学习</h1><p>[TOC]</p><h2 id="增强学习"><a href="#增强学习" class="headerlink" title="增强学习"></a>增强学习</h2><h2 id="Alpha-Go"><a href="#Alpha-Go" class="headerlink" title="Alpha Go"></a>Alpha Go</h2><p>深度增强学习</p><p>围棋有必胜策略</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 浙江大学机器学习课程 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>浙江大学机器学习课程Part4</title>
+      <link href="/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart4/"/>
+      <url>/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart4/</url>
+      
+        <content type="html"><![CDATA[<h1 id="浙江大学机器学习课程Part4——深度学习"><a href="#浙江大学机器学习课程Part4——深度学习" class="headerlink" title="浙江大学机器学习课程Part4——深度学习"></a>浙江大学机器学习课程Part4——深度学习</h1><p>[TOC]</p><h2 id="多层神经网络的优劣"><a href="#多层神经网络的优劣" class="headerlink" title="多层神经网络的优劣"></a>多层神经网络的优劣</h2><h3 id="多层神经网络的优势"><a href="#多层神经网络的优势" class="headerlink" title="多层神经网络的优势"></a>多层神经网络的优势</h3><ol><li>基本单元简单，多个基本单元可扩展为非常复杂的非线性函数。因此易于构建，同时模型有很强的表达能力。</li><li>训练和测试的计算并行性非常好，有利于在分布式系统上的应用。</li><li>模型构建来源于对人脑的仿生，话题丰富，各种领域的研究人员都有兴趣，都能做贡献。</li></ol><h3 id="多层神经网络的劣势"><a href="#多层神经网络的劣势" class="headerlink" title="多层神经网络的劣势"></a>多层神经网络的劣势</h3><ol><li>数学不漂亮，优化算法只能获得局部极值，算法性能与初始值有关。</li><li>不可解释。训练神经网络获得的参数与实际任务的关联性非常模糊。</li><li>模型可调整的参数很多 （网络层数、每层神经元个数、非线性函数、学习率、优化方法、终止条件等等），使得训练神经网络变成了一门“艺术”。</li><li>如果要训练相对复杂的网络，需要大量的训练样本。</li></ol><h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><ol><li>Mnist：手写数字数据库（LeCun 在1998年创造）</li><li>ImageNet：（Fei-fei Li等 2007年创造）</li></ol><h2 id="发展历史"><a href="#发展历史" class="headerlink" title="发展历史"></a>发展历史</h2><h3 id="现状"><a href="#现状" class="headerlink" title="现状"></a>现状</h3><p>神经网络是目前处理大数据最优的算法。</p><p>模拟退火和遗传算法还处于沉寂期。</p><h3 id="转机"><a href="#转机" class="headerlink" title="转机"></a>转机</h3><p>2006年是深度学习的起始年，Hinton在SCIENCE上发文，提出一种叫做自动编码机（Auto-encoder）的方法，部分解决了神经网络参数初始化的问题。</p><p>但是目前为止，自动编码机并没有什么用。</p><h2 id="卷积神经网络"><a href="#卷积神经网络" class="headerlink" title="卷积神经网络"></a>卷积神经网络</h2><h3 id="发展"><a href="#发展" class="headerlink" title="发展"></a>发展</h3><p>是深度学习神经网络流行起来最大的因素。</p><p>由手工设计卷积核变成自动学习卷积核。</p><h3 id="如何卷积"><a href="#如何卷积" class="headerlink" title="如何卷积"></a>如何卷积</h3><blockquote><p>一个讲解比较清晰的视频：<a href="https://www.bilibili.com/video/BV1JX4y1K7Dr">什么是卷积？</a></p></blockquote><p>详细图解原理在另一份笔记中，不重复记述：<a href="/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part10/">PyTorch深度学习实践Part10</a></p><p><img src="/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart4/image-20210210160012660.png" alt="image-20210210160012660"></p><p>卷积核的数量等于输出通道数。卷积核的长度等于输入通道数。</p><p>卷积过后得到的叫做特征图。</p><p>在边缘可能会丢失数据的时候，用padding补零。</p><h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><p><img src="/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart4/image-20210210160114566.png" alt="image-20210210160114566"></p><p>卷积神经网络与全连接的区别。</p><ol><li>局部感受野</li><li>权值共享</li></ol><p>卷积虽然复杂，但是计算量更少。</p><h3 id="激活"><a href="#激活" class="headerlink" title="激活"></a>激活</h3><p>在卷积神经网络中，最常用的非线性函数为ReLu。</p><h3 id="后向传播"><a href="#后向传播" class="headerlink" title="后向传播"></a>后向传播</h3><p>导数会平均反向传播。</p><blockquote><p>整个网络的计算速度取决于卷积层，整个网络的参数个数取决于全连接层。</p><p>即：如果要加速神经网络，则在卷积层做文章；如果要让其内存占用更少的话，则在全连接层做文章。</p></blockquote><h2 id="AlexNet"><a href="#AlexNet" class="headerlink" title="AlexNet"></a>AlexNet</h2><h3 id="改进1——ReLU"><a href="#改进1——ReLU" class="headerlink" title="改进1——ReLU"></a>改进1——ReLU</h3><p>以ReLU函数代替sigmoid或tanh函数。</p><p><img src="/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart4/image-20210210163727240.png" alt="image-20210210163727240"></p><p>实践证明，这样做能使网络训练以更快速度收敛。</p><blockquote><p>如果数据是靠近0的正态分布，则每次只激活一半的神经元。</p></blockquote><h3 id="改进2——MaxPooling"><a href="#改进2——MaxPooling" class="headerlink" title="改进2——MaxPooling"></a>改进2——MaxPooling</h3><p><img src="/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart4/image-20210210163808698.png" alt="image-20210210163808698"></p><p>在AlexNet中，提出了最大池化(Max Pooling)的概念，即对每一个邻近像素组成的“池子”，选取像素最大值作为输出。在LeNet中，池化的像素是不重叠的；而在AlexNet中进行的是有重叠的池化。实践表明，有重叠的最大池化能够很好的克服过拟合问题，提升系统性能。</p><p>在反向传播时，只传播最大值，其他都为0。</p><blockquote><p>MaxPooling不仅是一个降采样的操作，同时还是一个非线性操作。只采用最大的神经元，有效降低了激活的神经元个数，从而加快了收敛的速率。</p></blockquote><h3 id="改进3——Dropout"><a href="#改进3——Dropout" class="headerlink" title="改进3——Dropout"></a>改进3——Dropout</h3><p>随机丢弃（Dropout）。为了避免系统参数更新过快导致过拟合，每次利用训练样本更新参数时候，随机的“丢弃”一定比例的神经元，被丢弃的神经元将不参加训练过程，输入和输出该神经元的权重系数也不做更新。这样每次训练时，训练的网络架构都不一样，而这些不同的网络架构却分享共同的权重系数。实验表明，随机丢弃技术减缓了网络收敛速度，也以大概率避免了过拟合的发生。</p><blockquote><p>道理和改进2一样，每次训练都只激活有限个神经元，而不要让整个网络同时改变所有的参数，导致整个网络不稳定。</p></blockquote><h3 id="改进4——增加训练样本"><a href="#改进4——增加训练样本" class="headerlink" title="改进4——增加训练样本"></a>改进4——增加训练样本</h3><p>增加训练样本。尽管ImageNet的训练样本数量有超过120万幅图片，但相对于6亿待估计参数来说，训练图像仍然不够。Alex等人采用了多种方法增加训练样本，包括：1. 将原图水平翻转；2. 将256×256的图像随机选取224×224的片段作为输入图像。运用上面两种方法的组合可以将一幅图像变为2048幅图像。还可以对每幅图片引入一定的噪声，构成新的图像。这样做可以较大规模增加训练样本，避免由于训练样本不够造成的性能损失。</p><h3 id="改进5——GPU加速"><a href="#改进5——GPU加速" class="headerlink" title="改进5——GPU加速"></a>改进5——GPU加速</h3><p>用GPU加速训练过程。采用2片GTX 580 GPU对训练过程进行加速，由于GPU强大的并行计算能力，使得训练过程的时间缩短数十倍，哪怕这样，训练时间仍然用了六天。</p><h2 id="近年来流行的网络结构"><a href="#近年来流行的网络结构" class="headerlink" title="近年来流行的网络结构"></a>近年来流行的网络结构</h2><h3 id="VGGNet-（Simonyan-and-Zisserman-2014）"><a href="#VGGNet-（Simonyan-and-Zisserman-2014）" class="headerlink" title="VGGNet: （Simonyan and Zisserman, 2014）"></a>VGGNet: （Simonyan and Zisserman, 2014）</h3><p>3个叠到一起的3 * 3卷积核，感受野（Receptive Field）是7 * 7,大致可以替代7 * 7卷积核的作用。但这样做可以使参数更少 ，参数比例大致为27:49。</p><p>但是，运算速度会因为卷积核数量的增加而大幅下降。</p><p><img src="/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart4/image-20210210173031450.png" alt="image-20210210173031450"></p><h3 id="GoogLeNet-（Szegedy-2014）"><a href="#GoogLeNet-（Szegedy-2014）" class="headerlink" title="GoogLeNet: （Szegedy, 2014）"></a>GoogLeNet: （Szegedy, 2014）</h3><p>inception 结构，用一些1<em>1, 3</em>3和5*5的小卷积核用固定方式组合到一起，来代替大的卷积核，从而达到增加感受野和减少参数的目的。500万参数，比ALEXNET小了12倍。</p><p><img src="/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart4/image-20210210173440780.png" alt="image-20210210173440780"></p><h3 id="残差网络Residual-Net-ResNet-（He-et-al-2015）"><a href="#残差网络Residual-Net-ResNet-（He-et-al-2015）" class="headerlink" title="残差网络Residual Net(ResNet): （He et al, 2015）"></a>残差网络Residual Net(ResNet): （He et al, 2015）</h3><p>加入了前向输入机制，将前面层获得的特征图作为监督项输入到后面层。用这样的方法使深层网络训练能够更好地收敛。</p><p><img src="/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart4/image-20210210183347601.png" alt="image-20210210183347601"></p><h2 id="神经网络应用"><a href="#神经网络应用" class="headerlink" title="神经网络应用"></a>神经网络应用</h2><p>Transfer Learning </p><p>迁移学习是指，从一个domain训练好的神经网络，加入新的domain的样本进行调优，从而获得一个更好的识别效果。</p><p>例如，训练好的 Alex Net ，在最后的1k个分类后，外加一层全连接神经网络，输出十几种水果的分类，用十种水果进行调优。虽然这原本1k个分类中或许没有很明显的这十几种水果分类，但这样它能很容易排除除了这些水果以外的物品，同时经过调优之后会更容易贴合我们想要分出的十几种水果。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 浙江大学机器学习课程 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>浙江大学机器学习课程Part3</title>
+      <link href="/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart3/"/>
+      <url>/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart3/</url>
+      
+        <content type="html"><![CDATA[<h1 id="浙江大学机器学习课程Part3——人工神经网络"><a href="#浙江大学机器学习课程Part3——人工神经网络" class="headerlink" title="浙江大学机器学习课程Part3——人工神经网络"></a>浙江大学机器学习课程Part3——人工神经网络</h1><p>[TOC]</p><h2 id="神经网络的生物及数学模型"><a href="#神经网络的生物及数学模型" class="headerlink" title="神经网络的生物及数学模型"></a>神经网络的生物及数学模型</h2><ol><li>硬件算力的提升</li><li>数据样本的增加</li><li>但是，<strong>其最基本的神经元模型至今没有重大改变</strong></li></ol><p><img src="/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart3/image-20210209144613134.png" alt="image-20210209144613134"></p><h2 id="感知器算法-Perceptron-Algorithm"><a href="#感知器算法-Perceptron-Algorithm" class="headerlink" title="感知器算法(Perceptron Algorithm)"></a>感知器算法(Perceptron Algorithm)</h2><p><img src="/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart3/image-20210209144950398.png" alt="image-20210209144950398"></p><ul><li>效果比SVM差得多，但是是机器学习最早提出的算法。</li><li>感知器每次只取单个样本，SVM从全局样本考虑。</li></ul><p><a href="https://www.bilibili.com/video/BV1dJ411B7gh?p=20">收敛性证明看p20</a></p><h2 id="多层神经网络-Multi-Layer-Neural-Networks"><a href="#多层神经网络-Multi-Layer-Neural-Networks" class="headerlink" title="多层神经网络(Multi-Layer Neural Networks)"></a>多层神经网络(Multi-Layer Neural Networks)</h2><p>线性不可分的数据集困扰了早期神经网络算法长达十年之久。</p><p>因此，我们需要用非线性的函数集合来分开非线性可分的数据集。</p><p><img src="/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart3/image-20210209160042159.png" alt="image-20210209160042159"></p><p>二层神经网络模型举例。</p><h2 id="三层神经网络模拟任意决策面"><a href="#三层神经网络模拟任意决策面" class="headerlink" title="三层神经网络模拟任意决策面"></a>三层神经网络模拟任意决策面</h2><p>我个人认为：过了第一层，数据样本基本不会保持原貌，但是保留了特征，或者说特点。</p><p>在老师画的示例中，实际的数学意义为：①第一层是：坐标(x,y)进入多个函数输入相对位置，进入激活函数输出0-1；②第二层：根据上一层判断的0-1，进入函数判断是否为某一块图形内部，返回0-1；③第三层：根据上一层返回的是否在某图形内部的0-1，进入函数判断该图形是否为class1，通过或关系，输出最终结果0-1.</p><p>详情见<a href="https://www.bilibili.com/video/BV1dJ411B7gh?p=23">p23</a></p><h2 id="后向传播算法-Back-Propagation"><a href="#后向传播算法-Back-Propagation" class="headerlink" title="后向传播算法(Back Propagation)"></a>后向传播算法(Back Propagation)</h2><blockquote><p>在对于某种问题，我们究竟应该选择哪一种参数组合，如何搭建完美的网络结构。这依然是一个至今为止不完备的，对于一种问题，最好的方法还是不断试验。</p></blockquote><p>主要思想就是梯度向下法(Gradient Descent Method)来求局部极值。</p><p>常用的激活函数：sigmoid、tanh、ReLu(Rectified Linear Units)、LeakReLu</p><p><a href="https://www.bilibili.com/video/BV1dJ411B7gh?p=24">==BP推导P24==</a></p><h2 id="参数设置"><a href="#参数设置" class="headerlink" title="参数设置"></a>参数设置</h2><h3 id="随机梯度下降"><a href="#随机梯度下降" class="headerlink" title="随机梯度下降"></a>随机梯度下降</h3><ol><li>不用每输入一个样本就去变换参数，而是输入一批样本（叫做一个BATCH或MINI-BATCH），求出这些样本的梯度平均值后，根据这个平均值改变参数。</li><li>在神经网络训练中，BATCH的样本数大致设置为50-200不等。  </li></ol><h3 id="激活函数"><a href="#激活函数" class="headerlink" title="激活函数"></a>激活函数</h3><p><img src="/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart3/image-20210210140226760.png" alt="image-20210210140226760"></p><h3 id="梯度消失与归一化"><a href="#梯度消失与归一化" class="headerlink" title="梯度消失与归一化"></a>梯度消失与归一化</h3><ol><li>当样本都非常大或者非常小，在sigmoid函数中就可以发现，他们的梯度将会非常小，这样意味着他们更加符合我们想要得到的预测结果，即二分类。但是这并不是我们在训练过程中想要的，因为梯度太小而导致参数无法更新以进行训练。</li><li>防止梯度消失，那么就需要使样本更加靠近在0附近，更加具有像线性模型一样的特性。因此我们经常对<strong>初</strong>始数据以及在<strong>训练过程中</strong>进行归一化Batch Normalization。</li></ol><h3 id="目标函数选择"><a href="#目标函数选择" class="headerlink" title="目标函数选择"></a>目标函数选择</h3><ol><li><p>SOFTMAX函数</p><p><img src="/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart3/image-20210210131234229.png" alt="image-20210210131234229"> 处理多分类</p></li><li><p>交叉熵(Cross Entropy)</p><p><img src="/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart3/image-20210210131306125.png" alt="image-20210210131306125"> 处理二分类</p></li></ol><h3 id="参数更新策略"><a href="#参数更新策略" class="headerlink" title="参数更新策略"></a>参数更新策略</h3><p>优化器不一定是MSE，因为MSE的更新通常容易出现z字路径，一般可以选择使用其他更加平滑的优化器，比如AdaGrad、RMSProp。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 浙江大学机器学习课程 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>浙江大学机器学习课程Part2</title>
+      <link href="/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart2/"/>
+      <url>/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart2/</url>
+      
+        <content type="html"><![CDATA[<h1 id="浙江大学机器学习课程Part2——支持向量机"><a href="#浙江大学机器学习课程Part2——支持向量机" class="headerlink" title="浙江大学机器学习课程Part2——支持向量机"></a>浙江大学机器学习课程Part2——支持向量机</h1><p>[TOC]</p><h2 id="Support-Vector-Machine"><a href="#Support-Vector-Machine" class="headerlink" title="Support Vector Machine"></a>Support Vector Machine</h2><h3 id="支持向量机"><a href="#支持向量机" class="headerlink" title="支持向量机"></a>支持向量机</h3><p>对样本数较少的时候，都会得到一个比较好的结果。</p><p>如何在两种训练集上画一条直线来分类：</p><ol><li>线性可分(Linear Separable)训练样本集</li><li>非线性可分(Non-Linear Separable)样本集</li></ol><p>将线(在多维特征下是超平面Hyperplane)向两边移动直到擦到样本点，其中间隔(Margin)最大，且线在d/2处。</p><h3 id="数学描述"><a href="#数学描述" class="headerlink" title="数学描述"></a>数学描述</h3><ol><li>将平行线擦到的向量称作支持向量(Support Vector)</li><li>训练数据及标签：(Xn, Yn)…… X为特征向量，Y为标签。Y取+1或-1来表示，方便推导。</li><li>线性模型：(W, b) 超平面：Wt * X + b = 0</li></ol><h3 id="机器学习过程"><a href="#机器学习过程" class="headerlink" title="机器学习过程"></a>机器学习过程</h3><ol><li>用复杂的函数来限定模型框架</li><li>留出待定参数</li><li>用训练样本来确定参数取值</li></ol><h3 id="线性可分的定义和条件"><a href="#线性可分的定义和条件" class="headerlink" title="线性可分的定义和条件"></a>线性可分的定义和条件</h3><p>{(Xi, Yi)}i = 1<del>N, 存在(W, b), 则对任意 i = 1</del>N. 有：</p><p>①若Yi = +1, 则 Wt * X + b &gt; 0</p><p>②若Yi = -1, 则 Wt * X + b &lt; 0</p><p>为什么要取Y=±1？因为可以得到①②等价于 Yi ( Wt * X + b ) &gt; 0</p><h2 id="优化问题-优化目标函数和限制条件"><a href="#优化问题-优化目标函数和限制条件" class="headerlink" title="优化问题(优化目标函数和限制条件)"></a>优化问题(优化目标函数和限制条件)</h2><h3 id="两个要点"><a href="#两个要点" class="headerlink" title="两个要点"></a>两个要点</h3><ol><li>点最小化(Minimize / min): 1 / 2 * ||W||² 。<strong>这里1/2只是为了求导方便</strong></li><li>限制条件(Subject to / s.t.): Y<del>i</del> ( W^T^ * X + b ) ≥ 1, (i=1~N)</li></ol><h3 id="两个事实"><a href="#两个事实" class="headerlink" title="两个事实"></a>两个事实</h3><p>事实1：W^T^ * X + b = 0 与 a * W^T^ * X + a * b = 0, (a∈R+) 是同一个平面。</p><p>​           即: 若 (W, b) 满足 W^T^ * X + b = 0 , 则 (a * W, a * b) 也满足 W^T^ * X + b = 0 </p><p>事实2：向量到超平面(点到平面)的距离公式。d = | Wt * X0 + b | / || W || *<em>1.这里的X0代表的是包含多个维度的坐标[x,y,z…]，而Y0是分类标签，不能与坐标混为一谈；2.Wt</em>X0结果是一个数而不是矩阵向量**</p><p>​           其中，模 || W || = √(W1²+W2²…+Wn²)</p><h3 id="推导"><a href="#推导" class="headerlink" title="推导"></a>推导</h3><ol><li>用a去缩放超平面参数：(W, b) &lt;=&gt; ( a * W, a * b )。根据事实1，这两组不同的参数代表的是同一个平面。</li><li>最终使在支持向量上：| W^T^ * X<del>0</del> + b | = 1。<strong>这里的W和b都是经过系数a缩放过后的，目的是为了凑出1(当然你可以凑出任意常数)，而a具体是多少，我们不需要关注。需要注意的是，这里只是带入支持向量的值，并不是指支持向量的那个点在超平面上，否则值为0。</strong></li><li>由<em>推导2</em>和<em>事实2</em>可得：d = | W^T^ * X<del>0</del> + b | / || W || = 1 / || W ||。可得<em>要点1</em>：最小化 ||W|| 即最大化 d 。</li><li>其他不是支持向量的点到超平面的距离，则大于 1 / || W || 。可得 | W^T^ * X<del>0</del> + b | &gt; 1 。可得<em>要点2</em>：限制条件 Y<del>i</del> * ( W^T^ * X + b ) ≥ 1</li></ol><p>举例：原来平面是 W^T^ * X + b = 0 , 假设带入X<del>0</del>后的值 | W^T^ * X<del>0</del> + b | = M , 现在把超平面缩放为 a * W^T^ * X + a * b = 0 , 其中a是1/M, 那么把X<del>0</del>带入则 | a * W^T^ * X<del>0</del> + a * b | = M/M = 1。与此同时，计算d的时候，因为分子分母同乘a=1/M，a不需要求出，所以我们不需要关心a的取值，只是为了凑一个 | W^T^ * X<del>0</del> + b | = 1 ，当然你可以凑出任意常数。</p><h3 id="二次优化问题-Quadratic-Programming"><a href="#二次优化问题-Quadratic-Programming" class="headerlink" title="二次优化问题(Quadratic Programming)"></a>二次优化问题(Quadratic Programming)</h3><p>二次优化问题属于凸优化问题</p><ol><li>目标函数(Obejective Function)是二次项</li><li>限制条件是一次项</li></ol><p>要么无解，要么只有唯一极值。即局部极值就是全局极值。</p><h3 id="SVM处理非线性"><a href="#SVM处理非线性" class="headerlink" title="SVM处理非线性"></a>SVM处理非线性</h3><img src="/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart2/image-20210207133321372.png" alt="image-20210207133321372" style="zoom: 200%;"><p>处理这种问题的一种方案就是加上正则项(Regulation Term)（结构损失函数），在解集合中挑选出一组参数（解），使经验损失和结构损失都较低。</p><p>c是正则化的强度，是事先设定好的超参数。</p><p>ζ是松弛变量(Slack Variable)。</p><p>放到场景中就是，样本数小于参数量，在只优化经验误差函数的时候很容易发生过拟合。这个公式依然可以适用于处理线性Linear SVM。</p><h2 id="低维到高维映射"><a href="#低维到高维映射" class="headerlink" title="低维到高维映射"></a>低维到高维映射</h2><p>在低维空间中，一些线性不可分的数据集，在高维空间中，更有可能被分开。因此可以把Xi通过函数φ(x)变换映射到高维空间，通过泛函分析满足某种条件，把核函数W*φ(x)拆成两个高维向量的内积。</p><h3 id="核函数"><a href="#核函数" class="headerlink" title="核函数"></a>核函数</h3><p>我们可以不在意无限维映射φ(x)的显示表达，我们只要知道一个核函数(kernel Function)，<img src="/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart2/image-20210207142313276.png" alt="image-20210207142313276">，则优化问题仍然可解。</p><p>线性内核相当于没有用核。多项式核的待定系数d取越大，则越复杂。高斯核是无限维度，分类效果最高，待定系数为σ。Tanh核的待定参数是β和b。这些待定参数的选取只能不停地试。</p><p><img src="/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart2/image-20210206144627709.png" alt="image-20210206144627709"></p><h3 id="充要条件"><a href="#充要条件" class="headerlink" title="充要条件"></a>充要条件</h3><p><img src="/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart2/image-20210207142313276.png" alt="image-20210207142313276">能够成立的充要条件：(Mercer’s Theorem)</p><ol><li>K(X<del>1</del>, X<del>2</del>) = K(X<del>2</del>, X<del>1</del>) <strong>(交换性)</strong></li><li>对任意 常数C<del>i</del>, 向量X<del>i</del> (i=1<del>N)，有 ∑(i=1</del>N) ∑(j=1<del>N) C</del>i~ * C<del>j</del> * K(X<del>i</del>, X<del>j</del>) ≥ 0 <strong>(半正定性)</strong></li></ol><h2 id="原问题和对偶问题-重点复习"><a href="#原问题和对偶问题-重点复习" class="headerlink" title="原问题和对偶问题==(重点复习)=="></a>原问题和对偶问题==(重点复习)==</h2><h3 id="优化理论"><a href="#优化理论" class="headerlink" title="优化理论"></a>优化理论</h3><p>优化理论(运筹学)是工程里最本质的问题</p><h4 id="推荐书籍"><a href="#推荐书籍" class="headerlink" title="推荐书籍"></a>推荐书籍</h4><ol><li>Convex optimization - Stephen Boyd - b站吴立德</li><li>Nonlinear Programming</li></ol><h3 id="原问题-Prime-Problem"><a href="#原问题-Prime-Problem" class="headerlink" title="原问题(Prime Problem)"></a>原问题(Prime Problem)</h3><p>min: f(w)</p><p>s.t. : g<del>i</del>(w)≤0 (i=1<del>K) , h</del>i<del>(w)=0 (i=1</del>M)</p><h3 id="对偶问题-Dual-Problem"><a href="#对偶问题-Dual-Problem" class="headerlink" title="对偶问题(Dual Problem)"></a>对偶问题(Dual Problem)</h3><ol><li><p>定义：<img src="/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart2/image-20210207153808814.png" alt="image-20210207153808814"></p><p>x是前面的w，α是一个K维的向量，β是一个M维的向量。</p><p>拉格朗日对偶问题是运筹学基础知识。*(KKT条件求解、拉格朗日传乘数法、弱对偶性定理)*</p></li><li><p>对偶问题定义：</p><p>max: <img src="/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart2/image-20210207154702680.png" alt="image-20210207154702680">(inf:求最小值)</p><p>s.t. : λ<del>i</del> ≥ 0 (i=1~K)</p></li></ol><p><img src="/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart2/image-20210207161614446.png" alt="p11-19:17"></p><p><img src="/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart2/image-20210207162438113.png" alt="p11-22:56"></p><p><img src="/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart2/image-20210207162758286.png" alt="p11-26:14"></p><p>这里可以去看《Convex optimization》前150页内容，学习推导过程。</p><p>结论可推出：</p><p><img src="/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart2/image-20210207163413689.png" alt="image-20210207163413689"></p><h2 id="支持向量机原问题转化为对偶问题-重点复习"><a href="#支持向量机原问题转化为对偶问题-重点复习" class="headerlink" title="支持向量机原问题转化为对偶问题==(重点复习)=="></a>支持向量机原问题转化为对偶问题==(重点复习)==</h2><p>凸函数的定义。w可能是高维向量，这个代数表达在高维依然适用。</p><p><img src="/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart2/image-20210207164852602.png" alt="image-20210207164852602"></p><p>原问题证明建议重看<a href="https://www.bilibili.com/video/BV1dJ411B7gh?p=12">p12-23:37</a></p><h2 id="支持向量机的应用——兵王问题"><a href="#支持向量机的应用——兵王问题" class="headerlink" title="支持向量机的应用——兵王问题"></a>支持向量机的应用——兵王问题</h2><h3 id="n折交叉验证"><a href="#n折交叉验证" class="headerlink" title="n折交叉验证"></a>n折交叉验证</h3><p>对于<strong>每一组超参数</strong>，进行<strong>n折交叉验证</strong>求损失，最终选取的是损失最小的那一组超参数。</p><h3 id="测试结果中的支持向量"><a href="#测试结果中的支持向量" class="headerlink" title="测试结果中的支持向量"></a>测试结果中的支持向量</h3><p>当支持向量占比非常高，甚至是几乎等于训练样本。则表明这次训练失败，或者数据集本身没有规律，或者SVM 没法找到他的规律。</p><h3 id="评判模型好坏"><a href="#评判模型好坏" class="headerlink" title="评判模型好坏"></a>评判模型好坏</h3><h4 id="混淆矩阵"><a href="#混淆矩阵" class="headerlink" title="混淆矩阵"></a>混淆矩阵</h4><p><img src="/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart2/image-20210208230203359.png" alt="image-20210208230203359"></p><p>TP: 将正样本识别为正样本的数量（或概率）</p><p>FN: 将正样本识别为负样本的数量（或概率）</p><p>FP: 将负样本识别为正样本的数量（或概率）</p><p>TN: 将负样本识别为负样本的数量（或概率）</p><p>FN减少 &lt;=&gt; TP增加 &lt;=&gt; FP增加 &lt;=&gt; TN减少</p><h4 id="ROC曲线-Receiver-Operating-Character"><a href="#ROC曲线-Receiver-Operating-Character" class="headerlink" title="ROC曲线(Receiver Operating Character)"></a>ROC曲线(Receiver Operating Character)</h4><p><img src="/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart2/image-20210209123230240.png" alt="image-20210209123230240"></p><p>四条线表示四个不同的系统</p><p>等错误率 (Equal Error Rate, EER)是两类错误FP和FN相等时候的错误率，这时错误率越小，表示系统性能约好。</p><p>AUC(Area Under Curve)曲线右下角的一块面积，面积的大小也能体现模型的好坏。</p><blockquote><p>判别模型的好坏要看具体的应用，并不是准确率越高，模型高就越好</p></blockquote><h3 id="兵王问题的Python实现-补充"><a href="#兵王问题的Python实现-补充" class="headerlink" title="兵王问题的Python实现==(补充)=="></a>兵王问题的Python实现==(补充)==</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure><h2 id="处理多分类问题"><a href="#处理多分类问题" class="headerlink" title="处理多分类问题"></a>处理多分类问题</h2><ol><li>改造优化的目标函数和限制条件，使之能处理多类<br>论文 SVM-Multiclass Multi-class Support Vector Machine</li><li>一类 VS 其他类</li><li>一类 VS 另一类</li></ol><p>其中，①方法通常不是很好，因为SVM是针对二分类问题开发的。</p><p>在n类问题分类中，②方法主要构造n个SVM，③方法要构造 n * (n-1) / 2 个SVM。</p><p>通常来说，③方法分类噢效果更好，但是也更复杂。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 浙江大学机器学习课程 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>浙江大学机器学习课程Part1</title>
+      <link href="/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart1/"/>
+      <url>/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart1/</url>
+      
+        <content type="html"><![CDATA[<h1 id="浙江大学机器学习课程Part1——课程概论"><a href="#浙江大学机器学习课程Part1——课程概论" class="headerlink" title="浙江大学机器学习课程Part1——课程概论"></a>浙江大学机器学习课程Part1——课程概论</h1><p>[TOC]</p><h2 id="推荐书籍-amp-课程"><a href="#推荐书籍-amp-课程" class="headerlink" title="推荐书籍&amp;课程"></a>推荐书籍&amp;课程</h2><ol><li>机器学习， 周志华，清华大学出版社，2016</li><li>统计学习方法，李航，清华大学出版社，2012</li><li>Machine Learning in Action, P. Harrington,人民邮电出版社</li><li>Pattern Recognition and Machine Learning (模式识别与机器学习)，Christopher M. Bishop, 2006</li><li>Machine Learning: A Probabilistic Perspective, K. P. Murphy, </li><li>Machine Learning (机器学习), Tom M. Mitchell, 机械工业出版社，2003年</li><li>Deep Learning, I. Goodfellow, Y. Bengio and A. Courville, 2016</li><li><a href="https://www.coursera.org/course/ml">Stanfrod Web course by Andrew Ng</a></li><li><a href="https://cs231n.stanford.edu/">Stanfrod Web course by Fei-fei Li</a></li></ol><h2 id="机器学习算法分类"><a href="#机器学习算法分类" class="headerlink" title="机器学习算法分类"></a>机器学习算法分类</h2><ol><li>Supervised learning 监督式学习 – SVM, NEURAL NETWORKS</li><li>Unsupervised learning 无监督式学习 – CLUSTERING, EM ALGORITHM, PCA</li><li>Semi-Supervised Learning 半监督式学习</li><li>Reinforcement learning 增强学习</li></ol><p>以预测标签为导向的分类：监督式学习、无监督式学习、半监督式学习。</p><p>不注重过程而关心结果的分类：增强学习。例如：智能驾驶（在不违反交通规则的情况下最快到达目的地）、下棋对战AI（为了最终的输赢有很多种不同的下法）</p><p>Supervised learning:  The machine learning task of inferring a function from labeled training data. Supervised learning can be further divided into </p><ol><li>classification 分类（二分类/多分类） - 离散值标签</li><li>regression 回归（单响应/多响应） - 连续值标签</li></ol><p>两者没有明确界限，以至于有些分类算法也能做回归算法。</p><h2 id="机器学习两大难点"><a href="#机器学习两大难点" class="headerlink" title="机器学习两大难点"></a>机器学习两大难点</h2><ol><li>维度</li><li>标准</li></ol><h2 id="没有免费午餐定理-No-Free-Lunch-Theorem"><a href="#没有免费午餐定理-No-Free-Lunch-Theorem" class="headerlink" title="没有免费午餐定理(No Free Lunch Theorem)"></a>没有免费午餐定理(No Free Lunch Theorem)</h2><p>任何一个预测函数，如果在一些训练样本上表现好，那么必然在另一些训练样本上表现不好，表现好与表现不好的情况一样多。</p><p>如果我们不对特征空间有先验假设，则所有算法的平均表现是一样的。</p><p>我们认为：特征差距小的样本更有可能是同一类。但是，在没有任何先前给定特征意义的情况下，我们都不能确定预测的下一个是什么。</p><p>在这个领域没有最好的算法，但是有公认的好方法。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 浙江大学机器学习课程 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>PyTorch深度学习实践-完结目录</title>
       <link href="/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/"/>
       <url>/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/</url>
       
-        <content type="html"><![CDATA[<h1 id="PyTorch深度学习实践"><a href="#PyTorch深度学习实践" class="headerlink" title="PyTorch深度学习实践"></a>PyTorch深度学习实践</h1><p>PyTorch深度学习入门笔记</p><p>教程视频传送门：<a href="https://www.bilibili.com/video/BV1Y7411d7Ys?p=13">《PyTorch深度学习实践》完结合集</a></p><table><thead><tr><th align="center"><a href="../PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part1/">Part1——概论</a></th></tr></thead><tbody><tr><td align="center"><strong><a href="../PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part2/">Part2——线性模型</a></strong></td></tr><tr><td align="center"><strong><a href="../PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part3/">Part3——梯度下降算法</a></strong></td></tr><tr><td align="center"><strong><a href="../PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part4/">Part4——反向传播</a></strong></td></tr><tr><td align="center"><strong><a href="../PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part5/">Part5——线性回归</a></strong></td></tr><tr><td align="center"><strong><a href="../PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part6/">Part6——逻辑斯蒂回归</a></strong></td></tr><tr><td align="center"><strong><a href="../PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part7/">Part7——处理多维特征的输入</a></strong></td></tr><tr><td align="center"><strong><a href="../PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part8/">Part8——加载数据集</a></strong></td></tr><tr><td align="center"><strong><a href="../PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part9/">Part9——多分类问题</a></strong></td></tr><tr><td align="center"><strong><a href="../PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part10/">Part10——卷积神经网络（基础篇）</a></strong></td></tr><tr><td align="center"><strong><a href="../PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part11/">Part11——卷积神经网络（高级篇）</a></strong></td></tr><tr><td align="center"><strong><a href="../PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part12/">Part12——循环神经网络（基础篇）</a></strong></td></tr><tr><td align="center"><strong><a href="../PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part13/">Part13——循环神经网络（高级篇）</a></strong></td></tr></tbody></table>]]></content>
+        <content type="html"><![CDATA[<h1 id="PyTorch深度学习实践"><a href="#PyTorch深度学习实践" class="headerlink" title="PyTorch深度学习实践"></a>PyTorch深度学习实践</h1><p>b站 - 刘二大人 - 《PyTorch深度学习实践》完结合集 - 笔记</p><p>教程视频传送门：<a href="https://www.bilibili.com/video/BV1Y7411d7Ys?p=13">《PyTorch深度学习实践》完结合集</a></p><p>一点小感想：总之就是很推荐，很适合新手入门，原理循序渐进，建议认真听，认真做。</p><table><thead><tr><th align="center"><a href="../PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part1/">Part1——概论</a></th></tr></thead><tbody><tr><td align="center"><strong><a href="../PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part2/">Part2——线性模型</a></strong></td></tr><tr><td align="center"><strong><a href="../PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part3/">Part3——梯度下降算法</a></strong></td></tr><tr><td align="center"><strong><a href="../PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part4/">Part4——反向传播</a></strong></td></tr><tr><td align="center"><strong><a href="../PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part5/">Part5——线性回归</a></strong></td></tr><tr><td align="center"><strong><a href="../PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part6/">Part6——逻辑斯蒂回归</a></strong></td></tr><tr><td align="center"><strong><a href="../PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part7/">Part7——处理多维特征的输入</a></strong></td></tr><tr><td align="center"><strong><a href="../PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part8/">Part8——加载数据集</a></strong></td></tr><tr><td align="center"><strong><a href="../PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part9/">Part9——多分类问题</a></strong></td></tr><tr><td align="center"><strong><a href="../PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part10/">Part10——卷积神经网络（基础篇）</a></strong></td></tr><tr><td align="center"><strong><a href="../PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part11/">Part11——卷积神经网络（高级篇）</a></strong></td></tr><tr><td align="center"><strong><a href="../PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part12/">Part12——循环神经网络（基础篇）</a></strong></td></tr><tr><td align="center"><strong><a href="../PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part13/">Part13——循环神经网络（高级篇）</a></strong></td></tr></tbody></table>]]></content>
       
       
       <categories>
@@ -21,6 +116,8 @@
         <tags>
             
             <tag> 深度学习 </tag>
+            
+            <tag> Python </tag>
             
         </tags>
       
@@ -43,12 +140,6 @@
       </categories>
       
       
-        <tags>
-            
-            <tag> 深度学习 </tag>
-            
-        </tags>
-      
     </entry>
     
     
@@ -67,12 +158,6 @@
           
       </categories>
       
-      
-        <tags>
-            
-            <tag> 深度学习 </tag>
-            
-        </tags>
       
     </entry>
     
@@ -93,12 +178,6 @@
       </categories>
       
       
-        <tags>
-            
-            <tag> 深度学习 </tag>
-            
-        </tags>
-      
     </entry>
     
     
@@ -117,12 +196,6 @@
           
       </categories>
       
-      
-        <tags>
-            
-            <tag> 深度学习 </tag>
-            
-        </tags>
       
     </entry>
     
@@ -143,12 +216,6 @@
       </categories>
       
       
-        <tags>
-            
-            <tag> 深度学习 </tag>
-            
-        </tags>
-      
     </entry>
     
     
@@ -167,12 +234,6 @@
           
       </categories>
       
-      
-        <tags>
-            
-            <tag> 深度学习 </tag>
-            
-        </tags>
       
     </entry>
     
@@ -193,12 +254,6 @@
       </categories>
       
       
-        <tags>
-            
-            <tag> 深度学习 </tag>
-            
-        </tags>
-      
     </entry>
     
     
@@ -217,12 +272,6 @@
           
       </categories>
       
-      
-        <tags>
-            
-            <tag> 深度学习 </tag>
-            
-        </tags>
       
     </entry>
     
@@ -243,12 +292,6 @@
       </categories>
       
       
-        <tags>
-            
-            <tag> 深度学习 </tag>
-            
-        </tags>
-      
     </entry>
     
     
@@ -267,12 +310,6 @@
           
       </categories>
       
-      
-        <tags>
-            
-            <tag> 深度学习 </tag>
-            
-        </tags>
       
     </entry>
     
@@ -293,12 +330,6 @@
       </categories>
       
       
-        <tags>
-            
-            <tag> 深度学习 </tag>
-            
-        </tags>
-      
     </entry>
     
     
@@ -317,12 +348,6 @@
           
       </categories>
       
-      
-        <tags>
-            
-            <tag> 深度学习 </tag>
-            
-        </tags>
       
     </entry>
     
@@ -343,11 +368,24 @@
       </categories>
       
       
-        <tags>
-            
-            <tag> 深度学习 </tag>
-            
-        </tags>
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Butterfly主题安装和魔改</title>
+      <link href="/2021/01/Butterfly%E4%B8%BB%E9%A2%98%E5%AE%89%E8%A3%85%E5%92%8C%E9%AD%94%E6%94%B9/"/>
+      <url>/2021/01/Butterfly%E4%B8%BB%E9%A2%98%E5%AE%89%E8%A3%85%E5%92%8C%E9%AD%94%E6%94%B9/</url>
+      
+        <content type="html"><![CDATA[<h1 id="安装butterfly"><a href="#安装butterfly" class="headerlink" title="安装butterfly"></a>安装butterfly</h1><ol><li>运行<code>git clone https://github.com/jerryc127/hexo-theme-butterfly themes/butterfly</code></li><li>打开_config.yml找到这一行<code>theme: landspace</code>然后将landspace替换butterfly</li><li>安装插件<code>cnpm install hexo-renderer-pug hexo-renderer-stylus</code></li><li>安装插件<code>cnpm install --save hexo-renderer-jade hexo-generator-feed hexo-generator-sitemap hexo-browsersync hexo-generator-archive</code></li></ol><blockquote><p>为了以后升级方便，这里不推荐直接对主题的配置文件进行修改，而是复制配置文件进行修改。个人推荐把主題的配置文件_config.yml复制到 Hexo 工作目录下的source/_data/butterfly.yml，如果目录不存在那就创建一个。</p></blockquote><h1 id="butterfly主题魔改"><a href="#butterfly主题魔改" class="headerlink" title="butterfly主题魔改"></a>butterfly主题魔改</h1><p>自己一开始动手做的时候大部分都参考Dreamy.TZK的博客</p><p><a href="https://www.antmoe.com/posts/75a6347a/index.html">Hexo安装并使用Butterfly主题</a></p><p>但是改到后来就越来越觉得，版本问题导致的主题修改不兼容，问题实在很大。甚至到后来想要获得自己的预期效果时，已经不得不去在源代码上下手<del>，因为还没有学过前端，改的属实面目全非</del>。</p><h2 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h2><p>这里只能为想要自己动手改的小伙伴一些建议，比如想修改文章页，可以结合浏览器的开发者工具来找到相应的参数，来修改对应的值。</p><p><img src="/2021/01/Butterfly%E4%B8%BB%E9%A2%98%E5%AE%89%E8%A3%85%E5%92%8C%E9%AD%94%E6%94%B9/Untitled.png" alt="Butterfly主题安装和魔改/Untitled.png"></p><p><img src="/2021/01/Butterfly%E4%B8%BB%E9%A2%98%E5%AE%89%E8%A3%85%E5%92%8C%E9%AD%94%E6%94%B9/Untitled%201.png" alt="Butterfly主题安装和魔改/Untitled%201.png"></p><h2 id="相册的使用"><a href="#相册的使用" class="headerlink" title="相册的使用"></a>相册的使用</h2><p><a href="https://blog.ahzoo.cn/2020/07/20/b7201/">https://blog.ahzoo.cn/2020/07/20/b7201/</a></p><h2 id="关于文章中插入图片"><a href="#关于文章中插入图片" class="headerlink" title="关于文章中插入图片"></a>关于文章中插入图片</h2><p>先把hexo的配置文件中的 relative_link 参数确保为false。否则会导致butterfly各分页面的链接错乱</p><p><img src="/2021/01/Butterfly%E4%B8%BB%E9%A2%98%E5%AE%89%E8%A3%85%E5%92%8C%E9%AD%94%E6%94%B9/image-20201231210020980.png" alt="image-20201231210020980"></p><p>把每个文章开头部分加一个参数 relative_link: true。使每个文章部分遵从相对位置的引用，这样可以将文章的图片，不仅在typora或是在服务器上，都能够实时看到自己文章图片引用的效果。</p><p><img src="/2021/01/Butterfly%E4%B8%BB%E9%A2%98%E5%AE%89%E8%A3%85%E5%92%8C%E9%AD%94%E6%94%B9/image-20201231205840731.png" alt="image-20201231205840731"></p><p><img src="/2021/01/Butterfly%E4%B8%BB%E9%A2%98%E5%AE%89%E8%A3%85%E5%92%8C%E9%AD%94%E6%94%B9/image-20201231210339382.png" alt="image-20201231210339382"></p><h2 id="关于分类管理-post下的文章"><a href="#关于分类管理-post下的文章" class="headerlink" title="关于分类管理_post下的文章"></a>关于分类管理_post下的文章</h2><p>主要参考<a href="https://blog.csdn.net/maosidiaoxian/article/details/85220394">如何在Hexo中对文章md文件分类</a></p><p>现在文章中的permalink:参数会完全覆盖_config.yml中的设置，要注意。</p><h1 id="后面应该还会慢慢更新一些有用的东西"><a href="#后面应该还会慢慢更新一些有用的东西" class="headerlink" title="后面应该还会慢慢更新一些有用的东西~"></a>后面应该还会慢慢更新一些有用的东西~</h1>]]></content>
+      
+      
+      <categories>
+          
+          <category> Hexo博客搭建 </category>
+          
+      </categories>
+      
       
     </entry>
     
@@ -368,22 +406,16 @@
       </categories>
       
       
-        <tags>
-            
-            <tag> hexo </tag>
-            
-        </tags>
-      
     </entry>
     
     
     
     <entry>
-      <title>Butterfly主题安装和魔改</title>
-      <link href="/2021/01/Butterfly%E4%B8%BB%E9%A2%98%E5%AE%89%E8%A3%85%E5%92%8C%E9%AD%94%E6%94%B9/"/>
-      <url>/2021/01/Butterfly%E4%B8%BB%E9%A2%98%E5%AE%89%E8%A3%85%E5%92%8C%E9%AD%94%E6%94%B9/</url>
+      <title>个人博客建站教程-完结目录</title>
+      <link href="/2021/01/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%95%99%E7%A8%8B-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/"/>
+      <url>/2021/01/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%95%99%E7%A8%8B-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/</url>
       
-        <content type="html"><![CDATA[<h1 id="安装butterfly"><a href="#安装butterfly" class="headerlink" title="安装butterfly"></a>安装butterfly</h1><ol><li>运行<code>git clone https://github.com/jerryc127/hexo-theme-butterfly themes/butterfly</code></li><li>打开_config.yml找到这一行<code>theme: landspace</code>然后将landspace替换butterfly</li><li>安装插件<code>cnpm install hexo-renderer-pug hexo-renderer-stylus</code></li><li>安装插件<code>cnpm install --save hexo-renderer-jade hexo-generator-feed hexo-generator-sitemap hexo-browsersync hexo-generator-archive</code></li></ol><blockquote><p>为了以后升级方便，这里不推荐直接对主题的配置文件进行修改，而是复制配置文件进行修改。个人推荐把主題的配置文件_config.yml复制到 Hexo 工作目录下的source/_data/butterfly.yml，如果目录不存在那就创建一个。</p></blockquote><h1 id="butterfly主题魔改"><a href="#butterfly主题魔改" class="headerlink" title="butterfly主题魔改"></a>butterfly主题魔改</h1><p>自己一开始动手做的时候大部分都参考Dreamy.TZK的博客</p><p><a href="https://www.antmoe.com/posts/75a6347a/index.html">Hexo安装并使用Butterfly主题</a></p><p>但是改到后来就越来越觉得，版本问题导致的主题修改不兼容，问题实在很大。甚至到后来想要获得自己的预期效果时，已经不得不去在源代码上下手<del>，因为还没有学过前端，改的属实面目全非</del>。</p><h2 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h2><p>这里只能为想要自己动手改的小伙伴一些建议，比如想修改文章页，可以结合浏览器的开发者工具来找到相应的参数，来修改对应的值。</p><p><img src="/2021/01/Butterfly%E4%B8%BB%E9%A2%98%E5%AE%89%E8%A3%85%E5%92%8C%E9%AD%94%E6%94%B9/Untitled.png" alt="Butterfly主题安装和魔改/Untitled.png"></p><p><img src="/2021/01/Butterfly%E4%B8%BB%E9%A2%98%E5%AE%89%E8%A3%85%E5%92%8C%E9%AD%94%E6%94%B9/Untitled%201.png" alt="Butterfly主题安装和魔改/Untitled%201.png"></p><h2 id="相册的使用"><a href="#相册的使用" class="headerlink" title="相册的使用"></a>相册的使用</h2><p><a href="https://blog.ahzoo.cn/2020/07/20/b7201/">https://blog.ahzoo.cn/2020/07/20/b7201/</a></p><h2 id="关于文章中插入图片"><a href="#关于文章中插入图片" class="headerlink" title="关于文章中插入图片"></a>关于文章中插入图片</h2><p>先把hexo的配置文件中的 relative_link 参数确保为false。否则会导致butterfly各分页面的链接错乱</p><p><img src="/2021/01/Butterfly%E4%B8%BB%E9%A2%98%E5%AE%89%E8%A3%85%E5%92%8C%E9%AD%94%E6%94%B9/image-20201231210020980.png" alt="image-20201231210020980"></p><p>把每个文章开头部分加一个参数 relative_link: true。使每个文章部分遵从相对位置的引用，这样可以将文章的图片，不仅在typora或是在服务器上，都能够实时看到自己文章图片引用的效果。</p><p><img src="/2021/01/Butterfly%E4%B8%BB%E9%A2%98%E5%AE%89%E8%A3%85%E5%92%8C%E9%AD%94%E6%94%B9/image-20201231205840731.png" alt="image-20201231205840731"></p><p><img src="/2021/01/Butterfly%E4%B8%BB%E9%A2%98%E5%AE%89%E8%A3%85%E5%92%8C%E9%AD%94%E6%94%B9/image-20201231210339382.png" alt="image-20201231210339382"></p><h2 id="关于分类管理-post下的文章"><a href="#关于分类管理-post下的文章" class="headerlink" title="关于分类管理_post下的文章"></a>关于分类管理_post下的文章</h2><p>主要参考<a href="https://blog.csdn.net/maosidiaoxian/article/details/85220394">如何在Hexo中对文章md文件分类</a></p><p>现在文章中的permalink:参数会完全覆盖_config.yml中的设置，要注意。</p><h1 id="后面应该还会慢慢更新一些有用的东西"><a href="#后面应该还会慢慢更新一些有用的东西" class="headerlink" title="后面应该还会慢慢更新一些有用的东西~"></a>后面应该还会慢慢更新一些有用的东西~</h1>]]></content>
+        <content type="html"><![CDATA[]]></content>
       
       
       <categories>

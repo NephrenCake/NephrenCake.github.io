@@ -2,84 +2,70 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://nephrencake.gitee.io/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part8/</loc>
+    <loc>https://nephrencake.gitee.io/2021/01/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%99%E6%95%99%E7%A8%8B-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/</loc>
     
-    <lastmod>2021-01-22</lastmod>
+    <lastmod>2021-02-10</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://nephrencake.gitee.io/2021/01/Hexo%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%92%8C%E9%83%A8%E7%BD%B2/</loc>
+    
+    <lastmod>2021-02-10</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://nephrencake.gitee.io/2021/01/Butterfly%E4%B8%BB%E9%A2%98%E5%AE%89%E8%A3%85%E5%92%8C%E9%AD%94%E6%94%B9/</loc>
+    
+    <lastmod>2021-02-10</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://nephrencake.gitee.io/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart5/</loc>
+    
+    <lastmod>2021-02-10</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://nephrencake.gitee.io/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart4/</loc>
+    
+    <lastmod>2021-02-10</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://nephrencake.gitee.io/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart3/</loc>
+    
+    <lastmod>2021-02-10</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://nephrencake.gitee.io/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart2/</loc>
+    
+    <lastmod>2021-02-10</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://nephrencake.gitee.io/2021/02/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8BPart1/</loc>
+    
+    <lastmod>2021-02-10</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://nephrencake.gitee.io/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/</loc>
+    
+    <lastmod>2021-02-10</lastmod>
     
   </url>
   
   <url>
     <loc>https://nephrencake.gitee.io/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part1/</loc>
-    
-    <lastmod>2021-01-22</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://nephrencake.gitee.io/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part13/</loc>
-    
-    <lastmod>2021-01-22</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://nephrencake.gitee.io/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part12/</loc>
-    
-    <lastmod>2021-01-22</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://nephrencake.gitee.io/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part11/</loc>
-    
-    <lastmod>2021-01-22</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://nephrencake.gitee.io/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part10/</loc>
-    
-    <lastmod>2021-01-22</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://nephrencake.gitee.io/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part9/</loc>
-    
-    <lastmod>2021-01-22</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://nephrencake.gitee.io/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part7/</loc>
-    
-    <lastmod>2021-01-22</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://nephrencake.gitee.io/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part6/</loc>
-    
-    <lastmod>2021-01-22</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://nephrencake.gitee.io/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part5/</loc>
-    
-    <lastmod>2021-01-22</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://nephrencake.gitee.io/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part4/</loc>
-    
-    <lastmod>2021-01-22</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://nephrencake.gitee.io/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part3/</loc>
     
     <lastmod>2021-01-22</lastmod>
     
@@ -93,23 +79,79 @@
   </url>
   
   <url>
-    <loc>https://nephrencake.gitee.io/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/</loc>
+    <loc>https://nephrencake.gitee.io/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part3/</loc>
     
     <lastmod>2021-01-22</lastmod>
     
   </url>
   
   <url>
-    <loc>https://nephrencake.gitee.io/2021/01/Butterfly%E4%B8%BB%E9%A2%98%E5%AE%89%E8%A3%85%E5%92%8C%E9%AD%94%E6%94%B9/</loc>
+    <loc>https://nephrencake.gitee.io/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part4/</loc>
     
-    <lastmod>2021-01-18</lastmod>
+    <lastmod>2021-01-22</lastmod>
     
   </url>
   
   <url>
-    <loc>https://nephrencake.gitee.io/2021/01/Hexo%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%92%8C%E9%83%A8%E7%BD%B2/</loc>
+    <loc>https://nephrencake.gitee.io/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part5/</loc>
     
-    <lastmod>2021-01-18</lastmod>
+    <lastmod>2021-01-22</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://nephrencake.gitee.io/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part6/</loc>
+    
+    <lastmod>2021-01-22</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://nephrencake.gitee.io/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part7/</loc>
+    
+    <lastmod>2021-01-22</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://nephrencake.gitee.io/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part8/</loc>
+    
+    <lastmod>2021-01-22</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://nephrencake.gitee.io/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part9/</loc>
+    
+    <lastmod>2021-01-22</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://nephrencake.gitee.io/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part10/</loc>
+    
+    <lastmod>2021-01-22</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://nephrencake.gitee.io/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part11/</loc>
+    
+    <lastmod>2021-01-22</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://nephrencake.gitee.io/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part12/</loc>
+    
+    <lastmod>2021-01-22</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://nephrencake.gitee.io/2021/01/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5Part13/</loc>
+    
+    <lastmod>2021-01-22</lastmod>
     
   </url>
   
@@ -151,22 +193,29 @@
 
   <url>
     <loc>https://nephrencake.gitee.io/</loc>
-    <lastmod>2021-01-22</lastmod>
+    <lastmod>2021-02-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   
   <url>
-    <loc>https://nephrencake.gitee.io/tags/hexo/</loc>
-    <lastmod>2021-01-22</lastmod>
+    <loc>https://nephrencake.gitee.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</loc>
+    <lastmod>2021-02-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://nephrencake.gitee.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2021-01-22</lastmod>
+    <loc>https://nephrencake.gitee.io/tags/Python/</loc>
+    <lastmod>2021-02-10</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://nephrencake.gitee.io/tags/hexo/</loc>
+    <lastmod>2021-02-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -175,14 +224,21 @@
   
   <url>
     <loc>https://nephrencake.gitee.io/categories/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</loc>
-    <lastmod>2021-01-22</lastmod>
+    <lastmod>2021-02-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://nephrencake.gitee.io/categories/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5/</loc>
-    <lastmod>2021-01-22</lastmod>
+    <lastmod>2021-02-10</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://nephrencake.gitee.io/categories/%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B/</loc>
+    <lastmod>2021-02-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
