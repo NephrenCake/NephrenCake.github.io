@@ -1,0 +1,272 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Linux基础Part4 | 浅幽丶奈芙莲的个人博客</title><meta name="author" content="NephrenCake"><meta name="copyright" content="NephrenCake"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="用户和用户组">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux基础Part4">
+<meta property="og:url" content="https://nephrencake.gitee.io/2021/03/Linux%E5%9F%BA%E7%A1%80Part4/index.html">
+<meta property="og:site_name" content="浅幽丶奈芙莲的个人博客">
+<meta property="og:description" content="用户和用户组">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://nephrencake.gitee.io/2021/03/Linux%E5%9F%BA%E7%A1%80Part4/%E4%B8%80ed01.jpg">
+<meta property="article:published_time" content="2021-03-11T12:42:30.000Z">
+<meta property="article:modified_time" content="2021-03-14T04:30:34.816Z">
+<meta property="article:author" content="NephrenCake">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://nephrencake.gitee.io/2021/03/Linux%E5%9F%BA%E7%A1%80Part4/%E4%B8%80ed01.jpg"><link rel="shortcut icon" href="/img/favicon.jpg"><link rel="canonical" href="https://nephrencake.gitee.io/2021/03/Linux%E5%9F%BA%E7%A1%80Part4/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}
+
+// https://stackoverflow.com/questions/16839698/jquery-getscript-alternative-in-native-javascript
+const getScript = url => new Promise((resolve, reject) => {
+  const script = document.createElement('script')
+  script.src = url
+  script.async = true
+  script.onerror = reject
+  script.onload = script.onreadystatechange = function() {
+    const loadState = this.readyState
+    if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+    script.onload = script.onreadystatechange = null
+    resolve()
+  }
+  document.head.appendChild(script)
+})</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-03-14 12:30:34'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><link rel="stylesheet" href="/css/background.css"><link rel="stylesheet" href="/css/mouse.css"><link rel="stylesheet" href="/css/scrollbar.css"><link rel="stylesheet" href="/css/font.css"><link rel="stylesheet" href="/css/iconfont.css"><meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="浅幽丶奈芙莲的个人博客" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">34</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/photo/"><i class="fa-fw fas fa-heart"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/2021/03/Linux%E5%9F%BA%E7%A1%80Part4/%E4%B8%80ed01.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">浅幽丶奈芙莲的个人博客</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/photo/"><i class="fa-fw fas fa-heart"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Linux基础Part4</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-03-11T12:42:30.000Z" title="发表于 2021-03-11 20:42:30">2021-03-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-03-14T04:30:34.816Z" title="更新于 2021-03-14 12:30:34">2021-03-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Linux%E5%9F%BA%E7%A1%80/">Linux基础</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3.5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>11分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Linux基础Part4——用户和用户组"><a href="#Linux基础Part4——用户和用户组" class="headerlink" title="Linux基础Part4——用户和用户组"></a>Linux基础Part4——用户和用户组</h1><p>[TOC]</p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>Linux系统是一个多用户多任务的分时操作系统，任何一个要使用系统资源的用户，都必须首先向系统管理员申请一个账号，然后以这个账号的身份进入系统。</p>
+<p>用户的账号一方面可以帮助系统管理员对使用系统的用户进行跟踪，并控制他们对系统资源的访问；另一方面也可以帮助用户组织文件，并为用户提供安全性保护。</p>
+<p>每个用户账号都拥有一个唯一的用户名和各自的口令。</p>
+<p>用户在登录时键入正确的用户名和口令后，就能够进入系统和自己的主目录。</p>
+<p>实现用户账号的管理，要完成的工作主要有如下几个方面：</p>
+<ul>
+<li>用户账号的添加、删除与修改。</li>
+<li>用户口令的管理。</li>
+<li>用户组的管理。</li>
+</ul>
+<h2 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h2><h3 id="添加用户"><a href="#添加用户" class="headerlink" title="添加用户"></a>添加用户</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">useradd [ -cdgGsu ] 用户名</span><br></pre></td></tr></table></figure>
+<ul>
+<li>-c comment 指定一段注释性描述</li>
+<li>-d 目录 指定用户主目录，如果此目录不存在，则一并创建</li>
+<li>-g 用户组 指定用户所属的用户组 <code>useradd -g group user</code></li>
+<li>-G 用户组，用户组 指定用户所属的附加组(SentOS每个用户只有一个附加组)</li>
+<li>-s Shell文件 指定用户的登录Shell</li>
+<li>-u 用户号 指定用户的用户号，如果同时有-o选项，则可以重复使用其他用户的标识号</li>
+</ul>
+<p>如果不使用参数，则默认在 /home 新建一个  /home/用户名 ，注意不要提前自己新建目录，因为还需要生成一系列隐藏文件。</p>
+<h3 id="口令管理"><a href="#口令管理" class="headerlink" title="口令管理"></a>口令管理</h3><p>用户账号刚创建时没有口令，被系统锁定，无法使用，必须为其指定口令后才可以使用，即使是指定空口令。</p>
+<p>指定和修改用户口令的Shell命令是<code>passwd</code>。超级用户可以为自己和其他用户指定口令，普通用户只能用它修改自己的口令。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd [ -ludf ] 用户名</span><br></pre></td></tr></table></figure>
+<ul>
+<li>-l 锁定口令，即禁用账号</li>
+<li>-u 口令解锁</li>
+<li>-d 使账号无口令</li>
+<li>-f 强迫用户下次登录时修改口令</li>
+</ul>
+<p>如果默认用户名，则修改当前用户的口令</p>
+<p>普通用户修改自己的口令时，要求先输入原口令；而超级用户为用户指定口令时，就不需要原口令。</p>
+<h3 id="删除用户"><a href="#删除用户" class="headerlink" title="删除用户"></a>删除用户</h3><p>如果一个用户的账号不再使用，可以从系统中删除。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">userdel [ -r ] 用户名</span><br></pre></td></tr></table></figure>
+<ul>
+<li> -r 把用户相关文件一起删除，包括用户在系统文件中（主要是/etc/passwd, /etc/shadow, /etc/group等）的记录，同时删除用户的主目录。</li>
+</ul>
+<p>一般公司员工离职会删除用户但保存家目录，因为其贡献的代码都在家目录中。</p>
+<h3 id="修改用户"><a href="#修改用户" class="headerlink" title="修改用户"></a>修改用户</h3><p>修改用户账号就是根据实际情况更改用户的有关属性，如用户号、主目录、用户组、登录Shell等。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">usermod [ -cdgGsu ] 用户名</span><br></pre></td></tr></table></figure>
+<p>常用的选项包括 -c, -d, -m, -g, -G, -s, -u, -o 等，这些选项的意义同 <code>useradd</code> ，可以为用户指定新的资源值。</p>
+<p>另外，有些系统可以使用选项：-l 将原来的用户名改为新的用户名。</p>
+<h3 id="查询用户"><a href="#查询用户" class="headerlink" title="查询用户"></a>查询用户</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id 用户名</span><br></pre></td></tr></table></figure>
+<p>demo：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-1-14-centos tt]<span class="comment"># id root</span></span><br><span class="line">uid=0(root) gid=0(root) groups=0(root)</span><br><span class="line">[root@VM-1-14-centos tt]<span class="comment"># id xu</span></span><br><span class="line">id: xu: no such user</span><br></pre></td></tr></table></figure>
+<h3 id="切换用户"><a href="#切换用户" class="headerlink" title="切换用户"></a>切换用户</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">su 用户名</span><br></pre></td></tr></table></figure>
+<p>高权限用户到低权限用户不需要输入密码，反之需要</p>
+<p>可以通过 <code>exit</code> 返回原用户</p>
+<h3 id="查看当前用户"><a href="#查看当前用户" class="headerlink" title="查看当前用户"></a>查看当前用户</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">whoami</span><br></pre></td></tr></table></figure>
+<p>返回当前登录用户名</p>
+<h2 id="用户组管理"><a href="#用户组管理" class="headerlink" title="用户组管理"></a>用户组管理</h2><p>每个用户都有一个用户组，系统可以对一个用户组中的所有用户进行集中管理。</p>
+<p>组的增加、删除和修改实际上就是对/etc/group文件的更新。</p>
+<h3 id="新增用户组"><a href="#新增用户组" class="headerlink" title="新增用户组"></a>新增用户组</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">groupadd [ -go ] 用户组</span><br></pre></td></tr></table></figure>
+<ul>
+<li>-g GID 指定新用户组的组标识号（GID）。</li>
+<li>-o 一般与-g选项同时使用，表示新用户组的GID可以与系统已有用户组的GID相同。</li>
+</ul>
+<p>不指定GID则默认在当前已有的最大组标识号的基础上加1。</p>
+<h3 id="删除用户组"><a href="#删除用户组" class="headerlink" title="删除用户组"></a>删除用户组</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">groupdel 用户组</span><br></pre></td></tr></table></figure>
+<h3 id="修改用户组属性"><a href="#修改用户组属性" class="headerlink" title="修改用户组属性"></a>修改用户组属性</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">groupmod [ -gon ] 用户组</span><br></pre></td></tr></table></figure>
+<ul>
+<li>-g GID 为用户组指定新的组标识号。</li>
+<li>-o 与-g选项同时使用，用户组的新GID可以与系统已有用户组的GID相同。</li>
+<li>-n新用户组 将用户组的名字改为新名字</li>
+</ul>
+<p>demo；</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">groupmod –g 10000 -n group3 group2  <span class="comment"># 将组group2的标识号改为10000，组名修改为group3</span></span><br></pre></td></tr></table></figure>
+<h3 id="切换用户组"><a href="#切换用户组" class="headerlink" title="切换用户组"></a>切换用户组</h3><p>如果一个用户同时属于多个用户组，那么用户可以在用户组之间切换，以便具有其他用户组的权限。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">newgrp 用户组</span><br></pre></td></tr></table></figure>
+<h2 id="用户和用户组的系统文件"><a href="#用户和用户组的系统文件" class="headerlink" title="用户和用户组的系统文件"></a>用户和用户组的系统文件</h2><p>管理用户和用户组实际上都是对有关的系统文件进行修改，包括/etc/passwd, /etc/shadow, /etc/group等。</p>
+<h3 id="etc-passwd"><a href="#etc-passwd" class="headerlink" title="/etc/passwd"></a>/etc/passwd</h3><p>Linux系统中的每个用户都在/etc/passwd文件中有一个对应的记录行，它记录了这个用户的一些基本属性。</p>
+<p>这个文件对所有用户都是可读的。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-1-14-centos home]<span class="comment"># cat /etc/passwd</span></span><br><span class="line">root:x:0:0:root:/root:/bin/bash</span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line">用户名:口令:用户标识号:组标识号:注释性描述:主目录:登录Shell</span><br></pre></td></tr></table></figure>
+<h4 id="用户名"><a href="#用户名" class="headerlink" title="用户名"></a>用户名</h4><p>“用户名”是代表用户账号的字符串。通常长度不超过8个字符，并且由大小写字母和/或数字组成。</p>
+<p>登录名中不能有冒号(:)，因为冒号在这里是分隔符。为了兼容起见，登录名中最好不要包含点字符(.)，并且不使用连字符(-)和加号(+)打头。</p>
+<h4 id="口令"><a href="#口令" class="headerlink" title="口令"></a>口令</h4><p>虽然这个字段存放的只是用户口令的加密串，不是明文，但是由于/etc/passwd文件对所有用户都可读，所以这仍是一个安全隐患。</p>
+<p>因此，现在许多Linux 系统都使用了shadow技术，把真正的加密后的用户口令字存放到/etc/shadow文件中，而在/etc/passwd文件的口令字段中只存放一个特殊的字符，例如“x”或者“*”。</p>
+<h4 id="用户标识号"><a href="#用户标识号" class="headerlink" title="用户标识号"></a>用户标识号</h4><p>一般情况下它与用户名是一一对应的。如果几个用户名对应的用户标识号是一样的，系统内部将把它们视为同一个用户，但是它们可以有不同的口令、不同的主目录以及不同的登录Shell等。</p>
+<p>通常用户标识号的取值范围是0～65 535。0是超级用户root的标识号，1～99由系统保留，作为管理账号，普通用户的标识号从100开始。在Linux系统中，这个界限是500。</p>
+<h4 id="组标识号"><a href="#组标识号" class="headerlink" title="组标识号"></a>组标识号</h4><p>它对应着/etc/group文件中的一条记录。</p>
+<h4 id="注释性描述"><a href="#注释性描述" class="headerlink" title="注释性描述"></a>注释性描述</h4><p>例如用户的真实姓名、电话、地址等，这个字段并没有什么实际的用途。格式也没有统一。在许多Linux系统中，用做finger命令的输出。没有就为空。</p>
+<h4 id="主目录"><a href="#主目录" class="headerlink" title="主目录"></a>主目录</h4><p>是用户在登录到系统之后所处的家目录。各用户的主目录都被放在 /home 下，通常来说用户主目录的名称就是该用户的登录名。</p>
+<p>各用户对自己的主目录有读、写、执行权限，其他用户对此目录的访问权限则根据具体情况设置。</p>
+<h4 id="登录Shell"><a href="#登录Shell" class="headerlink" title="登录Shell"></a>登录Shell</h4><p>Shell是用户与Linux系统之间的接口。Linux的Shell有许多种，每种都有不同的特点。常用的有sh(Bourne Shell), csh(C Shell), ksh(Korn Shell), tcsh(TENEX/TOPS-20 type C Shell), bash(Bourne Again Shell)等。</p>
+<p>系统管理员可以根据系统情况和用户习惯为用户指定某个Shell。如果不指定Shell，那么系统使用sh为默认的登录Shell，即这个字段的值为/bin/sh。</p>
+<p>用户的登录Shell也可以指定为某个特定的程序（此程序不是一个命令解释器）。</p>
+<p>利用这一特点，我们可以限制用户只能运行指定的应用程序，在该应用程序运行结束后，用户就自动退出了系统。有些Linux 系统要求只有那些在系统中登记了的程序才能出现在这个字段中。</p>
+<h4 id="伪用户-pseudo-users"><a href="#伪用户-pseudo-users" class="headerlink" title="伪用户(pseudo users)"></a>伪用户(pseudo users)</h4><p>这些用户在/etc/passwd文件中也占有一条记录，但是不能登录，因为它们的登录Shell为空。它们的存在主要是方便系统管理，满足相应的系统进程对文件属主的要求。</p>
+<ul>
+<li>bin 拥有可执行的用户命令文件 </li>
+<li>sys 拥有系统文件 </li>
+<li>adm 拥有帐户文件 </li>
+<li>uucp UUCP使用 </li>
+<li>lp lp或lpd子系统使用 </li>
+<li>nobody NFS使用</li>
+</ul>
+<h3 id="etc-shadow"><a href="#etc-shadow" class="headerlink" title="/etc/shadow"></a>/etc/shadow</h3><p>与/etc/passwd记录一一对应，由pwconv命令根据/etc/passwd中的数据自动产生。但只有超级用户才拥有该文件读权限。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-1-14-centos home]<span class="comment"># cat /etc/shadow</span></span><br><span class="line">root:$1$ltOhBJKQ<span class="variable">$X</span>/KwY82TfyngQn/GVxk..1:18692:0:99999:7:::</span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line">登录名:加密口令:最后一次修改时间:最小时间间隔:最大时间间隔:警告时间:不活动时间:失效时间:标志</span><br></pre></td></tr></table></figure>
+<ol>
+<li>“登录名”是与/etc/passwd文件中的登录名相一致的用户账号</li>
+<li>“口令”字段存放的是加密后的用户口令字，长度为13个字符。如果为空，则对应用户没有口令，登录时不需要口令；如果含有不属于集合 { ./0-9A-Za-z }中的字符，则对应的用户不能登录。</li>
+<li>“最后一次修改时间”表示的是从某个时刻起，到用户最后一次修改口令时的天数。时间起点对不同的系统可能不一样。</li>
+<li>“最小时间间隔”指的是两次修改口令之间所需的最小天数。</li>
+<li>“最大时间间隔”指的是口令保持有效的最大天数。</li>
+<li>“警告时间”字段表示的是从系统开始警告用户到用户密码正式失效之间的天数。</li>
+<li>“不活动时间”表示的是用户没有登录活动但账号仍能保持有效的最大天数。</li>
+<li>“失效时间”字段给出的是一个绝对的天数，如果使用了这个字段，那么就给出相应账号的生存期。期满后，该账号就不再是一个合法的账号，也就不能再用来登录了。</li>
+</ol>
+<h3 id="etc-group"><a href="#etc-group" class="headerlink" title="/etc/group"></a>/etc/group</h3><p>用户组的所有信息都存放在 /etc/group 文件中。</p>
+<p>将用户分组是 Linux 系统中对用户进行管理及控制访问权限的一种手段。</p>
+<p>每个用户都属于某个用户组；一个组中可以有多个用户，一个用户也可以属于不同的组。</p>
+<p>当一个用户同时是多个组中的成员时，在 /etc/passwd 文件中记录的是用户所属的主组，也就是登录时所属的默认组，而其他组称为附加组。</p>
+<p>用户要访问属于附加组的文件时，必须首先使用 <code>newgrp</code> 命令使自己成为所要访问的组中的成员。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-1-14-centos home]<span class="comment"># cat /etc/shadow</span></span><br><span class="line">root:$1$ltOhBJKQ<span class="variable">$X</span>/KwY82TfyngQn/GVxk..1:18692:0:99999:7:::</span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line">组名:口令:组标识号:组内用户列表</span><br></pre></td></tr></table></figure>
+<ol>
+<li>“组名”是用户组的名称，由字母或数字构成。与/etc/passwd中的登录名一样，组名不应重复。</li>
+<li>“口令”字段存放的是用户组加密后的口令字。一般Linux 系统的用户组都没有口令，即这个字段一般为空，或者是*。</li>
+<li>“组标识号”与用户标识号类似，也是一个整数，被系统内部用来标识组。</li>
+<li>“组内用户列表”是属于这个组的所有用户的列表，不同用户之间用逗号(,)分隔。这个用户组可能是用户的主组，也可能是附加组。</li>
+</ol>
+<p>口令和主组内用户列表一般是看不到的</p>
+<h2 id="添加批量用户"><a href="#添加批量用户" class="headerlink" title="添加批量用户"></a>添加批量用户</h2><h3 id="（1）先编辑一个文本用户文件"><a href="#（1）先编辑一个文本用户文件" class="headerlink" title="（1）先编辑一个文本用户文件"></a>（1）先编辑一个文本用户文件</h3><p>每一列按照<code>/etc/passwd</code>密码文件的格式书写，要注意每个用户的用户名、UID、宿主目录都不可以相同，其中密码栏可以留做空白或输入x号。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">user001::600:100:user:/home/user001:/bin/bash</span><br><span class="line">user002::601:100:user:/home/user002:/bin/bash</span><br><span class="line">user003::602:100:user:/home/user003:/bin/bash</span><br><span class="line">user004::603:100:user:/home/user004:/bin/bash</span><br><span class="line">user005::604:100:user:/home/user005:/bin/bash</span><br><span class="line">user006::605:100:user:/home/user006:/bin/bash</span><br></pre></td></tr></table></figure>
+<h3 id="（2）以root身份执行-usr-sbin-newusers并导入user-txt"><a href="#（2）以root身份执行-usr-sbin-newusers并导入user-txt" class="headerlink" title="（2）以root身份执行 /usr/sbin/newusers并导入user.txt"></a>（2）以root身份执行 <code>/usr/sbin/newusers</code>并导入<code>user.txt</code></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># newusers &lt; user.txt</span><br></pre></td></tr></table></figure>
+
+
+<p>然后可以执行命令 <code>vipw</code> 或 <code>vi /etc/passwd</code> 检查 <code>/etc/passwd</code> 文件是否已经出现这些用户的数据，并且用户的宿主目录是否已经创建。</p>
+<h3 id="（3）执行命令-usr-sbin-pwunconv"><a href="#（3）执行命令-usr-sbin-pwunconv" class="headerlink" title="（3）执行命令/usr/sbin/pwunconv"></a>（3）执行命令/usr/sbin/pwunconv</h3><p>将 <code>/etc/shadow</code> 产生的 <code>shadow</code> 密码解码，然后回写到 <code>/etc/passwd</code> 中，并将<code>/etc/shadow</code>的<code>shadow</code>密码栏删掉。这是为了方便下一步的密码转换工作，即先取消 <code>shadow password</code> 功能。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># pwunconv</span></span><br></pre></td></tr></table></figure>
+<h3 id="（4）编辑每个用户的密码对照文件"><a href="#（4）编辑每个用户的密码对照文件" class="headerlink" title="（4）编辑每个用户的密码对照文件"></a>（4）编辑每个用户的密码对照文件</h3><p>格式为：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">用户名:密码</span><br></pre></td></tr></table></figure>
+<p>实例文件 <code>passwd.txt</code> 内容如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">user001:123456</span><br><span class="line">user002:123456</span><br><span class="line">user003:123456</span><br><span class="line">user004:123456</span><br><span class="line">user005:123456</span><br><span class="line">user006:123456</span><br></pre></td></tr></table></figure>
+<h3 id="（5）以-root-身份执行命令-usr-sbin-chpasswd"><a href="#（5）以-root-身份执行命令-usr-sbin-chpasswd" class="headerlink" title="（5）以 root 身份执行命令 /usr/sbin/chpasswd"></a>（5）以 root 身份执行命令 <code>/usr/sbin/chpasswd</code></h3><p>创建用户密码，<code>chpasswd</code> 会将经过 <code>/usr/bin/passwd</code> 命令编码过的密码写入 <code>/etc/passwd</code> 的密码栏。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># chpasswd &lt; passwd.txt</span></span><br></pre></td></tr></table></figure>
+<h3 id="（6）确定密码经编码写入-etc-passwd的密码栏后"><a href="#（6）确定密码经编码写入-etc-passwd的密码栏后" class="headerlink" title="（6）确定密码经编码写入/etc/passwd的密码栏后"></a>（6）确定密码经编码写入/etc/passwd的密码栏后</h3><p>执行命令 <code>/usr/sbin/pwconv</code> 将密码编码为 <code>shadow password</code>，并将结果写入 <code>/etc/shadow</code>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># pwconv</span></span><br></pre></td></tr></table></figure>
+<p>这样就完成了大量用户的创建了，之后您可以到/home下检查这些用户宿主目录的权限设置是否都正确，并登录验证用户密码是否正确。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">NephrenCake</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://nephrencake.gitee.io/2021/03/Linux%E5%9F%BA%E7%A1%80Part4/">https://nephrencake.gitee.io/2021/03/Linux%E5%9F%BA%E7%A1%80Part4/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://nephrencake.gitee.io" target="_blank">浅幽丶奈芙莲的个人博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/2021/03/Linux%E5%9F%BA%E7%A1%80Part4/%E4%B8%80ed01.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/03/Linux%E5%9F%BA%E7%A1%80Part5/"><img class="prev-cover" src="/2021/03/Linux%E5%9F%BA%E7%A1%80Part5/%E4%B8%80ed02.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Linux基础Part5</div></div></a></div><div class="next-post pull-right"><a href="/2021/03/Linux%E5%9F%BA%E7%A1%80Part3/"><img class="next-cover" src="/2021/03/Linux%E5%9F%BA%E7%A1%80Part3/%E4%BA%8Cop12.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Linux基础Part3</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux%E5%9F%BA%E7%A1%80Part4%E2%80%94%E2%80%94%E7%94%A8%E6%88%B7%E5%92%8C%E7%94%A8%E6%88%B7%E7%BB%84"><span class="toc-number">1.</span> <span class="toc-text">Linux基础Part4——用户和用户组</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-number">1.1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86"><span class="toc-number">1.2.</span> <span class="toc-text">用户管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B7"><span class="toc-number">1.2.1.</span> <span class="toc-text">添加用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%A3%E4%BB%A4%E7%AE%A1%E7%90%86"><span class="toc-number">1.2.2.</span> <span class="toc-text">口令管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E7%94%A8%E6%88%B7"><span class="toc-number">1.2.3.</span> <span class="toc-text">删除用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E7%94%A8%E6%88%B7"><span class="toc-number">1.2.4.</span> <span class="toc-text">修改用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2%E7%94%A8%E6%88%B7"><span class="toc-number">1.2.5.</span> <span class="toc-text">查询用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%87%E6%8D%A2%E7%94%A8%E6%88%B7"><span class="toc-number">1.2.6.</span> <span class="toc-text">切换用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E5%BD%93%E5%89%8D%E7%94%A8%E6%88%B7"><span class="toc-number">1.2.7.</span> <span class="toc-text">查看当前用户</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E7%BB%84%E7%AE%A1%E7%90%86"><span class="toc-number">1.3.</span> <span class="toc-text">用户组管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B0%E5%A2%9E%E7%94%A8%E6%88%B7%E7%BB%84"><span class="toc-number">1.3.1.</span> <span class="toc-text">新增用户组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E7%94%A8%E6%88%B7%E7%BB%84"><span class="toc-number">1.3.2.</span> <span class="toc-text">删除用户组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E7%94%A8%E6%88%B7%E7%BB%84%E5%B1%9E%E6%80%A7"><span class="toc-number">1.3.3.</span> <span class="toc-text">修改用户组属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%87%E6%8D%A2%E7%94%A8%E6%88%B7%E7%BB%84"><span class="toc-number">1.3.4.</span> <span class="toc-text">切换用户组</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E5%92%8C%E7%94%A8%E6%88%B7%E7%BB%84%E7%9A%84%E7%B3%BB%E7%BB%9F%E6%96%87%E4%BB%B6"><span class="toc-number">1.4.</span> <span class="toc-text">用户和用户组的系统文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#etc-passwd"><span class="toc-number">1.4.1.</span> <span class="toc-text">&#x2F;etc&#x2F;passwd</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E5%90%8D"><span class="toc-number">1.4.1.1.</span> <span class="toc-text">用户名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%A3%E4%BB%A4"><span class="toc-number">1.4.1.2.</span> <span class="toc-text">口令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E6%A0%87%E8%AF%86%E5%8F%B7"><span class="toc-number">1.4.1.3.</span> <span class="toc-text">用户标识号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%84%E6%A0%87%E8%AF%86%E5%8F%B7"><span class="toc-number">1.4.1.4.</span> <span class="toc-text">组标识号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B3%A8%E9%87%8A%E6%80%A7%E6%8F%8F%E8%BF%B0"><span class="toc-number">1.4.1.5.</span> <span class="toc-text">注释性描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BB%E7%9B%AE%E5%BD%95"><span class="toc-number">1.4.1.6.</span> <span class="toc-text">主目录</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%99%BB%E5%BD%95Shell"><span class="toc-number">1.4.1.7.</span> <span class="toc-text">登录Shell</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%AA%E7%94%A8%E6%88%B7-pseudo-users"><span class="toc-number">1.4.1.8.</span> <span class="toc-text">伪用户(pseudo users)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#etc-shadow"><span class="toc-number">1.4.2.</span> <span class="toc-text">&#x2F;etc&#x2F;shadow</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#etc-group"><span class="toc-number">1.4.3.</span> <span class="toc-text">&#x2F;etc&#x2F;group</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E6%89%B9%E9%87%8F%E7%94%A8%E6%88%B7"><span class="toc-number">1.5.</span> <span class="toc-text">添加批量用户</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E5%85%88%E7%BC%96%E8%BE%91%E4%B8%80%E4%B8%AA%E6%96%87%E6%9C%AC%E7%94%A8%E6%88%B7%E6%96%87%E4%BB%B6"><span class="toc-number">1.5.1.</span> <span class="toc-text">（1）先编辑一个文本用户文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E4%BB%A5root%E8%BA%AB%E4%BB%BD%E6%89%A7%E8%A1%8C-usr-sbin-newusers%E5%B9%B6%E5%AF%BC%E5%85%A5user-txt"><span class="toc-number">1.5.2.</span> <span class="toc-text">（2）以root身份执行 &#x2F;usr&#x2F;sbin&#x2F;newusers并导入user.txt</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4-usr-sbin-pwunconv"><span class="toc-number">1.5.3.</span> <span class="toc-text">（3）执行命令&#x2F;usr&#x2F;sbin&#x2F;pwunconv</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%884%EF%BC%89%E7%BC%96%E8%BE%91%E6%AF%8F%E4%B8%AA%E7%94%A8%E6%88%B7%E7%9A%84%E5%AF%86%E7%A0%81%E5%AF%B9%E7%85%A7%E6%96%87%E4%BB%B6"><span class="toc-number">1.5.4.</span> <span class="toc-text">（4）编辑每个用户的密码对照文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%885%EF%BC%89%E4%BB%A5-root-%E8%BA%AB%E4%BB%BD%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4-usr-sbin-chpasswd"><span class="toc-number">1.5.5.</span> <span class="toc-text">（5）以 root 身份执行命令 &#x2F;usr&#x2F;sbin&#x2F;chpasswd</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%886%EF%BC%89%E7%A1%AE%E5%AE%9A%E5%AF%86%E7%A0%81%E7%BB%8F%E7%BC%96%E7%A0%81%E5%86%99%E5%85%A5-etc-passwd%E7%9A%84%E5%AF%86%E7%A0%81%E6%A0%8F%E5%90%8E"><span class="toc-number">1.5.6.</span> <span class="toc-text">（6）确定密码经编码写入&#x2F;etc&#x2F;passwd的密码栏后</span></a></li></ol></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 By NephrenCake</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">这里是浅幽丶奈芙莲的个人博客~</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> {preloader.endLoading()})</script><div class="js-pjax"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></div></body></html>
