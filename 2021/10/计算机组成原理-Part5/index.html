@@ -1,0 +1,911 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>计算机组成原理-Part5 | 浅幽丶奈芙莲的个人博客</title><meta name="author" content="NephrenCake"><meta name="copyright" content="NephrenCake"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="中央处理器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机组成原理-Part5">
+<meta property="og:url" content="https://nephrencake.gitee.io/2021/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-Part5/index.html">
+<meta property="og:site_name" content="浅幽丶奈芙莲的个人博客">
+<meta property="og:description" content="中央处理器">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://nephrencake.gitee.io/2021/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/%E4%BA%8Ced11.jpg">
+<meta property="article:published_time" content="2021-10-02T02:53:18.000Z">
+<meta property="article:modified_time" content="2021-10-26T15:16:15.323Z">
+<meta property="article:author" content="NephrenCake">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://nephrencake.gitee.io/2021/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/%E4%BA%8Ced11.jpg"><link rel="shortcut icon" href="/img/favicon.jpg"><link rel="canonical" href="https://nephrencake.gitee.io/2021/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-Part5/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}
+
+// https://stackoverflow.com/questions/16839698/jquery-getscript-alternative-in-native-javascript
+const getScript = url => new Promise((resolve, reject) => {
+  const script = document.createElement('script')
+  script.src = url
+  script.async = true
+  script.onerror = reject
+  script.onload = script.onreadystatechange = function() {
+    const loadState = this.readyState
+    if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+    script.onload = script.onreadystatechange = null
+    resolve()
+  }
+  document.head.appendChild(script)
+})</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-10-26 23:16:15'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><link rel="stylesheet" href="/css/background.css"><link rel="stylesheet" href="/css/mouse.css"><link rel="stylesheet" href="/css/scrollbar.css"><link rel="stylesheet" href="/css/font.css"><link rel="stylesheet" href="/css/iconfont.css"><meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="浅幽丶奈芙莲的个人博客" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">79</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">9</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/photo/"><i class="fa-fw fas fa-heart"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/2021/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/%E4%BA%8Ced11.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">浅幽丶奈芙莲的个人博客</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/photo/"><i class="fa-fw fas fa-heart"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">计算机组成原理-Part5</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-10-02T02:53:18.000Z" title="发表于 2021-10-02 10:53:18">2021-10-02</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-10-26T15:16:15.323Z" title="更新于 2021-10-26 23:16:15">2021-10-26</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">计算机组成原理</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">8.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>25分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="计算机组成原理-Part5——中央处理器"><a href="#计算机组成原理-Part5——中央处理器" class="headerlink" title="计算机组成原理-Part5——中央处理器"></a>计算机组成原理-Part5——中央处理器</h1><p>[TOC]</p>
+<h2 id="CPU-的功能和结构"><a href="#CPU-的功能和结构" class="headerlink" title="CPU 的功能和结构"></a>CPU 的功能和结构</h2><h3 id="CPU-的功能"><a href="#CPU-的功能" class="headerlink" title="CPU 的功能"></a>CPU 的功能</h3><ol>
+<li><strong>指令控制</strong>：完成<strong>取指令</strong>、<strong>分析指令</strong>和<strong>执行指令</strong>的操作，即程序的顺序控制。</li>
+<li><strong>操作控制</strong>：CPU 产生并管理一条指令中的若干操作信号，从而<strong>控制相应的部件</strong>按指令要求进行动作。</li>
+<li><strong>时间控制</strong>：为<strong>每条指令按时间顺序</strong>提供应有的控制信号。</li>
+<li><strong>数据加工</strong>：对数据进行<strong>算术和逻辑运算</strong>。</li>
+<li><strong>中断处理</strong>：管理<strong>总线</strong>及<strong>输入输出</strong>；处理<strong>异常情况</strong>和<strong>特殊请求</strong>。</li>
+</ol>
+<ul>
+<li>运算器：<strong>数据加工</strong></li>
+<li>控制器：<strong>操作控制</strong>、<strong>时间控制</strong>、<strong>指令控制</strong>、<strong>中断处理</strong></li>
+</ul>
+<h3 id="运算器的基本结构"><a href="#运算器的基本结构" class="headerlink" title="运算器的基本结构"></a>运算器的基本结构</h3><ul>
+<li>运算器结构：<ul>
+<li>算术逻辑单元：进行算术/逻辑运算。</li>
+<li>通用寄存器组：如 AX、BX、CX、DX、SP 等。用于存放操作数（包括源操作数、目的操作数及中间结果）和各种地址信息等。</li>
+<li>暂存寄存器：用于暂存<strong>从主存读来的数据</strong>，这个数据不能立即存放在通用寄存器中，否则会破坏其原有内容。</li>
+<li>累加寄存器：是一个通用寄存器，用于暂时存放 ALU 运算的结果信息，用于实现加法运算。</li>
+<li>程序状态字寄存器（PSW）：保留由算术逻辑运算指令或测试指令的结果的各种状态信息，如溢出标志（OP）、符号标志（SF）、零标志（ZF）、进位标志（CF）等。<strong>这些位参与并决定微操作的形成</strong>。</li>
+<li>移位器：对运算结果进行移位运算。</li>
+<li>计数器：控制乘除运算的操作步数。</li>
+</ul>
+</li>
+</ul>
+<img src="/2021/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-Part5/image-20211023104243472.png" alt="image-20211023104243472" style="zoom:80%;">
+
+<ul>
+<li><strong>专用数据通路方式</strong>：根据指令执行过程中的数据和地址的流动方向安排连接线路。<ul>
+<li>特点：<strong>性能较高</strong>，基本不存在数据冲突现象，但<strong>结构复杂</strong>，硬件量大，不易实现。</li>
+</ul>
+</li>
+<li>针对问题：<ul>
+<li>如果 ALU 与寄存器组直接用导线连接，相当于多个寄存器同时并且一直向 ALU 传输数据</li>
+</ul>
+</li>
+<li>改进方向：<ul>
+<li>解决方法1：使用<strong>多路选择器</strong>根据控制信号选择一路输出</li>
+<li>解决方法2：使用<strong>三态门</strong>可以控制每一路是否输出</li>
+</ul>
+</li>
+</ul>
+<img src="/2021/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-Part5/image-20211023105644925.png" alt="image-20211023105644925" style="zoom:80%;">
+
+<ul>
+<li><strong>CPU 内部单总线方式</strong>：将所有寄存器的输入端和输出端都连接到一条公共的通路上。<ul>
+<li>特点：结构简单，容易实现，但数据传输存在较多冲突的现象，性能较低。</li>
+</ul>
+</li>
+<li>针对问题：<ul>
+<li>ALU 的计算结果会在电流不稳定时直接传回 CPU 内部总线，破坏寄存器信息</li>
+</ul>
+</li>
+<li>改进方向：<ul>
+<li>在 ALU 后加入<strong>暂存寄存器</strong>和<strong>三态门</strong>来等待稳定之后再将结果写入寄存器</li>
+<li>通常会把 ALU 后的寄存器添加移位功能</li>
+</ul>
+</li>
+</ul>
+<h3 id="控制器的基本结构"><a href="#控制器的基本结构" class="headerlink" title="控制器的基本结构"></a>控制器的基本结构</h3><p><img src="/2021/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-Part5/image-20211023121447512.png" alt="image-20211023121447512"></p>
+<ol>
+<li>程序计数器：存放下一条指令在主存中的地址。CPU 会根据 PC 的内容去主存中取指令。通常 PC 有自增功能，有的也会交给 ALU 进行加一。</li>
+<li>指令寄存器：用于保存当前正在执行的指令。</li>
+<li>指令译码器：仅<strong>对操作码字段进行译码</strong>，向控制器提供特定的操作信号。</li>
+<li>微操作信号发生器：根据 <strong>IR 的内容</strong>（指令）、<strong>PSW 的内容</strong>（状态信息）及<strong>时序信号</strong>（时序脉冲），产生控制整个计算机系统所需的各种控制信号，其结构有<strong>组合逻辑型</strong>和<strong>存储逻辑型</strong>两种。</li>
+<li>时序系统：用于产生各种时序信号，它们都是由统一时钟（CLOCK）分频得到。</li>
+<li>存储器地址寄存器：用于存放所要访问的主存单元地址。</li>
+<li>存储器数据寄存器：用于存放向主存写入的信息或从主存中读出的信息。</li>
+</ol>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><img src="/2021/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-Part5/image-20211023122455417.png" alt="image-20211023122455417"></p>
+<ul>
+<li>用户可见寄存器：通用寄存器组、程序状态字寄存器 PSW、程序计数器 PC</li>
+<li>用户不可见寄存器：MAR、MDR、IR、暂存寄存器</li>
+</ul>
+<h2 id="指令执行过程"><a href="#指令执行过程" class="headerlink" title="指令执行过程"></a>指令执行过程</h2><h3 id="指令周期"><a href="#指令周期" class="headerlink" title="指令周期"></a>指令周期</h3><ul>
+<li><img src="/2021/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-Part5/image-20211023123259434.png" alt="image-20211023123259434" style="zoom:80%;"><img src="/2021/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-Part5/image-20211023123229871.png" alt="image-20211023123229871" style="zoom:80%;"></li>
+<li><strong>指令周期</strong>：CPU 从主存中每<strong>取出并执行</strong>一条指令所需的全部时间。<ul>
+<li>指令周期常常用若干<strong>机器周期</strong>（<strong>CPU 周期</strong>）来表示。</li>
+<li>一个机器周期又包含若干<strong>时钟周期</strong>（也称为<strong>节拍</strong>、<strong>T 周期</strong>、<strong>主频的倒数</strong>或 <strong>CPU 时钟周期</strong>，它是 CPU 操作的<strong>最基本单位</strong>）。</li>
+</ul>
+</li>
+<li>每个指令周期内机器周期数可以<strong>不等</strong>，每个机器周期内的节拍数也可以<strong>不等</strong>。<ul>
+<li><img src="/2021/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-Part5/image-20211023124356581.png" alt="image-20211023124356581" style="zoom:80%;">
+
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="指令周期数据流"><a href="#指令周期数据流" class="headerlink" title="指令周期数据流"></a>指令周期数据流</h3><ul>
+<li><img src="/2021/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-Part5/image-20211023130107891.png" alt="image-20211023130107891" style="zoom:80%;">
+</li>
+<li><p>四个工作周期都有CPU访存操作，只是访存的目的不同。</p>
+<ul>
+<li><strong>取指周期</strong>是为了<strong>取指令</strong></li>
+<li><strong>间址周期</strong>是为了<strong>取有效地址</strong></li>
+<li><strong>执行周期</strong>是为了<strong>取操作数</strong></li>
+<li><strong>中断周期</strong>是为了<strong>保存程序断点</strong></li>
+</ul>
+</li>
+<li><p name="取指周期">取指周期（所有指令都一样）</p>
+
+<ul>
+<li>(PC) → MAR：当前指令地址送至存储器地址寄存器</li>
+<li>1 → R：CU 发出控制信号，经控制总线传到主存，这里是给<strong>读信号接口</strong>输送一个高电平</li>
+<li>M(MAR) → MDR：将 MAR 所指主存中的内容经数据总线送入 MDR</li>
+<li>(MDR) → IR：将 MDR 中的内容（此时是指令）送入 IR</li>
+<li>OP(IR) → ID：将指令（IR 中的操作码部分）传入指令译码器（Instruction Decoder，ID）</li>
+<li>(PC)+1 → PC：CU 发出控制信号，形成下一条指令地址</li>
+</ul>
+</li>
+<li><p>间址周期（所有指令都一样）</p>
+<ul>
+<li>Ad(IR/MDR) → MAR：将指令的地址码送入 MAR</li>
+<li>1 → R：CU 发出控制信号，启动主存做<strong>读操作</strong></li>
+<li>M(MAR) → MDR：将 MAR 所指主存中的内容经数据总线送入 MDR</li>
+<li>(MDR) → Ad(IR)：将最终的有效地址（IR 中的地址码部分）送至指令的地址码字段</li>
+</ul>
+</li>
+<li><p>执行周期（各不相同）</p>
+<ul>
+<li>执行周期的任务是根据 IR 中的指令字的操作码和操作数通过 ALU 操作产生执行结果。不同指令的执行周期操作不同，因此没有统一的数据流向。</li>
+<li>CLA：clear ACC（ACC清零）<ul>
+<li>0 → AC</li>
+</ul>
+</li>
+<li>LDA X：load ACC（把X所指内容取到ACC）<ul>
+<li>Ad ( IR ) → MAR</li>
+<li>1 → R</li>
+<li>M ( MAR ) → MDR</li>
+<li>MDR → AC</li>
+</ul>
+</li>
+<li>JMP X：（无条件转移)<ul>
+<li>Ad(IR) → PC</li>
+</ul>
+</li>
+<li>BAN X：Branch ACC Negative（当ACC为负时转移）<ul>
+<li>A<del>0</del> • Ad (IR) + (!A<del>0</del>) • (PC) → PC</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>中断周期</p>
+<ul>
+<li>中断：暂停当前任务去完成其他任务。为了能够恢复当前任务，需要保存断点。一般使用堆栈来保存断点，假设 SP 指向栈顶元素（低地址部分）。进栈操作是先修改指针，后存入数据。</li>
+<li>中断周期三个任务：<ul>
+<li>保存断点</li>
+<li>形成中断服务程序的入口地址</li>
+<li>关中断</li>
+</ul>
+</li>
+<li>(SP)-1 → SP，(SP) → MAR：CU 控制 SP 减1，修改后的地址送入 MAR</li>
+<li>1 → W：CU 发出控制信号，启动主存做<strong>写操作</strong></li>
+<li>(PC) → MDR：将断点（PC 内容）送入 MDR</li>
+<li>向量地址 → PC：CU 控制将中断服务程序的入口地址（由向量地址形成部件产生）送入 PC</li>
+</ul>
+</li>
+</ul>
+<h3 id="指令执行方案"><a href="#指令执行方案" class="headerlink" title="指令执行方案"></a>指令执行方案</h3><ul>
+<li>一个指令周期通常要包括几个时间段（执行步骤），每个步骤完成指令的一部分功能，几个依次执行的步骤完成这条指令的全部功能。</li>
+<li>单指令周期<ul>
+<li>所有指令都选用相同的执行时间来完成，指令之间串行执行。</li>
+<li>指令周期取决于执行时间最长的指令的执行时间。对于可以在更短时间内完成的指令，要使用等待至最长的周期，会降低系统的运行速度。</li>
+</ul>
+</li>
+<li>多指令周期<ul>
+<li>对不同类型的指令选用不同的执行步骤来完成 ，指令之间串行执行。</li>
+<li>可选用不同个数的时钟周期来完成不同指令的执行过程 。需要更复杂的硬件设计。</li>
+</ul>
+</li>
+<li>流水线方案<ul>
+<li>在每一个时钟周期启动一条指令，让多条指令处在<strong>不同的执行步骤</strong>中<strong>同时运行</strong>，指令之间并行执行。</li>
+</ul>
+</li>
+</ul>
+<h2 id="数据通路（大题高频）"><a href="#数据通路（大题高频）" class="headerlink" title="数据通路（大题高频）"></a>数据通路（大题高频）</h2><ul>
+<li>数据通路：数据在功能部件之间传送的路径。<ul>
+<li>寄存器-寄存器</li>
+<li>寄存器-主存</li>
+<li>寄存器-ALU</li>
+</ul>
+</li>
+<li>数据通路的基本结构：<ul>
+<li>CPU 内部单总线方式（ALU 必须配合暂存寄存器使用）</li>
+<li>CPU 内部多总线方式（相比单总线成本更高，但是数据传输更有效率）</li>
+<li>专用数据通路方式</li>
+</ul>
+</li>
+</ul>
+<h3 id="单总线结构"><a href="#单总线结构" class="headerlink" title="单总线结构"></a>单总线结构</h3><ul>
+<li><img src="/2021/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-Part5/image-20211023141239720.png" alt="image-20211023141239720" style="zoom:80%;"></li>
+<li>寄存器之间数据传送<ul>
+<li>(PC)→Bus：PCout 有效（PC 内容送总线）</li>
+<li>Bus→MAR：MARin 有效（总线内容送 MAR）</li>
+</ul>
+</li>
+<li>主存与CPU之间的数据传送<ul>
+<li>(PC)→Bus→MAR：PCout 和 MARin 有效（现行指令地址→MAR）</li>
+<li>1→R：CU 发读命令</li>
+<li>MEM(MAR)→MDR：MDRinE 有效</li>
+<li>MDR→Bus→IR：MDRout 和 IRin 有效（现行指令→IR）</li>
+</ul>
+</li>
+<li>执行算术或逻辑运算<ul>
+<li>Ad(IR/MDR)→Bus→MAR：MDRout 和 MARin 有效</li>
+<li>1→R：CU 发读命令</li>
+<li>MEM(MAR)→数据线→MDR：MDRin 有效</li>
+<li>MDR→Bus→Y：MDRout 和 Yin 有效（操作数→Y）</li>
+<li>(ACC)+(Y)→Z：ACCout 和 ALUin 有效（CU 向 ALU 发送加命令）</li>
+<li>Z→ACC：Zout 和 ACCin 有效（结果→ACC）</li>
+</ul>
+</li>
+</ul>
+<h3 id="专用通路结构"><a href="#专用通路结构" class="headerlink" title="专用通路结构"></a>专用通路结构</h3><ul>
+<li><img src="/2021/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-Part5/image-20211023145547590.png" alt="image-20211023145547590" style="zoom:80%;"></li>
+<li>取指周期<ul>
+<li>(PC)→MAR：C0有效</li>
+<li>(MAR)→主存：C1有效</li>
+<li>1→R：控制单元向主存发送读命令</li>
+<li>M(MAR)→MDR：C2有效</li>
+<li>(MDR)→IR：C3有效</li>
+<li>(PC)+1→PC</li>
+<li>Op(IR)→CU：C4有效</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>数据通路是计组大题高频考点！一定要做题巩固！</p>
+</blockquote>
+<h2 id="控制器的功能和工作原理"><a href="#控制器的功能和工作原理" class="headerlink" title="控制器的功能和工作原理"></a>控制器的功能和工作原理</h2><h3 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h3><ul>
+<li>硬布线控制器：使用<strong>纯硬件</strong>的方式来实现控制器的功能</li>
+<li>微程序控制器：使用<strong>软硬件结合</strong>的方式来实现控制器的功能</li>
+<li><img src="/2021/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-Part5/image-20211023185221891.png" alt="image-20211023185221891"></li>
+<li>CPU 会在每个时钟周期内发出一个<strong>微命令</strong>，即完成一个对应<strong>微操作</strong>的控制信号。<ul>
+<li>如，微命令1 使得 PCout、MARin 有效，从而完成对应的微操作1 (PC)-&gt;MAR。</li>
+<li>微命令与微操作是相互对应的</li>
+<li>特点：<ol>
+<li>多个<strong>相容</strong>的微操作是可以<strong>在一个节拍内并行</strong>的。比如使用专用通路结构就可以提高微命令的并行数量</li>
+<li>同一个微操作可能在不同的指令阶段中重复使用</li>
+<li>在定长机器周期中，通常以<strong>访存所需节拍数</strong>作为参考</li>
+<li>若实际所需节拍数较少，可将微操作安排在机器周期末尾进行</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>根据<strong>指令操作码</strong>、<strong>当前的机器周期</strong>、<strong>节拍信号</strong>、<strong>机器状态条件</strong>，即可确定现在这个节拍下应该发出哪些“微命令”</li>
+<li>CPU 所处的周期由四个不同的触发器确定。</li>
+</ul>
+<h3 id="硬布线控制器"><a href="#硬布线控制器" class="headerlink" title="硬布线控制器"></a>硬布线控制器</h3><ul>
+<li><img src="/2021/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-Part5/image-20211023190651176.png" alt="image-20211023190651176"></li>
+<li>设计步骤<ol>
+<li><a href="#取指周期">分析每个阶段的微操作序列</a>（哪些指令在<strong>什么阶段</strong>、<strong>什么条件</strong>下会使用到<strong>什么微操作</strong>）</li>
+<li>选择 CPU 的控制方式（定长/不定长周期，每个周期的节拍数）</li>
+<li>安排微操作时序</li>
+<li>电路设计（逻辑表达式与电路设计）<ul>
+<li>列出操作时间表</li>
+<li>写出微操作的最简表达式</li>
+<li>画出逻辑图</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>安排微操作时序的原则<ol>
+<li>微操作的<strong>先后顺序</strong>不得随意更改</li>
+<li><strong>被控对象不同</strong>的微操作尽量安排在<strong>一个节拍</strong>内完成</li>
+<li>占用<strong>时间较短</strong>的微操作尽量安排在<strong>一个节拍</strong>内完成，允许有先后顺序</li>
+</ol>
+</li>
+<li>取指周期：<ul>
+<li><img src="/2021/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-Part5/image-20211023194220430.png" alt="image-20211023194220430" style="zoom:80%;"></li>
+<li>M ( MAR ) -&gt; MDR：从主存取数据，用时较长，因此必须一个时钟周期才能保证微操作的完成</li>
+<li>MDR -&gt; IR：是 CPU 内部寄存器之间的数据传送，速度很快，因此在一个时钟周期内可以紧接着完成第二个微命令 OP ( IR ) -&gt; ID。</li>
+</ul>
+</li>
+<li>间址周期：<ul>
+<li><img src="/2021/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-Part5/image-20211023194429655.png" alt="image-20211023194429655" style="zoom:80%;"></li>
+</ul>
+</li>
+<li>执行周期：<ul>
+<li><img src="/2021/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-Part5/image-20211023194744913.png" alt="image-20211023194744913" style="zoom:80%;"></li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>指令越多，设计、实现就越复杂，因此<strong>一般用于 RISC</strong>（精简指令集系统） </li>
+<li>如果扩充一条新的指令，则控制器的设计就需要大改，因此<strong>扩充指令较困难</strong>。</li>
+</ul>
+</li>
+<li>优点：<ul>
+<li>由于使用纯硬件实现控制，因此执行<strong>速度很快</strong>。</li>
+<li><strong>微操作控制信号</strong>由组合逻辑电路根据当前的指令码、状态和时序，<strong>即时产生</strong>。</li>
+</ul>
+</li>
+</ul>
+<h3 id="微程序控制器（考点）"><a href="#微程序控制器（考点）" class="headerlink" title="微程序控制器（考点）"></a>微程序控制器（考点）</h3><h4 id="基本原理-1"><a href="#基本原理-1" class="headerlink" title="基本原理"></a>基本原理</h4><h5 id="微程序的概念"><a href="#微程序的概念" class="headerlink" title="微程序的概念"></a>微程序的概念</h5><ul>
+<li><img src="/2021/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-Part5/image-20211024094522115.png" alt="image-20211024094522115"></li>
+<li>基本思想：采用“存储程序”的思想，CPU 出厂前将所有指令的“微程序”存入“控制器存储器”中</li>
+<li>层次结构：<ul>
+<li>程序：由<strong>指令序列</strong>组成</li>
+<li><strong>微程序</strong>：<ul>
+<li>由<strong>微指令序列</strong>组成，<strong>每一种指令对应一个微程序</strong></li>
+<li><strong>取指、间指、执行、中断周期微程序段</strong>，共同<strong>组成一个微程序</strong></li>
+</ul>
+</li>
+<li><strong>指令</strong>：是对程序执行步骤的描述<ul>
+<li>指令/微程序是对微指令功能的“封装”</li>
+<li>是一个微指令序列</li>
+</ul>
+</li>
+<li><strong>微指令</strong>：是对指令执行步骤的描述<ul>
+<li>微指令中可能包含多个<strong>微命令</strong></li>
+<li><strong>每一个微命令对应一个微操作</strong>，<strong>每一个微命令对应一条输出控制线</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="微程序控制器基本结构"><a href="#微程序控制器基本结构" class="headerlink" title="微程序控制器基本结构"></a>微程序控制器基本结构</h5><ul>
+<li><img src="/2021/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-Part5/image-20211024180509785.png" alt="image-20211024180509785"></li>
+<li><strong>微地址形成部件</strong>：产生初始微地址和后继微地址，以保证微指令的连续执行。</li>
+<li><strong>CMAR</strong>：又称 <strong>μPC</strong>，微地址寄存器，接收微地址形成部件送来的微地址，为在 CM 中读取微指令作准备。</li>
+<li><strong>地址译码</strong>：将地址码转化为存储单元控制信号。</li>
+<li><strong>控制存储器 CM</strong>：简称<strong>控存</strong>，用于存放各指令对应的微程序，控制存储器是由<strong>只读存储器 ROM</strong> 构成。</li>
+<li><strong>CMDR</strong>：别名：<strong>μIR</strong>，用于存放从 CM 中取出的微指令，它的位数同微指令字长相等。</li>
+<li><strong>顺序逻辑</strong>：<ul>
+<li>根据<strong>指令地址码的寻址特征位</strong>判断是否要跳过间址周期</li>
+<li>根据<strong>中断信号</strong>判断是否进入中断周期</li>
+</ul>
+</li>
+<li>所有指令的<strong>取指周期</strong>、<strong>间址周期</strong>、<strong>中断周期</strong>所对应的微指令序列都一样，<strong>可以共享使用</strong>。</li>
+<li>取指周期微程序：（常考）<ul>
+<li>通常是公用的，故如果某指令系统中有 n 条机器指令，则 CM 中微程序（段）的个数至少是 <strong>n+1</strong> 个</li>
+<li>一些早期的 CPU、物联网设备的 CPU <strong>可以不提供间接寻址和中断功能</strong>，因此这类 CPU 可以不包含间址周期、中断周期的微程序段</li>
+</ul>
+</li>
+<li>有的选择题中，虽然取指周期、执行周期<strong>在物理上</strong>是两个微程序，但<strong>逻辑上</strong>应该把它们看作一个整体。即，<strong>一条指令对应一个微程序</strong>。</li>
+</ul>
+<h4 id="微指令的设计"><a href="#微指令的设计" class="headerlink" title="微指令的设计"></a>微指令的设计</h4><h5 id="微指令的格式"><a href="#微指令的格式" class="headerlink" title="微指令的格式"></a>微指令的格式</h5><ul>
+<li>水平型微指令：一条微指令能定义多个可并行的微命令。<ul>
+<li>优点：微程序短，执行速度快；</li>
+<li>缺点：微指令长，编写微程序较麻烦。</li>
+<li><img src="/2021/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-Part5/image-20211024182849406.png" alt="image-20211024182849406"></li>
+</ul>
+</li>
+<li>垂直型微指令：一条微指令只能定义<strong>一个</strong>微命令<strong>，</strong>由微操作码字段规定具体功能<ul>
+<li>优点：微指令短、简单、规整，便于编写微程序；</li>
+<li>缺点：微程序长，执行速度慢，工作效率低。 </li>
+<li><img src="/2021/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-Part5/image-20211024182907683.png" alt="image-20211024182907683"></li>
+</ul>
+</li>
+<li>混合型微指令：<ul>
+<li>在垂直型的基础上增加一些不太复杂的并行操作。</li>
+<li>微指令较短，仍便于编写；微程序也不长，执行速度加快。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<ul>
+<li><strong>相容性</strong>微命令：可以并行完成的微命令。</li>
+<li><strong>互斥性</strong>微命令：不允许并行完成的微命令。</li>
+</ul>
+</blockquote>
+<h5 id="微指令的编码方式（高频）"><a href="#微指令的编码方式（高频）" class="headerlink" title="微指令的编码方式（高频）"></a>微指令的编码方式（高频）</h5><p><strong>微指令的编码方式</strong>，又称<strong>微指令的控制方式</strong>，指如何对微指令的控制字段进行编码，以形成控制信号。目标是在保证速度的情况下，尽量缩短微指令字长。</p>
+<ol>
+<li>直接编码（直接控制）方式<ul>
+<li>在微指令的操作控制字段中，<strong>每一位代表一个微操作命令</strong>，某位为 1 表示该控制信号有效</li>
+<li>优点：简单、直观，执行速度快，操作并行性好。</li>
+<li>缺点：微指令字长过长，n 个微命令就要求微指令的操作字段有 n 位，造成控存容量极大。</li>
+<li><img src="/2021/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-Part5/image-20211024205924843.png" alt="image-20211024205924843"></li>
+</ul>
+</li>
+<li>字段直接编码方式<ul>
+<li>将微指令的控制字段分成若干“段”，<strong>每段经译码后发出控制信号</strong>微命令字段分段的原则：<ul>
+<li><strong>互斥性</strong>微命令分在<strong>同一段内</strong>，<strong>相容性</strong>微命令分在<strong>不同段内</strong>。不同段/不同互斥类/相容的微命令可以并行</li>
+<li><strong>每个小段</strong>中包含的<strong>信息位不能太多</strong>，否则将增加译码线路的复杂性和译码时间。</li>
+<li>一般<strong>每个小段还要留出一个状态</strong>，表示本字段不发出任何微命令。因此，当某字段的长度为 3 位时，最多只能表示 7 个互斥的微命令，<strong>通常用 000 表示不操作</strong>。</li>
+</ul>
+</li>
+<li>优点：可以缩短微指令字长。</li>
+<li>缺点：要通过译码电路后再发出微命令，因此比直接编码方式慢 。</li>
+<li><img src="/2021/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-Part5/image-20211024210134498.png" alt="image-20211024210134498"></li>
+</ul>
+</li>
+<li>字段间接编码方式<ul>
+<li>一个字段的某些微命令需由另一个字段中的某些微命令来解释，由于不是靠字段直接译码发出的微命令，故称为字段间接编码，又称隐式编码。</li>
+<li>优点：可进一步缩短微指令字长。</li>
+<li>缺点：削弱了微指令的并行控制能力。通常作为字段直接编码方式的一种辅助手段。</li>
+<li><img src="/2021/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-Part5/image-20211024210333131.png" alt="image-20211024210333131"></li>
+</ul>
+</li>
+</ol>
+<h5 id="微指令的地址形成方式"><a href="#微指令的地址形成方式" class="headerlink" title="微指令的地址形成方式"></a>微指令的地址形成方式</h5><ol>
+<li><strong>断定方式</strong>（常考）：微指令的下地址字段直接指出后继微指令的地址。</li>
+<li>根据机器指令的<strong>操作码</strong>形成：当机器指令取至指令寄存器后，微指令的地址由操作码经微地址形成部件形成。（不常考）</li>
+<li>增量<strong>计数器法</strong>（常考）：(CMAR) + 1 -&gt; CMAR/μPC</li>
+<li>分支转移：操作控制字段+转移方式+转移地址。转移方式，指明判别条件；转移地址，指明转移成功后的去向。（不常考）</li>
+<li>通过测试网络（不常考）</li>
+<li>由<strong>硬件</strong>产生微程序入口地址：<ul>
+<li>第一条微指令地址：由<strong>硬件</strong>产生（用专门的硬件记录取指周期微程序首地址）</li>
+<li>中断周期：由<strong>硬件</strong>产生中断周期微程序首地址（用专门的硬件记录）</li>
+</ul>
+</li>
+</ol>
+<h4 id="微程序控制单元的设计"><a href="#微程序控制单元的设计" class="headerlink" title="微程序控制单元的设计"></a>微程序控制单元的设计</h4><ul>
+<li><p><img src="/2021/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-Part5/image-20211024232747714.png" alt="image-20211024232747714"></p>
+</li>
+<li><p>设计步骤：</p>
+<ol>
+<li><p>分析每个阶段的微操作序列</p>
+</li>
+<li><p>写出对应机器指令的微操作命令及节拍安排</p>
+<ul>
+<li><p> 写出每个周期所需要的微操作（参照硬布线）</p>
+</li>
+<li><p>补充微程序控制器特有的微操作：</p>
+<p>a. 取指周期：</p>
+<ul>
+<li>Ad ( CMDR ) -&gt; CMAR（每条微指令结束都要进行）</li>
+<li>OP ( IR ) -&gt; 微地址形成部件 -&gt; CMAR（取指周期结束，根据指令操作码确定其执行周期的微程序首地址）</li>
+</ul>
+<p>b. 执行周期：</p>
+<ul>
+<li>Ad(CMDR) -&gt; CMAR（每条微指令结束都要进行，最后一条微指令的下地址是 0）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>确定微指令格式</p>
+<ul>
+<li>根据<strong>微操作个数</strong>决定采用何种<strong>编码方式</strong>，以确定微指令的<strong>操作控制字段的位数</strong>。</li>
+<li>根据 CM 中存储的<strong>微指令总数</strong>，确定微指令的<strong>顺序控制字段的位数</strong>。</li>
+<li>最后按操作控制字段位数和顺序控制字段位数就可确定<strong>微指令字长</strong>。</li>
+</ul>
+</li>
+<li><p>编写微指令码点</p>
+<ul>
+<li>根据操作控制字段每一位代表的微操作命令，编写每一条微指令的码点。</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>读出微指令：</p>
+<ul>
+<li>取指周期的<strong>第一条微指令地址由硬件自动给出</strong></li>
+<li>用微指令 a 的下地址表示 b 的地址。上一条微指令的下地址部分转到下一条微指令的译码，同样需要消耗一个节拍</li>
+</ul>
+</li>
+</ul>
+<h4 id="微程序设计分类"><a href="#微程序设计分类" class="headerlink" title="微程序设计分类"></a>微程序设计分类</h4><ol>
+<li>静态微程序设计和动态微程序设计<ul>
+<li>静态：微程序无需改变，采用 ROM</li>
+<li>动态：通过改变<strong>微指令</strong>和<strong>微程序</strong>改变机器指令。有利于仿真，采用 EPROM</li>
+</ul>
+</li>
+<li>毫微程序设计<ul>
+<li>微程序设计：用微程序解释机器指令</li>
+<li>毫微程序设计：用毫微程序解释微程序</li>
+<li><strong>毫微指令与微指令</strong>的关系好比<strong>微指令与机器指令</strong>的关系</li>
+</ul>
+</li>
+</ol>
+<h3 id="硬布线与微程序的比较"><a href="#硬布线与微程序的比较" class="headerlink" title="硬布线与微程序的比较"></a>硬布线与微程序的比较</h3><table>
+<thead>
+<tr>
+<th>对比项目</th>
+<th>微程序控制器</th>
+<th>硬布线控制器</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>工作原理</td>
+<td>读出微程序</td>
+<td>电路即时产生</td>
+</tr>
+<tr>
+<td>执行速度</td>
+<td>慢</td>
+<td>快</td>
+</tr>
+<tr>
+<td>规整性</td>
+<td>较规整</td>
+<td>繁琐，不规整</td>
+</tr>
+<tr>
+<td>应用场合</td>
+<td>CISC CPU</td>
+<td>RISC CPU</td>
+</tr>
+<tr>
+<td>易扩充性</td>
+<td>易扩充修改</td>
+<td>困难</td>
+</tr>
+</tbody></table>
+<h3 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h3><p><img src="/2021/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-Part5/image-20211024235150778.png" alt="image-20211024235150778"></p>
+<h2 id="指令流水线（大题考察）"><a href="#指令流水线（大题考察）" class="headerlink" title="指令流水线（大题考察）"></a>指令流水线（大题考察）</h2><h3 id="指令流水线的基本概念"><a href="#指令流水线的基本概念" class="headerlink" title="指令流水线的基本概念"></a>指令流水线的基本概念</h3><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><ul>
+<li>指令流水：一条指令的执行过程可以分成多个阶段（或过程）。根据计算机的不同，具体的分法、数量也不同。<ul>
+<li>取指（Instruction Fetch，IF）、分析（Instruction Decode，ID）、执行（Execute）、Memory、Writeback</li>
+<li>分成 5 个阶段的 RISC 是比较常见的考法。</li>
+</ul>
+</li>
+</ul>
+<h4 id="执行方式"><a href="#执行方式" class="headerlink" title="执行方式"></a>执行方式</h4><ul>
+<li>顺序执行方式：<ul>
+<li>总耗时T = n×3t = 3nt</li>
+<li>传统冯·诺依曼机采用顺序执行方式，又称串行执行方式。</li>
+<li>优点：控制简单，硬件代价小。</li>
+<li>缺点：执行指令的速度较慢，在任何时刻，处理机中只有一条指令在执行，各功能部件的利用率很低。</li>
+</ul>
+</li>
+<li>一次重叠执行方式：<ul>
+<li>总耗时T = 3t + (n-1)×2t = (1+2n)t</li>
+<li>优点：程序的执行时间缩短了1/3，各功能部件的利用率明显提高。</li>
+<li>缺点：需要付出硬件上较大开销的代价，控制过程也比顺序执行复杂了。</li>
+</ul>
+</li>
+<li>二次重叠执行方式：<ul>
+<li>总耗时T = 3t + (n-1)×t = (2+n)t</li>
+<li>与顺序执行方式相比，指令的执行时间缩短近2/3。这是一种理想的指令执行方式，在正常情况下，处理机中同时有3条指令在执行。</li>
+</ul>
+</li>
+</ul>
+<h4 id="表示方法（重要）"><a href="#表示方法（重要）" class="headerlink" title="表示方法（重要）"></a>表示方法（重要）</h4><ul>
+<li><img src="/2021/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-Part5/image-20211025092552132.png" alt="image-20211025092552132"></li>
+<li>指令执行过程图：主要用于分析指令执行过程以及影响流水线的因素</li>
+<li>时空图：主要用于分析流水线的性能</li>
+</ul>
+<h4 id="性能指标（重要）"><a href="#性能指标（重要）" class="headerlink" title="性能指标（重要）"></a>性能指标（重要）</h4><p><img src="/2021/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-Part5/image-20211025093530754.png" alt="image-20211025093530754"></p>
+<p>一条指令的执行分为 k 个阶段，每个阶段耗时 Δt ，一般取 Δt=一个时钟周期（应该是机器周期，在理想情况下可以当做时钟周期）</p>
+<ul>
+<li>吞吐率：在单位时间内流水线所完成的任务数量。<ul>
+<li>吞吐率计算公式：$TP = \frac{n}{T_{k}}$</li>
+<li>实际吞吐率为：$TP = \frac{n}{(k+n-1)Δt}$</li>
+<li>当连续输入的任务 n→∞ 时，最大吞吐率为 TPmax=1/Δt。</li>
+</ul>
+</li>
+<li>加速比：完成同样一批任务，<strong>不使用流水线所用的时间</strong>与<strong>使用流水线所用的时间</strong>之比。<ul>
+<li>加速比公式：$S = \frac{T_{0}}{T_{k}}$</li>
+<li>实际加速比：$S = \frac{knΔt}{(k+n-1)Δt} = \frac{kn}{(k+n-1)}$</li>
+<li>当连续输入的任务 n→∞ 时，最大加速比为 Smax=k。</li>
+</ul>
+</li>
+<li>效率：流水线的设备利用率称为流水线的效率。<ul>
+<li>在时空图上，流水线的效率定义为完成<strong>n个任务占用的时空区有效面积</strong>与<strong>n个任务所用的时间与k个流水段所围成的时空区总面积</strong>之比。</li>
+<li>效率公式：$E = \frac{n个任务占用k时空区有效面积}{n个任务所用的时间与k个流水段所围成的时空区总面积}=\frac{T_{0}}{kT_{k}}$</li>
+<li>当连续输入的任务 n→∞ 时，最高效率为 Emax=1。</li>
+<li><img src="/2021/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-Part5/image-20211025095147120.png" alt="image-20211025095147120"></li>
+</ul>
+</li>
+</ul>
+<h3 id="指令流水线的影响因素和分类"><a href="#指令流水线的影响因素和分类" class="headerlink" title="指令流水线的影响因素和分类"></a>指令流水线的影响因素和分类</h3><h4 id="影响流水线的因素（重要）"><a href="#影响流水线的因素（重要）" class="headerlink" title="影响流水线的因素（重要）"></a>影响流水线的因素（重要）</h4><ul>
+<li>结构相关（资源冲突）<ul>
+<li>由于多条指令在同一时刻争用同一资源而形成的冲突称为结构相关。</li>
+<li>解决办法：<ul>
+<li>后一相关指令暂停一周期</li>
+<li>资源重复配置：数据存储器+指令存储器</li>
+</ul>
+</li>
+<li><img src="/2021/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-Part5/image-20211025102708962.png" alt="image-20211025102708962"></li>
+</ul>
+</li>
+<li>数据相关（数据冲突）<ul>
+<li>数据相关指在一个程序中，存在必须等前一条指令执行完才能执行后一条指令的情况，则这两条指令即为数据相关。</li>
+<li>解决办法：<ul>
+<li>把遇到数据相关的指令及其后续指令都暂停一至几个时钟周期，直到数据相关问题消失后再继续执行。可分为<strong>硬件阻塞（stall）</strong>和<strong>软件插 入（NOP）</strong>两种方法。</li>
+<li>数据旁路技术（转发机制）：通过增加电路（数据旁路），将上一步的 ALU 结果直接送入下一步的 ALU</li>
+<li>编译优化：通过编译器调整指令顺序来解决数据相关。</li>
+</ul>
+</li>
+<li><img src="/2021/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-Part5/image-20211025102758077.png" alt="image-20211025102758077"></li>
+</ul>
+</li>
+<li>控制相关（控制冲突）<ul>
+<li>当流水线遇到改变 PC 值的指令（如转移指令、CALL、中断）而造成断流时，会引起控制相关。</li>
+<li>解决办法：（由转移指令发生）<ul>
+<li>转移指令预测。简单预测（永远猜true或false）动态预测（根据历史情况动态调整）</li>
+<li>预取转移成功和不成功两个控制流方向上的目标指令（需要增加至能够支持两个方向的寄存器数量）</li>
+<li>加快和提前形成条件码（类似于全加器并行）</li>
+<li>提高转移方向的猜准率</li>
+</ul>
+</li>
+<li><img src="/2021/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-Part5/image-20211025103223036.png" alt="image-20211025103223036"></li>
+</ul>
+</li>
+</ul>
+<p><img src="/2021/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-Part5/image-20211025103334530.png" alt="image-20211025103334530"></p>
+<h4 id="流水线的分类"><a href="#流水线的分类" class="headerlink" title="流水线的分类"></a>流水线的分类</h4><ul>
+<li>部件功能级、处理机级和处理机间级流水线（流水线使用的级别）<ul>
+<li><strong>部件功能级流水</strong>就是将复杂的算术逻辑运算组成流水线工作方式。例如，可将浮点加法操作分成求阶差、对阶、尾数相加以及结果规格化等4个子过程。</li>
+<li><strong>处理机级流水</strong>是把一条指令解释过程分成多个子过程，如前面提到的取指、译码、执行、访存及写回 5 个子过程。</li>
+<li><strong>处理机间流水</strong>是一种宏流水，其中每一个处理机完成某一专门任务，各个处理机所得到的结果需存放在与下一个处理机所共享的存储器中。</li>
+</ul>
+</li>
+<li>单功能流水线和多功能流水线（流水线可以完成的功能）<ul>
+<li><strong>单功能流水线</strong>指只能实现一种固定的专门功能的流水线</li>
+<li><strong>多功能流水线</strong>指通过各段间的不同连接方式可以同时或不同时地实现多种功能的流水线</li>
+</ul>
+</li>
+<li>动态流水线和静态流水线（同一时间内各段之间的连接方式）<ul>
+<li><strong>静态流水线</strong>指在同一时间内，流水线的各段只能按同一种功能的连接方式工作。</li>
+<li><strong>动态流水线</strong>指在同一时间内，当某些段正在实现某种运算时，另一些段却正在进行另一种运算。这样对提高流水线的效率很有好处，但会使流水线控制变得很复杂。</li>
+</ul>
+</li>
+<li>线性流水线和非线性流水线（各个功能段之间是否有反馈信号）<ul>
+<li><strong>线性流水线</strong>中，从输入到输出，每个功能段只允许经过一次，不存在反馈回路。</li>
+<li><strong>非线性流水线</strong>存在反馈回路，从输入到输出过程中，某些功能段将数次通过流水线，这种流水线适合进行线性递归的运算。</li>
+</ul>
+</li>
+</ul>
+<h4 id="流水线的多发技术"><a href="#流水线的多发技术" class="headerlink" title="流水线的多发技术"></a>流水线的多发技术</h4><ul>
+<li><strong>超标量技术</strong>（空分复用）<ul>
+<li>每个时钟周期内可<strong>并发多条独立指令</strong></li>
+<li>要配置<strong>多个功能部件</strong>（多个 ALU、寄存器组）</li>
+<li><strong>不能调整</strong>指令的<strong>执行顺序</strong>（乱序发射 CPU 可以调整顺序）</li>
+<li>通过编译优化技术，把可并行执行的指令搭配起来</li>
+<li><img src="/2021/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-Part5/image-20211025105329051.png" alt="image-20211025105329051"></li>
+</ul>
+</li>
+<li><strong>超流水技术</strong>（时分复用）<ul>
+<li>在<strong>一个时钟周期内再分段</strong>（3段）</li>
+<li>在一个时钟周期（机器周期，理想情况下min机器周期-&gt;时钟周期）内<strong>一个功能部件使用多次</strong>（ 3 次）</li>
+<li><strong>不能调整</strong>指令的<strong>执行顺序</strong></li>
+<li>靠编译程序解决优化问题</li>
+<li><img src="/2021/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-Part5/image-20211025105518773.png" alt="image-20211025105518773"></li>
+</ul>
+</li>
+<li><strong>超长指令字</strong><ul>
+<li>由<strong>编译程序</strong>挖掘出指令间<strong>潜在的并行性</strong></li>
+<li>将<strong>多条能并行操作的指令组合</strong>成 一条</li>
+<li>具有<strong>多个操作码字段</strong>的超长指令字（可达几百位）</li>
+<li>采用<strong>多个处理部件</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="五段式指令流水线"><a href="#五段式指令流水线" class="headerlink" title="五段式指令流水线"></a>五段式指令流水线</h3><h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><ul>
+<li><img src="/2021/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-Part5/image-20211025100227733.png" alt="image-20211025100227733"></li>
+<li>为方便流水线的设计，将每个阶段的耗时取成一样，以最长耗时为准。即此处应将机器周期设置为 100ns。</li>
+<li>流水线<strong>每一个功能段</strong>部件后面都要有一个<strong>缓冲寄存器</strong>，或称为<strong>锁存器</strong>，其作用是<strong>保存本流水段的执行结果</strong>，提供给下一流水段使用。</li>
+<li><strong>① IF 取指 -&gt; ② ID 译码&amp;取数 -&gt; ③ EX 执行 -&gt; ④ M 访存 -&gt; ⑤ WB 写回寄存器</strong></li>
+<li>考试中常见的五类指令：<ul>
+<li><strong>运算类指令</strong>、<strong>LOAD 指令</strong>、<strong>STORE 指令</strong>、<strong>条件转移指令</strong>、<strong>无条件转移指令</strong></li>
+</ul>
+</li>
+</ul>
+<h4 id="运算类指令的执行过程"><a href="#运算类指令的执行过程" class="headerlink" title="运算类指令的执行过程"></a>运算类指令的执行过程</h4><ul>
+<li>IF：根据 PC 从指令 Cache 取指令至 IF 段的锁存器</li>
+<li>ID：取出操作数至 ID 段锁存器</li>
+<li>EX：运算，将结果存入 EX 段锁存器</li>
+<li>M：空段（RISC 指令集不会在运算指令中访问主存，但是这段时间周期是需要消耗的）</li>
+<li>WB：将运算结果写回指定寄存器</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>运算类指令举例</th>
+<th>指令的汇编格式</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>加法指令（两个寄存器相加）</td>
+<td>ADD Rs, Rd</td>
+<td>(Rs)+(Rd) -&gt; Rd</td>
+</tr>
+<tr>
+<td>加法指令（寄存器与立即数相加）</td>
+<td>ADD #996, Rd</td>
+<td>996+(Rd) -&gt; Rd</td>
+</tr>
+<tr>
+<td>算数左移指令</td>
+<td>SHL Rd</td>
+<td>(Rd)&lt;&lt;&lt;2 -&gt; Rd</td>
+</tr>
+</tbody></table>
+<blockquote>
+<ul>
+<li>Rs 指源操作数（source）</li>
+<li>Rd 指目的操作数（destination）</li>
+</ul>
+</blockquote>
+<h4 id="LOAD-指令的执行过程"><a href="#LOAD-指令的执行过程" class="headerlink" title="LOAD 指令的执行过程"></a>LOAD 指令的执行过程</h4><ul>
+<li>IF：根据 PC 从指令 Cache 取指令至 IF 段的锁存器</li>
+<li>ID：将基址寄存器的值放到锁存器 A，将偏移量的值放到 Imm</li>
+<li>EX：运算，得到有效地址</li>
+<li>M：从数据 Cache 中取数并放入锁存器</li>
+<li>WB：将取出的数写回寄存器</li>
+<li>LOAD 也需要经过运算，才能得到有效地址</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>指令的汇编格式</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>LOAD Rd, 996(Rs) 或 LOAD Rd, mem</td>
+<td>(996+(Rs)) -&gt; Rd 或 (mem) -&gt; Rd</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>通常，RISC 处理器<strong>只有“取数 LOAD”和“存数 STORE”指令才能访问主存</strong></p>
+</blockquote>
+<h4 id="STORE-指令的执行过程"><a href="#STORE-指令的执行过程" class="headerlink" title="STORE 指令的执行过程"></a>STORE 指令的执行过程</h4><ul>
+<li>IF：根据 PC 从指令 Cache 取指令至 IF 段的锁存器</li>
+<li>ID：将基址寄存器的值放到锁存器 A，将偏移量的值放到 Imm。<strong>将要存的数放到 B</strong></li>
+<li>EX：运算，得到有效地址。并将锁存器 B 的内容放到锁存器 Store。</li>
+<li>M：写入数据 Cache</li>
+<li>WB：空段</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>指令的汇编格式</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>STORE Rs, 996(Rd) 或 STORE Rs, mem</td>
+<td>Rs -&gt; (996+(Rd)) 或 Rs -&gt; (mem)</td>
+</tr>
+</tbody></table>
+<h4 id="条件转移指令的执行过程"><a href="#条件转移指令的执行过程" class="headerlink" title="条件转移指令的执行过程"></a>条件转移指令的执行过程</h4><ul>
+<li><p>IF：根据 PC 从指令 Cache 取指令至 IF 段的锁存器</p>
+</li>
+<li><p>ID：进行比较的两个数放入锁存器 A、B；偏移量放入 Imm</p>
+</li>
+<li><p>EX：运算，比较两个数</p>
+</li>
+<li><p>M：将目标 PC 值写回 PC（<strong>修改 PC 值不在写回阶段而是访存阶段</strong>）</p>
+</li>
+<li><p>WB：空段（<strong>写回阶段通常是修改通用寄存器</strong>）</p>
+</li>
+<li><p>转移类指令常采用<strong>相对寻址</strong></p>
+</li>
+<li><p>很多教材把写回 PC 的功能段称为“WrPC 段”，其耗时比 M 段更短，可安排在 M 段时间内完成。</p>
+</li>
+<li><p>通常在 IF 段结束止之后 PC 就会自动 +“1”</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>指令的汇编格式</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>beq Rs, Rt, #偏移量</td>
+<td>若(Rs)==(Rt)，则**(PC)+指令字长+(偏移量×指令字长) -&gt; PC<strong>；否则</strong>(PC)+指令字长 -&gt; PC**</td>
+</tr>
+<tr>
+<td>bne Rs, Rt, #偏移量</td>
+<td>若(Rs)!=(Rt)，则**(PC)+指令字长+(偏移量×指令字长) -&gt; PC<strong>；否则</strong>(PC)+指令字长 -&gt; PC**</td>
+</tr>
+</tbody></table>
+<h4 id="无条件转移指令的执行过程"><a href="#无条件转移指令的执行过程" class="headerlink" title="无条件转移指令的执行过程"></a>无条件转移指令的执行过程</h4><ul>
+<li>IF：根据 PC 从指令 Cache 取指令至IF段的锁存器</li>
+<li>ID：偏移量放入 Imm</li>
+<li>EX：将目标 PC 值写回 PC（<strong>这里修改 PC 值不在写回阶段而又是在执行阶段</strong>）</li>
+<li>M：空段</li>
+<li>WB：空段</li>
+<li>“WrPC段”耗时比 EX 段更短，可安排在 EX 段时间内完成。<strong>尽早完成 WrPC 段、修改 PC 值，就越能避免控制冲突</strong>。当然，也有的地方会在 WB 段时间内才修改 PC 的值</li>
+<li>偏移量通常采用补码表示</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>指令的汇编格式</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>jmp #偏移量</td>
+<td>(PC)+指令字长+(偏移量×指令字长) -&gt; PC</td>
+</tr>
+</tbody></table>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">NephrenCake</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://nephrencake.gitee.io/2021/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-Part5/">https://nephrencake.gitee.io/2021/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-Part5/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://nephrencake.gitee.io" target="_blank">浅幽丶奈芙莲的个人博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/2021/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/%E4%BA%8Ced11.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-Part6/"><img class="prev-cover" src="/2021/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/%E4%BA%8Ced11.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">计算机组成原理-Part6</div></div></a></div><div class="next-post pull-right"><a href="/2021/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-Part4/"><img class="next-cover" src="/2021/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/%E4%BA%8Ced11.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">计算机组成原理-Part4</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-Part5%E2%80%94%E2%80%94%E4%B8%AD%E5%A4%AE%E5%A4%84%E7%90%86%E5%99%A8"><span class="toc-number">1.</span> <span class="toc-text">计算机组成原理-Part5——中央处理器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#CPU-%E7%9A%84%E5%8A%9F%E8%83%BD%E5%92%8C%E7%BB%93%E6%9E%84"><span class="toc-number">1.1.</span> <span class="toc-text">CPU 的功能和结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CPU-%E7%9A%84%E5%8A%9F%E8%83%BD"><span class="toc-number">1.1.1.</span> <span class="toc-text">CPU 的功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E7%AE%97%E5%99%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84"><span class="toc-number">1.1.2.</span> <span class="toc-text">运算器的基本结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A7%E5%88%B6%E5%99%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84"><span class="toc-number">1.1.3.</span> <span class="toc-text">控制器的基本结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">1.1.4.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%87%E4%BB%A4%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B"><span class="toc-number">1.2.</span> <span class="toc-text">指令执行过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E4%BB%A4%E5%91%A8%E6%9C%9F"><span class="toc-number">1.2.1.</span> <span class="toc-text">指令周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E4%BB%A4%E5%91%A8%E6%9C%9F%E6%95%B0%E6%8D%AE%E6%B5%81"><span class="toc-number">1.2.2.</span> <span class="toc-text">指令周期数据流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%96%B9%E6%A1%88"><span class="toc-number">1.2.3.</span> <span class="toc-text">指令执行方案</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%80%9A%E8%B7%AF%EF%BC%88%E5%A4%A7%E9%A2%98%E9%AB%98%E9%A2%91%EF%BC%89"><span class="toc-number">1.3.</span> <span class="toc-text">数据通路（大题高频）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E6%80%BB%E7%BA%BF%E7%BB%93%E6%9E%84"><span class="toc-number">1.3.1.</span> <span class="toc-text">单总线结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%93%E7%94%A8%E9%80%9A%E8%B7%AF%E7%BB%93%E6%9E%84"><span class="toc-number">1.3.2.</span> <span class="toc-text">专用通路结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A7%E5%88%B6%E5%99%A8%E7%9A%84%E5%8A%9F%E8%83%BD%E5%92%8C%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">1.4.</span> <span class="toc-text">控制器的功能和工作原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="toc-number">1.4.1.</span> <span class="toc-text">基本原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A1%AC%E5%B8%83%E7%BA%BF%E6%8E%A7%E5%88%B6%E5%99%A8"><span class="toc-number">1.4.2.</span> <span class="toc-text">硬布线控制器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BE%AE%E7%A8%8B%E5%BA%8F%E6%8E%A7%E5%88%B6%E5%99%A8%EF%BC%88%E8%80%83%E7%82%B9%EF%BC%89"><span class="toc-number">1.4.3.</span> <span class="toc-text">微程序控制器（考点）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86-1"><span class="toc-number">1.4.3.1.</span> <span class="toc-text">基本原理</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BE%AE%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">1.4.3.1.1.</span> <span class="toc-text">微程序的概念</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BE%AE%E7%A8%8B%E5%BA%8F%E6%8E%A7%E5%88%B6%E5%99%A8%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84"><span class="toc-number">1.4.3.1.2.</span> <span class="toc-text">微程序控制器基本结构</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BE%AE%E6%8C%87%E4%BB%A4%E7%9A%84%E8%AE%BE%E8%AE%A1"><span class="toc-number">1.4.3.2.</span> <span class="toc-text">微指令的设计</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BE%AE%E6%8C%87%E4%BB%A4%E7%9A%84%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.4.3.2.1.</span> <span class="toc-text">微指令的格式</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BE%AE%E6%8C%87%E4%BB%A4%E7%9A%84%E7%BC%96%E7%A0%81%E6%96%B9%E5%BC%8F%EF%BC%88%E9%AB%98%E9%A2%91%EF%BC%89"><span class="toc-number">1.4.3.2.2.</span> <span class="toc-text">微指令的编码方式（高频）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BE%AE%E6%8C%87%E4%BB%A4%E7%9A%84%E5%9C%B0%E5%9D%80%E5%BD%A2%E6%88%90%E6%96%B9%E5%BC%8F"><span class="toc-number">1.4.3.2.3.</span> <span class="toc-text">微指令的地址形成方式</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BE%AE%E7%A8%8B%E5%BA%8F%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83%E7%9A%84%E8%AE%BE%E8%AE%A1"><span class="toc-number">1.4.3.3.</span> <span class="toc-text">微程序控制单元的设计</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BE%AE%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E5%88%86%E7%B1%BB"><span class="toc-number">1.4.3.4.</span> <span class="toc-text">微程序设计分类</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A1%AC%E5%B8%83%E7%BA%BF%E4%B8%8E%E5%BE%AE%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%AF%94%E8%BE%83"><span class="toc-number">1.4.4.</span> <span class="toc-text">硬布线与微程序的比较</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93-1"><span class="toc-number">1.4.5.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%87%E4%BB%A4%E6%B5%81%E6%B0%B4%E7%BA%BF%EF%BC%88%E5%A4%A7%E9%A2%98%E8%80%83%E5%AF%9F%EF%BC%89"><span class="toc-number">1.5.</span> <span class="toc-text">指令流水线（大题考察）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E4%BB%A4%E6%B5%81%E6%B0%B4%E7%BA%BF%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.5.1.</span> <span class="toc-text">指令流水线的基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-number">1.5.1.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%A7%E8%A1%8C%E6%96%B9%E5%BC%8F"><span class="toc-number">1.5.1.2.</span> <span class="toc-text">执行方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95%EF%BC%88%E9%87%8D%E8%A6%81%EF%BC%89"><span class="toc-number">1.5.1.3.</span> <span class="toc-text">表示方法（重要）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87%EF%BC%88%E9%87%8D%E8%A6%81%EF%BC%89"><span class="toc-number">1.5.1.4.</span> <span class="toc-text">性能指标（重要）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E4%BB%A4%E6%B5%81%E6%B0%B4%E7%BA%BF%E7%9A%84%E5%BD%B1%E5%93%8D%E5%9B%A0%E7%B4%A0%E5%92%8C%E5%88%86%E7%B1%BB"><span class="toc-number">1.5.2.</span> <span class="toc-text">指令流水线的影响因素和分类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BD%B1%E5%93%8D%E6%B5%81%E6%B0%B4%E7%BA%BF%E7%9A%84%E5%9B%A0%E7%B4%A0%EF%BC%88%E9%87%8D%E8%A6%81%EF%BC%89"><span class="toc-number">1.5.2.1.</span> <span class="toc-text">影响流水线的因素（重要）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%81%E6%B0%B4%E7%BA%BF%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-number">1.5.2.2.</span> <span class="toc-text">流水线的分类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%81%E6%B0%B4%E7%BA%BF%E7%9A%84%E5%A4%9A%E5%8F%91%E6%8A%80%E6%9C%AF"><span class="toc-number">1.5.2.3.</span> <span class="toc-text">流水线的多发技术</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E6%AE%B5%E5%BC%8F%E6%8C%87%E4%BB%A4%E6%B5%81%E6%B0%B4%E7%BA%BF"><span class="toc-number">1.5.3.</span> <span class="toc-text">五段式指令流水线</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.5.3.1.</span> <span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E7%AE%97%E7%B1%BB%E6%8C%87%E4%BB%A4%E7%9A%84%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B"><span class="toc-number">1.5.3.2.</span> <span class="toc-text">运算类指令的执行过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LOAD-%E6%8C%87%E4%BB%A4%E7%9A%84%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B"><span class="toc-number">1.5.3.3.</span> <span class="toc-text">LOAD 指令的执行过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#STORE-%E6%8C%87%E4%BB%A4%E7%9A%84%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B"><span class="toc-number">1.5.3.4.</span> <span class="toc-text">STORE 指令的执行过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E8%BD%AC%E7%A7%BB%E6%8C%87%E4%BB%A4%E7%9A%84%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B"><span class="toc-number">1.5.3.5.</span> <span class="toc-text">条件转移指令的执行过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%97%A0%E6%9D%A1%E4%BB%B6%E8%BD%AC%E7%A7%BB%E6%8C%87%E4%BB%A4%E7%9A%84%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B"><span class="toc-number">1.5.3.6.</span> <span class="toc-text">无条件转移指令的执行过程</span></a></li></ol></li></ol></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 By NephrenCake</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">这里是浅幽丶奈芙莲的个人博客~</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> {preloader.endLoading()})</script><div class="js-pjax"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><canvas class="fireworks" mobile="true"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script></div></body></html>

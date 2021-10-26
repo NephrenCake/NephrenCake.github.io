@@ -1,0 +1,342 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Django-Part6 | 浅幽丶奈芙莲的个人博客</title><meta name="author" content="NephrenCake"><meta name="copyright" content="NephrenCake"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="中间件与Auth模块">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Django-Part6">
+<meta property="og:url" content="https://nephrencake.gitee.io/2021/08/Django-Part6/index.html">
+<meta property="og:site_name" content="浅幽丶奈芙莲的个人博客">
+<meta property="og:description" content="中间件与Auth模块">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://nephrencake.gitee.io/2021/08/Django-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/%E4%BA%8Ced07.jpg">
+<meta property="article:published_time" content="2021-08-12T17:58:05.000Z">
+<meta property="article:modified_time" content="2021-10-26T15:08:56.965Z">
+<meta property="article:author" content="NephrenCake">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://nephrencake.gitee.io/2021/08/Django-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/%E4%BA%8Ced07.jpg"><link rel="shortcut icon" href="/img/favicon.jpg"><link rel="canonical" href="https://nephrencake.gitee.io/2021/08/Django-Part6/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}
+
+// https://stackoverflow.com/questions/16839698/jquery-getscript-alternative-in-native-javascript
+const getScript = url => new Promise((resolve, reject) => {
+  const script = document.createElement('script')
+  script.src = url
+  script.async = true
+  script.onerror = reject
+  script.onload = script.onreadystatechange = function() {
+    const loadState = this.readyState
+    if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+    script.onload = script.onreadystatechange = null
+    resolve()
+  }
+  document.head.appendChild(script)
+})</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-10-26 23:08:56'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><link rel="stylesheet" href="/css/background.css"><link rel="stylesheet" href="/css/mouse.css"><link rel="stylesheet" href="/css/scrollbar.css"><link rel="stylesheet" href="/css/font.css"><link rel="stylesheet" href="/css/iconfont.css"><meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="浅幽丶奈芙莲的个人博客" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">79</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">9</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/photo/"><i class="fa-fw fas fa-heart"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/2021/08/Django-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/%E4%BA%8Ced07.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">浅幽丶奈芙莲的个人博客</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/photo/"><i class="fa-fw fas fa-heart"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Django-Part6</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-08-12T17:58:05.000Z" title="发表于 2021-08-13 01:58:05">2021-08-13</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-10-26T15:08:56.965Z" title="更新于 2021-10-26 23:08:56">2021-10-26</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Django/">Django</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>10分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Django-Part6——中间件与Auth模块"><a href="#Django-Part6——中间件与Auth模块" class="headerlink" title="Django-Part6——中间件与Auth模块"></a>Django-Part6——中间件与Auth模块</h1><p>[TOC]</p>
+<h2 id="Django中间件"><a href="#Django中间件" class="headerlink" title="Django中间件"></a>Django中间件</h2><h3 id="中间件简介"><a href="#中间件简介" class="headerlink" title="中间件简介"></a>中间件简介</h3><ul>
+<li>django自带七个中间件，并且支持程序员自定义中间件</li>
+<li>只要是涉及到全局相关的功能都可以使用中间件完成</li>
+<li>全局用户身份、权限校验<ul>
+<li>全局访问频率校验</li>
+</ul>
+</li>
+<li>…</li>
+<li>django中间件是django的门户<ul>
+<li>请求需要先经过中间件才能到达django后端</li>
+<li>响应也需要经过中间件才能发送出去</li>
+</ul>
+</li>
+</ul>
+<h3 id="自定义中间件"><a href="#自定义中间件" class="headerlink" title="自定义中间件"></a>自定义中间件</h3><ul>
+<li><p>中间件可以在项目名或者应用名下任意名称的文件夹中定义</p>
+</li>
+<li><p>自定义中间件类必须继承于MiddlewareMixin类</p>
+</li>
+<li><p>需要将类的路径以字符串的形式注册到配置文件中才能生效</p>
+</li>
+<li><p>中间件将暴露五个可以自定义的方法，按需求重写</p>
+<ul>
+<li><p><code>process_request(self, request)</code>：</p>
+<ol>
+<li><p>请求来的时候需要经过每一个中间件里面的process_request方法</p>
+</li>
+<li><p>顺序是按照配置文件中注册的中间件从上往下的顺序依次执行</p>
+</li>
+<li><p>如果中间件里面没有定义该方法，则跳过</p>
+</li>
+<li><p>如果该方法返回了HttpResponse对象，则请求将不再继续往后执行，而是从同级别的process_reponse向上原路返回</p>
+<p>flask中即使中途返回数据，但依然经过所有中间件</p>
+</li>
+</ol>
+<p>process_request方法可以用来做全局相关的所有限制功能</p>
+</li>
+<li><p><code>process_response(self, request, response)</code>：</p>
+<ol>
+<li>响应走的时候需要经过每一个中间件里面的process_response方法</li>
+<li>顺序是按照配置文件中注册了的中间件从下往上依次经过</li>
+<li>如果中间件里面没有定义该方法，则跳过</li>
+<li>该方法必须返回一个HttpResponse对象，默认返回的就是形参response</li>
+</ol>
+</li>
+<li><p><code>process_view(self, request, view_func, view_args, view_kwargs)</code>：</p>
+<ol>
+<li>触发时间在路由匹配成功之后，执行视图函数之前</li>
+<li>顺序是按照配置文件中注册的中间件从上往下的顺序依次执行</li>
+</ol>
+</li>
+<li><p><code>process_template_response(self, request, response)</code>：</p>
+<ol>
+<li>返回的HttpResponse对象有render属性的时候才会触发</li>
+<li>顺序是按照配置文件中注册了的中间件从下往上依次经过</li>
+</ol>
+</li>
+<li><p><code>process_exception(self, request, exception)</code>：</p>
+<ol>
+<li>当视图函数中出现异常的情况下触发</li>
+<li>顺序是按照配置文件中注册了的中间件从下往上依次经过</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.utils.deprecation <span class="keyword">import</span> MiddlewareMixin</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MD1</span>(<span class="params">MiddlewareMixin</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process_request</span>(<span class="params">self, request</span>):</span></span><br><span class="line">        print(<span class="string">&quot;MD1里面的 process_request&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process_response</span>(<span class="params">self, request, response</span>):</span></span><br><span class="line">        print(<span class="string">&quot;MD1里面的 process_response&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> response</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process_view</span>(<span class="params">self, request, view_func, view_args, view_kwargs</span>):</span></span><br><span class="line">        print(<span class="string">&quot;-&quot;</span> * <span class="number">80</span>)</span><br><span class="line">        print(<span class="string">&quot;MD1 中的process_view&quot;</span>)</span><br><span class="line">        print(view_func, view_func.__name__)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process_exception</span>(<span class="params">self, request, exception</span>):</span></span><br><span class="line">        print(exception)</span><br><span class="line">        print(<span class="string">&quot;MD1 中的process_exception&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> HttpResponse(<span class="built_in">str</span>(exception))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process_template_response</span>(<span class="params">self, request, response</span>):</span></span><br><span class="line">        print(<span class="string">&quot;MD1 中的process_template_response&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> response</span><br></pre></td></tr></table></figure>
+<h3 id="csrf跨站请求伪造"><a href="#csrf跨站请求伪造" class="headerlink" title="csrf跨站请求伪造"></a>csrf跨站请求伪造</h3><h4 id="使用cookie完成csrf校验"><a href="#使用cookie完成csrf校验" class="headerlink" title="使用cookie完成csrf校验"></a>使用cookie完成csrf校验</h4><ul>
+<li>为了确保请求来源是本服务器发送出去的</li>
+<li>为每一次发出去的页面提供唯一标识，如果校验标识失败则直接拒绝(403 forbbiden)</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">&quot;get请求url&quot;</span>&gt;&lt;/script&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Ajax CSRF in cookies start</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getCookie</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> cookieValue = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">document</span>.cookie &amp;&amp; <span class="built_in">document</span>.cookie !== <span class="string">&#x27;&#x27;</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> cookies = <span class="built_in">document</span>.cookie.split(<span class="string">&#x27;;&#x27;</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; cookies.length; i++) &#123;</span><br><span class="line">            <span class="keyword">var</span> cookie = jQuery.trim(cookies[i]);</span><br><span class="line">            <span class="comment">// Does this cookie string begin with the name we want?</span></span><br><span class="line">            <span class="keyword">if</span> (cookie.substring(<span class="number">0</span>, name.length + <span class="number">1</span>) === (name + <span class="string">&#x27;=&#x27;</span>)) &#123;</span><br><span class="line">                cookieValue = <span class="built_in">decodeURIComponent</span>(cookie.substring(name.length + <span class="number">1</span>));</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cookieValue;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> csrftoken = getCookie(<span class="string">&#x27;csrftoken&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">csrfSafeMethod</span>(<span class="params">method</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// these HTTP methods do not require CSRF protection</span></span><br><span class="line">  <span class="keyword">return</span> (<span class="regexp">/^(GET|HEAD|OPTIONS|TRACE)$/</span>.test(method));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$.ajaxSetup(&#123;</span><br><span class="line">  beforeSend: <span class="function"><span class="keyword">function</span> (<span class="params">xhr, settings</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!csrfSafeMethod(settings.type) &amp;&amp; !<span class="built_in">this</span>.crossDomain) &#123;</span><br><span class="line">      xhr.setRequestHeader(<span class="string">&quot;X-CSRFToken&quot;</span>, csrftoken);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// Ajax CSRF in cookies end</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>如果使用从cookie中取csrftoken的方式，需要确保cookie存在csrftoken值。</li>
+<li> 如果你的视图渲染的HTML文件中没有包含 {% csrf_token %}，Django可能不会设置CSRFtoken的cookie。</li>
+<li>这个时候需要使用ensure_csrf_cookie()装饰器强制设置Cookie。</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">django.views.decorators.csrf <span class="keyword">import</span> ensure_csrf_cookie</span><br><span class="line"> </span><br><span class="line"><span class="meta">@ensure_csrf_cookie</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">login</span>(<span class="params">request</span>):</span></span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<h4 id="csrf相关装饰器"><a href="#csrf相关装饰器" class="headerlink" title="csrf相关装饰器"></a>csrf相关装饰器</h4><ul>
+<li>@csrf_protect：需要校验</li>
+<li>@csrf_exempt：忽视校验</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.views.decorators.csrf <span class="keyword">import</span> csrf_protect, csrf_exempt</span><br><span class="line"><span class="keyword">from</span> django.utils.decorators <span class="keyword">import</span> method_decorator</span><br><span class="line"></span><br><span class="line"><span class="comment"># @csrf_exempt</span></span><br><span class="line"><span class="comment"># @csrf_protect</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">transfer</span>(<span class="params">request</span>):</span></span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">&#x27;POST&#x27;</span>:</span><br><span class="line">        username = request.POST.get(<span class="string">&#x27;username&#x27;</span>)</span><br><span class="line">        target_user = request.POST.get(<span class="string">&#x27;target_user&#x27;</span>)</span><br><span class="line">        money = request.POST.get(<span class="string">&#x27;money&#x27;</span>)</span><br><span class="line">        print(<span class="string">&#x27;%s给%s转了%s元&#x27;</span>%(username,target_user,money))</span><br><span class="line">    <span class="keyword">return</span> render(request,<span class="string">&#x27;transfer.html&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> django.views <span class="keyword">import</span> View</span><br><span class="line"></span><br><span class="line"><span class="comment"># @method_decorator(csrf_protect, name=&#x27;post&#x27;)  # 针对csrf_protect 第二种方式可以</span></span><br><span class="line"><span class="comment"># @method_decorator(csrf_exempt, name=&#x27;post&#x27;)  # 针对csrf_exempt 第二种方式不可以</span></span><br><span class="line"><span class="meta">@method_decorator(<span class="params">csrf_exempt, name=<span class="string">&#x27;dispatch&#x27;</span></span>)</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyCsrfToken</span>(<span class="params">View</span>):</span></span><br><span class="line">    <span class="comment"># @method_decorator(csrf_protect)  # 针对csrf_protect 第三种方式可以</span></span><br><span class="line">    <span class="comment"># @method_decorator(csrf_exempt)  # 针对csrf_exempt 第三种方式可以</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dispatch</span>(<span class="params">self, request, *args, **kwargs</span>):</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">super</span>(MyCsrfToken, self).dispatch(request, *args, **kwargs)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get</span>(<span class="params">self,request</span>):</span></span><br><span class="line">        <span class="keyword">return</span> HttpResponse(<span class="string">&#x27;get&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># @method_decorator(csrf_protect)  # 针对csrf_protect 第一种方式可以</span></span><br><span class="line">    <span class="comment"># @method_decorator(csrf_exempt)  # 针对csrf_exempt 第一种方式不可以</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">post</span>(<span class="params">self,request</span>):</span></span><br><span class="line">        <span class="keyword">return</span> HttpResponse(<span class="string">&#x27;post&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="跨域请求"><a href="#跨域请求" class="headerlink" title="跨域请求"></a>跨域请求</h3><ul>
+<li>对于前后端分离的报错：<code>has been blocked by CORS policy: NO &#39;Access-Control-Allow-Origin&#39; header is present on the reauested resource.</code></li>
+</ul>
+<h4 id="同源策略"><a href="#同源策略" class="headerlink" title="同源策略"></a>同源策略</h4><ul>
+<li>浏览器的同源策略：浏览器发现ip或端口是不一样的，就会认为存在风险，会进行拦截。</li>
+<li>推荐的方法是使用Nginx进行反向代理。</li>
+</ul>
+<h4 id="添加响应头解决跨域"><a href="#添加响应头解决跨域" class="headerlink" title="添加响应头解决跨域"></a>添加响应头解决跨域</h4><ul>
+<li>解决思路就是告诉浏览器：不进行拦截。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -&gt; app01/middlewares/Mycors.py</span></span><br><span class="line"><span class="keyword">from</span> django.utils.deprecation <span class="keyword">import</span> MiddlewareMixin</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyCors</span>(<span class="params">MiddlewareMixin</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process_response</span>(<span class="params">self, request, response</span>):</span></span><br><span class="line">        response[<span class="string">&quot;Access-Control-Allow-Origin&quot;</span>] = <span class="string">&quot;*&quot;</span></span><br><span class="line">        <span class="keyword">if</span> request.method == <span class="string">&quot;OPTIONS&quot;</span>:</span><br><span class="line">            response[<span class="string">&quot;Access-Control-Allow-Headers&quot;</span>] = <span class="string">&quot;Content-Type&quot;</span></span><br><span class="line">            response[<span class="string">&quot;Access-Control-Allow-Methods&quot;</span>] = <span class="string">&quot;DELETE, PUT, POST&quot;</span></span><br><span class="line">        <span class="keyword">return</span> response</span><br><span class="line"></span><br><span class="line"><span class="comment"># -&gt; DjangoProject/settings.py</span></span><br><span class="line">MIDDLEWARE = [</span><br><span class="line">    ...</span><br><span class="line">    <span class="string">&#x27;app01.middlewares.Mycors.MyCors&#x27;</span>,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h2 id="配置文件与反射"><a href="#配置文件与反射" class="headerlink" title="配置文件与反射"></a>配置文件与反射</h2><h3 id="importlib模块"><a href="#importlib模块" class="headerlink" title="importlib模块"></a>importlib模块</h3><p>使用importlib，以字符串形式导入模块</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> myfile <span class="keyword">import</span> b</span><br><span class="line">print(b)</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> importlib</span><br><span class="line">res = <span class="string">&#x27;myfile.b&#x27;</span></span><br><span class="line">ret = importlib.import_module(res)  <span class="comment"># 该方法最小只能到py文件名</span></span><br><span class="line">print(ret)</span><br></pre></td></tr></table></figure>
+<h3 id="实例展示"><a href="#实例展示" class="headerlink" title="实例展示"></a>实例展示</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> settings</span><br><span class="line"><span class="keyword">import</span> importlib</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">send_all</span>(<span class="params">content</span>):</span></span><br><span class="line">    <span class="keyword">for</span> path_str <span class="keyword">in</span> settings.NOTIFY_LIST:  <span class="comment"># &#x27;notify.email.Email&#x27;</span></span><br><span class="line">        module_path,class_name = path_str.rsplit(<span class="string">&#x27;.&#x27;</span>, maxsplit=<span class="number">1</span>)</span><br><span class="line">        <span class="comment"># module_path = &#x27;notify.email&#x27;  class_name = &#x27;Email&#x27;</span></span><br><span class="line">        <span class="comment"># 1 利用字符串导入模块</span></span><br><span class="line">        module = importlib.import_module(module_path)  <span class="comment"># from notify import email</span></span><br><span class="line">        <span class="comment"># 2 利用反射获取类名</span></span><br><span class="line">        cls = <span class="built_in">getattr</span>(module, class_name)  <span class="comment"># Email、QQ、Wechat</span></span><br><span class="line">        <span class="comment"># 3 生成类的对象</span></span><br><span class="line">        obj = cls()</span><br><span class="line">        <span class="comment"># 4 利用鸭子类型直接调用send方法</span></span><br><span class="line">        obj.send(content)</span><br></pre></td></tr></table></figure>
+<h2 id="Auth模块"><a href="#Auth模块" class="headerlink" title="Auth模块"></a>Auth模块</h2><blockquote>
+<p> 使用auth模块要用就用全套</p>
+</blockquote>
+<p>Django的admin路由对应的就是就是auth_user表，必须是管理员用户才能进入。</p>
+<p>创建超级用户(管理员)：<code>python3 manage.py createsuperuser</code></p>
+<h3 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h3><ul>
+<li><code>auth.authenticate(request, username, password)</code>：根据用户名在表中查询加密后的密码，并将请求中的密码加密比对是否正确。返回用户对象，不匹配则返回None</li>
+<li><code>auth.login(request, user_obj)</code>：保存用户状态，建立session。执行该方法后，可以在任何地方通过<code>request.user</code>获取到当前登陆的用户对象</li>
+<li><code>request.user</code>：</li>
+<li><code>request.user.is_authenticated()</code>：判断当前用户是否登陆</li>
+<li><code>@login_required</code>：校验登录装饰器<ul>
+<li>局部配置：<code>@login_required(login_url=&#39;/login/&#39;)</code></li>
+<li>全局配置：<code>settings.py -&gt; LOGIN_URL = &#39;/login/&#39;</code></li>
+</ul>
+</li>
+<li><code>request.user.check_password(old_password)</code>：将请求中的密码加密，并比对原密码</li>
+<li><code>request.user.set_password(new_password)</code>：修改用户对象的密码</li>
+<li><code>request.user.save()</code>：将修改密码后的用户对象写入数据库</li>
+<li><code>auth.logout(request)</code> ：注销，清除双方session</li>
+<li><code>User.objects.create_user(username=username,password=password)</code>：注册用户。注意不能使用<code>create</code>方法，该方法不对密码进行加密。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">login</span>(<span class="params">request</span>):</span></span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">&#x27;POST&#x27;</span>:</span><br><span class="line">        username = request.POST.get(<span class="string">&#x27;username&#x27;</span>)</span><br><span class="line">        password = request.POST.get(<span class="string">&#x27;password&#x27;</span>)</span><br><span class="line">        user_obj = auth.authenticate(request, username=username, password=password)</span><br><span class="line">        print(user_obj)  <span class="comment"># 用户对象，不存在则返回None</span></span><br><span class="line">        print(user_obj.username)  <span class="comment"># jason</span></span><br><span class="line">        print(user_obj.password)  <span class="comment"># pbkdf2_sha256$36000$zeNDf8CkZj7y$b+e/CjzZoAnbBIpvUWgz25ybBDqDzRTmYAHPytxqRYQ=</span></span><br><span class="line">        <span class="comment"># 判断当前用户是否存在</span></span><br><span class="line">        <span class="keyword">if</span> user_obj:</span><br><span class="line">            auth.login(request, user_obj)  <span class="comment"># 保持用户状态，类似于request.session[key] = user_obj</span></span><br><span class="line">            <span class="comment"># 执行该方法后，可以在任何地方通过request.user获取到当前登陆的用户对象</span></span><br><span class="line">            <span class="keyword">return</span> redirect(<span class="string">&#x27;/home/&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> render(request, <span class="string">&#x27;login.html&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@login_required(<span class="params">login_url=<span class="string">&#x27;/login/&#x27;</span></span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">home</span>(<span class="params">request</span>):</span></span><br><span class="line">    print(request.user)  <span class="comment"># 在django_session中判断用户是否登陆，没有登录则为AnonymousUser匿名用户</span></span><br><span class="line">    print(request.user.is_authenticated())</span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">&#x27;home&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@login_required</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">set_password</span>(<span class="params">request</span>):</span></span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">&#x27;POST&#x27;</span>:</span><br><span class="line">        old_password = request.POST.get(<span class="string">&#x27;old_password&#x27;</span>)</span><br><span class="line">        new_password = request.POST.get(<span class="string">&#x27;new_password&#x27;</span>)</span><br><span class="line">        confirm_password = request.POST.get(<span class="string">&#x27;confirm_password&#x27;</span>)</span><br><span class="line">        <span class="comment"># 校验两次密码是否一致、老密码是否正确</span></span><br><span class="line">        <span class="keyword">if</span> new_password == confirm_password <span class="keyword">and</span> request.user.check_password(old_password):</span><br><span class="line">            request.user.set_password(new_password)  <span class="comment"># 仅仅是在修改对象的密码属性</span></span><br><span class="line">            request.user.save()  <span class="comment"># 这一步才是真正的操作数据库</span></span><br><span class="line">        <span class="keyword">return</span> redirect(<span class="string">&#x27;/login/&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> render(request, <span class="string">&#x27;set_password.html&#x27;</span>, <span class="built_in">locals</span>())</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@login_required</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">logout</span>(<span class="params">request</span>):</span></span><br><span class="line">    auth.logout(request)  <span class="comment"># 类似于request.session.flush()</span></span><br><span class="line">    <span class="keyword">return</span> redirect(<span class="string">&#x27;/login/&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">register</span>(<span class="params">request</span>):</span></span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">&#x27;POST&#x27;</span>:</span><br><span class="line">        username = request.POST.get(<span class="string">&#x27;username&#x27;</span>)</span><br><span class="line">        password = request.POST.get(<span class="string">&#x27;password&#x27;</span>)</span><br><span class="line">        User.objects.create_user(username=username, password=password)  <span class="comment"># 创建普通用户</span></span><br><span class="line">    <span class="keyword">return</span> render(request, <span class="string">&#x27;register.html&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="扩展auth-user表"><a href="#扩展auth-user表" class="headerlink" title="扩展auth_user表"></a>扩展auth_user表</h3><ul>
+<li>面向对象继承，自由增加字段，对象可以直接访问字段</li>
+<li>如果继承了<code>AbstractUser</code>，那么在执行数据库迁移命令的时候<code>auth_user</code>表就不会再创建出来了，而是替换成定义的子类</li>
+<li>auth模块的功能还是照常使用</li>
+<li>前提：<ol>
+<li>在继承之前没有执行过数据库迁移命令、auth_user没有被创建</li>
+<li>继承的类里面不要覆盖<code>AbstractUser</code>里面的字段名，只扩展额外字段</li>
+<li>需要在配置文件中添加<code>AUTH_USER_MODEL = &#39;app01.UserInfo&#39;</code></li>
+</ol>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserInfo</span>(<span class="params">AbstractUser</span>):</span></span><br><span class="line">    phone = models.BigIntegerField()</span><br></pre></td></tr></table></figure>
+<h2 id="BBS实战"><a href="#BBS实战" class="headerlink" title="BBS实战"></a>BBS实战</h2><h3 id="表设计"><a href="#表设计" class="headerlink" title="表设计"></a>表设计</h3><ol>
+<li><p>用户表(AbstractUser)</p>
+<ul>
+<li>phone：电话号码</li>
+<li>avatar：用户头像</li>
+<li>create_time：创建时间</li>
+<li>一对一：个人站点表</li>
+</ul>
+</li>
+<li><p>个人站点表</p>
+<ul>
+<li>site_name：站点名称</li>
+<li>site_title：站点标题</li>
+<li>site_theme：站点样式</li>
+</ul>
+</li>
+<li><p>文章标签表</p>
+<ul>
+<li>name：标签名</li>
+<li>一对多：个人站点</li>
+</ul>
+</li>
+<li><p>文章分类表</p>
+<ul>
+<li>name：分类名</li>
+<li>一对多：个人站点</li>
+</ul>
+</li>
+<li><p>文章表</p>
+<ul>
+<li><p>title：文章标题</p>
+</li>
+<li><p>desc：文章简介</p>
+</li>
+<li><p>content：文章内容</p>
+</li>
+<li><p>create_time：发布时间</p>
+<p>数据库字段设计优化：虽然下述的三个字段可以从其他表里面跨表查询计算得出，但是频繁跨表效率</p>
+</li>
+<li><p>up_num：点赞数</p>
+</li>
+<li><p>down_num：点踩数</p>
+</li>
+<li><p>comment_num：评论数</p>
+</li>
+<li><p>一对多个人站点</p>
+</li>
+<li><p>多对多文章标签</p>
+</li>
+<li><p>一对多文章分类</p>
+</li>
+</ul>
+</li>
+<li><p>点赞点踩表（记录哪个用户给哪篇文章点了赞还是点了踩）</p>
+<ul>
+<li>user：ForeignKey(to=”User”)</li>
+<li>article：ForeignKey(to=”Article”)    </li>
+<li>is_up：BooleanField()</li>
+</ul>
+</li>
+<li><p>文章评论表</p>
+<ul>
+<li><p>user：ForeignKey(to=”User”)                </p>
+</li>
+<li><p>article：ForeignKey(to=”Article”)</p>
+</li>
+<li><p>content：CharField()</p>
+</li>
+<li><p>comment_time：DateField()</p>
+</li>
+<li><p>parent：ForeignKey(to=”self/Comment”,null=True)</p>
+<p>根评论子评论，评论当前发布的内容，根评论与子评论是一对多的关系</p>
+</li>
+</ul>
+</li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">NephrenCake</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://nephrencake.gitee.io/2021/08/Django-Part6/">https://nephrencake.gitee.io/2021/08/Django-Part6/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://nephrencake.gitee.io" target="_blank">浅幽丶奈芙莲的个人博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/2021/08/Django-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/%E4%BA%8Ced07.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/08/Django-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/"><img class="prev-cover" src="/2021/08/Django-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/%E4%BA%8Ced07.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Django-完结目录</div></div></a></div><div class="next-post pull-right"><a href="/2021/08/Django-Part5/"><img class="next-cover" src="/2021/08/Django-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/%E4%BA%8Ced07.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Django-Part5</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Django-Part6%E2%80%94%E2%80%94%E4%B8%AD%E9%97%B4%E4%BB%B6%E4%B8%8EAuth%E6%A8%A1%E5%9D%97"><span class="toc-number">1.</span> <span class="toc-text">Django-Part6——中间件与Auth模块</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Django%E4%B8%AD%E9%97%B4%E4%BB%B6"><span class="toc-number">1.1.</span> <span class="toc-text">Django中间件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%AE%80%E4%BB%8B"><span class="toc-number">1.1.1.</span> <span class="toc-text">中间件简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E4%B8%AD%E9%97%B4%E4%BB%B6"><span class="toc-number">1.1.2.</span> <span class="toc-text">自定义中间件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#csrf%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0"><span class="toc-number">1.1.3.</span> <span class="toc-text">csrf跨站请求伪造</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8cookie%E5%AE%8C%E6%88%90csrf%E6%A0%A1%E9%AA%8C"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">使用cookie完成csrf校验</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#csrf%E7%9B%B8%E5%85%B3%E8%A3%85%E9%A5%B0%E5%99%A8"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">csrf相关装饰器</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82"><span class="toc-number">1.1.4.</span> <span class="toc-text">跨域请求</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%8C%E6%BA%90%E7%AD%96%E7%95%A5"><span class="toc-number">1.1.4.1.</span> <span class="toc-text">同源策略</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E5%93%8D%E5%BA%94%E5%A4%B4%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F"><span class="toc-number">1.1.4.2.</span> <span class="toc-text">添加响应头解决跨域</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%B8%8E%E5%8F%8D%E5%B0%84"><span class="toc-number">1.2.</span> <span class="toc-text">配置文件与反射</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#importlib%E6%A8%A1%E5%9D%97"><span class="toc-number">1.2.1.</span> <span class="toc-text">importlib模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B%E5%B1%95%E7%A4%BA"><span class="toc-number">1.2.2.</span> <span class="toc-text">实例展示</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Auth%E6%A8%A1%E5%9D%97"><span class="toc-number">1.3.</span> <span class="toc-text">Auth模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-number">1.3.1.</span> <span class="toc-text">常用方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%A9%E5%B1%95auth-user%E8%A1%A8"><span class="toc-number">1.3.2.</span> <span class="toc-text">扩展auth_user表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BBS%E5%AE%9E%E6%88%98"><span class="toc-number">1.4.</span> <span class="toc-text">BBS实战</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E8%AE%BE%E8%AE%A1"><span class="toc-number">1.4.1.</span> <span class="toc-text">表设计</span></a></li></ol></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 By NephrenCake</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">这里是浅幽丶奈芙莲的个人博客~</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> {preloader.endLoading()})</script><div class="js-pjax"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><canvas class="fireworks" mobile="true"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script></div></body></html>

@@ -1,0 +1,547 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>OpenCV-Part3 | 浅幽丶奈芙莲的个人博客</title><meta name="author" content="NephrenCake"><meta name="copyright" content="NephrenCake"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="图像处理（中）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenCV-Part3">
+<meta property="og:url" content="https://nephrencake.gitee.io/2021/08/OpenCV-Part3/index.html">
+<meta property="og:site_name" content="浅幽丶奈芙莲的个人博客">
+<meta property="og:description" content="图像处理（中）">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://nephrencake.gitee.io/2021/08/OpenCV-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/%E4%BA%8Ced08.jpg">
+<meta property="article:published_time" content="2021-08-29T17:07:42.000Z">
+<meta property="article:modified_time" content="2021-10-26T15:11:12.812Z">
+<meta property="article:author" content="NephrenCake">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://nephrencake.gitee.io/2021/08/OpenCV-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/%E4%BA%8Ced08.jpg"><link rel="shortcut icon" href="/img/favicon.jpg"><link rel="canonical" href="https://nephrencake.gitee.io/2021/08/OpenCV-Part3/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}
+
+// https://stackoverflow.com/questions/16839698/jquery-getscript-alternative-in-native-javascript
+const getScript = url => new Promise((resolve, reject) => {
+  const script = document.createElement('script')
+  script.src = url
+  script.async = true
+  script.onerror = reject
+  script.onload = script.onreadystatechange = function() {
+    const loadState = this.readyState
+    if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+    script.onload = script.onreadystatechange = null
+    resolve()
+  }
+  document.head.appendChild(script)
+})</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-10-26 23:11:12'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><link rel="stylesheet" href="/css/background.css"><link rel="stylesheet" href="/css/mouse.css"><link rel="stylesheet" href="/css/scrollbar.css"><link rel="stylesheet" href="/css/font.css"><link rel="stylesheet" href="/css/iconfont.css"><meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="浅幽丶奈芙莲的个人博客" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">79</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">9</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/photo/"><i class="fa-fw fas fa-heart"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/2021/08/OpenCV-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/%E4%BA%8Ced08.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">浅幽丶奈芙莲的个人博客</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/photo/"><i class="fa-fw fas fa-heart"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">OpenCV-Part3</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-08-29T17:07:42.000Z" title="发表于 2021-08-30 01:07:42">2021-08-30</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-10-26T15:11:12.812Z" title="更新于 2021-10-26 23:11:12">2021-10-26</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/OpenCV/">OpenCV</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">6.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>22分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="OpenCV-Part3——图像处理（中）"><a href="#OpenCV-Part3——图像处理（中）" class="headerlink" title="OpenCV-Part3——图像处理（中）"></a>OpenCV-Part3——图像处理（中）</h1><p>[TOC]</p>
+<h2 id="图像边缘检测"><a href="#图像边缘检测" class="headerlink" title="图像边缘检测"></a>图像边缘检测</h2><h3 id="边缘检测"><a href="#边缘检测" class="headerlink" title="边缘检测"></a>边缘检测</h3><ul>
+<li>边缘是图像中的重要的结构性特征，边缘往往存在于目标和背景之间、不同的区域之间，因此它可以作为图像分割的重要依据。</li>
+<li>边缘检测是检测图像中的像素点，其周围的像素值是否发生了急剧的变化，这个剧烈的变化就是不同物体的边界。<ul>
+<li>边缘其实就是图像上灰度级变化很快、梯度很大的点的集合。</li>
+<li>图像的梯度可以用一阶导数和二阶偏导数来求解。</li>
+<li>边缘检测提取的是图像中不连续部分的特征，将闭合的边缘提取出来便可以作为一个区域。</li>
+</ul>
+</li>
+<li>与区域划分相比，边缘检测不需要逐个的对像素进行比较，比较适合大图像的处理。</li>
+<li>图像数据以二/三维矩阵的形式存储的，对一幅图像的求导相当于对一个曲面求导。<ul>
+<li>对图像求导、获取一幅图像的梯度：使用模板（Roberts、Prewitt、Sobel、Lapacian算子）对原图像进行卷积。</li>
+<li>OpenCV 提供的梯度滤波器（高通滤波器）：Sobel、Scharr、Laplacian、Canny。</li>
+<li>使用一阶导的算子有 Prewitt、Sobel、Canny；使用二阶导的有 Lapacian 。Scharr 是对 Sobel（使用小的卷积核求解求解梯度角度时）的优化。</li>
+</ul>
+</li>
+</ul>
+<h3 id="各种算子比较"><a href="#各种算子比较" class="headerlink" title="各种算子比较"></a>各种算子比较</h3><h4 id="Roberts-算子"><a href="#Roberts-算子" class="headerlink" title="Roberts 算子"></a>Roberts 算子</h4><ul>
+<li>Roberts 算子又称为交叉微分算子，是基于交叉差分的一阶微分算子。比较简单，计算量小。</li>
+<li>Roberts 常用来处理具有陡峭的低噪声图像，当图像边缘接近于正 45° 或负 45° 时，该算法处理效果更理想。其缺点是对边缘的定位不太准确，提取的边缘线条较粗。</li>
+<li>对应的模板：<img src="/2021/08/OpenCV-Part3/20200604163101990-163037519253316.png" alt="img"></li>
+</ul>
+<h4 id="Prewitt-算子"><a href="#Prewitt-算子" class="headerlink" title="Prewitt 算子"></a>Prewitt 算子</h4><ul>
+<li><p>Prewitt 算子也是一种一阶微分算子。由 Roberts 的 2×2 改为 3×3 模板矩阵，增加了计算量。</p>
+</li>
+<li><p>Prewitt 在水平方向和垂直方向分别利用两个方向模板与图像进行邻域卷积，边缘检测效果比 Robert 算子更加明显。</p>
+</li>
+<li><p>Prewitt 在权重上对局部像素进行了平均，对噪声有抑制作用。但是同时像素平均也代表了对图像的低通滤波，所以 Prewitt 算子对边缘的定位不如 Roberts 算子。</p>
+</li>
+<li><p>Prewitt 会造成边缘点的误判，因为许多噪声点的灰度值也很大。而且对于幅值较小的边缘点，其边缘反而丢失了。</p>
+</li>
+<li><p>对应的模板：<img src="/2021/08/OpenCV-Part3/image-20210830155817284.png" alt="image-20210830155817284" style="zoom: 67%;"></p>
+</li>
+</ul>
+<h4 id="Sobel-算子"><a href="#Sobel-算子" class="headerlink" title="Sobel 算子"></a>Sobel 算子</h4><ul>
+<li><p>Sobel 是结合了高斯平滑与微分求导的一阶微分算子。在 Prewitt 基础上，将权值改为符合高斯分布。</p>
+</li>
+<li><p>Sobel 考虑了不同距离的相邻点对当前像素点的影响，距离越近的像素点对应当前像素的影响越大，从而实现锐化边缘。因此，比 Prewitt 和 Roberts 都更能准确检测图像边缘。</p>
+</li>
+<li><p>Sobel 算子根据像素点上下左右邻点灰度加权差，在边缘处达到极值这一现象检测边缘，对噪声具有平滑作用，并提供较为精确的边缘方向信息。</p>
+</li>
+<li><p>对应的模板：<img src="/2021/08/OpenCV-Part3/image-20210830155931977.png" alt="image-20210830155931977"></p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">img = cv2.imread(<span class="string">&#x27;box.png&#x27;</span>, <span class="number">0</span>)</span><br><span class="line"><span class="comment"># 使用float64为了保留负数信息</span></span><br><span class="line">sobelx = cv2.Sobel(img, cv2.CV_64F, <span class="number">1</span>, <span class="number">0</span>, ksize=<span class="number">5</span>)</span><br><span class="line">sobely = cv2.Sobel(img, cv2.CV_64F, <span class="number">0</span>, <span class="number">1</span>, ksize=<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="Laplacian-算子"><a href="#Laplacian-算子" class="headerlink" title="Laplacian 算子"></a>Laplacian 算子</h4><ul>
+<li><p>拉普拉斯（Laplacian）是一个二阶微分算子，是二阶 Sobel 导数，常用于图像增强和边缘提取。</p>
+</li>
+<li><p>Laplacian 原理：在卷积邻域内，如果中心像素的灰度更高，则提升中心像素的灰度；反之则降低中心像素的灰度。</p>
+<ol>
+<li>模板与图像进行卷积运算：当中心像素灰度等于邻域内其他像素的平均灰度时，结果为0；当中心像素高于平均灰度时，结果为正数；当中心像素低于平均灰度时，结果为负数。</li>
+<li>对上述卷积运算结果用适当的衰弱因子处理后，加在原中心像素上，就可以实现图像的锐化处理。</li>
+</ol>
+</li>
+<li><p>Laplacian 算子模板分为四邻域和八邻域，四邻域是对邻域中心像素的四方向求梯度，八邻域是对八方向求梯度。</p>
+<ol>
+<li>四邻域模板：<img src="/2021/08/OpenCV-Part3/20200604163300437.png" alt="img" style="zoom:67%;"></li>
+<li>八邻域模板：<img src="/2021/08/OpenCV-Part3/20200604163310938.png" alt="img" style="zoom:67%;"></li>
+</ol>
+</li>
+<li><p>Laplacian 用于图像增强时，有这几个比较适合的场合。</p>
+<ul>
+<li>由于是通过二次微分正峰和负峰之间的过零点来确定边缘线的位置，因此对孤立点或端点更为敏感，这一特性适用于以突出图像中的孤立点、孤立线或线端点为目的的场合。</li>
+<li>用来改善因扩散效应的模糊特别有效，因为它符合降制模型。扩散效应是成像过程中经常发生的现象。</li>
+</ul>
+</li>
+<li><p>Laplacian 用于边缘提取时，一般不使用其原始形式。它对于边缘和噪声都非常敏感，在锐化边缘的同时也会增强图像中的噪声，所以需要先对图像进行平滑处理。</p>
+<ul>
+<li>原因：1. Laplacian 对噪声具有无法接受的敏感性；2. 同时其幅值产生算边缘，这是复杂的分割不希望有的结果；3. 不能检测边缘的方向。</li>
+<li>取而代之，一般使用的是高斯型拉普拉斯算子(Laplacian of a Gaussian,LoG)，利用该LoG算子进行卷积 等价于 高斯模糊+拉普拉斯。所以，在 LoG 中使用高斯函数的目的就是对图像进行平滑处理，使用 Laplacian 的目的是提供一幅由零交叉确定边缘位置的图像。图像的平滑处理减少了噪声的影响，并且还抵消由 Laplacian 算子的二阶导数引起的逐渐增加的噪声影响。</li>
+</ul>
+</li>
+<li><p>Laplacian 用于图像分割时的作用：</p>
+<ul>
+<li>利用它的零交叉性质进行边缘定位。</li>
+<li>确定一个像素是在一条边缘暗的一面还是亮的一面。</li>
+</ul>
+</li>
+<li><p>图像锐化处理的作用是使灰度反差增强，从而使模糊图像变得更加清晰。图像模糊的实质就是图像受到平均运算或积分运算，因此可以对图像进行逆运算，如微分运算能够突出图像细节，使图像变得更为清晰。</p>
+<p>由于拉普拉斯是一种微分算子，它的应用可增强图像中灰度突变的区域，减弱灰度的缓慢变化区域。因此，锐化处理可选择拉普拉斯算子对原图像进行处理，产生描述灰度突变的图像，再将拉普拉斯图像与原始图像叠加。最终结果是使图像中的各灰度值得到保留、灰度突变处的对比度得到增强，在保留图像背景的前提下，突现出图像中小的细节信息锐化图像。</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">img = cv2.imread(<span class="string">&#x27;box.png&#x27;</span>, <span class="number">0</span>)</span><br><span class="line">laplacian = cv2.Laplacian(img, cv2.CV_64F)</span><br></pre></td></tr></table></figure>
+<p><img src="/2021/08/OpenCV-Part3/gradients.jpg" alt="img"></p>
+<h4 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h4><ul>
+<li><p>对于使用数据类型为<code>cv2.CV_8U</code>或<code>np.uint8</code>，会有一个小问题：黑色到白色的过渡被视为正斜率（具有正值），而白色到黑色的过渡被视为负斜率（具有负值）。因此，当将数据转换为np.uint8时，所有负斜率均设为零，即错过这一边缘信息。</p>
+</li>
+<li><p>如果要检测两个边缘，更好的选择是将输出数据类型保留为更高的形式，例如<code>cv2.CV_16S</code>，<code>cv2.CV_64F</code>等，取其绝对值，然后转换回<code>cv2.CV_8U</code>。 </p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">img = cv2.imread(<span class="string">&#x27;box.png&#x27;</span>, <span class="number">0</span>)</span><br><span class="line"><span class="comment"># Output dtype = cv2.CV_8U</span></span><br><span class="line">sobelx8u = cv2.Sobel(img, cv2.CV_8U, <span class="number">1</span>, <span class="number">0</span>, ksize=<span class="number">5</span>)</span><br><span class="line"><span class="comment"># Output dtype = cv2.CV_64F. Then take its absolute and convert to cv.CV_8U</span></span><br><span class="line">sobelx64f = cv2.Sobel(img, cv2.CV_64F, <span class="number">1</span>, <span class="number">0</span>, ksize=<span class="number">5</span>)</span><br><span class="line">abs_sobel64f = np.absolute(sobelx64f)</span><br><span class="line">sobel_8u = np.uint8(abs_sobel64f)</span><br></pre></td></tr></table></figure>
+ <img src="/2021/08/OpenCV-Part3/double_edge.jpg" alt="img" style="zoom:150%;">
+
+<h3 id="Canny边缘检测算子"><a href="#Canny边缘检测算子" class="headerlink" title="Canny边缘检测算子"></a>Canny边缘检测算子</h3><h4 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h4><ul>
+<li><p>Canny 算子是一个具有滤波、增强、检测的多阶段的边缘检测算子。其产生的边缘很细，没有强弱之分，边缘检测性能比前面几种都要好。</p>
+</li>
+<li><p>Canny 的具体算法步骤：</p>
+<ol>
+<li><p>用高斯滤波器<strong>平滑图像</strong>；</p>
+<ul>
+<li>去除噪声。由于边缘检测很容易受到噪声影响，所以第一步是使用 5x5 的高斯滤波器去除噪声。</li>
+</ul>
+</li>
+<li><p>用一阶偏导的有限差分来<strong>计算并记录梯度和幅值方向</strong>；</p>
+<ul>
+<li><p>对平滑后的图像使用 Sobel 算子计算水平方向和竖直方向的一阶导数（图像梯度）Gx 和 Gy 。根据得到的这两幅梯度图 Gx 和 Gy 找到边界的梯度和方向，公式如下：</p>
+<img src="/2021/08/OpenCV-Part3/image-20210831114755186.png" alt="image-20210831114755186" style="zoom:80%;">
+</li>
+<li><p>梯度的方向一般总是与边界垂直。梯度方向被归为四类：垂直，水平，和两个对角线。</p>
+</li>
+</ul>
+</li>
+<li><p>对梯度幅值进行<strong>非极大值抑制</strong>：</p>
+<ul>
+<li><p>在获得梯度的方向和大小之后，应该对整幅图像做一个扫描，去除那些非边界上的点。对每一个像素进行检查，看这个点的梯度是不是周围具有相同梯度方向的点中最大的。</p>
+<img src="/2021/08/OpenCV-Part3/image-20210831115028137.png" alt="image-20210831115028137" style="zoom:80%;">
+</li>
+<li><p>现在你得到的是一个包含“窄边界”的二值图像。</p>
+</li>
+</ul>
+</li>
+<li><p>用<strong>双阈值算法检测和连接边缘</strong>：</p>
+<ul>
+<li><p>现在要确定那些边界才是真正的边界。这时我们需要设置两个阈值：minVal 和 maxVal。当图像的灰度梯度高于 maxVal 时被认为是真的边界，那些低于 minVal 的边界会被抛弃。如果介于两者之间的话，就要看这个点是否与某个被确定为真正的边界点相连，如果是就认为它也是边界点，如果不是就抛弃。</p>
+<img src="/2021/08/OpenCV-Part3/image-20210831115538954.png" alt="image-20210831115538954" style="zoom: 67%;">
+</li>
+<li><p>A 高于阈值 maxVal 所以是真正的边界点，C 虽然低于 maxVal 但高于minVal 并且与 A 相连，所以也被认为是真正的边界点。而 B 就会被抛弃，因为他不仅低于 maxVal 而且不与真正的边界点相连。所以选择合适的 maxVal和 minVal 对于能否得到好的结果非常重要。在这一步一些小的噪声点也会被除去，因为我们假设边界都是一些长的线段。</p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h4 id="OpenCV中的Canny检测"><a href="#OpenCV中的Canny检测" class="headerlink" title="OpenCV中的Canny检测"></a>OpenCV中的Canny检测</h4><ul>
+<li><code>cv2.Canny(src, threshold1, threshold2)</code>：封装了 Canny 的所有步骤。<ul>
+<li><code>threshold1, threshold2</code>：即双阈值算法的 minVal 和 maxVal 。</li>
+<li><code>perture_size</code>：用于查找图像渐变的 Sobel 内核的大小。默认为3。</li>
+<li><code>L2gradient</code>：用于查找梯度幅度的方程式。如果为<code>True</code>，则使用更精确的公式，默认为<code>False</code>。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">edges = cv2.Canny(img, threshold1=<span class="number">100</span>, threshold2=<span class="number">200</span>)  <span class="comment"># 建议放入彩色图</span></span><br></pre></td></tr></table></figure>
+<h2 id="图像金字塔"><a href="#图像金字塔" class="headerlink" title="图像金字塔"></a>图像金字塔</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><ul>
+<li>图像金字塔，是同一图像、不同分辨率的图像的集合。</li>
+<li>图像金字塔，可以协助同时在不同分辨率的相同图像中进行目标检测，即同时检测不同大小的对象，因为我们不能确定对象将会以多大的尺寸显示在图像中。</li>
+</ul>
+<h3 id="构造图像金字塔"><a href="#构造图像金字塔" class="headerlink" title="构造图像金字塔"></a>构造图像金字塔</h3><ul>
+<li><p>构造图像金字塔一般包括二个步骤：</p>
+<ol>
+<li>利用低通滤波器平滑图像</li>
+<li>对平滑后的图像进行采样</li>
+</ol>
+</li>
+<li><p>有两种采样方式：上采样（分辨率逐级升高，不会恢复细节信息）和下采样（分辨率逐级降低，会丢失细节信息）。</p>
+</li>
+<li><p>使用函数<code>cv2.pyrDown()</code>和<code>cv2.pyrUp()</code>构建图像金字塔。</p>
+<ul>
+<li><code>cv2.pyrDown()</code>：从一个高分辨率大尺寸的图像向上构建一个金子塔（尺寸变小，分辨率降低）。</li>
+<li><code>cv2.pyrUp()</code>：从一个低分辨率小尺寸的图像向下构建一个金子塔（尺寸变大，但分辨率不会增加）。</li>
+</ul>
+</li>
+<li><p>下采样过后的层也称为 Octave 。</p>
+<p><img src="/2021/08/OpenCV-Part3/v2-8c6640fe15ab1ecd253a4c06d3b40ddf_720w.jpg" alt="img"></p>
+</li>
+</ul>
+<h4 id="高斯金字塔"><a href="#高斯金字塔" class="headerlink" title="高斯金字塔"></a>高斯金字塔</h4><ul>
+<li>高斯金字塔的构造过程：<ol>
+<li>用高斯内核与图像卷积。</li>
+<li>删除所有偶数行列。</li>
+</ol>
+</li>
+<li>此时<code>higher_reso</code>与<code>higher_reso2</code>是不一样的，因为一旦进行下采样就丢失了细节信息。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">higher_reso = cv2.imread(<span class="string">&#x27;messi5.jpg&#x27;</span>) </span><br><span class="line">lower_reso = cv2.pyrDown(higher_reso)  <span class="comment"># 下采样</span></span><br><span class="line">higher_reso2 = cv.pyrUp(lower_reso)  <span class="comment"># 上采样</span></span><br></pre></td></tr></table></figure>
+<h4 id="拉普拉斯金字塔"><a href="#拉普拉斯金字塔" class="headerlink" title="拉普拉斯金字塔"></a>拉普拉斯金字塔</h4><ul>
+<li>拉普拉斯金字塔由高斯金字塔的高低层级差形成，仅为图像边缘信息。</li>
+<li>拉普拉斯金字塔可以用于图像压缩。</li>
+</ul>
+<h3 id="使用金字塔进行图像融合"><a href="#使用金字塔进行图像融合" class="headerlink" title="使用金字塔进行图像融合"></a>使用金字塔进行图像融合</h3><ul>
+<li>金字塔另一种常用的应用是图像融合。将两个不同层级或不同图像的 Octave 经过变换成相同大小并堆叠在一起，这可以使图像获得不同的特征数据（特征融合）。</li>
+</ul>
+<ol>
+<li>加载两个图像</li>
+<li>查找两个图像的高斯金字塔（在此示例中， 级别数为6）</li>
+<li>在高斯金字塔中，找到其拉普拉斯金字塔</li>
+<li>然后在每个拉普拉斯金字塔级别中加入A的左半部分和B的右半部分</li>
+<li>最后从此联合图像金字塔中重建原始图像。</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">A = cv2.imread(<span class="string">&#x27;test2.png&#x27;</span>)</span><br><span class="line">B = cv2.imread(<span class="string">&#x27;test.jpg&#x27;</span>)</span><br><span class="line"><span class="comment"># 注意：为了使后面可以逐渐减半，这里的尺寸必须为2的次幂</span></span><br><span class="line">A = cv2.resize(A, (<span class="number">256</span>, <span class="number">256</span>), interpolation=cv2.INTER_CUBIC)</span><br><span class="line">B = cv2.resize(B, (<span class="number">256</span>, <span class="number">256</span>), interpolation=cv2.INTER_CUBIC)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成高斯金字塔</span></span><br><span class="line">G = A.copy()</span><br><span class="line">gpA = [G]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>):</span><br><span class="line">    G = cv2.pyrDown(G)</span><br><span class="line">    gpA.append(G)</span><br><span class="line"></span><br><span class="line">G = B.copy()</span><br><span class="line">gpB = [G]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>):</span><br><span class="line">    G = cv2.pyrDown(G)</span><br><span class="line">    gpB.append(G)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 产生Laplacian金字塔</span></span><br><span class="line">lpA = [gpA[<span class="number">5</span>]]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>, <span class="number">0</span>, -<span class="number">1</span>):</span><br><span class="line">    GE = cv2.pyrUp(gpA[i])</span><br><span class="line">    L = cv2.subtract(gpA[i - <span class="number">1</span>], GE)</span><br><span class="line">    lpA.append(L)</span><br><span class="line"></span><br><span class="line">lpB = [gpB[<span class="number">5</span>]]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>, <span class="number">0</span>, -<span class="number">1</span>):</span><br><span class="line">    GE = cv2.pyrUp(gpB[i])</span><br><span class="line">    L = cv2.subtract(gpB[i - <span class="number">1</span>], GE)</span><br><span class="line">    lpB.append(L)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 合并</span></span><br><span class="line">LS = []</span><br><span class="line"><span class="keyword">for</span> la, lb <span class="keyword">in</span> <span class="built_in">zip</span>(lpA, lpB):</span><br><span class="line">    rows, cols, dpt = la.shape</span><br><span class="line">    ls = np.hstack((la[:, <span class="number">0</span>:cols // <span class="number">2</span>], lb[:, cols // <span class="number">2</span>:]))</span><br><span class="line">    LS.append(ls)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重新构建图像</span></span><br><span class="line">ls_ = LS[<span class="number">0</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">6</span>):</span><br><span class="line">    ls_ = cv2.pyrUp(ls_)</span><br><span class="line">    ls_ = cv2.add(ls_, LS[i])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 连接</span></span><br><span class="line">real = np.hstack((A[:, :cols // <span class="number">2</span>], B[:, cols // <span class="number">2</span>:]))</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&quot;LS&quot;</span>, ls_)</span><br><span class="line">cv2.imshow(<span class="string">&quot;Real&quot;</span>, real)</span><br><span class="line"></span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<h2 id="图像轮廓"><a href="#图像轮廓" class="headerlink" title="图像轮廓"></a>图像轮廓</h2><h3 id="轮廓定义"><a href="#轮廓定义" class="headerlink" title="轮廓定义"></a>轮廓定义</h3><ul>
+<li>轮廓，是连接具有相同颜色或强度的所有连续点（沿边界）的曲线。轮廓是用于形状分析以及对象检测和识别的有用工具。</li>
+<li>为了找到轮廓，通常应用阈值或Canny边缘检测。</li>
+</ul>
+<h3 id="查找轮廓"><a href="#查找轮廓" class="headerlink" title="查找轮廓"></a>查找轮廓</h3><ul>
+<li><code>findContours(image, mode, method)</code>：从黑色背景中找到白色物体的轮廓。<ul>
+<li><code>image</code>：仅接受二值图。</li>
+<li><code>mode</code>：轮廓检索模式。<ul>
+<li><code>cv2.RETR_EXTERNAL</code>：表示只检测外轮廓。</li>
+<li><code>cv2.RETR_LIST</code>：检测的轮廓不建立等级关系。</li>
+<li><code>cv2.RETR_CCOMP</code>：建立两个等级的轮廓，上面的一层为外边界，里面的一层为内孔的边界信息。如果内孔内还有一个连通物体，这个物体的边界也在顶层。</li>
+<li><code>cv2.RETR_TREE</code>：建立一个等级树结构的轮廓。</li>
+</ul>
+</li>
+<li><code>method</code>：轮廓近似方法。<ul>
+<li><code>cv2.CHAIN_APPROX_NONE</code>：存储所有的轮廓点，相邻的两个点的像素位置差不超过1。</li>
+<li><code>cv2.CHAIN_APPROX_SIMPLE</code>：压缩水平、垂直、对角线方向的元素，只保留该方向的终点坐标，例如一个矩形轮廓只需4个点来保存轮廓信息</li>
+<li><code>cv2.CHAIN_APPROX_TC89_L1/CV_CHAIN_APPROX_TC89_KCOS</code>：使用 teh-Chinl chain 近似算法</li>
+</ul>
+</li>
+<li><code>contours</code>：返回的第一个值，图像中所有轮廓组成的list。<ul>
+<li>每个轮廓的类型为<code>ndarray</code>，本质是轮廓上的点的集合。</li>
+</ul>
+</li>
+<li><code>hierarchy</code>：返回的第二个可选值，是一个<code>ndarray</code>，其元素个数和轮廓个数相同。<ul>
+<li>每个轮廓<code>contours[i]</code>对应4个轮廓层级属性<code>hierarchy[i][0] ~ hierarchy[i][3]</code>，分别表示后一个轮廓、前一个轮廓、父轮廓、内嵌轮廓的索引。如果没有对应项，则该值为负数。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>在OpenCV中，<code>findContours()</code>的版本区别：<ul>
+<li>OpenCV3.2 之前，函数会修改源图像。OpenCV3.2 之后，不再修改源图像。</li>
+<li>OpenCV2 返回两个值：<code>contours</code>、<code>hierarchy</code>。OpenCV3 返回三个值：<code>img</code>、<code>countours</code>、<code>hierarchy</code>。这里可以用 try-except 解决版本兼容问题。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">im = cv2.imread(<span class="string">&#x27;test.jpg&#x27;</span>)</span><br><span class="line">imgray = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)</span><br><span class="line">ret, thresh = cv2.threshold(imgray, <span class="number">127</span>, <span class="number">255</span>, <span class="number">0</span>)  <span class="comment"># 转二值</span></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    img, contours, hierarchy = cv2.findContours(thresh, mode=cv2.RETR_EXTERNAL, method=cv2.CHAIN_APPROX_SIMPLE)</span><br><span class="line"><span class="keyword">except</span>:</span><br><span class="line">    contours, hierarchy = cv2.findContours(thresh, mode=cv2.RETR_EXTERNAL, method=cv2.CHAIN_APPROX_SIMPLE)</span><br></pre></td></tr></table></figure>
+<h3 id="绘制轮廓"><a href="#绘制轮廓" class="headerlink" title="绘制轮廓"></a>绘制轮廓</h3><ul>
+<li><p><code>cv2.drawContours(image, contours, contourIdx, color, thickness, lineType, hierarchy, maxLevel, offset)</code>：绘制任何形状的轮廓。</p>
+<ul>
+<li><code>image</code>：指明在哪幅图像上绘制轮廓。</li>
+<li><code>contours</code>：轮廓集合。</li>
+<li><code>contourIdx</code>：指定绘制轮廓集合中的哪条轮廓，如果是-1，则绘制其中的所有轮廓。</li>
+<li><code>thickness</code>：表明轮廓线的宽度，如果是-1(cv2.FILLED)，则为填充。</li>
+</ul>
+</li>
+<li><p>在图像中绘制所有轮廓：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cv2.drawContours(img, contours, -<span class="number">1</span>, (<span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>), <span class="number">3</span>)</span><br></pre></td></tr></table></figure></li>
+<li><p>绘制单个轮廓，如第四个轮廓：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cv2.drawContours(img, contours, <span class="number">3</span>, (<span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>), <span class="number">3</span>)</span><br><span class="line"><span class="comment"># 更好用的等价方法</span></span><br><span class="line">cnt = contours[<span class="number">4</span>]</span><br><span class="line">cv2.drawContours(img, [cnt], <span class="number">0</span>, (<span class="number">0</span>,<span class="number">255</span>,<span class="number">0</span>), <span class="number">3</span>)</span><br></pre></td></tr></table></figure></li>
+<li><p>绘制面积最大的轮廓：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 找到最大的轮廓</span></span><br><span class="line">area = []</span><br><span class="line"><span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(contours)):</span><br><span class="line">    area.append(cv2.contourArea(contours[k]))</span><br><span class="line">max_idx = np.argmax(np.array(area))</span><br><span class="line">cnt = contours[max_idx]</span><br><span class="line">cv2.drawContours(img, [cnt], <span class="number">0</span>, (<span class="number">0</span>,<span class="number">255</span>,<span class="number">0</span>), <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<h3 id="轮廓特征"><a href="#轮廓特征" class="headerlink" title="轮廓特征"></a>轮廓特征</h3><h4 id="特征矩"><a href="#特征矩" class="headerlink" title="特征矩"></a>特征矩</h4><ul>
+<li>特征矩可以帮助计算目标的特征，例如物体的质心、面积等。</li>
+<li><code>cv2.moments()</code>：提供所有计算出的矩值字典。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">img = cv2.imread(<span class="string">&#x27;test.jpg&#x27;</span>, <span class="number">0</span>)</span><br><span class="line">thresh = cv2.Canny(img, <span class="number">100</span>, <span class="number">200</span>)</span><br><span class="line">image, contours, hierarchy = cv2.findContours(thresh, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">cnt = contours[<span class="number">0</span>]</span><br><span class="line">M = cv2.moments(cnt)</span><br><span class="line">print(M)</span><br><span class="line"><span class="comment"># &#123;&#x27;m00&#x27;: 6.0, &#x27;m10&#x27;: 3258.0, &#x27;m01&#x27;: 3474.0, &#x27;m20&#x27;: 1769095.6666666665, &#x27;m11&#x27;: 1886382.0, &#x27;m02&#x27;: 2011451.0, &#x27;m30&#x27;: 960620757.0, &#x27;m21&#x27;: 1024306391.0, &#x27;m12&#x27;: 1092217893.0, &#x27;m03&#x27;: 1164635919.0, &#x27;mu20&#x27;: 1.6666666665114462, &#x27;mu11&#x27;: 0.0, &#x27;mu02&#x27;: 5.0, &#x27;mu30&#x27;: 2.384185791015625e-07, &#x27;mu21&#x27;: 8.987262845039368e-08, &#x27;mu12&#x27;: 0.0, &#x27;mu03&#x27;: 0.0, &#x27;nu20&#x27;: 0.04629629629198462, &#x27;nu11&#x27;: 0.0, &#x27;nu02&#x27;: 0.1388888888888889, &#x27;nu30&#x27;: 2.7037215925843386e-09, &#x27;nu21&#x27;: 1.0191763034546432e-09, &#x27;nu12&#x27;: 0.0, &#x27;nu03&#x27;: 0.0&#125;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>计算质心：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cx = <span class="built_in">int</span>(M[<span class="string">&#x27;m10&#x27;</span>] / M[<span class="string">&#x27;m00&#x27;</span>])</span><br><span class="line">cy = <span class="built_in">int</span>(M[<span class="string">&#x27;m01&#x27;</span>] / M[<span class="string">&#x27;m00&#x27;</span>])</span><br><span class="line">print(cx, cy)</span><br><span class="line"><span class="comment"># 543 579</span></span><br></pre></td></tr></table></figure>
+<h4 id="轮廓面积"><a href="#轮廓面积" class="headerlink" title="轮廓面积"></a>轮廓面积</h4><ul>
+<li><code>cv2.contourArea(curve)</code>：轮廓面积，等价于矩<code>M[&#39;m00&#39;]</code>。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">area = cv2.contourArea(cnt) </span><br></pre></td></tr></table></figure>
+<h4 id="轮廓周长"><a href="#轮廓周长" class="headerlink" title="轮廓周长"></a>轮廓周长</h4><ul>
+<li><code>cv2.arcLength(curve, closed)</code>：轮廓弧长。<ul>
+<li><code>closed</code>：<code>True</code>指定形状是闭合轮廓，<code>False</code>为曲线。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">perimeter = cv2.arcLength(cnt, closed=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="轮廓凹凸状况"><a href="#轮廓凹凸状况" class="headerlink" title="轮廓凹凸状况"></a>轮廓凹凸状况</h3><h4 id="轮廓近似"><a href="#轮廓近似" class="headerlink" title="轮廓近似"></a>轮廓近似</h4><ul>
+<li>例如试图在图像中找到一个正方形，但是由于图像问题，没能得到一个完美的正方形，则可以近似形状。</li>
+<li><code>cv2.approxPolyDP(curve, epsilon, closed)</code>：根据指定的精度，将轮廓形状近似为顶点数量较少的其他形状。由Douglas-Peucker算法实现。<ul>
+<li><code>epsilon</code>：是一个精度参数，表示从轮廓到近似轮廓的最大距离。需要正确选择epsilon才能获得正确的输出。</li>
+<li><code>closed</code>：指定曲线是否闭合。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">epsilon = <span class="number">0.3</span> * cv2.arcLength(cnt, <span class="literal">True</span>)</span><br><span class="line">approx = cv2.approxPolyDP(cnt, epsilon, <span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>在第二张图片中，绿线显示了<code>ε=周长×10％</code>时的近似曲线。第三张图中，显示了<code>ε=周长×1％</code>时的情况。</p>
+<p><img src="/2021/08/OpenCV-Part3/approx-16304145028132.jpg" alt="img"></p>
+</li>
+</ul>
+<h4 id="轮廓凸包"><a href="#轮廓凸包" class="headerlink" title="轮廓凸包"></a>轮廓凸包</h4><ul>
+<li><p>凸包与轮廓逼近相似，在某些情况下两者可能提供相同的结果。</p>
+</li>
+<li><p><code>cv2.convexHull(points, hull, clockwise, returnPoints)</code>：检查曲线是否存在凸凹缺陷并进行校正。</p>
+<ul>
+<li><code>points</code>：传入轮廓点集。</li>
+<li><code>hull</code>：输出，通常不需要。</li>
+<li><code>clockwise</code>：方向标志。<code>True</code>表示输出的凸包是顺时针方向的，否则为逆时针。</li>
+<li><code>returnPoints</code>：默认值为<code>True</code>。返回凸包点的(x, y)坐标。如果设置为 False，则返回凸包点在轮廓中相应的索引。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hull = cv2.convexHull(cnt) </span><br></pre></td></tr></table></figure>
+<h4 id="检查凸度"><a href="#检查凸度" class="headerlink" title="检查凸度"></a>检查凸度</h4><ul>
+<li><code>cv2.isContourConvex(point)</code>：检查曲线是否凸出。只返回True或False。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">k = cv2.isContourConvex(cnt) </span><br></pre></td></tr></table></figure>
+<h4 id="凸性缺陷"><a href="#凸性缺陷" class="headerlink" title="凸性缺陷"></a>凸性缺陷</h4><ul>
+<li>凸包的任何偏差都可以被认为是凸性缺陷。</li>
+<li><code>cv2.convexityDefects()</code>：查找凸性缺陷。<ul>
+<li>在寻找凸包时，对<code>cv2.convexHull(points, returnPoints)</code>必须传递<code>returnPoints=False</code>。</li>
+<li>返回一个数组，其中每行包含这些值：**[起点、终点、最远点、到最远点的近似距离]**。</li>
+<li>该函数返回的前三个值是cnt的索引。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;test.jpg&#x27;</span>)</span><br><span class="line">thresh = cv2.Canny(img, <span class="number">100</span>, <span class="number">200</span>)</span><br><span class="line">_, contours, hierarchy = cv2.findContours(thresh, <span class="number">2</span>, <span class="number">1</span>)</span><br><span class="line">cnt = contours[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查找凸性缺陷</span></span><br><span class="line">hull = cv2.convexHull(cnt, returnPoints=<span class="literal">False</span>)</span><br><span class="line">defects = cv2.convexityDefects(cnt, hull)  </span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(defects.shape[<span class="number">0</span>]):</span><br><span class="line">    s, e, f, d = defects[i, <span class="number">0</span>]</span><br><span class="line">    start = <span class="built_in">tuple</span>(cnt[s][<span class="number">0</span>])</span><br><span class="line">    end = <span class="built_in">tuple</span>(cnt[e][<span class="number">0</span>])</span><br><span class="line">    far = <span class="built_in">tuple</span>(cnt[f][<span class="number">0</span>])</span><br><span class="line">    cv2.line(img, start, end, [<span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>], <span class="number">2</span>)</span><br><span class="line">    cv2.circle(img, far, <span class="number">5</span>, [<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>], -<span class="number">1</span>)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;img&#x27;</span>, img)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><img src="/2021/08/OpenCV-Part3/defects.jpg" alt="img"></li>
+</ul>
+<h4 id="点多边形测试"><a href="#点多边形测试" class="headerlink" title="点多边形测试"></a>点多边形测试</h4><ul>
+<li><code>cv2.pointPolygonTest(contour, pt, measureDist)</code>：计算图像中某一点到轮廓线的最短距离。<ul>
+<li><code>measureDist</code>：如果不想找到距离，则设置为False，因为设置为False可使速度提高2-3倍。<ul>
+<li><code>True</code>：计算有符号距离。点在轮廓线外时为负数，点在轮廓线内时为正数，点在轮廓线上时为零。</li>
+<li><code>False</code>：判断该点是在轮廓线外部还是内部。点在轮廓线外时为<code>-1</code>，点在轮廓线内时为<code>+1</code>，点在轮廓线上时为<code>0</code>。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dist = cv2.pointPolygonTest(contour=cnt, pt=(<span class="number">50</span>, <span class="number">50</span>), measureDist=<span class="literal">True</span>)  <span class="comment"># 检查(50, 50)到轮廓线的最短距离</span></span><br></pre></td></tr></table></figure>
+<h4 id="形状匹配"><a href="#形状匹配" class="headerlink" title="形状匹配"></a>形状匹配</h4><ul>
+<li><code>cv2.matchShapes()</code>：比较两个形状或两个轮廓，返回一个显示相似性的度量。结果越低，匹配越好。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line">img1 = cv2.imread(<span class="string">&#x27;star.jpg&#x27;</span>, <span class="number">0</span>)</span><br><span class="line">img2 = cv2.imread(<span class="string">&#x27;star2.jpg&#x27;</span>, <span class="number">0</span>)</span><br><span class="line">ret, thresh = cv2.threshold(img1, <span class="number">127</span>, <span class="number">255</span>, <span class="number">0</span>)</span><br><span class="line">ret, thresh2 = cv2.threshold(img2, <span class="number">127</span>, <span class="number">255</span>, <span class="number">0</span>)</span><br><span class="line">contours, hierarchy = cv2.findContours(thresh, <span class="number">2</span>, <span class="number">1</span>)</span><br><span class="line">cnt1 = contours[<span class="number">0</span>]</span><br><span class="line">contours, hierarchy = cv2.findContours(thresh2, <span class="number">2</span>, <span class="number">1</span>)</span><br><span class="line">cnt2 = contours[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">ret = cv2.matchShapes(cnt1, cnt2, <span class="number">1</span>, <span class="number">0.0</span>)</span><br><span class="line">print(ret)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>在以下案例中：匹配图像A与本身=0.0；匹配图像A与图像B=0.001946；匹配图像A与图像C=0.326911。</p>
+<p><img src="http://qiniu.aihubs.net/matchshapes.jpg" alt="img"></p>
+</li>
+<li><p>即使是图像旋转也不会对这个比较产生很大的影响。</p>
+</li>
+</ul>
+<h3 id="拟合轮廓"><a href="#拟合轮廓" class="headerlink" title="拟合轮廓"></a>拟合轮廓</h3><h4 id="直角矩形"><a href="#直角矩形" class="headerlink" title="直角矩形"></a>直角矩形</h4><ul>
+<li><code>cv2.boundingRect(points)</code>：不考虑物体旋转，拟合最小矩形框。注意，其面积不是最小的。<ul>
+<li><code>points</code>：目标轮廓的点集。</li>
+<li><code>(x，y)</code>为矩形的左上角坐标，而<code>(w，h)</code>为矩形的宽度和高度。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x, y, w, h = cv2.boundingRect(cnt)</span><br><span class="line">cv2.rectangle(img, (x, y), (x + w, y + h), (<span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>), <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="旋转矩形"><a href="#旋转矩形" class="headerlink" title="旋转矩形"></a>旋转矩形</h4><ul>
+<li><code>cv2.minAreaRect(point)</code>：考虑旋转，拟合面积最小的外接矩形。<ul>
+<li><code>point</code>：目标轮廓的点集。</li>
+<li>返回一个Box2D结构：<code>(中心坐标(x, y), (宽, 高), 旋转角度)</code>。</li>
+</ul>
+</li>
+<li>cv2.boxPoints()：<code>(中心坐标(x, y), (宽, 高), 旋转角度)</code> -&gt; <code>[[x, y] * 4]</code><ul>
+<li>注意版本区别：OpenCV2中为<code>cv2.cv.BoxPoints</code>，OpenCV3中为<code>cv2.boxPoints()</code>。同样可以用 try-except 兼容版本问题。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">rect = cv2.minAreaRect(cnt)</span><br><span class="line">box = cv2.boxPoints(rect)</span><br><span class="line">box = np.int0(box)</span><br><span class="line">cv2.drawContours(img, [box], contourIdx=<span class="number">0</span>, color=(<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>), thickness=<span class="number">2</span>)  <span class="comment"># 画(拟合后矩形的)轮廓</span></span><br><span class="line">cv2.polylines(img, [box], isClosed=<span class="literal">True</span>, color=(<span class="number">0</span>, <span class="number">255</span>, <span class="number">255</span>), thickness=<span class="number">2</span>)  <span class="comment"># 画多边形</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><img src="/2021/08/OpenCV-Part3/image-20210831214555327.png" alt="image-20210831214555327" style="zoom: 50%;">
+
+</li>
+</ul>
+<h4 id="最小闭合圈"><a href="#最小闭合圈" class="headerlink" title="最小闭合圈"></a>最小闭合圈</h4><ul>
+<li><code>cv2.minEnclosingCircle(point)</code>：拟合最小外接圆。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(x, y), radius = cv2.minEnclosingCircle(cnt)</span><br><span class="line">center = (<span class="built_in">int</span>(x), <span class="built_in">int</span>(y))</span><br><span class="line">radius = <span class="built_in">int</span>(radius)</span><br><span class="line">cv2.circle(img, center, radius, (<span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>), <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="拟合椭圆"><a href="#拟合椭圆" class="headerlink" title="拟合椭圆"></a>拟合椭圆</h4><ul>
+<li><code>cv2.fitEllipse(point)</code>：内接椭圆的旋转矩形。</li>
+<li>很多时候效果并不是非常理想，并没有做到外接。</li>
+<li>需要5个点以上才能拟合椭圆，否则只能用圆形。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ellipse = cv2.fitEllipse(cnt)</span><br><span class="line">(x, y), (w, h), t = ellipse</span><br><span class="line">e_x, e_y, e_a, e_b, e_t = <span class="built_in">int</span>(x), <span class="built_in">int</span>(y), <span class="built_in">int</span>(w / <span class="number">2</span>), <span class="built_in">int</span>(h / <span class="number">2</span>), <span class="built_in">int</span>(t)</span><br><span class="line">cv2.ellipse(img, (e_x, e_y), (e_a, e_b), e_t, <span class="number">0</span>, <span class="number">360</span>, (<span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>), <span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><img src="/2021/08/OpenCV-Part3/image-20210831221246120.png" alt="image-20210831221246120" style="zoom:50%;">
+
+</li>
+</ul>
+<h4 id="拟合直线"><a href="#拟合直线" class="headerlink" title="拟合直线"></a>拟合直线</h4><ul>
+<li><code>cv2.fitLine(points, distType, param, reps, aeps)</code>：在一组点集上近似一条直线。</li>
+<li>也没啥用。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">rows, cols = img.shape[:<span class="number">2</span>]</span><br><span class="line">[vx, vy, x, y] = cv2.fitLine(cnt, cv2.DIST_L2, <span class="number">0</span>, <span class="number">0.01</span>, <span class="number">0.01</span>)</span><br><span class="line">lefty = <span class="built_in">int</span>((-x * vy / vx) + y)</span><br><span class="line">righty = <span class="built_in">int</span>(((cols - x) * vy / vx) + y)</span><br><span class="line">cv2.line(img, (cols - <span class="number">1</span>, righty), (<span class="number">0</span>, lefty), (<span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>), <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="轮廓性质"><a href="#轮廓性质" class="headerlink" title="轮廓性质"></a>轮廓性质</h3><h4 id="长宽比"><a href="#长宽比" class="headerlink" title="长宽比"></a>长宽比</h4><ul>
+<li>长宽比：对象边界矩形的宽高比。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x, y, w, h = cv2.boundingRect(cnt)</span><br><span class="line">aspect_ratio = <span class="built_in">float</span>(w) / h</span><br></pre></td></tr></table></figure>
+<h4 id="范围"><a href="#范围" class="headerlink" title="范围"></a>范围</h4><ul>
+<li>范围：轮廓区域与边界矩形区域的比值。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">area = cv2.contourArea(cnt)</span><br><span class="line">x, y, w, h = cv2.boundingRect(cnt)</span><br><span class="line">rect_area = w * h</span><br><span class="line">extent = <span class="built_in">float</span>(area) / rect_area</span><br></pre></td></tr></table></figure>
+<h4 id="坚实度"><a href="#坚实度" class="headerlink" title="坚实度"></a>坚实度</h4><ul>
+<li>坚实度：等高线面积与其凸包面积之比。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">area = cv2.contourArea(cnt)</span><br><span class="line">hull = cv2.convexHull(cnt)</span><br><span class="line">hull_area = cv2.contourArea(hull)</span><br><span class="line">solidity = <span class="built_in">float</span>(area) / hull_area</span><br></pre></td></tr></table></figure>
+<h4 id="等效直径"><a href="#等效直径" class="headerlink" title="等效直径"></a>等效直径</h4><ul>
+<li>等效直径：面积与轮廓面积相同的圆的直径。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">area = cv2.contourArea(cnt)</span><br><span class="line">equi_diameter = np.sqrt(<span class="number">4</span> * area / np.pi)</span><br></pre></td></tr></table></figure>
+<h4 id="取向"><a href="#取向" class="headerlink" title="取向"></a>取向</h4><ul>
+<li>取向：物体指向的角度。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(x, y), (MA, ma), angle = cv2.fitEllipse(cnt)</span><br></pre></td></tr></table></figure>
+<h4 id="掩码"><a href="#掩码" class="headerlink" title="掩码"></a>掩码</h4><ul>
+<li>掩码：构成该对象的所有点。</li>
+<li>Numpy给出的坐标是<code>(行、列)</code>格式，而OpenCV给出的坐标是<code>(x,y)</code>格式。注意，<code>row = x, column = y</code>。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mask = np.zeros(imgray.shape, np.uint8)</span><br><span class="line">cv2.drawContours(mask, [cnt], <span class="number">0</span>, <span class="number">255</span>, -<span class="number">1</span>)</span><br><span class="line">pixelpoints = np.transpose(np.nonzero(mask))</span><br><span class="line"><span class="comment"># pixelpoints = cv2.findNonZero(mask)  # 等价方法</span></span><br></pre></td></tr></table></figure>
+<h4 id="最大值、最小值及其位置"><a href="#最大值、最小值及其位置" class="headerlink" title="最大值、最小值及其位置"></a>最大值、最小值及其位置</h4><ul>
+<li>可以使用掩码图像找到这些参数。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(imgray, mask=mask)</span><br></pre></td></tr></table></figure>
+<h4 id="平均颜色、平均强度"><a href="#平均颜色、平均强度" class="headerlink" title="平均颜色、平均强度"></a>平均颜色、平均强度</h4><ul>
+<li>找到对象的平均颜色，或者灰度模式下物体的平均强度。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mean_val = cv2.mean(img, mask=mask)</span><br></pre></td></tr></table></figure>
+<h4 id="极端点"><a href="#极端点" class="headerlink" title="极端点"></a>极端点</h4><ul>
+<li>极端点：指对象的最顶部，最底部，最右侧和最左侧的点。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">leftmost = <span class="built_in">tuple</span>(cnt[cnt[:, :, <span class="number">0</span>].argmin()][<span class="number">0</span>])</span><br><span class="line">rightmost = <span class="built_in">tuple</span>(cnt[cnt[:, :, <span class="number">0</span>].argmax()][<span class="number">0</span>])</span><br><span class="line">topmost = <span class="built_in">tuple</span>(cnt[cnt[:, :, <span class="number">1</span>].argmin()][<span class="number">0</span>])</span><br><span class="line">bottommost = <span class="built_in">tuple</span>(cnt[cnt[:, :, <span class="number">1</span>].argmax()][<span class="number">0</span>])</span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">NephrenCake</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://nephrencake.gitee.io/2021/08/OpenCV-Part3/">https://nephrencake.gitee.io/2021/08/OpenCV-Part3/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://nephrencake.gitee.io" target="_blank">浅幽丶奈芙莲的个人博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/2021/08/OpenCV-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/%E4%BA%8Ced08.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/08/OpenCV-Part4/"><img class="prev-cover" src="/2021/08/OpenCV-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/%E4%BA%8Ced08.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">OpenCV-Part4</div></div></a></div><div class="next-post pull-right"><a href="/2021/08/OpenCV-Part2/"><img class="next-cover" src="/2021/08/OpenCV-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/%E4%BA%8Ced08.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">OpenCV-Part2</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#OpenCV-Part3%E2%80%94%E2%80%94%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%EF%BC%88%E4%B8%AD%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">OpenCV-Part3——图像处理（中）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F%E8%BE%B9%E7%BC%98%E6%A3%80%E6%B5%8B"><span class="toc-number">1.1.</span> <span class="toc-text">图像边缘检测</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%B9%E7%BC%98%E6%A3%80%E6%B5%8B"><span class="toc-number">1.1.1.</span> <span class="toc-text">边缘检测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%84%E7%A7%8D%E7%AE%97%E5%AD%90%E6%AF%94%E8%BE%83"><span class="toc-number">1.1.2.</span> <span class="toc-text">各种算子比较</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Roberts-%E7%AE%97%E5%AD%90"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">Roberts 算子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Prewitt-%E7%AE%97%E5%AD%90"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">Prewitt 算子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Sobel-%E7%AE%97%E5%AD%90"><span class="toc-number">1.1.2.3.</span> <span class="toc-text">Sobel 算子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Laplacian-%E7%AE%97%E5%AD%90"><span class="toc-number">1.1.2.4.</span> <span class="toc-text">Laplacian 算子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">1.1.2.5.</span> <span class="toc-text">注意事项</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Canny%E8%BE%B9%E7%BC%98%E6%A3%80%E6%B5%8B%E7%AE%97%E5%AD%90"><span class="toc-number">1.1.3.</span> <span class="toc-text">Canny边缘检测算子</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">基本原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OpenCV%E4%B8%AD%E7%9A%84Canny%E6%A3%80%E6%B5%8B"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">OpenCV中的Canny检测</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F%E9%87%91%E5%AD%97%E5%A1%94"><span class="toc-number">1.2.</span> <span class="toc-text">图像金字塔</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-number">1.2.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%84%E9%80%A0%E5%9B%BE%E5%83%8F%E9%87%91%E5%AD%97%E5%A1%94"><span class="toc-number">1.2.2.</span> <span class="toc-text">构造图像金字塔</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%AB%98%E6%96%AF%E9%87%91%E5%AD%97%E5%A1%94"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">高斯金字塔</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E9%87%91%E5%AD%97%E5%A1%94"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">拉普拉斯金字塔</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E9%87%91%E5%AD%97%E5%A1%94%E8%BF%9B%E8%A1%8C%E5%9B%BE%E5%83%8F%E8%9E%8D%E5%90%88"><span class="toc-number">1.2.3.</span> <span class="toc-text">使用金字塔进行图像融合</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F%E8%BD%AE%E5%BB%93"><span class="toc-number">1.3.</span> <span class="toc-text">图像轮廓</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AE%E5%BB%93%E5%AE%9A%E4%B9%89"><span class="toc-number">1.3.1.</span> <span class="toc-text">轮廓定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E6%89%BE%E8%BD%AE%E5%BB%93"><span class="toc-number">1.3.2.</span> <span class="toc-text">查找轮廓</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%98%E5%88%B6%E8%BD%AE%E5%BB%93"><span class="toc-number">1.3.3.</span> <span class="toc-text">绘制轮廓</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AE%E5%BB%93%E7%89%B9%E5%BE%81"><span class="toc-number">1.3.4.</span> <span class="toc-text">轮廓特征</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E5%BE%81%E7%9F%A9"><span class="toc-number">1.3.4.1.</span> <span class="toc-text">特征矩</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BD%AE%E5%BB%93%E9%9D%A2%E7%A7%AF"><span class="toc-number">1.3.4.2.</span> <span class="toc-text">轮廓面积</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BD%AE%E5%BB%93%E5%91%A8%E9%95%BF"><span class="toc-number">1.3.4.3.</span> <span class="toc-text">轮廓周长</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AE%E5%BB%93%E5%87%B9%E5%87%B8%E7%8A%B6%E5%86%B5"><span class="toc-number">1.3.5.</span> <span class="toc-text">轮廓凹凸状况</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BD%AE%E5%BB%93%E8%BF%91%E4%BC%BC"><span class="toc-number">1.3.5.1.</span> <span class="toc-text">轮廓近似</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BD%AE%E5%BB%93%E5%87%B8%E5%8C%85"><span class="toc-number">1.3.5.2.</span> <span class="toc-text">轮廓凸包</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5%E5%87%B8%E5%BA%A6"><span class="toc-number">1.3.5.3.</span> <span class="toc-text">检查凸度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%B8%E6%80%A7%E7%BC%BA%E9%99%B7"><span class="toc-number">1.3.5.4.</span> <span class="toc-text">凸性缺陷</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%82%B9%E5%A4%9A%E8%BE%B9%E5%BD%A2%E6%B5%8B%E8%AF%95"><span class="toc-number">1.3.5.5.</span> <span class="toc-text">点多边形测试</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BD%A2%E7%8A%B6%E5%8C%B9%E9%85%8D"><span class="toc-number">1.3.5.6.</span> <span class="toc-text">形状匹配</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%9F%E5%90%88%E8%BD%AE%E5%BB%93"><span class="toc-number">1.3.6.</span> <span class="toc-text">拟合轮廓</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%B4%E8%A7%92%E7%9F%A9%E5%BD%A2"><span class="toc-number">1.3.6.1.</span> <span class="toc-text">直角矩形</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%97%8B%E8%BD%AC%E7%9F%A9%E5%BD%A2"><span class="toc-number">1.3.6.2.</span> <span class="toc-text">旋转矩形</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%80%E5%B0%8F%E9%97%AD%E5%90%88%E5%9C%88"><span class="toc-number">1.3.6.3.</span> <span class="toc-text">最小闭合圈</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8B%9F%E5%90%88%E6%A4%AD%E5%9C%86"><span class="toc-number">1.3.6.4.</span> <span class="toc-text">拟合椭圆</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8B%9F%E5%90%88%E7%9B%B4%E7%BA%BF"><span class="toc-number">1.3.6.5.</span> <span class="toc-text">拟合直线</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AE%E5%BB%93%E6%80%A7%E8%B4%A8"><span class="toc-number">1.3.7.</span> <span class="toc-text">轮廓性质</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%95%BF%E5%AE%BD%E6%AF%94"><span class="toc-number">1.3.7.1.</span> <span class="toc-text">长宽比</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8C%83%E5%9B%B4"><span class="toc-number">1.3.7.2.</span> <span class="toc-text">范围</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9D%9A%E5%AE%9E%E5%BA%A6"><span class="toc-number">1.3.7.3.</span> <span class="toc-text">坚实度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AD%89%E6%95%88%E7%9B%B4%E5%BE%84"><span class="toc-number">1.3.7.4.</span> <span class="toc-text">等效直径</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%96%E5%90%91"><span class="toc-number">1.3.7.5.</span> <span class="toc-text">取向</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A9%E7%A0%81"><span class="toc-number">1.3.7.6.</span> <span class="toc-text">掩码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%80%E5%A4%A7%E5%80%BC%E3%80%81%E6%9C%80%E5%B0%8F%E5%80%BC%E5%8F%8A%E5%85%B6%E4%BD%8D%E7%BD%AE"><span class="toc-number">1.3.7.7.</span> <span class="toc-text">最大值、最小值及其位置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B9%B3%E5%9D%87%E9%A2%9C%E8%89%B2%E3%80%81%E5%B9%B3%E5%9D%87%E5%BC%BA%E5%BA%A6"><span class="toc-number">1.3.7.8.</span> <span class="toc-text">平均颜色、平均强度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9E%81%E7%AB%AF%E7%82%B9"><span class="toc-number">1.3.7.9.</span> <span class="toc-text">极端点</span></a></li></ol></li></ol></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 By NephrenCake</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">这里是浅幽丶奈芙莲的个人博客~</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> {preloader.endLoading()})</script><div class="js-pjax"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><canvas class="fireworks" mobile="true"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script></div></body></html>

@@ -1339,7 +1339,7 @@ canvas:not(#ribbon-canvas),
   --tab-botton-color: #1f2d3d;
   --tab-button-hover-bg: #dcdcdc;
   --tab-button-active-bg: #fff;
-  --card-bg: rgba(255,255,255,0.7);
+  --card-bg: rgba(255,255,255,0.9);
   --sidebar-bg: #f6f8fa;
   --btn-hover-color: #ff7242;
   --btn-color: #fff;

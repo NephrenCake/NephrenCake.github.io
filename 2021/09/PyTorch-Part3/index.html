@@ -1,0 +1,251 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PyTorch-Part3 | 浅幽丶奈芙莲的个人博客</title><meta name="author" content="NephrenCake"><meta name="copyright" content="NephrenCake"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="TensorFlow转PyTorch">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PyTorch-Part3">
+<meta property="og:url" content="https://nephrencake.gitee.io/2021/09/PyTorch-Part3/index.html">
+<meta property="og:site_name" content="浅幽丶奈芙莲的个人博客">
+<meta property="og:description" content="TensorFlow转PyTorch">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://nephrencake.gitee.io/2021/09/PyTorch-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/%E4%BA%8Ced10.jpg">
+<meta property="article:published_time" content="2021-09-12T09:36:23.000Z">
+<meta property="article:modified_time" content="2021-10-26T15:14:00.057Z">
+<meta property="article:author" content="NephrenCake">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://nephrencake.gitee.io/2021/09/PyTorch-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/%E4%BA%8Ced10.jpg"><link rel="shortcut icon" href="/img/favicon.jpg"><link rel="canonical" href="https://nephrencake.gitee.io/2021/09/PyTorch-Part3/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}
+
+// https://stackoverflow.com/questions/16839698/jquery-getscript-alternative-in-native-javascript
+const getScript = url => new Promise((resolve, reject) => {
+  const script = document.createElement('script')
+  script.src = url
+  script.async = true
+  script.onerror = reject
+  script.onload = script.onreadystatechange = function() {
+    const loadState = this.readyState
+    if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+    script.onload = script.onreadystatechange = null
+    resolve()
+  }
+  document.head.appendChild(script)
+})</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-10-26 23:14:00'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><link rel="stylesheet" href="/css/background.css"><link rel="stylesheet" href="/css/mouse.css"><link rel="stylesheet" href="/css/scrollbar.css"><link rel="stylesheet" href="/css/font.css"><link rel="stylesheet" href="/css/iconfont.css"><meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="浅幽丶奈芙莲的个人博客" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">79</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">9</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/photo/"><i class="fa-fw fas fa-heart"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/2021/09/PyTorch-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/%E4%BA%8Ced10.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">浅幽丶奈芙莲的个人博客</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/photo/"><i class="fa-fw fas fa-heart"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">PyTorch-Part3</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-09-12T09:36:23.000Z" title="发表于 2021-09-12 17:36:23">2021-09-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-10-26T15:14:00.057Z" title="更新于 2021-10-26 23:14:00">2021-10-26</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/PyTorch/">PyTorch</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>7分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="PyTorch-Part3——TensorFlow转PyTorch"><a href="#PyTorch-Part3——TensorFlow转PyTorch" class="headerlink" title="PyTorch-Part3——TensorFlow转PyTorch"></a>PyTorch-Part3——TensorFlow转PyTorch</h1><p>[TOC]</p>
+<h2 id="函数对应"><a href="#函数对应" class="headerlink" title="函数对应"></a>函数对应</h2><p>TensorFlow - tf.reshape 函数 &amp; Pytorch - torch.reshape 函数</p>
+<p>TensorFlow - tf.concat 函数 &amp; Pytorch - torch.cat 函数</p>
+<p>TensorFlow - tf.abs 函数 &amp;</p>
+<ul>
+<li>针对张量的每一位的元素分别计算其绝对值，并输出原格式的新张量。</li>
+</ul>
+<p>TensorFlow - tf.expand_dims 函数 &amp; torch.unsqueeze</p>
+<ul>
+<li><p>TensorFlow - tf.less 函数 &amp;<br>torch.le same as torch.ge — &gt;=<br>torch.lt same as torch.gt — &gt;<br>与torch.min相同的是，其均是用来比较两个张量每一位元素的最小值，不同的是tf.less输出的是是否为最小值的bool值，torch.min是输出两元素中的最小值并重新组合成张量。<br>返回值： 一个 torch.ByteTensor 张量，包含了每个位置的比较结果(是否 input &gt;= other )。 返回类型： Tensor</p>
+</li>
+<li><p>torch.le(input, other, out=None) -&gt; Tensor:</p>
+</li>
+<li><p>逐元素比较input和other，即是否input &lt;= other，第二个参数可以为一个数或与第一个参数相同形状和类型的张量。</p>
+</li>
+<li><p>torch.lt(input, other, out=None) -&gt; Tensor:</p>
+</li>
+<li><p>逐元素比较input和other，即是否input &lt; other</p>
+</li>
+</ul>
+<p>TensorFlow - tf.equal 函数 &amp; torch.equal</p>
+<ul>
+<li>若两个张量有相同的形状和元素值，则返回True， 否则False。</li>
+</ul>
+<p>TensorFlow - tf.greater_equal 函数 &amp; torch.ge torch.gt</p>
+<ul>
+<li>逐元素比较input和other，是否input &gt; other。若两个张量有相同的形状和元素值，则返回True，否则False。</li>
+</ul>
+<p>TensorFlow - tf.norm 函数 &amp; torch.norm</p>
+<p>TensorFlow - tf.argmin 函数 &amp; torch.argmin</p>
+<p>TensorFlow - tf.gather_nd 函数 &amp;</p>
+<ul>
+<li><p>目前torch中自带的同类型函数只有torch.gather，用于处理指定一维度，无gather_nd的用法，但开源工具torchsample中则加入了类似的函数th_gather_nd，模仿tensorflow中的使用，详见：<br>torchsample推荐安装，有点类似于tf中的keras，提供高级api，减少开发时间，实用。</p>
+<p>Pytorch的高级训练，数据增强和实用程序(torchsample/Keras)</p>
+</li>
+</ul>
+<p>TensorFlow - tf.gather 函数 &amp; torch.gather</p>
+<ul>
+<li>根据索引从参数轴上收集切片.</li>
+</ul>
+<p>TensorFlow - tf.shape 函数 &amp; torch.size</p>
+<p>TensorFlow - tf.range 函数 &amp; torch.arange / torch.range</p>
+<p>TensorFlow - tf.stack 函数 &amp; torch.stack</p>
+<p>TensorFlow - tf.reduce_mean 函数 &amp; torch.mean</p>
+<p>TensorFlow - tf.cast 函数 &amp;</p>
+<ul>
+<li>torch中没有相似的类型转换函数，直接使用torch.FloatTensor()或data.float()类似的进行转换就可以了。</li>
+</ul>
+<p>TensorFlow - tf.count_nonzero 函数 &amp; torch.nonzero</p>
+<ul>
+<li>计算并输出各个维度上非０元素的个数。</li>
+</ul>
+<p>TensorFlow - tf.tile 函数 &amp; Tensor.repeat()</p>
+<p>Tensorflow tf.where &amp; torch.le / torch.lt</p>
+<p>Tensorflow tf.nn.in_top_k</p>
+<ul>
+<li><p>tensorflow    pytroch<br>tf.reshape(input, shape)    input.view()<br>tf.expand_dims(input, dim)    input.unsqueeze(dim) / input.view()<br>tf.squeeze(input, dim)    torch.squeeze(dim)/ input.view()<br>tf.gather(input1, input2)    input1[input2]<br>tf.tile(input, shape)    input.repeat(shape)<br>tf.boolean_mask(input, mask)    input[mask] #注意，mask是bool值，不是0,1的数值<br>tf.concat(input1, input2)    torch.cat(input1, input2)<br>tf.matmul()    torch.matmul()<br>tf.minium(input, min)    torch.clamp(input, max=min)<br>tf.equal(input1, input2)    torch.eq(input1, input2)/ input1 == input2<br>tf.logical_and(input1, input2)    input1 &amp; input2<br>tf.logical_not(input)    ~ input<br>tf.reduce_logsumexp(input, [dim])    torch.logsumexp(input, dim=dim)<br>tf.reduce_any(input, dim)    input.any(dim)<br>tf.reduce_mean(input)    torch.mean(input)<br>tf.reduce_sum(input)    input.sum()<br>tf.transpose(input)    input.t()<br>tf.softmax_cross_entroy_with_logits(logits, labels)    torch.nn.CrossEntropyLoss(logits, labels)</p>
+</li>
+<li><p>获取词向量：</p>
+</li>
+<li><p>tensorflow中: input_emb = tf.gather(tf.get_variable(“input_emb”, [num, embedding_size]), input)<br>pytorch中：1.embedding = nn.Embedding(num, embedding_size)，2.input_emb = embedding (input)<br>只是初始化embedding矩阵</p>
+</li>
+<li><p>tensorflow中: input_emb = tf.get_variable(“input_emb”, [num, embedding_size])<br>pytorch中：1.embedding = nn.Embedding(num, embedding_size)， 2.input_emb = embedding .weight</p>
+</li>
+<li><p>基本重构完成代码之后，检查代码以下方面：</p>
+<ol>
+<li>👌 初始化网络权重是否正确</li>
+<li>👌 如果有预训练模型，检查是否加载正确</li>
+<li>👌 检查优化器，整个任务是相同的学习率，还是说是不同层，设置了不同的学习率</li>
+<li>👌 如果数据预处理也需要改动，最好也检查一下预处理是否正确</li>
+</ol>
+</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41895190/article/details/89954394">https://blog.csdn.net/qq_41895190/article/details/89954394</a></p>
+<blockquote>
+<p>两个 tf 流程</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/tengge/p/6376073.html">https://www.cnblogs.com/tengge/p/6376073.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lcczzu/article/details/91449731">https://blog.csdn.net/lcczzu/article/details/91449731</a></li>
+</ol>
+</blockquote>
+<h2 id="常见的loss问题"><a href="#常见的loss问题" class="headerlink" title="常见的loss问题"></a>常见的loss问题</h2><h3 id="train-loss与test-loss结果分析"><a href="#train-loss与test-loss结果分析" class="headerlink" title="train loss与test loss结果分析"></a>train loss与test loss结果分析</h3><p>train loss 不断下降，test loss不断下降，说明网络仍在学习;</p>
+<p>train loss 不断下降，test loss趋于不变，说明网络过拟合;</p>
+<p>train loss 趋于不变，test loss不断下降，说明数据集100%有问题;</p>
+<p>train loss 趋于不变，test loss趋于不变，说明学习遇到瓶颈，需要减小学习率或批量数目;</p>
+<p>train loss 不断上升，test loss不断上升，说明网络结构设计不当，训练超参数设置不当，数据集经过清洗等问题。</p>
+<p>二，<br>这个比较长，比较完整 Loss和神经网络训练</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u011534057/article/details/51452564">https://blog.csdn.net/u011534057/article/details/51452564</a></p>
+<p>有1.梯度检验2.训练前检查，3.训练中监控4.首层可视化5.模型融合和优化等等等</p>
+<p>三，<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/38937343">https://www.zhihu.com/question/38937343</a></p>
+<p>四，<a target="_blank" rel="noopener" href="https://blog.csdn.net/u010911921/article/details/71079367">https://blog.csdn.net/u010911921/article/details/71079367</a></p>
+<p>原文地址：<a target="_blank" rel="noopener" href="http://blog.csdn.net/u010911921/article/details/71079367">http://blog.csdn.net/u010911921/article/details/71079367</a><br>这段在使用caffe的时候遇到了两个问题都是在训练的过程中loss基本保持常数值，特此记录一下。</p>
+<p>1.loss等于87.33不变<br>loss等于87.33这个问题是在对Inception-V3网络不管是fine-tuning还是train的时候遇到的，无论网络迭代多少次，网络的loss一直保持恒定。</p>
+<p>查阅相关资料以后发现是由于loss的最大值由FLT_MIN计算得到，FLT_MIN是其对应的自然对数正好是-87.3356，这也就对应上了loss保持87.3356了。</p>
+<p>这说明softmax在计算的过程中得到了概率值出现了零，由于softmax是用指数函数计算的，指数函数的值都是大于0的，所以应该是计算过程中出现了float溢出的异常，也就是出现了inf，nan等异常值导致softmax输出为0.</p>
+<p>当softmax之前的feature值过大时，由于softmax先求指数，会超出float的数据范围，成为inf。inf与其他任何数值的和都是inf，softmax在做除法时任何正常范围的数值除以inf都会变成0.然后求loss就出现了87.3356的情况。</p>
+<p>解决办法</p>
+<p>由于softmax输入的feature由两部分计算得到：一部分是输入数据，另一部分是各层的权值等组成</p>
+<p>减小初始化权重，以使得softmax的输入feature处于一个比较小的范围</p>
+<p>降低学习率，这样可以减小权重的波动范围</p>
+<p>如果有BN(batch normalization)层，finetune时最好不要冻结BN的参数，否则数据分布不一致时很容易使输出值变得很大(注意将batch_norm_param中的use_global_stats设置为false )。</p>
+<p>观察数据中是否有异常样本或异常label导致数据读取异常</p>
+<p>本文遇到的情况采用降低学习率的方法，learning rate设置为0.01或者原来loss的或者。</p>
+<p>2.loss保持0.69左右<br>采用VGG-16在做一个二分类问题,所以计算loss时等价与下面的公式：</p>
+<p>当p=0.5时，loss正好为0.693147，也就是训练过程中，无论如何调节网络都不收敛。最初的网络配置文件卷积层的参数如下所示：</p>
+<p>从VGG-16训练好的模型进行fine-tuning也不发生改变，当在网络中加入初始化参数和decay_mult以后再次训练网络开始收敛。</p>
+<p>但是具体是什么原因造成的，暂时还没有找到，难道是初始化参数的问题还是？</p>
+<p>参考资料<br><a target="_blank" rel="noopener" href="http://blog.csdn.net/jkfdqjjy/article/details/52268565?locationNum=14">http://blog.csdn.net/jkfdqjjy/article/details/52268565?locationNum=14</a></p>
+<p><a target="_blank" rel="noopener" href="https://groups.google.com/forum/#!topic/caffe-users/KEgrRlwXz9c">https://groups.google.com/forum/#!topic/caffe-users/KEgrRlwXz9c</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/68603783">https://www.zhihu.com/question/68603783</a></p>
+<p>loss一直不下降的原因有很多，可以从头到尾滤一遍： 1）数据的输入是否正常，data和label是否一致。 2）网络架构的选择，一般是越深越好，也分数据集。 并且用不用在大数据集上pre-train的参数也很重要的 3）loss 对不对。</p>
+<p>具体到语音，很多是把audio转成频谱图送给CNN训练。</p>
+<p>NIPS16 有个soundNet(torch的code)，语音分类的performance很高，我觉得可以用来初始化你的model 参数, 可以参考下。</p>
+<p>还有我见的3D-CNN 多用于视频，做audio 用3D 的工作比较少，倒是见过是用1维卷积做audio的</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u011534057/article/details/51452564/">https://blog.csdn.net/u011534057/article/details/51452564/</a></p>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">NephrenCake</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://nephrencake.gitee.io/2021/09/PyTorch-Part3/">https://nephrencake.gitee.io/2021/09/PyTorch-Part3/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://nephrencake.gitee.io" target="_blank">浅幽丶奈芙莲的个人博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/2021/09/PyTorch-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/%E4%BA%8Ced10.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/09/PyTorch-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/"><img class="prev-cover" src="/2021/09/PyTorch-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/%E4%BA%8Ced10.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">PyTorch-完结目录</div></div></a></div><div class="next-post pull-right"><a href="/2021/09/PyTorch-Part2/"><img class="next-cover" src="/2021/09/PyTorch-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/%E4%BA%8Ced10.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">PyTorch-Part2</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#PyTorch-Part3%E2%80%94%E2%80%94TensorFlow%E8%BD%ACPyTorch"><span class="toc-number">1.</span> <span class="toc-text">PyTorch-Part3——TensorFlow转PyTorch</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%AF%B9%E5%BA%94"><span class="toc-number">1.1.</span> <span class="toc-text">函数对应</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84loss%E9%97%AE%E9%A2%98"><span class="toc-number">1.2.</span> <span class="toc-text">常见的loss问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#train-loss%E4%B8%8Etest-loss%E7%BB%93%E6%9E%9C%E5%88%86%E6%9E%90"><span class="toc-number">1.2.1.</span> <span class="toc-text">train loss与test loss结果分析</span></a></li></ol></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 By NephrenCake</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">这里是浅幽丶奈芙莲的个人博客~</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> {preloader.endLoading()})</script><div class="js-pjax"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><canvas class="fireworks" mobile="true"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script></div></body></html>

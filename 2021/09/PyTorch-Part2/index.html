@@ -1,0 +1,892 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PyTorch-Part2 | 浅幽丶奈芙莲的个人博客</title><meta name="author" content="NephrenCake"><meta name="copyright" content="NephrenCake"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="Pytorch模型训练">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PyTorch-Part2">
+<meta property="og:url" content="https://nephrencake.gitee.io/2021/09/PyTorch-Part2/index.html">
+<meta property="og:site_name" content="浅幽丶奈芙莲的个人博客">
+<meta property="og:description" content="Pytorch模型训练">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://nephrencake.gitee.io/2021/09/PyTorch-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/%E4%BA%8Ced10.jpg">
+<meta property="article:published_time" content="2021-09-12T09:36:17.000Z">
+<meta property="article:modified_time" content="2021-10-26T15:14:07.638Z">
+<meta property="article:author" content="NephrenCake">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://nephrencake.gitee.io/2021/09/PyTorch-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/%E4%BA%8Ced10.jpg"><link rel="shortcut icon" href="/img/favicon.jpg"><link rel="canonical" href="https://nephrencake.gitee.io/2021/09/PyTorch-Part2/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}
+
+// https://stackoverflow.com/questions/16839698/jquery-getscript-alternative-in-native-javascript
+const getScript = url => new Promise((resolve, reject) => {
+  const script = document.createElement('script')
+  script.src = url
+  script.async = true
+  script.onerror = reject
+  script.onload = script.onreadystatechange = function() {
+    const loadState = this.readyState
+    if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+    script.onload = script.onreadystatechange = null
+    resolve()
+  }
+  document.head.appendChild(script)
+})</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-10-26 23:14:07'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><link rel="stylesheet" href="/css/background.css"><link rel="stylesheet" href="/css/mouse.css"><link rel="stylesheet" href="/css/scrollbar.css"><link rel="stylesheet" href="/css/font.css"><link rel="stylesheet" href="/css/iconfont.css"><meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="浅幽丶奈芙莲的个人博客" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">79</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">9</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/photo/"><i class="fa-fw fas fa-heart"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/2021/09/PyTorch-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/%E4%BA%8Ced10.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">浅幽丶奈芙莲的个人博客</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/photo/"><i class="fa-fw fas fa-heart"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">PyTorch-Part2</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-09-12T09:36:17.000Z" title="发表于 2021-09-12 17:36:17">2021-09-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-10-26T15:14:07.638Z" title="更新于 2021-10-26 23:14:07">2021-10-26</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/PyTorch/">PyTorch</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">13.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>55分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="PyTorch-Part2——Pytorch模型训练"><a href="#PyTorch-Part2——Pytorch模型训练" class="headerlink" title="PyTorch-Part2——Pytorch模型训练"></a>PyTorch-Part2——Pytorch模型训练</h1><p>[TOC]</p>
+<h2 id="数据-Data"><a href="#数据-Data" class="headerlink" title="数据(Data)"></a>数据(Data)</h2><h3 id="数据集划分"><a href="#数据集划分" class="headerlink" title="数据集划分"></a>数据集划分</h3><ul>
+<li><p>严谨的人工智能模型应用应当划分训练集(train set)、测试集(test set)和验证集(valid/dev set)三部分。</p>
+</li>
+<li><p>训练集就用来训练模型，测试集是用来估计模型在实际应用中的泛化能力，而验证集是用于模型选择和调参的。</p>
+<p>在研究过程中，验证集和测试集作用都是一样的，只是对模型的泛化能力进行一个观测。</p>
+<p>而当在工程应用中，由于尽可能地用尽所有数据集并迭代，要防止模型过拟合到测试集上，要有验证集对其进行约束。</p>
+</li>
+<li><p>可以使用 <code>train : test : valid = 8 : 1 : 1</code> 这个比例。</p>
+</li>
+</ul>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u011995719/article/details/77451213">https://blog.csdn.net/u011995719/article/details/77451213</a></p>
+</blockquote>
+<h3 id="PyTorch读取数据集"><a href="#PyTorch读取数据集" class="headerlink" title="PyTorch读取数据集"></a>PyTorch读取数据集</h3><ul>
+<li><p>自定义数据集要继承 <code>Dataset</code> 类，并重写 <code>__getitem__()</code> 和 <code>__len__()</code> 方法</p>
+<ul>
+<li><code>__init__()</code>：生成数据的路径列表，尤其对于非结构化数据集，不能直接将所有数据读入内存。</li>
+<li><code>__getitem__()</code>：由 DataLoader 进行调用，返回相应索引的数据，同时进行一系列的数据增强扩充数据集的多样性。</li>
+<li><code>__len__()</code>：提供数据集长度的查询。</li>
+</ul>
+</li>
+<li><p>读取数据流程：</p>
+<ol>
+<li><p>在 MyDataset 中初始化图片路径和标签、数据增强方式</p>
+</li>
+<li><p>在 DataLoader 中初始化 num_workers、shuffle、batch_size、sampler、batch_sampler、collate_fn。即多进程读取数据、采样与拼接方法。</p>
+<p>在 sampler 中会调用到 MyDataset 的 <code>__len__()</code> 方法。</p>
+</li>
+<li><p>在 iteration 进行时，DataLoder 才读取一个 batch 的图片数据。由 batch_sampler 与 collate_fn 确定一个 batch 的 indices 并进行拼接。</p>
+<p>在 collate_fn 中会调用 MyDataset 类中的 <code>__getitem__()</code> 方法。</p>
+</li>
+</ol>
+</li>
+<li><p>在训练时，一般要对图片进行以下操作：</p>
+<ol>
+<li>随机裁剪</li>
+<li>ToTensor：包含①[h, w, c] -&gt; [c, h, w]；② /255：归一化至 0~1 区间。</li>
+<li>数据标准化(减均值，除以标准差)</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> Dataset</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyDataset</span>(<span class="params">Dataset</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, txt_path, transform=<span class="literal">None</span>, target_transform=<span class="literal">None</span></span>):</span></span><br><span class="line">        fh = <span class="built_in">open</span>(txt_path, <span class="string">&#x27;r&#x27;</span>)</span><br><span class="line">        imgs = []</span><br><span class="line">        <span class="keyword">for</span> line <span class="keyword">in</span> fh:</span><br><span class="line">            line = line.rstrip()</span><br><span class="line">            words = line.split()</span><br><span class="line">            imgs.append((words[<span class="number">0</span>], <span class="built_in">int</span>(words[<span class="number">1</span>])))</span><br><span class="line"></span><br><span class="line">        self.imgs = imgs  <span class="comment"># 最主要就是要生成这个list， 然后DataLoader中给index，通过getitem读取图片数据</span></span><br><span class="line">        self.transform = transform</span><br><span class="line">        self.target_transform = target_transform</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getitem__</span>(<span class="params">self, index</span>):</span></span><br><span class="line">        fn, label = self.imgs[index]</span><br><span class="line">        img = Image.<span class="built_in">open</span>(fn).convert(<span class="string">&#x27;RGB&#x27;</span>)  <span class="comment"># 像素值 0~255，在transfrom.totensor会除以255，使像素值变成 0~1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> self.transform <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            img = self.transform(img)  <span class="comment"># 在这里做transform，转为tensor等等</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> img, label</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__len__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">len</span>(self.imgs)</span><br></pre></td></tr></table></figure>
+<h3 id="transforms-的二十二个方法-干货"><a href="#transforms-的二十二个方法-干货" class="headerlink" title="transforms 的二十二个方法(干货)"></a>transforms 的二十二个方法(干货)</h3><ol>
+<li>裁剪——Crop<ul>
+<li>中心裁剪：<code>transforms.CenterCrop(size)</code><ul>
+<li><strong>size-</strong> (sequence or int)，若为 sequence，则为(h,w)，若为 int，则(size,size)</li>
+</ul>
+</li>
+<li>随机裁剪：<code>transforms.RandomCrop(size, padding=None, pad_if_needed=False, fill=0, padding_mode=&#39;constant&#39;)</code><ul>
+<li><strong>size-</strong> (sequence or int)，若为 sequence，则为(h,w)，若为 int，则(size,size)</li>
+<li><strong>padding-</strong>(sequence or int, optional)，当为 int时， 例如padding=a时，图片上下左右均填充a个像素；当为tupple时，(a, b)，则左右填充a个像素，上下填充b个像素；(a, b, c, d)， 则左填充a个像素，下填充b个像素，右填充c个像素, 上填充d个像素。</li>
+<li><strong>fill-</strong> (int or tuple)，填充的值（仅当padding_mode=’constant’）。int 时，各通道均填充该值，当长度为 3 的 tuple 时，表示 RGB 通道需要填充的值。</li>
+<li><strong>padding_mode-</strong> 填充模式：1. constant，常量。2. edge，按照图片边缘的像素值来填充。3. reflect，镜像填充，最后一个像素不镜像。 4. symmetric，最后一个像素镜像。</li>
+</ul>
+</li>
+<li>随机长宽比裁剪：<code>transforms.RandomResizedCrop(size, scale=(0.08, 1.0), ratio=(0.75, 1.33), interpolation=2) </code><ul>
+<li><strong>size-</strong> 所需裁剪图片尺寸。</li>
+<li><strong>scale-</strong> 随机裁剪面积比例，默认scale=(0.08, 1.0)，表示随机 crop 出来的图片会在的 0.08倍至 1 倍之间。</li>
+<li><strong>ratio-</strong> 随机长宽比设置，默认(3/4, 4/3)</li>
+<li><strong>interpolation</strong>- 插值的方法，默认为双线性插值(PIL.Image.BILINEAR)</li>
+</ul>
+</li>
+<li>上下左右中心裁剪：<code>transforms.FiveCrop(size)</code><ul>
+<li><strong>size-</strong> (sequence or int)，若为 sequence,则为(h,w)，若为 int，则(size,size)</li>
+</ul>
+</li>
+<li>上下左右中心裁剪后翻转：<code>transforms.TenCrop(size, vertical_flip=False)</code><ul>
+<li><strong>size-</strong> (sequence or int)，若为 sequence,则为(h,w)，若为 int，则(size,size)</li>
+<li><strong>vertical_flip</strong>- (bool)，是否垂直翻转，默认为 flase，即默认为水平翻转</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>翻转和旋转——Flip and Rotation<ul>
+<li>依概率 p 水平翻转：<code>transforms.RandomHorizontalFlip(p=0.5)</code><ul>
+<li><strong>p-</strong> 概率，默认值为 0.5</li>
+</ul>
+</li>
+<li>依概率 p 垂直翻转：<code>transforms.RandomVerticalFlip(p=0.5)</code><ul>
+<li><strong>p-</strong> 概率，默认值为 0.5</li>
+</ul>
+</li>
+<li>随机旋转：<code>transforms.RandomRotation(degrees, resample=False, expand=False, center=None)</code><ul>
+<li><strong>degress</strong>- (sequence or float or int) ，若为 int，则在（-int，+int）之间随机旋转，若为 sequence，则在 s[0]~s[1] 度之间随机旋转</li>
+<li><strong>resample</strong>- 重采样方法</li>
+<li><strong>expand</strong>- 是否扩大图片，以保存图片原有信息</li>
+<li><strong>center</strong>- 旋转中心，(0, 0)为左上角。默认为图片中心</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>图像变换<ul>
+<li>resize：<code>transforms.Resize(size, interpolation=2)</code><ul>
+<li><strong>size</strong>- If size is an int, if height &gt; width, then image will be rescaled to (size * height / width, size)，所以建议 size 设定为 h*w</li>
+<li><strong>interpolation</strong>- 插值方法选择，默认为 PIL.Image.BILINEAR</li>
+</ul>
+</li>
+<li>标准化：<code>transforms.Normalize(mean, std)</code><ul>
+<li>对数据按通道进行标准化，即先减均值，再除以标准差，注意是 [h, w, c]</li>
+</ul>
+</li>
+<li>转为 tensor，并归一化至[0-1]：<code>transforms.ToTensor</code><ul>
+<li>归一化至[0-1]是直接除以 255，若自己的 ndarray 数据尺度有变化，则需要自行修改。</li>
+</ul>
+</li>
+<li>填充图像边缘：<code>transforms.Pad(padding, fill=0, padding_mode=&#39;constant&#39;)</code><ul>
+<li>同 随机裁剪 RandomCrop 的参数</li>
+</ul>
+</li>
+<li>修改亮度、对比度和饱和度：<code>transforms.ColorJitter(brightness=0, contrast=0, saturation=0, hue=0)</code><ul>
+<li><strong>brightness</strong>- 亮度调整因子。当为a时，从 max((0, 1-a), 1+a) 中随机选择；当为(a, b)时，从[a, b]中随机选择。</li>
+<li><strong>constant</strong>- 对比度参数，同brightness</li>
+<li><strong>saturation</strong>- 饱和度参数，同brightness</li>
+<li><strong>hue</strong>- 色相参数，当为a时，从[-a, a]中选择参数，注：0 &lt;= a &lt;= 0.5；当为(a, b)时，从[a, b]中选择参数，注：-0.5 &lt;= a &lt;= b &lt;= 0.5</li>
+</ul>
+</li>
+<li>转灰度图：<code>transforms.Grayscale(num_output_channels=1)</code><ul>
+<li><strong>num_output_channels</strong>- 输出通道数，只能设置1或者3</li>
+</ul>
+</li>
+<li>线性变换：<code>transforms.LinearTransformation(transformation_matrix)</code><ul>
+<li>对矩阵做线性变化，可用于白化处理。 whitening: zero-center the data, compute the data covariance matrix</li>
+</ul>
+</li>
+<li>仿射变换：<code>transforms.RandomAffine(degrees, translate=None, scale=None, shear=None, resample=False, fillcolor=0)</code><ul>
+<li><strong>degrees</strong>- 旋转角度设置</li>
+<li><strong>translate</strong>- 平移区间设置如(a, b), a设置宽(width), b设置高(height) 。图像在宽维度的平移区间为 -img_width * a &lt; dx &lt; img_width * a</li>
+<li><strong>scale</strong>- 缩放比例（以面积为单位）</li>
+<li><strong>file_color</strong>- 填充颜色设置</li>
+<li><strong>share</strong>- 错切角度设置，有水平错切和垂直错切，若为a，则仅在x轴错切，错切角度为(-a, a)之间；若为(a, b), 则a设置x轴角度，b设置y的角度；若为(a, b, c, d), 则a，b设置x轴度，c， d设置y角度</li>
+<li><strong>resample</strong>- 重采样方式有NEAREST、BILINEAR、BICUBIC</li>
+</ul>
+</li>
+<li>依概率 p 转为灰度图：<code>transforms.RandomGrayscale(p=0.1)</code><ul>
+<li><strong>p</strong>- 概率值，图像被转换为灰度图的概率</li>
+</ul>
+</li>
+<li>将数据转换为 PILImage：<code>transforms.ToPILImage(mode=None)</code><ul>
+<li><strong>mode</strong>- 为 None 时，为 1 通道， mode=3 通道默认转换为 RGB，4 通道默认转换为 RGBA</li>
+</ul>
+</li>
+<li>随机遮挡：<code>transforms.RandomErasing(p=0.5, scale=(0.02, 0.33), ratio=(0.3, 3.3), value=0, inplace=False)</code><ul>
+<li><strong>p</strong>- 概率值</li>
+<li><strong>scale</strong>- 遮挡区域与输入图像的比例范围</li>
+<li><strong>ratio</strong>- 遮挡区域长宽比</li>
+<li><strong>value</strong>- 设置遮挡区域的像素值，(R, G, B) or (Gray), value为字符串(不一定非要random)时，随机填充像素值。</li>
+<li><strong>inplace</strong>- 改变自身</li>
+</ul>
+</li>
+<li>transforms.Lambda：Apply a user-defined lambda as a transform</li>
+</ul>
+</li>
+<li>对 transforms 操作，使数据增强更灵活<ul>
+<li>transforms.RandomChoice(transforms)，从给定的一系列 transforms 中选一个进行操作</li>
+<li>transforms.RandomApply(transforms, p=0.5)，给一个 transform 加上概率，依概率进行操作</li>
+<li>transforms.RandomOrder，将 transforms 中的操作随机打乱</li>
+</ul>
+</li>
+<li>自定义 transforms <ul>
+<li>仅接收一个参数，返回一个参数</li>
+<li>注意上下游的输出与输入</li>
+</ul>
+</li>
+</ol>
+<h3 id="计算-Normalize-所用均值和方差"><a href="#计算-Normalize-所用均值和方差" class="headerlink" title="计算 Normalize 所用均值和方差"></a>计算 Normalize 所用均值和方差</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    随机挑选CNum张图片，进行按通道计算均值mean和标准差std</span></span><br><span class="line"><span class="string">    先将像素从0～255归一化至 0-1 再计算</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">train_txt_path = os.path.join(<span class="string">&quot;..&quot;</span>, <span class="string">&quot;..&quot;</span>, <span class="string">&quot;Data/train.txt&quot;</span>)</span><br><span class="line">CNum = <span class="number">2000</span>  <span class="comment"># 挑选多少图片进行计算</span></span><br><span class="line"></span><br><span class="line">img_h, img_w = <span class="number">32</span>, <span class="number">32</span></span><br><span class="line">imgs = np.zeros([img_w, img_h, <span class="number">3</span>, <span class="number">1</span>])</span><br><span class="line">means, stdevs = [], []</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(train_txt_path, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    lines = f.readlines()</span><br><span class="line">    random.shuffle(lines)  <span class="comment"># shuffle , 随机挑选图片</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(CNum):</span><br><span class="line">        img_path = lines[i].rstrip().split()[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">        img = cv2.imread(img_path)</span><br><span class="line">        img = cv2.resize(img, (img_h, img_w))</span><br><span class="line"></span><br><span class="line">        img = img[:, :, :, np.newaxis]</span><br><span class="line">        imgs = np.concatenate((imgs, img), axis=<span class="number">3</span>)</span><br><span class="line">        print(i)</span><br><span class="line"></span><br><span class="line">imgs = imgs.astype(np.float32) / <span class="number">255.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>):</span><br><span class="line">    pixels = imgs[:, :, i, :].ravel()  <span class="comment"># 拉成一行</span></span><br><span class="line">    means.append(np.mean(pixels))</span><br><span class="line">    stdevs.append(np.std(pixels))</span><br><span class="line"></span><br><span class="line">means.reverse()  <span class="comment"># BGR --&gt; RGB</span></span><br><span class="line">stdevs.reverse()</span><br><span class="line"></span><br><span class="line">print(<span class="string">&quot;normMean = &#123;&#125;&quot;</span>.<span class="built_in">format</span>(means))</span><br><span class="line">print(<span class="string">&quot;normStd = &#123;&#125;&quot;</span>.<span class="built_in">format</span>(stdevs))</span><br><span class="line">print(<span class="string">&#x27;transforms.Normalize(normMean = &#123;&#125;, normStd = &#123;&#125;)&#x27;</span>.<span class="built_in">format</span>(means, stdevs))</span><br></pre></td></tr></table></figure>
+<h2 id="模型-Model"><a href="#模型-Model" class="headerlink" title="模型(Model)"></a>模型(Model)</h2><h3 id="模型定义"><a href="#模型定义" class="headerlink" title="模型定义"></a>模型定义</h3><ul>
+<li>三个要点<ul>
+<li>必须继承 <code>nn.Module</code> 这个类，要让 PyTorch 知道这个类是一个 Module。</li>
+<li>在 <code>__init__(self)</code> 中设置好需要的隐藏层(如 conv、pooling、Linear、BatchNorm等)。</li>
+<li>在 <code>forward(self, x)</code> 中用定义好的网络结构进行组装，定义前馈过程。</li>
+</ul>
+</li>
+<li>可以使用类似 <code>_make_layer()</code> 类似的方法来辅助自定义网络层。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> .BasicModule <span class="keyword">import</span> BasicModule</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"><span class="keyword">from</span> torch.nn <span class="keyword">import</span> functional <span class="keyword">as</span> F</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ResidualBlock</span>(<span class="params">nn.Module</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    实现子module: Residual Block</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, inchannel, outchannel, stride=<span class="number">1</span>, shortcut=<span class="literal">None</span></span>):</span></span><br><span class="line">        <span class="built_in">super</span>(ResidualBlock, self).__init__()</span><br><span class="line">        self.left = nn.Sequential(</span><br><span class="line">            nn.Conv2d(inchannel, outchannel, <span class="number">3</span>, stride, <span class="number">1</span>, bias=<span class="literal">False</span>),</span><br><span class="line">            nn.BatchNorm2d(outchannel),</span><br><span class="line">            nn.ReLU(inplace=<span class="literal">True</span>),</span><br><span class="line">            nn.Conv2d(outchannel, outchannel, <span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>, bias=<span class="literal">False</span>),</span><br><span class="line">            nn.BatchNorm2d(outchannel))</span><br><span class="line">        self.right = shortcut</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, x</span>):</span></span><br><span class="line">        out = self.left(x)</span><br><span class="line">        residual = x <span class="keyword">if</span> self.right <span class="keyword">is</span> <span class="literal">None</span> <span class="keyword">else</span> self.right(x)</span><br><span class="line">        out += residual</span><br><span class="line">        <span class="keyword">return</span> F.relu(out)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ResNet34</span>(<span class="params">BasicModule</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    实现主module：ResNet34</span></span><br><span class="line"><span class="string">    ResNet34包含多个layer，每个layer又包含多个Residual block</span></span><br><span class="line"><span class="string">    用子module来实现Residual block，用_make_layer函数来实现layer</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, num_classes=<span class="number">2</span></span>):</span></span><br><span class="line">        <span class="built_in">super</span>(ResNet34, self).__init__()</span><br><span class="line">        self.model_name = <span class="string">&#x27;resnet34&#x27;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 前几层: 图像转换</span></span><br><span class="line">        self.pre = nn.Sequential(</span><br><span class="line">            nn.Conv2d(<span class="number">3</span>, <span class="number">64</span>, <span class="number">7</span>, <span class="number">2</span>, <span class="number">3</span>, bias=<span class="literal">False</span>),</span><br><span class="line">            nn.BatchNorm2d(<span class="number">64</span>),</span><br><span class="line">            nn.ReLU(inplace=<span class="literal">True</span>),</span><br><span class="line">            nn.MaxPool2d(<span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 重复的layer，分别有3，4，6，3个residual block</span></span><br><span class="line">        self.layer1 = self._make_layer(<span class="number">64</span>, <span class="number">128</span>, <span class="number">3</span>)</span><br><span class="line">        self.layer2 = self._make_layer(<span class="number">128</span>, <span class="number">256</span>, <span class="number">4</span>, stride=<span class="number">2</span>)</span><br><span class="line">        self.layer3 = self._make_layer(<span class="number">256</span>, <span class="number">512</span>, <span class="number">6</span>, stride=<span class="number">2</span>)</span><br><span class="line">        self.layer4 = self._make_layer(<span class="number">512</span>, <span class="number">512</span>, <span class="number">3</span>, stride=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 分类用的全连接</span></span><br><span class="line">        self.fc = nn.Linear(<span class="number">512</span>, num_classes)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_make_layer</span>(<span class="params">self, inchannel, outchannel, block_num, stride=<span class="number">1</span></span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        构建layer,包含多个residual block</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        shortcut = nn.Sequential(</span><br><span class="line">            nn.Conv2d(inchannel, outchannel, <span class="number">1</span>, stride, bias=<span class="literal">False</span>),</span><br><span class="line">            nn.BatchNorm2d(outchannel))</span><br><span class="line"></span><br><span class="line">        layers = []</span><br><span class="line">        layers.append(ResidualBlock(inchannel, outchannel, stride, shortcut))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, block_num):</span><br><span class="line">            layers.append(ResidualBlock(outchannel, outchannel))</span><br><span class="line">        <span class="keyword">return</span> nn.Sequential(*layers)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, x</span>):</span></span><br><span class="line">        x = self.pre(x)</span><br><span class="line"></span><br><span class="line">        x = self.layer1(x)</span><br><span class="line">        x = self.layer2(x)</span><br><span class="line">        x = self.layer3(x)</span><br><span class="line">        x = self.layer4(x)</span><br><span class="line"></span><br><span class="line">        x = F.avg_pool2d(x, <span class="number">7</span>)</span><br><span class="line">        x = x.view(x.size(<span class="number">0</span>), -<span class="number">1</span>)  <span class="comment"># 按batch_size展平</span></span><br><span class="line">        <span class="keyword">return</span> self.fc(x)</span><br></pre></td></tr></table></figure>
+<h3 id="Sequential"><a href="#Sequential" class="headerlink" title="Sequential"></a>Sequential</h3><ul>
+<li>可以用 list 或者 OrderedDict 进行网络的堆叠。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Example of using Sequential</span></span><br><span class="line">model = nn.Sequential(</span><br><span class="line">    nn.Conv2d(<span class="number">1</span>, <span class="number">20</span>, <span class="number">5</span>),</span><br><span class="line">    nn.ReLU(),</span><br><span class="line">    nn.Conv2d(<span class="number">20</span>, <span class="number">64</span>, <span class="number">5</span>),</span><br><span class="line">    nn.ReLU()</span><br><span class="line">)</span><br><span class="line"><span class="comment"># Example of using Sequential with OrderedDict</span></span><br><span class="line">model = nn.Sequential(OrderedDict([</span><br><span class="line">    (<span class="string">&#x27;conv1&#x27;</span>, nn.Conv2d(<span class="number">1</span>, <span class="number">20</span>, <span class="number">5</span>)),</span><br><span class="line">    (<span class="string">&#x27;relu1&#x27;</span>, nn.ReLU()),</span><br><span class="line">    (<span class="string">&#x27;conv2&#x27;</span>, nn.Conv2d(<span class="number">20</span>, <span class="number">64</span>, <span class="number">5</span>)),</span><br><span class="line">    (<span class="string">&#x27;relu2&#x27;</span>, nn.ReLU())</span><br><span class="line">]))</span><br></pre></td></tr></table></figure>
+<h3 id="权值初始化"><a href="#权值初始化" class="headerlink" title="权值初始化"></a>权值初始化</h3><h4 id="权值初始化流程"><a href="#权值初始化流程" class="headerlink" title="权值初始化流程"></a>权值初始化流程</h4><ul>
+<li>初始化流程<ul>
+<li>第一步，先设定什么层用什么初始化方法，初始化方法在 torch.nn.init 中给出；</li>
+<li>第二步，实例化一个模型之后，执行该函数，即可完成初始化。</li>
+</ul>
+</li>
+<li><code>named_children()</code>和<code>named_modules()</code>的区别：<a target="_blank" rel="noopener" href="https://blog.csdn.net/watermelon1123/article/details/98036360">https://blog.csdn.net/watermelon1123/article/details/98036360</a></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义权值初始化</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">initialize_weights</span>(<span class="params">self</span>):</span></span><br><span class="line">    <span class="keyword">for</span> m <span class="keyword">in</span> self.modules():</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">isinstance</span>(m, nn.Conv2d):</span><br><span class="line">            torch.nn.init.xavier_normal_(m.weight.data)</span><br><span class="line">            <span class="keyword">if</span> m.bias <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">                m.bias.data.zero_()</span><br><span class="line">        <span class="keyword">elif</span> <span class="built_in">isinstance</span>(m, nn.BatchNorm2d):</span><br><span class="line">            m.weight.data.fill_(<span class="number">1</span>)</span><br><span class="line">            m.bias.data.zero_()</span><br><span class="line">        <span class="keyword">elif</span> <span class="built_in">isinstance</span>(m, nn.Linear):</span><br><span class="line">            torch.nn.init.normal_(m.weight.data, <span class="number">0</span>, <span class="number">0.01</span>)</span><br><span class="line">            m.bias.data.zero_()</span><br></pre></td></tr></table></figure>
+<h4 id="权值初始化的十种方法-干货"><a href="#权值初始化的十种方法-干货" class="headerlink" title="权值初始化的十种方法(干货)"></a>权值初始化的十种方法(干货)</h4><ol>
+<li>Xavier 均匀分布：<code>torch.nn.init.xavier_uniform_(tensor, gain=1)</code><ul>
+<li>xavier 初始化方法中服从均匀分布 U(−a,a) ，分布的参数 a = gain * sqrt(6/fan_in+fan_out)。也称为 Glorot initialization。</li>
+<li><strong>gain</strong>- 增益的大小是依据激活函数类型来设定。</li>
+<li>eg：nn.init.xavier_uniform_(w, gain=nn.init.calculate_gain(‘relu’))</li>
+</ul>
+</li>
+<li>Xavier 正态分布：<code>torch.nn.init.xavier_normal_(tensor, gain=1)</code><ul>
+<li>xavier 初始化方法中服从正态分布，mean=0,std = gain * sqrt(2/fan_in + fan_out)</li>
+<li>kaiming 初始化方法，论文在《 Delving deep into rectifiers: Surpassing human-level performance on ImageNet classification》，公式推导同样从“方差一致性”出法，kaiming是针对 xavier 初始化方法在 relu 这一类激活函数表现不佳而提出的改进，详细可以参看论文。</li>
+</ul>
+</li>
+<li>kaiming 均匀分布：<code>torch.nn.init.kaiming_uniform_(tensor, a=0, mode=&#39;fan_in&#39;, nonlinearity=&#39;leaky_relu&#39;)</code><ul>
+<li>此为均匀分布，U～（-bound, bound）, bound = sqrt(6/(1+a^2)*fan_in)。其中，a 为激活函数的负半轴的斜率，relu 是 0。</li>
+<li><strong>mode</strong>- 可选为 fan_in 或 fan_out, fan_in 使正向传播时，方差一致; fan_out 使反向传播时，方差一致</li>
+<li><strong>nonlinearity</strong>- 可选 relu 和 leaky_relu ，默认值为 。 leaky_relu</li>
+<li>eg：nn.init.kaiming_uniform_(w, mode=’fan_in’, nonlinearity=’relu’)</li>
+</ul>
+</li>
+<li>kaiming 正态分布：<code>torch.nn.init.kaiming_normal_(tensor, a=0, mode=&#39;fan_in&#39;, nonlinearity=&#39;leaky_relu&#39;)</code><ul>
+<li>此为 0 均值的正态分布，N～ (0,std)，其中 std = sqrt(2/(1+a^2)*fan_in) </li>
+<li><strong>a</strong>- 激活函数的负半轴的斜率，relu 是 0</li>
+<li><strong>mode</strong>- 可选为 fan_in 或 fan_out。fan_in 使正向传播时，方差一致；fan_out 使反向传播时，方差一致</li>
+<li><strong>nonlinearity</strong>- 可选 relu 和 leaky_relu ，默认值为 leaky_relu。</li>
+<li>eg：nn.init.kaiming_normal_(w, mode=’fan_out’, nonlinearity=’relu’)</li>
+</ul>
+</li>
+<li>均匀分布初始化：<code>torch.nn.init.uniform_(tensor, a=0, b=1)</code><ul>
+<li>使值服从均匀分布 U(a,b)</li>
+</ul>
+</li>
+<li>正态分布初始化：<code>torch.nn.init.normal_(tensor, mean=0, std=1)</code><ul>
+<li>使值服从正态分布 N(mean, std)，默认值为 0，1</li>
+</ul>
+</li>
+<li>常数初始化：<code>torch.nn.init.constant_(tensor, val)</code><ul>
+<li>使值为常数 val nn.init.constant_(w, 0.3)</li>
+</ul>
+</li>
+<li>单位矩阵初始化：<code>torch.nn.init.eye_(tensor)</code><ul>
+<li>将二维 tensor 初始化为单位矩阵（the identity matrix）</li>
+</ul>
+</li>
+<li>正交初始化：<code>torch.nn.init.orthogonal_(tensor, gain=1)</code><ul>
+<li>使得 tensor 是正交的，论文:Exact solutions to the nonlinear dynamics of learning in deep linear neural networks” - Saxe, A. et al. (2013)</li>
+</ul>
+</li>
+<li>稀疏初始化：<code>torch.nn.init.sparse_(tensor, sparsity, std=0.01)</code><ul>
+<li>从正态分布 N～（0. std）中进行稀疏化，使每一个 column 有一部分为 0</li>
+<li><strong>sparsity</strong>- 每一个 column 稀疏的比例，即为 0 的比例</li>
+<li>eg：nn.init.sparse_(w, sparsity=0.1)</li>
+</ul>
+</li>
+<li>计算增益：<code>torch.nn.init.calculate_gain(nonlinearity, param=None)</code></li>
+</ol>
+<blockquote>
+<p>其实，在创建网络实例的过程中, 一旦调用 nn.Conv2d 的时候就会有对权值进行初始化。</p>
+<p>在 PyTorch1.0 版本后，Conv2d 改用了 <code>kaiming_uniform_()</code> 进行初始化，可以在 <code>torch/nn/modules/conv.py</code> 中的 _ConvNd 类中的函数 <code>reset_parameters()</code> 中看到初始化方式。</p>
+</blockquote>
+<h3 id="模型加载与保存-Finetune"><a href="#模型加载与保存-Finetune" class="headerlink" title="模型加载与保存 Finetune"></a>模型加载与保存 Finetune</h3><ul>
+<li>模型 Finetune 权值初始化：<ol>
+<li>保存模型，拥有一个预训练模型</li>
+<li>加载模型，把预训练模型中的权值取出来</li>
+<li>初始化，将网络的权重用预训练模型初始化</li>
+</ol>
+</li>
+<li>官方文档中介绍了两种保存模型的方法，一种是保存整个模型，另外一种是仅保存模型参数（官方推荐用这种方法）</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 创建 net</span></span><br><span class="line">net = Net()</span><br><span class="line"><span class="comment"># 2. 获取已创建 net 的 state_dict</span></span><br><span class="line">net_state_dict = net.state_dict()</span><br><span class="line"><span class="comment"># 3. 加载模型，这里只是加载模型的参数</span></span><br><span class="line">pretrained_dict = torch.load(<span class="string">&#x27;net_params.pkl&#x27;</span>)</span><br><span class="line"><span class="comment"># 4. 将 pretrained_dict 里不属于 net_state_dict 的键剔除掉</span></span><br><span class="line">pretrained_dict_1 = &#123;k: v <span class="keyword">for</span> k, v <span class="keyword">in</span> pretrained_dict.items() <span class="keyword">if</span> k <span class="keyword">in</span> net_state_dict&#125;</span><br><span class="line"><span class="comment"># 5. 用预训练模型的参数字典 对 新模型的参数字典 net_state_dict 进行更新</span></span><br><span class="line">net_state_dict.update(pretrained_dict_1)</span><br><span class="line"><span class="comment"># 6. 将更新了参数的字典 “放”回到网络中</span></span><br><span class="line">net.load_state_dict(net_state_dict)</span><br><span class="line"><span class="comment"># 7. 将网络的参数保存下来</span></span><br><span class="line">torch.save(net.state_dict(), <span class="string">&#x27;net_params.pkl&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="不同层设置不同的学习率"><a href="#不同层设置不同的学习率" class="headerlink" title="不同层设置不同的学习率"></a>不同层设置不同的学习率</h3><ul>
+<li>在利用 pre-trained model 的参数做初始化之后，我们可能想让 fc 层更新相对快一些，而希望前面的权值更新小一些，这就可以通过为不同的层设置不同的学习率来达到此目的。</li>
+<li>为不同层设置不同的学习率，主要通过优化器对多个参数组进行设置不同的参数。所以，只需要将原始的参数组，划分成两个，甚至更多的参数组，然后分别进行设置学习率。</li>
+<li>这里将原始参数“切分”成 fc3 层参数和其余参数，为 fc3 层设置更大的学习率。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">lr_init: <span class="built_in">float</span> = <span class="number">0.001</span></span><br><span class="line">    </span><br><span class="line"><span class="comment"># 将fc3层的参数从原始网络参数中剔除</span></span><br><span class="line">ignored_params = <span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">id</span>, net.fc3.parameters()))  <span class="comment"># 返回的是 parameters 的内存地址</span></span><br><span class="line">base_params = <span class="built_in">filter</span>(<span class="keyword">lambda</span> p: <span class="built_in">id</span>(p) <span class="keyword">not</span> <span class="keyword">in</span> ignored_params, net.parameters())</span><br><span class="line"></span><br><span class="line"><span class="comment"># 为fc3层设置需要的学习率</span></span><br><span class="line">optimizer = optim.SGD([</span><br><span class="line">    &#123;<span class="string">&#x27;params&#x27;</span>: base_params&#125;,</span><br><span class="line">    &#123;<span class="string">&#x27;params&#x27;</span>: net.fc3.parameters(), <span class="string">&#x27;lr&#x27;</span>: lr_init*<span class="number">10</span>&#125;</span><br><span class="line">],  lr_init, momentum=<span class="number">0.9</span>, weight_decay=<span class="number">1e-4</span>)</span><br><span class="line"></span><br><span class="line">criterion = nn.CrossEntropyLoss()                                                   <span class="comment"># 选择损失函数</span></span><br><span class="line">scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=<span class="number">50</span>, gamma=<span class="number">0.1</span>)     <span class="comment"># 设置学习率下降策略</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>挑选出特定的层的机制是利用内存地址作为过滤条件，将需要单独设定的部分参数从总的参数中剔除。<ul>
+<li><code>net.fc3.parameters()</code> 是一个&lt;generator object parameters at 0x11b63bf00&gt;</li>
+<li><code>ignored_params</code> 是包含 net.fc3 中 weight、bias 两者对应参数的内存地址列表</li>
+<li><code>base_params</code> 是一个 list，每个元素是一个 Parameter 类，其中剔除了 net.fc3 的 weight、bias</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><strong>冻结权重</strong>与<strong>优化器仅传入部分参数</strong>两者是等价的。</p>
+<p>个人认为：1. 用requires_grad=False会提高内存优化，因为不需要保存梯度。2. 仅传入优化器可以提高运行速度，因为不用对部分参数进行计算</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/answer3664/article/details/108493753">https://blog.csdn.net/answer3664/article/details/108493753</a></p>
+</blockquote>
+<h2 id="损失函数-Loss-Function"><a href="#损失函数-Loss-Function" class="headerlink" title="损失函数(Loss Function)"></a>损失函数(Loss Function)</h2><h3 id="PyTorch-的十七个损失函数-干货"><a href="#PyTorch-的十七个损失函数-干货" class="headerlink" title="PyTorch 的十七个损失函数(干货)"></a>PyTorch 的十七个损失函数(干货)</h3><ul>
+<li>训练网络的过程，是不断优化网络权值使得损失函数值最小化的过程。</li>
+</ul>
+<ol>
+<li><p>L1loss：<code>torch.nn.L1Loss(size_average=None, reduce=None)</code></p>
+<ul>
+<li><p>计算 output 和 target 之差的绝对值</p>
+<img src="/2021/09/PyTorch-Part2/image-20210913142253796.png" alt="image-20210913142253796" style="zoom:67%;">
+</li>
+<li><p><strong>reduce</strong>(bool)- 返回值是否为标量，默认为 True</p>
+<p><strong>size_average</strong>(bool)- 当 reduce=True 时有效。为 True 时，返回的 loss 为平均值；为 False时，返回的各样本的 loss 之和</p>
+</li>
+</ul>
+</li>
+<li><p>MSELoss：<code>torch.nn.MSELoss(size_average=None, reduce=None, reduction=&#39;elementwise_mean&#39;)</code></p>
+<ul>
+<li><p>计算 output 和 target 之差的平方</p>
+<img src="/2021/09/PyTorch-Part2/image-20210913142318096.png" alt="image-20210913142318096" style="zoom:67%;">
+</li>
+<li><p><strong>reduce</strong>(bool)- 返回值是否为标量，默认为 True</p>
+<p><strong>size_average</strong>(bool)- 当 reduce=True 时有效。为 True 时，返回的 loss 为平均值；为 False时，返回的各样本的 loss 之和</p>
+</li>
+</ul>
+</li>
+<li><p>CrossEntropyLoss：<code>torch.nn.CrossEntropyLoss(weight=None, size_average=None, ignore_index=-100, reduce=None, reduction=&#39;elementwise_mean&#39;)</code></p>
+<ul>
+<li><p>将输入经过 softmax 激活函数之后，再计算其与 target 的交叉熵损失。</p>
+<p>该方法将 nn.LogSoftmax() 和 nn.NLLLoss() 进行了结合。严格意义上的交叉熵损失函数应该是 nn.NLLLoss()。</p>
+<img src="/2021/09/PyTorch-Part2/image-20210913142855509.png" alt="image-20210913142855509" style="zoom:67%;">
+</li>
+<li><p><strong>weight</strong>(Tensor)- 为每个类别的 loss 设置权值，常用于类别不均衡问题。weight 必须是 float类型的 tensor，其长度要于类别 C 一致，即每一个类别都要设置有 weight。</p>
+<p><strong>size_average</strong>(bool)- 当 reduce=True 时有效。为 True 时，返回的 loss 为平均值；为 False时，返回的各样本的 loss 之和。</p>
+<p><strong>reduce</strong>(bool)- 返回值是否为标量，默认为 True</p>
+<p><strong>ignore_index</strong>(int)- 忽略某一类别，不计算其 loss，其 loss 会为 0，并且，在采用size_average 时，不会计算那一类的 loss，除的时候的分母也不会统计那一类的样本。</p>
+</li>
+</ul>
+</li>
+<li><p>NLLLoss：<code>torch.nn.NLLLoss(weight=None, size_average=None, ignore_index=-100, reduce=None, reduction=&#39;elementwise_mean&#39;)</code></p>
+<ul>
+<li><p>不带 log_softmax 层的 CrossEntropyLoss 。</p>
+<img src="/2021/09/PyTorch-Part2/image-20210913144640040.png" alt="image-20210913144640040" style="zoom:67%;">
+</li>
+<li><p><strong>weight</strong>(Tensor)- 为每个类别的 loss 设置权值，常用于类别不均衡问题。weight 必须是 float类型的 tensor，其长度要于类别 C 一致，即每一个类别都要设置有 weight。</p>
+<p><strong>size_average</strong>(bool)- 当 reduce=True 时有效。为 True 时，返回的 loss 为除以权重之和的平均值；为 False 时，返回的各样本的 loss 之和。</p>
+<p><strong>reduce</strong>(bool)- 返回值是否为标量，默认为 True。</p>
+<p><strong>ignore_index</strong>(int)- 忽略某一类别，不计算其 loss，其 loss 会为 0，并且，在采用 size_average 时，不会计算那一类的 loss，除的时候的分母也不会统计那一类的样本。</p>
+</li>
+</ul>
+</li>
+<li><p>PoissonNLLLoss：<code>torch.nn.PoissonNLLLoss(log_input=True, full=False, size_average=None, eps=1e-08, reduce=None, reduction=&#39;elementwise_mean&#39;)</code></p>
+<ul>
+<li><p>用于 target 服从泊松分布的分类任务。</p>
+<img src="/2021/09/PyTorch-Part2/image-20210913144654680.png" alt="image-20210913144654680" style="zoom:67%;">
+</li>
+<li><p>log_input(bool)- 为 True 时，计算公式为：loss(input,target)=exp(input) - target * input; 为 False 时，loss(input,target)=input - target * log(input+eps)</p>
+<p><strong>full</strong>(bool)- 是否计算全部的 loss。例如，当采用斯特林公式近似阶乘项时，此为 target*log(target) - target+0.5∗log(2πtarget)</p>
+<p><strong>eps</strong>(float)- 当 log_input = False 时，用来防止计算 log(0)，而增加的一个修正项。即</p>
+<p><strong>loss</strong>(input,target)=input - target * log(input+eps)</p>
+<p><strong>size_average</strong>(bool)- 当 reduce=True 时有效。为 True 时，返回的 loss 为平均值；为 False时，返回的各样本的 loss 之和。</p>
+<p><strong>reduce</strong>(bool)- 返回值是否为标量，默认为 True</p>
+</li>
+</ul>
+</li>
+<li><p>KLDivLoss：<code>torch.nn.KLDivLoss(size_average=None, reduce=None, reduction=&#39;elementwise_mean&#39;)</code></p>
+<ul>
+<li><p>计算 input 和 target 之间的 KL 散度( Kullback–Leibler divergence) 。又称为相对熵(Relative Entropy)，用于描述两个概率分布之间的差异。</p>
+<p>要想获得真正的 KL 散度，需要如下操作：1. reduce = True ；size_average=False；2. 计算得到的 loss 要对 batch 进行求平均</p>
+<img src="/2021/09/PyTorch-Part2/image-20210913144829614.png" alt="image-20210913144829614" style="zoom:67%;">
+</li>
+<li><p><strong>size_average</strong>(bool)- 当 reduce=True 时有效。为 True 时，返回的 loss 为平均值，平均值为</p>
+<p><strong>element</strong>-wise 的，而不是针对样本的平均；为 False 时，返回是各样本各维度的 loss 之和。</p>
+<p><strong>reduce</strong>(bool)- 返回值是否为标量，默认为 True。</p>
+</li>
+</ul>
+</li>
+<li><p>BCELoss：<code>torch.nn.BCELoss(weight=None, size_average=None, reduce=None, reduction=&#39;elementwise_mean&#39;)</code></p>
+<ul>
+<li><p>二分类任务时的交叉熵计算函数。可以认为是 <strong>nn.CrossEntropyLoss</strong> 函数的特例。在 BCELoss 之前，input 一般为 sigmoid 激活层的输出。</p>
+<img src="/2021/09/PyTorch-Part2/image-20210913145243878.png" alt="image-20210913145243878" style="zoom:67%;">
+</li>
+<li><p><strong>weight</strong>(Tensor)- 为每个类别的 loss 设置权值，常用于类别不均衡问题。</p>
+<p><strong>size_average</strong>(bool)- 当 reduce=True 时有效。为 True 时，返回的 loss 为平均值；为 False 时，返回的各样本的 loss 之和。</p>
+<p><strong>reduce</strong>(bool)- 返回值是否为标量，默认为 True</p>
+</li>
+</ul>
+</li>
+<li><p>BCEWithLogitsLoss：<code>torch.nn.BCEWithLogitsLoss(weight=None, size_average=None, reduce=None, reduction=&#39;elementwise_mean&#39;, pos_weight=None)</code></p>
+<ul>
+<li><p>将 Sigmoid 与 BCELoss 结合，类似于 CrossEntropyLoss(将 nn.LogSoftmax()和 nn.NLLLoss() 进行结合）。即 input 会经过 Sigmoid 激活函数，将 input 变成概率分布的形式。</p>
+<img src="/2021/09/PyTorch-Part2/image-20210913145354209.png" alt="image-20210913145354209" style="zoom:67%;">
+</li>
+<li><p><strong>weight</strong>(Tensor)- : 为 batch 中单个样本设置权值，If given, has to be a Tensor of size “nbatch”.</p>
+<p><strong>pos_weight</strong>-: 正样本的权重, 当 p&gt;1，提高召回率，当 P&lt;1，提高精确度。可达到权衡召回率(Recall)和精确度(Precision)的作用。 Must be a vector with length equal to the number of classes.</p>
+<p><strong>size_average</strong>(bool)- 当 reduce=True 时有效。为 True 时，返回的 loss 为平均值；为 False 时，返回的各样本的 loss 之和。</p>
+<p><strong>reduce</strong>(bool)- 返回值是否为标量，默认为 True</p>
+</li>
+</ul>
+</li>
+<li><p>MarginRankingLoss：<code>torch.nn.MarginRankingLoss(margin=0, size_average=None, reduce=None, reduction=&#39;elementwise_mean&#39;)</code></p>
+<ul>
+<li><p>计算两个向量之间的相似度，当两个向量之间的距离大于 margin，则 loss 为正，小于 margin，loss 为 0。</p>
+<img src="/2021/09/PyTorch-Part2/image-20210913145522074.png" alt="image-20210913145522074" style="zoom:67%;">
+</li>
+<li><p><strong>margin</strong>(float)- x1 和 x2 之间的差异。</p>
+<p><strong>size_average</strong>(bool)- 当 reduce=True 时有效。为 True 时，返回的 loss 为平均值；为 False时，返回的各样本的 loss 之和。</p>
+<p><strong>reduce</strong>(bool)- 返回值是否为标量，默认为 True。</p>
+</li>
+</ul>
+</li>
+<li><p>HingeEmbeddingLoss：<code>torch.nn.HingeEmbeddingLoss(margin=1.0, size_average=None, reduce=None, reduction=&#39;elementwise_mean&#39;)</code></p>
+<ul>
+<li><p>为折页损失的拓展，主要用于衡量两个输入是否相似。used for learning nonlinear embeddings or semi-supervised</p>
+</li>
+<li><p><strong>margin</strong>(float)- 默认值为 1，容忍的差距。</p>
+<p><strong>size_average</strong>(bool)- 当 reduce=True 时有效。为 True 时，返回的 loss 为平均值；为 False时，返回的各样本的 loss 之和。</p>
+<p><strong>reduce</strong>(bool)- 返回值是否为标量，默认为 True。</p>
+</li>
+</ul>
+</li>
+<li><p>MultiLabelMarginLoss：<code>torch.nn.MultiLabelMarginLoss(size_average=None, reduce=None, reduction=&#39;elementwise_mean&#39;)</code></p>
+<ul>
+<li><p>用于一个样本属于多个类别时的分类任务。例如一个四分类任务，样本 x 属于第 0 类，第 1 类，不属于第 2 类，第 3 类。</p>
+<img src="/2021/09/PyTorch-Part2/image-20210913145842583.png" alt="image-20210913145842583">
+</li>
+<li><p><strong>size_average</strong>(bool)- 当 reduce=True 时有效。为 True 时，返回的 loss 为平均值；为 False时，返回的各样本的 loss 之和。</p>
+<p><strong>reduce</strong>(bool)- 返回值是否为标量，默认为 True。</p>
+<p><strong>Input</strong>: (C) or (N,C) where N is the batch size and C is the number of classes.</p>
+<p><strong>Target</strong>: (C) or (N,C), same shape as the input.</p>
+</li>
+</ul>
+</li>
+<li><p>SmoothL1Loss：<code>torch.nn.SmoothL1Loss(size_average=None, reduce=None, reduction=&#39;elementwise_mean&#39;)</code></p>
+<ul>
+<li><p>计算平滑 L1 损失，属于 Huber Loss 中的一种(因为参数 δ 固定为 1 了)。</p>
+<p>Huber Loss 常用于回归问题，其最大的特点是对离群点（outliers）、噪声不敏感，具有较强的鲁棒性。</p>
+<p>当误差绝对值小于 δ，采用 L2 损失；若大于 δ，采用 L1 损失。</p>
+<img src="/2021/09/PyTorch-Part2/image-20210913150004347.png" alt="image-20210913150004347" style="zoom:67%;">
+</li>
+<li><p><strong>size_average</strong>(bool)- 当 reduce=True 时有效。为 True 时，返回的 loss 为平均值；为 False时，返回的各样本的 loss 之和。</p>
+<p><strong>reduce</strong>(bool)- 返回值是否为标量，默认为 True。</p>
+</li>
+</ul>
+</li>
+<li><p>SoftMarginLoss：<code>torch.nn.SoftMarginLoss(size_average=None, reduce=None, reduction=&#39;elementwise_mean&#39;)</code></p>
+<ul>
+<li><p>Creates a criterion that optimizes a two-class classification logistic loss between input tensor x and target tensor y (containing 1 or -1). </p>
+<img src="/2021/09/PyTorch-Part2/image-20210913150303241.png" alt="image-20210913150303241">
+</li>
+<li><p><strong>size_average</strong>(bool)- 当 reduce=True 时有效。为 True 时，返回的 loss 为平均值；为 False时，返回的各样本的 loss 之和。</p>
+<p><strong>reduce</strong>(bool)- 返回值是否为标量，默认为 True。</p>
+</li>
+</ul>
+</li>
+<li><p>MultiLabelSoftMarginLoss：<code>torch.nn.MultiLabelSoftMarginLoss(weight=None, size_average=None, reduce=None, reduction=&#39;elementwise_mean&#39;)</code></p>
+<ul>
+<li><p>SoftMarginLoss 多标签版本，a multi-label one-versus-all loss based on max-entropy.</p>
+<p><img src="/2021/09/PyTorch-Part2/image-20210913150349060.png" alt="image-20210913150349060"></p>
+</li>
+<li><p><strong>weight</strong>(Tensor)- 为每个类别的 loss 设置权值。weight 必须是 float 类型的 tensor，其长度要于类别 C 一致，即每一个类别都要设置有 weight。</p>
+</li>
+</ul>
+</li>
+<li><p>CosineEmbeddingLoss：torch.nn.CosineEmbeddingLoss(margin=0, size_average=None, reduce=None, reduction=’elementwise_mean’)</p>
+<ul>
+<li><p>用 Cosine 函数来衡量两个输入是否相似。 used for learning nonlinear embeddings or semi-supervised</p>
+<p><img src="/2021/09/PyTorch-Part2/image-20210913150448355.png" alt="image-20210913150448355"></p>
+</li>
+<li><p><strong>margin</strong>(float)- ： 取值范围[-1,1]， 推荐设置范围 [0, 0.5] </p>
+<p><strong>size_average</strong>(bool)- 当 reduce=True 时有效。为 True 时，返回的 loss 为平均值；为 False时，返回的各样本的 loss 之和。</p>
+<p><strong>reduce</strong>(bool)- 返回值是否为标量，默认为 True。</p>
+</li>
+</ul>
+</li>
+<li><p>MultiMarginLoss：<code>torch.nn.MultiMarginLoss(p=1, margin=1, weight=None, size_average=None, reduce=None, reduction=&#39;elementwise_mean&#39;)</code></p>
+<ul>
+<li><p>计算多分类的折页损失。</p>
+<p><img src="/2021/09/PyTorch-Part2/image-20210913150527386.png" alt="image-20210913150527386"></p>
+</li>
+<li><p><strong>p</strong>(int)- 默认值为 1，仅可选 1 或者 2。</p>
+<p><strong>margin</strong>(float)- 默认值为 1</p>
+<p><strong>weight</strong>(Tensor)- 为每个类别的 loss 设置权值。weight 必须是 float 类型的 tensor，其长度要与类别 C 一致，即每一个类别都要设置有 weight。</p>
+<p><strong>size_average</strong>(bool)- 当 reduce=True 时有效。为 True 时，返回的 loss 为平均值；为 False时，返回的各样本的 loss 之和。</p>
+<p><strong>reduce</strong>(bool)- 返回值是否为标量，默认为 True。</p>
+</li>
+</ul>
+</li>
+<li><p>TripletMarginLoss：torch.nn.TripletMarginLoss(margin=1.0, p=2, eps=1e-06, swap=False, size_average=None, reduce=None, reduction=’elementwise_mean’)</p>
+<ul>
+<li><p>计算三元组损失，人脸验证中常用。</p>
+<p><img src="/2021/09/PyTorch-Part2/image-20210913150644479.png" alt="image-20210913150644479"></p>
+</li>
+<li><p><strong>margin</strong>(float)- 默认值为 1</p>
+<p><strong>p</strong>(int)- The norm degree ，默认值为 2</p>
+<p><strong>swap</strong>(float)– The distance swap is described in detail in the paper Learning shallow convolutional </p>
+<p><strong>feature</strong> descriptors with triplet losses by V. Balntas, E. Riba et al. Default: False</p>
+<p><strong>size_average</strong>(bool)- 当 reduce=True 时有效。为 True 时，返回的 loss 为平均值；为 False时，返回的各样本的 loss 之和。</p>
+<p><strong>reduce</strong>(bool)- 返回值是否为标量，默认为 True。</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="优化器-Optimizer"><a href="#优化器-Optimizer" class="headerlink" title="优化器(Optimizer)"></a>优化器(Optimizer)</h2><h3 id="优化器类"><a href="#优化器类" class="headerlink" title="优化器类"></a>优化器类</h3><ul>
+<li>PyTorch 中所有的优化器均是 Optimizer 的子类。</li>
+</ul>
+<h4 id="参数组"><a href="#参数组" class="headerlink" title="参数组"></a>参数组</h4><ul>
+<li>参数组(param_groups)在 finetune、某层定制学习率、某层学习率置零等操作中，将发挥重要作用。</li>
+<li>optimizer 对参数的管理是基于组的概念，可以为每一组参数配置特定的 lr、momentum、weight_decay 等等。</li>
+<li>参数组在 optimizer 中表现为一个 list(self.param_groups)，其中每个元素是 dict，表示一个参数及其相应配置，在 dict 中包含’params’、’weight_decay’、’lr’ 、’momentum’等字段。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">w1 = torch.randn((<span class="number">2</span>, <span class="number">2</span>), requires_grad=<span class="literal">True</span>)</span><br><span class="line">w2 = torch.randn((<span class="number">2</span>, <span class="number">2</span>), requires_grad=<span class="literal">True</span>)</span><br><span class="line">w3 = torch.randn((<span class="number">2</span>, <span class="number">2</span>), requires_grad=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 一个参数组</span></span><br><span class="line">optimizer_1 = optim.SGD([w1, w3], lr=<span class="number">0.1</span>)</span><br><span class="line">print(<span class="string">&#x27;len(optimizer.param_groups): &#x27;</span>, <span class="built_in">len</span>(optimizer_1.param_groups))</span><br><span class="line">print(optimizer_1.param_groups, <span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 两个参数组</span></span><br><span class="line">optimizer_2 = optim.SGD([&#123;<span class="string">&#x27;params&#x27;</span>: w1, <span class="string">&#x27;lr&#x27;</span>: <span class="number">0.1</span>&#125;,</span><br><span class="line">                         &#123;<span class="string">&#x27;params&#x27;</span>: w2, <span class="string">&#x27;lr&#x27;</span>: <span class="number">0.001</span>&#125;])</span><br><span class="line">print(<span class="string">&#x27;len(optimizer.param_groups): &#x27;</span>, <span class="built_in">len</span>(optimizer_2.param_groups))</span><br><span class="line">print(optimizer_2.param_groups)</span><br><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">len(optimizer.param_groups): 1</span></span><br><span class="line"><span class="string">[&#123;&#x27;params&#x27;: [tensor([[0.6320, 0.4332], [-0.0429, -0.4769]], requires_grad=True), </span></span><br><span class="line"><span class="string">             tensor([[0.4598, 0.3449], [0.5621, -1.2329]], requires_grad=True)],</span></span><br><span class="line"><span class="string">  &#x27;lr&#x27;: 0.1, &#x27;momentum&#x27;: 0, &#x27;dampening&#x27;: 0, &#x27;weight_decay&#x27;: 0, &#x27;nesterov&#x27;: False&#125;]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">len(optimizer.param_groups): 2</span></span><br><span class="line"><span class="string">[&#123;&#x27;params&#x27;: [tensor([[0.6320, 0.4332], [-0.0429, -0.4769]], requires_grad=True)], </span></span><br><span class="line"><span class="string">  &#x27;lr&#x27;: 0.1, &#x27;momentum&#x27;: 0, &#x27;dampening&#x27;: 0, &#x27;weight_decay&#x27;: 0, &#x27;nesterov&#x27;: False&#125;, </span></span><br><span class="line"><span class="string"> &#123;&#x27;params&#x27;: [tensor([[-0.8244, 2.3955], [0.6752, -0.0980]], requires_grad=True)], </span></span><br><span class="line"><span class="string">  &#x27;lr&#x27;: 0.001, &#x27;momentum&#x27;: 0, &#x27;dampening&#x27;: 0, &#x27;weight_decay&#x27;: 0, &#x27;nesterov&#x27;: False&#125;]</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<h4 id="优化器常用方法"><a href="#优化器常用方法" class="headerlink" title="优化器常用方法"></a>优化器常用方法</h4><ol>
+<li><code>zero_grad()</code>：将梯度清零。<ul>
+<li>由于 PyTorch 不会自动清零梯度，所以在每一次反向传播之前都应当进行此操作。</li>
+</ul>
+</li>
+<li><code>state_dict()</code>：将优化器的状态作为dict返回。返回 state、param_groups 组成的字典。<ul>
+<li><strong>state</strong> - 保存当前优化状态的字典。 其内容优化器类之间有所不同。<br><strong>param_groups</strong> - 包含所有参数组的字典</li>
+</ul>
+</li>
+<li><code>load_state_dict(state_dict)</code>：加载优化器状态。<ul>
+<li>常用于 finetune。</li>
+</ul>
+</li>
+<li><code>add_param_group()</code>：给 optimizer 管理的参数组中增加一组参数。<ul>
+<li>可为该组参数定制 lr、momentum、weight_decay 等，在 finetune 中常用。</li>
+</ul>
+</li>
+<li><code>step(closure)</code>：执行一步权值更新, 其中可传入参数 closure（一个闭包）。<ul>
+<li>如，当采用 LBFGS 优化方法时，需要多次计算，因此需要传入一个闭包去允许它们重新计算 loss 。</li>
+</ul>
+</li>
+</ol>
+<h3 id="PyTorch-的十个优化器-干货"><a href="#PyTorch-的十个优化器-干货" class="headerlink" title="PyTorch 的十个优化器(干货)"></a>PyTorch 的十个优化器(干货)</h3><ol>
+<li><p>torch.optim.SGD：<code>torch.optim.SGD(params, lr=&lt;object object&gt;, momentum=0, dampening=0, weight_decay=0, nesterov=False)</code></p>
+<ul>
+<li><p>实现带动量的 SGD 优化算法，并且均可拥有 weight_decay 项。</p>
+</li>
+<li><p><strong>params</strong>(iterable)- 参数组(参数组的概念请查看 3.2 优化器基类：Optimizer)，优化器要管理的那部分参数。</p>
+<p><strong>lr</strong>(float)- 初始学习率，可按需随着训练过程不断调整学习率。</p>
+<p><strong>momentum</strong>(float)- 动量，通常设置为 0.9，0.8</p>
+<p><strong>dampening</strong>(float)- 若采用 nesterov，dampening 必须为 0.</p>
+<p><strong>weight_decay</strong>(float)- 权值衰减系数，也就是 L2 正则项的系数</p>
+<p><strong>nesterov</strong>(bool)- bool 选项，是否使用 NAG(Nesterov accelerated gradient)</p>
+</li>
+</ul>
+</li>
+<li><p>torch.optim.ASGD：<code>torch.optim.ASGD(params, lr=0.01, lambd=0.0001, alpha=0.75, t0=1000000.0, weight_decay=0)</code></p>
+<ul>
+<li><p>ASGD 也称为 SAG，表示随机平均梯度下降(Averaged Stochastic Gradient Descent)，简单地说 ASGD 就是用空间换时间的一种 SGD。</p>
+<p><a target="_blank" rel="noopener" href="http://riejohnson.com/rie/stograd_nips.pdf">http://riejohnson.com/rie/stograd_nips.pdf</a> </p>
+</li>
+<li><p><strong>params</strong>(iterable)- 参数组(参数组的概念请查看 3.1 优化器基类：Optimizer)，优化器要优化的那些参数。</p>
+<p><strong>lr</strong>(float)- 初始学习率，可按需随着训练过程不断调整学习率。</p>
+<p><strong>lambd</strong>(float)- 衰减项，默认值 1e-4。</p>
+<p><strong>alpha</strong>(float)- power for eta update ，默认值 0.75。</p>
+<p><strong>t0</strong>(float)- point at which to start averaging，默认值 1e6。</p>
+<p><strong>weight_decay</strong>(float)- 权值衰减系数，也就是 L2 正则项的系数。</p>
+</li>
+</ul>
+</li>
+<li><p>torch.optim.Rprop：<code>torch.optim.Rprop(params, lr=0.01, etas=(0.5, 1.2), step_sizes=(1e-06, 50))</code></p>
+<ul>
+<li><p>实现 Rprop 优化方法(弹性反向传播)，该优化方法适用于 full-batch，不适用于 mini-batch，因而在 mini-batch 大行其道的时代里，很少见到。</p>
+<p>《Martin Riedmiller und Heinrich Braun: Rprop -A Fast Adaptive Learning Algorithm. Proceedings of the International Symposium on Computer and Information Science VII, 1992》</p>
+</li>
+</ul>
+</li>
+<li><p>torch.optim.Adagrad：<code>torch.optim.Adagrad(params, lr=0.01, lr_decay=0, weight_decay=0, initial_accumulator_value=0)</code></p>
+<ul>
+<li><p>Adagrad(Adaptive Gradient) 是一种自适应优化方法，是自适应的为各个参数分配不同的学习率。这个学习率的变化，会受到梯度的大小和迭代次数的影响。梯度越大，学习率越小；梯度越小，学习率越大。缺点是训练后期，学习率过小，因为 Adagrad 累加之前所有的梯度平方作为分母。</p>
+<p><a target="_blank" rel="noopener" href="http://www.jmlr.org/papers/volume12/duchi11a/duchi11a.pdf">Adaptive Subgradient Methods for Online Learning and Stochastic Optimization John Duchi, Elad Hazan, Yoram Singer; 12(Jul):2121−2159, 2011.</a></p>
+</li>
+</ul>
+</li>
+<li><p>torch.optim.Adadelta：<code>torch.optim.Adadelta(params, lr=1.0, rho=0.9, eps=1e-06, weight_decay=0)</code></p>
+<ul>
+<li><p>实现 Adadelta 优化方法。<strong>Adadelta</strong> 是 <strong>Adagrad</strong> 的改进。Adadelta 分母中采用距离当前时间点比较近的累计项，这可以避免在训练后期，学习率过小。</p>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1212.5701.pdf">https://arxiv.org/pdf/1212.5701.pdf</a></p>
+</li>
+</ul>
+</li>
+<li><p>torch.optim.RMSprop：<code>torch.optim.RMSprop(params, lr=0.01, alpha=0.99, eps=1e-08, weight_decay=0, momentum=0, centered=False)</code></p>
+<ul>
+<li><p>实现 RMSprop 优化方法（Hinton 提出），RMS 是均方根（root meam square）的意思。RMSprop 和 Adadelta 一样，也是对 Adagrad 的一种改进。RMSprop 采用均方根作为分母，可缓解 Adagrad 学习率下降较快的问题，并且引入均方根，可以减少摆动</p>
+<p><a target="_blank" rel="noopener" href="http://www.cs.toronto.edu/~tijmen/csc321/slides/lecture_slides_lec6.pdf">http://www.cs.toronto.edu/~tijmen/csc321/slides/lecture_slides_lec6.pdf</a></p>
+</li>
+</ul>
+</li>
+<li><p>torch.optim.Adam(AMSGrad)：<code>torch.optim.Adam(params, lr=0.001, betas=(0.9, 0.999), eps=1e- 08, weight_decay=0, amsgrad=False)</code></p>
+<ul>
+<li><p>实现 Adam(Adaptive Moment Estimation))优化方法。Adam 是一种自适应学习率的优化方法，Adam 利用梯度的一阶矩估计和二阶矩估计动态的调整学习率。吴老师课上说过，Adam 是结合了 Momentum 和 RMSprop，并进行了偏差修正。</p>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1412.6980">Adam: A Method for Stochastic Optimization</a></p>
+</li>
+<li><p><strong>amsgrad</strong>- 是否采用 AMSGrad 优化方法，asmgrad 优化方法是针对 Adam 的改进，通过添加额外的约束，使学习率始终为正值。</p>
+</li>
+</ul>
+</li>
+<li><p>torch.optim.Adamax：<code>torch.optim.Adamax(params, lr=0.002, betas=(0.9, 0.999), eps=1e-08, weight_decay=0)</code></p>
+<ul>
+<li><p>实现 Adamax 优化方法。Adamax 是对 Adam 增加了一个学习率上限的概念</p>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1412.6980">Adam: A Method for Stochastic Optimization</a></p>
+</li>
+</ul>
+</li>
+<li><p>torch.optim.SparseAdam：<code>torch.optim.SparseAdam(params, lr=0.001, betas=(0.9, 0.999), eps=1e-08)</code></p>
+<ul>
+<li>针对稀疏张量的一种“阉割版”Adam 优化方法。</li>
+</ul>
+</li>
+<li><p>torch.optim.LBFGS：<code>torch.optim.LBFGS(params, lr=1, max_iter=20, max_eval=None, tolerance_grad=1e-05, tolerance_change=1e-09, history_size=100, line_search_fn=None)</code></p>
+<ul>
+<li>实现 L-BFGS（Limited-memory Broyden–Fletcher–Goldfarb–Shanno）优化方法。L-BFGS 属于拟牛顿算法。L-BFGS 是对 BFGS 的改进，特点就是节省内存。</li>
+</ul>
+</li>
+</ol>
+<h3 id="PyTorch-的六个学习率调整方法-干货"><a href="#PyTorch-的六个学习率调整方法-干货" class="headerlink" title="PyTorch 的六个学习率调整方法(干货)"></a>PyTorch 的六个学习率调整方法(干货)</h3><ol>
+<li><p>StepLR：<code>torch.optim.lr_scheduler.StepLR(optimizer, step_size, gamma=0.1, last_epoch=-1)</code></p>
+<ul>
+<li><p>等间隔调整学习率，调整倍数为 gamma 倍，调整间隔为 step_size。</p>
+<p>间隔单位是 step。需要注意的是，step 通常是指 epoch，不要当成 iteration 。</p>
+</li>
+<li><p><strong>step_size</strong>(int)- 学习率下降间隔数，若为 30，则会在 30、60、90……个 step 时，将学习率调整为 lr*gamma。</p>
+<p><strong>gamma</strong>(float)- 学习率调整倍数，默认为 0.1 倍，即下降 10 倍。</p>
+<p><strong>last_epoch</strong>(int)- 上一个 epoch 数，这个变量用来指示学习率是否需要调整。当 last_epoch 符合设定的间隔时，就会对学习率进行调整。当为 -1 时，学习率设置为初始值。</p>
+</li>
+</ul>
+</li>
+<li><p>MultiStepLR：<code>torch.optim.lr_scheduler.MultiStepLR(optimizer, milestones, gamma=0.1, last_epoch=-1)</code></p>
+<ul>
+<li><p>按设定的间隔调整学习率。这个方法适合后期调试使用，观察 loss 曲线，为每个实验定制学习率调整时机</p>
+</li>
+<li><p><strong>milestones</strong>(list)- 一个 list，每一个元素代表何时调整学习率，list 元素必须是递增的。如 milestones=[30, 80, 120]</p>
+<p><strong>gamma</strong>(float)- 学习率调整倍数，默认为 0.1 倍，即下降 10 倍。</p>
+<p><strong>last_epoch</strong>(int)- 上一个 epoch 数，这个变量用来指示学习率是否需要调整。当 last_epoch 符合设定的间隔时，就会对学习率进行调整。当为 -1 时，学习率设置为初始值。</p>
+</li>
+</ul>
+</li>
+<li><p>ExponentialLR：<code>torch.optim.lr_scheduler.ExponentialLR(optimizer, gamma, last_epoch=-1)</code></p>
+<ul>
+<li><p>按指数衰减调整学习率，调整公式: lr = lr * gamma**epoch</p>
+</li>
+<li><p><strong>gamma</strong>- 学习率调整倍数的底，指数为 epoch，即 gamma**epoch</p>
+<p><strong>last_epoch</strong>(int)- 上一个 epoch 数，这个变量用来指示学习率是否需要调整。当 last_epoch 符合设定的间隔时，就会对学习率进行调整。当为-1 时，学习率设置为初始值。</p>
+</li>
+</ul>
+</li>
+<li><p>CosineAnnealingLR：<code>torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max, eta_min=0, last_epoch=-1)</code></p>
+<ul>
+<li><p>余弦退火，以余弦函数为周期，并在每个周期最大值时重新设置学习率。</p>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1608.03983">《SGDR: Stochastic Gradient Descent with Warm Restarts》(ICLR-2017)</a></p>
+</li>
+<li><p><strong>T_max</strong>(int)- 一次学习率周期的迭代次数，即 T_max 个 epoch 之后重新设置学习率。</p>
+<p><strong>eta_min</strong>(float)- 最小学习率，即在一个周期中，学习率最小会下降到 eta_min，默认值为 0。</p>
+</li>
+</ul>
+</li>
+<li><p>ReduceLROnPlateau：<code>torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode=&#39;min&#39;,factor=0.1, patience=10, verbose=False, threshold=0.0001, threshold_mode=&#39;rel&#39;, cooldown=0, min_lr=0, eps=1e-08)</code></p>
+<ul>
+<li><p>检测指定的指标，当某指标不再变化（下降或升高）时，调整学习率。这是非常实用的学习率调整策略。</p>
+<p>例如，当验证集的 loss 不再下降时，进行学习率调整；或者监测验证集的 accuracy，当 accuracy 不再上升时，则调整学习率。</p>
+</li>
+<li><p><strong>mode</strong>(str)- 模式选择，有 min 和 max 两种模式，min 表示当指标不再降低(如监测loss)，max 表示当指标不再升高(如监测 accuracy)。</p>
+<p><strong>factor</strong>(float)- 学习率调整倍数(等同于其它方法的 gamma)，即学习率更新为 lr = lr * factor</p>
+<p><strong>patience</strong>(int)- “耐心”，即忍受该指标多少个 step 不变化，当忍无可忍时，调整学习率。</p>
+<p><strong>verbose</strong>(bool)- 是否打印学习率信息：print(‘Epoch {:5d}: reducing learning rate’ ‘ of group {} to {:.4e}.’.format(epoch, i, new_lr))</p>
+<p><strong>threshold</strong>(float)- Threshold for measuring the new optimum，配合 threshold_mode 使用。</p>
+<p><strong>threshold_mode</strong>(str)- 选择判断指标是否达最优的模式，有两种模式，rel 和 abs。 当 threshold_mode=rel，并且 mode=max 时，dynamic_threshold = best * ( 1 + threshold )；</p>
+<p>​        当 threshold_mode=rel，并且 mode=min 时，dynamic_threshold = best * ( 1 -threshold )； </p>
+<p>​        当 threshold_mode=abs，并且 mode=max 时，dynamic_threshold = best + threshold ； </p>
+<p>​        当 threshold_mode=rel，并且 mode=max 时，dynamic_threshold = best - threshold </p>
+<p><strong>cooldown</strong>(int)- “冷却时间“，当调整学习率之后，让学习率调整策略冷静一下，让模型再训练一段时间，再重启监测模式。</p>
+<p><strong>min_lr</strong>(float or list)- 学习率下限，可为 float，或者 list，当有多个参数组时，可用 list 进行设置。</p>
+<p><strong>eps</strong>(float)- 学习率衰减的最小值，当学习率变化小于 eps 时，则不调整学习率。</p>
+</li>
+</ul>
+</li>
+<li><p>LambdaLR：<code>torch.optim.lr_scheduler.LambdaLR(optimizer, lr_lambda, last_epoch=- 1)</code></p>
+<ul>
+<li><p>为不同参数组自定义学习率调整策略。调整规则为，lr = base_lr * lmbda(self.last_epoch) 。</p>
+</li>
+<li><p><strong>lr_lambda</strong>(function or list)- 一个计算学习率调整倍数的函数，输入通常为 step，当有多个参数组时，设为 list。</p>
+<p><strong>last_epoch</strong>(int)- 上一个 epoch 数，这个变量用来指示学习率是否需要调整。当 last_epoch 符合设定的间隔时，就会对学习率进行调整。当为-1 时，学习率设置为初始值。</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">model = resnet18(pretrained=<span class="literal">False</span>)  <span class="comment"># 加载模型</span></span><br><span class="line">optimizer = torch.optim.SGD(params=[  <span class="comment"># 初始化优化器，并设置两个param_groups</span></span><br><span class="line">    &#123;<span class="string">&#x27;params&#x27;</span>: model.layer2.parameters()&#125;,</span><br><span class="line">    &#123;<span class="string">&#x27;params&#x27;</span>: model.layer3.parameters(), <span class="string">&#x27;lr&#x27;</span>: <span class="number">0.2</span>&#125;,</span><br><span class="line">], lr=<span class="number">1</span>, momentum=<span class="number">0.9</span>, weight_decay=<span class="number">0.005</span>)  <span class="comment"># base_lr = 0.1</span></span><br><span class="line"></span><br><span class="line">epochs = <span class="number">500</span>  <span class="comment"># 训练次数</span></span><br><span class="line">warm_up_epoch = <span class="number">5</span></span><br><span class="line">t_max = epochs - warm_up_epoch  <span class="comment"># cos衰减周期</span></span><br><span class="line">lr_max = <span class="number">0.1</span>  <span class="comment"># 最大值</span></span><br><span class="line">lr_min = <span class="number">0.001</span>  <span class="comment"># 最小值</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_warmup_cos_lambda</span>(<span class="params">lr_max, lr_min, start, warm_up_epoch, t_max</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">warmup_cos_lambda</span>(<span class="params">cur_epoch</span>):</span></span><br><span class="line">        <span class="keyword">if</span> cur_epoch &lt; start:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="keyword">elif</span> cur_epoch &lt; warm_up_epoch + start:</span><br><span class="line">            <span class="keyword">return</span> (cur_epoch - start) / warm_up_epoch + lr_min</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> (lr_max - lr_min) * (<span class="number">1.0</span> + math.cos((cur_epoch - start - warm_up_epoch) / t_max * math.pi)) / <span class="number">2</span> + lr_min</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> warmup_cos_lambda</span><br><span class="line"></span><br><span class="line"><span class="comment"># LambdaLR</span></span><br><span class="line">scheduler = torch.optim.lr_scheduler.LambdaLR(</span><br><span class="line">    optimizer,</span><br><span class="line">    lr_lambda=[</span><br><span class="line">        get_warmup_cos_lambda(lr_max, lr_min, <span class="number">0</span>, warm_up_epoch, t_max),</span><br><span class="line">        get_warmup_cos_lambda(lr_max, lr_min, <span class="number">5</span>, warm_up_epoch, t_max)</span><br><span class="line">    ]</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="built_in">range</span>(epochs):</span><br><span class="line">    print(optimizer.param_groups[<span class="number">0</span>][<span class="string">&#x27;lr&#x27;</span>], optimizer.param_groups[<span class="number">1</span>][<span class="string">&#x27;lr&#x27;</span>])</span><br><span class="line">    optimizer.step()</span><br><span class="line">    scheduler.step()</span><br></pre></td></tr></table></figure>
+<h3 id="scheduler-step"><a href="#scheduler-step" class="headerlink" title="scheduler.step()"></a>scheduler.step()</h3></li>
+</ol>
+<ul>
+<li>当调用 <code>scheduler.step(epoch=None)</code> 时，如果不传入 epoch，默认成员变量 last_epoch+=1，如果传入 epoch，则直接更新 last_epoch。</li>
+<li>因此，scheduler.step() 要放在 epoch 的 for 循环当中执行。当然也可以放在每个 batch 的 iter 中更新，这样更加细致。</li>
+<li>更新完 last_epoch 之后，则调用 <code>get_lr()</code> 获取当前 epoch 下，该参数组的学习率。</li>
+</ul>
+<h2 id="可视化"><a href="#可视化" class="headerlink" title="可视化"></a>可视化</h2><h3 id="TensorBoardX"><a href="#TensorBoardX" class="headerlink" title="TensorBoardX"></a>TensorBoardX</h3><ul>
+<li>无法显示图表有可能是因为浏览器差异。</li>
+</ul>
+<h4 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h4><blockquote>
+<p>在浏览器中查看可视化数据，只要在命令行中开启 tensorboard ：<code>tensorboard --logdir=&lt;your_log_dir&gt;</code></p>
+<p>其中的 <your_log_dir> 既可以是单个 run 的路径，也可以是多个 run 的父目录。如 runs/ 下面可能会有很多的子文件夹，每个文件夹都代表了一次实验，我们令 –logdir=runs/ 就可以在 tensorboard 可视化界面中方便地横向比较不同实验所得数据的差异。</your_log_dir></p>
+</blockquote>
+<ol>
+<li><p>SummaryWriter：<code>SummaryWriter(logdir=None, comment=&quot;&quot;, purge_step=None, max_queue=10, flush_secs=120, filename_suffix=&#39;&#39;, write_to_disk=True, log_dir=None, comet_config=&#123;&quot;disabled&quot;: True&#125;, **kwargs)</code></p>
+<ul>
+<li><p>创建一个 SummaryWriter 的实例</p>
+</li>
+<li><p><strong>logdir</strong>- 用该路径来保存日志。无参数，默认将使用 runs/日期时间</p>
+<p><strong>comment</strong>- 文件夹后缀，将使用 runs/日期时间-comment 路径来保存日志</p>
+<p><strong>filename_suffix</strong>- 设置 event file 文件名后缀</p>
+</li>
+<li><p>```python<br>writer = SummaryWriter(log_dir=’./tensorboard event file’, filename_suffix=str(cfg.EPOCH_NUMBER), comment=’test_tensorboard’)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">2. add_scalar：&#96;add_scalar(tag, scalar_value, global_step&#x3D;None, walltime&#x3D;None)&#96;</span><br><span class="line"></span><br><span class="line">   - 在一个图表中记录一个标量的变化，常用于 loss、accuracy、learning rate 曲线的记录。</span><br><span class="line"></span><br><span class="line">   - **tag**(string)- 该图的标签，类似于 polt.title</span><br><span class="line"></span><br><span class="line">     **scalar_value**(float or string&#x2F;blobname)- 用于存储的值，曲线图的 y 坐标。注意，对于 PyTorch scalar tensor，需要调用 &#96;.item()&#96; 方法获取其数值</span><br><span class="line"></span><br><span class="line">     **global_step**(int)- 曲线图的 x 坐标</span><br><span class="line"></span><br><span class="line">     **walltime**(float)- 为 event 文件的文件名设置时间，默认为 time.time()</span><br><span class="line">     </span><br><span class="line">   - &#96;&#96;&#96;python</span><br><span class="line">     writer.add_scalar(&#39;Train Loss&#39;, train_loss &#x2F; num_mini_batch, epoch)</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>add_scalars：<code>add_scalars(main_tag, tag_scalar_dict, global_step=None, walltime=None)</code></p>
+<ul>
+<li><p>在一个图表中记录多个标量的变化，常用于对比，如 trainLoss 和 validLoss 的比较等。</p>
+</li>
+<li><p><strong>main_tag</strong>(string)- 该图的标签。</p>
+<p><strong>tag_scalar_dict</strong>(dict)- key 是变量的 tag，value 是变量的值。</p>
+<p><strong>global_step</strong>(int)- 曲线图的 x 坐标</p>
+<p><strong>walltime</strong>(float)- 为 event 文件的文件名设置时间，默认为 time.time()</p>
+</li>
+<li><pre><code class="python">    writer.add_scalars(&#39;data/scalar_group&#39;, &#123;&quot;xsinx&quot;: x * np.sin(x),
+                                             &quot;xcosx&quot;: x * np.cos(x),
+                                             &quot;arctanx&quot;: np.arctan(x)&#125;, x)
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">4. add_histogram：&#96;add_histogram(tag, values, global_step&#x3D;None, bins&#x3D;&#39;tensorflow&#39;, walltime&#x3D;None)&#96;</span><br><span class="line"></span><br><span class="line">   - 绘制直方图和多分位数折线图，常用于监测权值及梯度的分布变化情况，便于诊断网络更新方向是否正确。</span><br><span class="line"></span><br><span class="line">   - **tag**(string)- 该图的标签，类似于 polt.title。</span><br><span class="line"></span><br><span class="line">     **values**(torch.Tensor, numpy.array or string&#x2F;blobname)- 用于绘制直方图的值</span><br><span class="line"></span><br><span class="line">     **global_step**(int)- 曲线图的 y 坐标</span><br><span class="line"></span><br><span class="line">     **bins**(string)- 决定如何取 bins，默认为‘tensorflow’，可选：’auto’, ‘fd’等</span><br><span class="line"></span><br><span class="line">     **walltime**(float)- 为 event 文件的文件名设置时间，默认为 time.time()</span><br><span class="line"></span><br><span class="line">5. add_image：&#96;add_image(tag, img_tensor, global_step&#x3D;None, walltime&#x3D;None)&#96;</span><br><span class="line"></span><br><span class="line">   - 绘制图片，可用于检查模型的输入，监测 feature map 的变化，或是观察 weight。</span><br><span class="line"></span><br><span class="line">   - **tag**(string)- 该图的标签，类似于 polt.title。</span><br><span class="line"></span><br><span class="line">     **img_tensor**(torch.Tensor,numpy.array, or string&#x2F;blobname)- 需要可视化的图片数据， shape &#x3D; [C,H,W]。</span><br><span class="line"></span><br><span class="line">     **global_step**(int)- x 坐标。</span><br><span class="line"></span><br><span class="line">     **walltime**(float)- 为 event 文件的文件名设置时间，默认为 time.time()。</span><br><span class="line"></span><br><span class="line">   - 通常会借助 torchvision.utils.make_grid() 将一组图片绘制到一个窗口</span><br><span class="line"></span><br><span class="line">   - torchvision.utils.make_grid：&#96;torchvision.utils.make_grid(tensor, nrow&#x3D;8, padding&#x3D;2, normalize&#x3D;False, range&#x3D;None, scale_each&#x3D;False, pad_value&#x3D;0)&#96;</span><br><span class="line"></span><br><span class="line">     - 将一组图片拼接成一张图片，便于可视化。</span><br><span class="line"></span><br><span class="line">     - **tensor**(Tensor or list)- 需可视化的数据，shape:(B x C x H x W) ,B 表示 batch 数，即几张图片</span><br><span class="line"></span><br><span class="line">       **nrow**(int)- 一行显示几张图，默认值为 8。</span><br><span class="line"></span><br><span class="line">       **padding**(int)- 每张图片之间的间隔，默认值为 2。</span><br><span class="line"></span><br><span class="line">       **normalize**(bool)- 是否进行归一化至(0,1)。</span><br><span class="line"></span><br><span class="line">       **range**(tuple)- 设置归一化的 min 和 max，若不设置，默认从 tensor 中找 min 和 max。</span><br><span class="line"></span><br><span class="line">       **scale_each**(bool)- 每张图片是否单独进行归一化，还是 min 和 max 的一个选择。</span><br><span class="line"></span><br><span class="line">       **pad_value**(float)- 填充部分的像素值，默认为 0，即黑色。</span><br><span class="line"></span><br><span class="line">6. add_graph：&#96;add_graph(model, input_to_model&#x3D;None, verbose&#x3D;False, **kwargs)&#96;</span><br><span class="line"></span><br><span class="line">   - 绘制网络结构拓扑图。</span><br><span class="line"></span><br><span class="line">   - **model**(torch.nn.Module)- 模型实例</span><br><span class="line"></span><br><span class="line">     **inpjt_to_model**(torch.autograd.Variable)- 模型的输入数据，可以生成一个随机数，只要 shape 符合要求即可</span><br><span class="line">     </span><br><span class="line">   - &#96;&#96;&#96;python</span><br><span class="line">     init_img &#x3D; torch.zeros((1, 3, 400, 400), device&#x3D;device)</span><br><span class="line">     init_msg &#x3D; torch.zeros((1, secret_size), device&#x3D;device)</span><br><span class="line">     tb_writer.add_graph(StegaStampEncoder, &#123;&quot;img&quot;: init_img, &quot;msg&quot;: init_msg&#125;)</span><br></pre></td></tr></table></figure></code></pre>
+</li>
+<li><p>另外一种用于 debug 检查模型的方法：summary() 可输出模型每层输入输出的 shape 以及模型总量。使用前需要在终端 pip install torchsummary。</p>
+<ul>
+<li><pre><code class="python">from torchsummary import summary
+print(summary(net, (3, 360, 640), device=&quot;cpu&quot;))
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">7. add_embedding：&#96;add_embedding(mat, metadata&#x3D;None, label_img&#x3D;None, global_step&#x3D;None, tag&#x3D;&#39;default&#39;, metadata_header&#x3D;None)&#96;</span><br><span class="line"></span><br><span class="line">   - 在三维空间或二维空间展示数据分布，可选 T-SNE、PCA 和 CUSTOM 方法。</span><br><span class="line"></span><br><span class="line">   - **mat**(torch.Tensor or numpy.array)- 需要绘制的数据，一个样本必须是一个向量形式。</span><br><span class="line"></span><br><span class="line">     **shape** &#x3D; (N,D)，N 是样本数，D 是特征维数。</span><br><span class="line"></span><br><span class="line">     **metadata**(list)- 数据的标签，是一个 list，长度为 N。</span><br><span class="line"></span><br><span class="line">     **label_img**(torch.Tensor)- 空间中展示的图片，shape &#x3D; (N,C,H,W)。</span><br><span class="line"></span><br><span class="line">     **global_step**(int)- Global step value to record，不理解这里有何用处呢？知道的朋友补充一下吧。</span><br><span class="line"></span><br><span class="line">     **tag**(string)- 标签</span><br><span class="line"></span><br><span class="line">8. add_text：&#96;add_text(tag, text_string, global_step&#x3D;None, walltime&#x3D;None)&#96;</span><br><span class="line"></span><br><span class="line">   - 记录文字</span><br><span class="line"></span><br><span class="line">9. add_video：&#96;add_video(tag, vid_tensor, global_step&#x3D;None, fps&#x3D;4, walltime&#x3D;None)&#96;</span><br><span class="line"></span><br><span class="line">   - 记录 video</span><br><span class="line"></span><br><span class="line">10. add_figure：&#96;add_figure(tag, figure, global_step&#x3D;None, close&#x3D;True, walltime&#x3D;None)&#96;</span><br><span class="line"></span><br><span class="line">    - 添加 matplotlib 图片到图像中</span><br><span class="line"></span><br><span class="line">11. add_image_with_boxes：&#96;add_image_with_boxes(tag, img_tensor, box_tensor, global_step&#x3D;None, walltime&#x3D;None, **kwargs)&#96;</span><br><span class="line"></span><br><span class="line">    - 图像中绘制 Box，目标检测中会用到</span><br><span class="line"></span><br><span class="line">12. add_pr_curve：&#96;add_pr_curve(tag, labels, predictions, global_step&#x3D;None, num_thresholds&#x3D;127, weights&#x3D;None, walltime&#x3D;None)&#96;</span><br><span class="line"></span><br><span class="line">    - 绘制 PR 曲线</span><br><span class="line"></span><br><span class="line">13. add_pr_curve_raw：&#96;add_pr_curve_raw(tag, true_positive_counts, false_positive_counts, true_negative_counts, false_negative_counts, precision, recall, global_step&#x3D;None, num_thresholds&#x3D;127, weights&#x3D;None, walltime&#x3D;None)&#96;</span><br><span class="line"></span><br><span class="line">    - 从原始数据上绘制 PR 曲线</span><br><span class="line"></span><br><span class="line">14. export_scalars_to_json：&#96;export_scalars_to_json(path)&#96;</span><br><span class="line"></span><br><span class="line">    - 将 scalars 信息保存到 json 文件，便于后期使用</span><br><span class="line"></span><br><span class="line">#### 卷积核可视化 </span><br><span class="line"></span><br><span class="line">- 神经网络中最重要的就是权值，而人们对神经网络理解有限，所以我们需要通过尽可能了解权值来帮助诊断网络的训练情况。除了查看权值分布图和多折线分位图，还可以对卷积核权值进行可视化，来辅助我们分析网络。对卷积核权值进行可视化，在一定程度上帮助我们诊断网络的训练好坏，因此对卷积核权值的可视化十分有必要。</span><br><span class="line">- 可视化原理很简单，对单个卷积核进行“归一化”至 0～255，然后将其展现出来即可，这一系列操作可以借助 TensorboardX 的 add_image 来实现。</span><br><span class="line">- 决定一张特征图需要的卷积核的维度由输入通道决定，生成的特征图数量由卷积核的数量决定。</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;python</span><br><span class="line">import os</span><br><span class="line">import torch</span><br><span class="line">import torchvision.utils as vutils</span><br><span class="line">from tensorboardX import SummaryWriter</span><br><span class="line">import torch.nn as nn</span><br><span class="line">import torch.nn.functional as F</span><br><span class="line"></span><br><span class="line">net &#x3D; Net()  # 创建一个网络</span><br><span class="line">pretrained_dict &#x3D; torch.load(os.path.join(&quot;..&quot;, &quot;2_model&quot;, &quot;net_params.pkl&quot;))</span><br><span class="line">net.load_state_dict(pretrained_dict)</span><br><span class="line"></span><br><span class="line">writer &#x3D; SummaryWriter(log_dir&#x3D;os.path.join(&quot;..&quot;, &quot;..&quot; &quot;Result&quot;, &quot;visual_weights&quot;))</span><br><span class="line">params &#x3D; net.state_dict()</span><br><span class="line">for k, v in params.items():</span><br><span class="line">    if &#39;conv&#39; in k and &#39;weight&#39; in k:</span><br><span class="line"></span><br><span class="line">        c_int &#x3D; v.size()[1]  # 输入层通道数</span><br><span class="line">        c_out &#x3D; v.size()[0]  # 输出层通道数</span><br><span class="line"></span><br><span class="line">        # 以feature map为单位，绘制一组卷积核，一张feature map对应的卷积核个数为输入通道数</span><br><span class="line">        for j in range(c_out):</span><br><span class="line">            print(k, v.size(), j)</span><br><span class="line">            kernel_j &#x3D; v[j, :, :, :].unsqueeze(1)  # 压缩维度，为make_grid制作输入</span><br><span class="line">            kernel_grid &#x3D; vutils.make_grid(kernel_j, normalize&#x3D;True, scale_each&#x3D;True, nrow&#x3D;c_int)  # 1*输入通道数, w, h</span><br><span class="line">            writer.add_image(k + &#39;_split_in_channel&#39;, kernel_grid, global_step&#x3D;j)  # j 表示feature map数</span><br><span class="line"></span><br><span class="line">        # 将一个卷积层的卷积核绘制在一起，每一行是一个 feature map 的卷积核</span><br><span class="line">        k_w, k_h &#x3D; v.size()[-1], v.size()[-2]</span><br><span class="line">        kernel_all &#x3D; v.view(-1, 1, k_w, k_h)</span><br><span class="line">        kernel_grid &#x3D; vutils.make_grid(kernel_all, normalize&#x3D;True, scale_each&#x3D;True, nrow&#x3D;c_int)  # 1*输入通道数, w, h</span><br><span class="line">        writer.add_image(k + &#39;_all&#39;, kernel_grid, global_step&#x3D;666)</span><br><span class="line">writer.close()</span><br></pre></td></tr></table></figure>
+#### 特征图可视化</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>获取图片，将其转换成模型输入前的数据格式，即一系列 transform，</p>
+</li>
+<li><p>获取模型各层操作，手动的执行每一层操作，拿到所需的 feature maps，</p>
+</li>
+<li><p>借助 tensorboardX 进行绘制。</p>
+</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torchvision.utils <span class="keyword">as</span> vutils</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> tensorboardX <span class="keyword">import</span> SummaryWriter</span><br><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"><span class="keyword">import</span> torchvision.transforms <span class="keyword">as</span> transforms</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line">sys.path.append(<span class="string">&quot;..&quot;</span>)</span><br><span class="line"><span class="keyword">from</span> utils.utils <span class="keyword">import</span> MyDataset, Net, normalize_invert</span><br><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> DataLoader</span><br><span class="line"></span><br><span class="line">vis_layer = <span class="string">&#x27;conv1&#x27;</span></span><br><span class="line">log_dir = os.path.join(<span class="string">&quot;..&quot;</span>, <span class="string">&quot;..&quot;</span> <span class="string">&quot;Result&quot;</span>, <span class="string">&quot;visual_featuremaps&quot;</span>)</span><br><span class="line">txt_path = os.path.join(<span class="string">&quot;..&quot;</span>, <span class="string">&quot;..&quot;</span>, <span class="string">&quot;Data&quot;</span>, <span class="string">&quot;visual.txt&quot;</span>)</span><br><span class="line">pretrained_path = os.path.join(<span class="string">&quot;..&quot;</span>, <span class="string">&quot;..&quot;</span>, <span class="string">&quot;Data&quot;</span>, <span class="string">&quot;net_params_72p.pkl&quot;</span>)</span><br><span class="line"></span><br><span class="line">net = Net()</span><br><span class="line">net.load_state_dict(torch.load(pretrained_path))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据预处理</span></span><br><span class="line">normMean = [<span class="number">0.49139968</span>, <span class="number">0.48215827</span>, <span class="number">0.44653124</span>]</span><br><span class="line">normStd = [<span class="number">0.24703233</span>, <span class="number">0.24348505</span>, <span class="number">0.26158768</span>]</span><br><span class="line">testTransform = transforms.Compose([</span><br><span class="line">    transforms.Resize((<span class="number">32</span>, <span class="number">32</span>)),</span><br><span class="line">    transforms.ToTensor(),</span><br><span class="line">    transforms.Normalize(normMean, normStd)</span><br><span class="line">])</span><br><span class="line"><span class="comment"># 载入数据</span></span><br><span class="line">test_data = MyDataset(txt_path=txt_path, transform=testTransform)</span><br><span class="line">test_loader = DataLoader(dataset=test_data, batch_size=<span class="number">1</span>)</span><br><span class="line">img, label = <span class="built_in">iter</span>(test_loader).<span class="built_in">next</span>()</span><br><span class="line"></span><br><span class="line">x = img</span><br><span class="line">writer = SummaryWriter(log_dir=log_dir)</span><br><span class="line"><span class="keyword">for</span> name, layer <span class="keyword">in</span> net._modules.items():</span><br><span class="line">    <span class="comment"># 为fc层预处理x</span></span><br><span class="line">    x = x.view(x.size(<span class="number">0</span>), -<span class="number">1</span>) <span class="keyword">if</span> <span class="string">&quot;fc&quot;</span> <span class="keyword">in</span> name <span class="keyword">else</span> x</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 对x执行单层运算</span></span><br><span class="line">    x = layer(x)</span><br><span class="line">    print(x.size())</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 由于__init__()相较于forward()缺少relu操作，需要手动增加</span></span><br><span class="line">    x = F.relu(x) <span class="keyword">if</span> <span class="string">&#x27;conv&#x27;</span> <span class="keyword">in</span> name <span class="keyword">else</span> x</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 依据选择的层，进行记录feature maps</span></span><br><span class="line">    <span class="keyword">if</span> name == vis_layer:</span><br><span class="line">        <span class="comment"># 绘制feature maps</span></span><br><span class="line">        x1 = x.transpose(<span class="number">0</span>, <span class="number">1</span>)  <span class="comment"># C，B, H, W  ---&gt; B，C, H, W</span></span><br><span class="line">        img_grid = vutils.make_grid(x1, normalize=<span class="literal">True</span>, scale_each=<span class="literal">True</span>, nrow=<span class="number">2</span>)  <span class="comment"># B，C, H, W</span></span><br><span class="line">        writer.add_image(vis_layer + <span class="string">&#x27;_feature_maps&#x27;</span>, img_grid, global_step=<span class="number">666</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 绘制原始图像</span></span><br><span class="line">        img_raw = normalize_invert(img, normMean, normStd)  <span class="comment"># 图像去标准化</span></span><br><span class="line">        img_raw = np.array(img_raw * <span class="number">255</span>).clip(<span class="number">0</span>, <span class="number">255</span>).squeeze().astype(<span class="string">&#x27;uint8&#x27;</span>)</span><br><span class="line">        writer.add_image(<span class="string">&#x27;raw img&#x27;</span>, img_raw, global_step=<span class="number">666</span>)  <span class="comment"># j 表示feature map数</span></span><br><span class="line">writer.close()</span><br></pre></td></tr></table></figure>
+<h4 id="梯度及权值分布可视化"><a href="#梯度及权值分布可视化" class="headerlink" title="梯度及权值分布可视化"></a>梯度及权值分布可视化</h4><h5 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h5><ul>
+<li>在网络训练过程中，我们常常会遇到梯度消失、梯度爆炸等问题，我们可以通过记录每个 epoch 的梯度的值来监测梯度的情况，还可以记录权值，分析权值更新的方向是否符合规律。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> DataLoader</span><br><span class="line"><span class="keyword">import</span> torchvision.transforms <span class="keyword">as</span> transforms</span><br><span class="line"><span class="keyword">from</span> torch.autograd <span class="keyword">import</span> Variable</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">import</span> torch.optim <span class="keyword">as</span> optim</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">sys.path.append(<span class="string">&quot;..&quot;</span>)</span><br><span class="line"><span class="keyword">from</span> utils.utils <span class="keyword">import</span> MyDataset, validate, show_confMat, Net</span><br><span class="line"><span class="keyword">from</span> tensorboardX <span class="keyword">import</span> SummaryWriter</span><br><span class="line">train_txt_path = os.path.join(<span class="string">&quot;..&quot;</span>, <span class="string">&quot;..&quot;</span>, <span class="string">&quot;Data&quot;</span>, <span class="string">&quot;train.txt&quot;</span>)</span><br><span class="line">valid_txt_path = os.path.join(<span class="string">&quot;..&quot;</span>, <span class="string">&quot;..&quot;</span>, <span class="string">&quot;Data&quot;</span>, <span class="string">&quot;valid.txt&quot;</span>)</span><br><span class="line"></span><br><span class="line">classes_name = [<span class="string">&#x27;plane&#x27;</span>, <span class="string">&#x27;car&#x27;</span>, <span class="string">&#x27;bird&#x27;</span>, <span class="string">&#x27;cat&#x27;</span>, <span class="string">&#x27;deer&#x27;</span>, <span class="string">&#x27;dog&#x27;</span>, <span class="string">&#x27;frog&#x27;</span>, <span class="string">&#x27;horse&#x27;</span>, <span class="string">&#x27;ship&#x27;</span>, <span class="string">&#x27;truck&#x27;</span>]</span><br><span class="line"></span><br><span class="line">train_bs = <span class="number">16</span></span><br><span class="line">valid_bs = <span class="number">16</span></span><br><span class="line">lr_init = <span class="number">0.001</span></span><br><span class="line">max_epoch = <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># log</span></span><br><span class="line">log_dir = os.path.join(<span class="string">&quot;..&quot;</span>, <span class="string">&quot;..&quot;</span>, <span class="string">&quot;Result&quot;</span>, <span class="string">&quot;hist_grad_weight&quot;</span>)</span><br><span class="line"></span><br><span class="line">writer = SummaryWriter(log_dir=log_dir)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ------------------------------------ step 1/4 : 加载数据-------------------------------------------------</span></span><br><span class="line"><span class="comment"># 数据预处理设置</span></span><br><span class="line">normMean = [<span class="number">0.4948052</span>, <span class="number">0.48568845</span>, <span class="number">0.44682974</span>]</span><br><span class="line">normStd = [<span class="number">0.24580306</span>, <span class="number">0.24236229</span>, <span class="number">0.2603115</span>]</span><br><span class="line">trainTransform = transforms.Compose([</span><br><span class="line">    transforms.Resize(<span class="number">32</span>),</span><br><span class="line">    transforms.RandomCrop(<span class="number">32</span>, padding=<span class="number">4</span>),</span><br><span class="line">    transforms.ToTensor(),</span><br><span class="line">    transforms.Normalize(normMean, normStd)</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">validTransform = transforms.Compose([</span><br><span class="line">    transforms.ToTensor(),</span><br><span class="line">    transforms.Normalize(normMean, normStd)</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建MyDataset实例</span></span><br><span class="line">train_data = MyDataset(txt_path=train_txt_path, transform=trainTransform)</span><br><span class="line">valid_data = MyDataset(txt_path=valid_txt_path, transform=validTransform)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建DataLoder</span></span><br><span class="line">train_loader = DataLoader(dataset=train_data, batch_size=train_bs, shuffle=<span class="literal">True</span>)</span><br><span class="line">valid_loader = DataLoader(dataset=valid_data, batch_size=valid_bs)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ------------------------------------ step 2/4 : 网络初始化----------------------------------------------</span></span><br><span class="line">net = Net()  <span class="comment"># 创建一个网络</span></span><br><span class="line">net.initialize_weights()  <span class="comment"># 初始化权值</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ------------------------------------ step 3/4 : 定义损失函数和优化器 ------------------------------------</span></span><br><span class="line">criterion = nn.CrossEntropyLoss()  <span class="comment"># 选择损失函数</span></span><br><span class="line">optimizer = optim.SGD(net.parameters(), lr=lr_init, momentum=<span class="number">0.9</span>, dampening=<span class="number">0.1</span>)  <span class="comment"># 选择优化器</span></span><br><span class="line">scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=<span class="number">50</span>, gamma=<span class="number">0.1</span>)  <span class="comment"># 设置学习率下降策略</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ------------------------------------ step 4/4 : 训练 --------------------------------------------------</span></span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="built_in">range</span>(max_epoch):</span><br><span class="line">    loss_sigma = <span class="number">0.0</span>  <span class="comment"># 记录一个epoch的loss之和</span></span><br><span class="line">    correct = <span class="number">0.0</span></span><br><span class="line">    total = <span class="number">0.0</span></span><br><span class="line">    scheduler.step()  <span class="comment"># 更新学习率</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i, data <span class="keyword">in</span> <span class="built_in">enumerate</span>(train_loader):</span><br><span class="line">        <span class="comment"># 获取图片和标签</span></span><br><span class="line">        inputs, labels = data</span><br><span class="line">        inputs, labels = Variable(inputs), Variable(labels)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># forward, backward, update weights</span></span><br><span class="line">        optimizer.zero_grad()</span><br><span class="line">        outputs = net(inputs)</span><br><span class="line">        loss = criterion(outputs, labels)</span><br><span class="line">        loss.backward()</span><br><span class="line">        optimizer.step()</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 统计预测信息</span></span><br><span class="line">        _, predicted = torch.<span class="built_in">max</span>(outputs.data, <span class="number">1</span>)</span><br><span class="line">        total += labels.size(<span class="number">0</span>)</span><br><span class="line">        correct += (predicted == labels).squeeze().<span class="built_in">sum</span>().numpy()</span><br><span class="line">        loss_sigma += loss.item()</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 每10个iteration 打印一次训练信息，loss为10个iteration的平均</span></span><br><span class="line">        <span class="keyword">if</span> i % <span class="number">10</span> == <span class="number">9</span>:</span><br><span class="line">            loss_avg = loss_sigma / <span class="number">10</span></span><br><span class="line">            loss_sigma = <span class="number">0.0</span></span><br><span class="line">            print(<span class="string">&quot;Training: Epoch[&#123;:0&gt;3&#125;/&#123;:0&gt;3&#125;] Iteration[&#123;:0&gt;3&#125;/&#123;:0&gt;3&#125;] Loss: &#123;:.4f&#125; Acc:&#123;:.2%&#125;&quot;</span>.<span class="built_in">format</span>(</span><br><span class="line">                epoch + <span class="number">1</span>, max_epoch, i + <span class="number">1</span>, <span class="built_in">len</span>(train_loader), loss_avg, correct / total))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 每个epoch，记录梯度，权值</span></span><br><span class="line">    <span class="keyword">for</span> name, layer <span class="keyword">in</span> net.named_parameters():</span><br><span class="line">        writer.add_histogram(name + <span class="string">&#x27;_grad&#x27;</span>, layer.grad.cpu().data.numpy(), epoch)</span><br><span class="line">        writer.add_histogram(name + <span class="string">&#x27;_data&#x27;</span>, layer.cpu().data.numpy(), epoch)</span><br><span class="line"></span><br><span class="line">print(<span class="string">&#x27;Finished Training&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h5 id="可视化分析"><a href="#可视化分析" class="headerlink" title="可视化分析"></a>可视化分析</h5><h6 id="权值-weights-的监控"><a href="#权值-weights-的监控" class="headerlink" title="权值 weights 的监控"></a>权值 weights 的监控</h6><p>经过 100 个 epoch 的训练，来看看第一个卷积层的权值分布的变化。x 轴即变量大小，y 轴为 gloabl_step。</p>
+<p>图 1 x=0.306， y=0， 数值显示为 0.00，表示第 0 个 epoch 时，权值为 0.306 的个数为 0.00。 </p>
+<img src="/2021/09/PyTorch-Part2/image-20210914221527396.png" alt="image-20210914221527396" style="zoom:67%;">
+
+<p>图 2， x=0.306， y=85， 数值显示为 5.71，表示第 85 个 epoch 时，权值在 0.306 区间的有 5.71 个。</p>
+<img src="/2021/09/PyTorch-Part2/image-20210914221609780.png" alt="image-20210914221609780" style="zoom:67%;">
+
+<p>通过 HISTOGRAMS 可以看到第一个卷积层的权值随着训练的不断的“扩散”，一开始是个比较标准的高斯分布，并且最大值不会超过 0.3。</p>
+<p>而到了后期，权值会发散到 0.6+，这个问题也是需要关注的，若权值太大容易导致过拟合。因为模型的输出值会被该特征所主导，从而引起过拟合现象，这个可以通过权值衰减(weight_decay)来缓解。</p>
+<h6 id="偏置-bias-的监控"><a href="#偏置-bias-的监控" class="headerlink" title="偏置 bias 的监控"></a>偏置 bias 的监控</h6><p>通常会监控输出层的 bias 的大小，若有特别大，或者特别小的 bias，那么某一类别的召回率可能会很低，可以通过观察输出层的 bias 来诊断是否在这一环节出问题。</p>
+<p>从图上可以看到，一开始 10 个类别的 bias 都比较小，随着训练的进行，每个类别都有了自己的固定的 bias 大小。</p>
+<img src="/2021/09/PyTorch-Part2/image-20210914221837983.png" alt="image-20210914221837983" style="zoom:67%;">
+
+<h6 id="梯度的监控"><a href="#梯度的监控" class="headerlink" title="梯度的监控"></a>梯度的监控</h6><p>下图为第一个卷积层权值的梯度变化情况，可以看到，几乎都是服从高斯分布的。倘若前面几层的梯度非常小，那么就是梯度流通不畅导致的，可以考虑残差结构或者辅助损失层等 trick 来解决梯度消失。</p>
+<img src="/2021/09/PyTorch-Part2/image-20210914221932315.png" alt="image-20210914221932315" style="zoom:67%;">
+
+<h6 id="文末思考："><a href="#文末思考：" class="headerlink" title="文末思考："></a>文末思考：</h6><ol>
+<li><p>通过观察各层的梯度，权值分布，我们可以针对性的设置学习率，为那些梯度小的层设置更大的学习率，让那些层可以有效的更新。</p>
+</li>
+<li><p>对权值特别大的那些层，可以考虑为那一层设置更大的 weight_decay，是否能有效降低该层权值大小呢。</p>
+</li>
+<li><p>通过对梯度的观察，可以合理的设置梯度 clip 的值。</p>
+</li>
+</ol>
+<h4 id="混淆矩阵及其可视化"><a href="#混淆矩阵及其可视化" class="headerlink" title="混淆矩阵及其可视化"></a>混淆矩阵及其可视化</h4><p>混淆矩阵(Confusion Matrix)常用来观察分类结果，其是一个 N*N 的方阵，N 表示类别数。混淆矩阵的行表示真实类别，列表示预测类别。</p>
+<img src="/2021/09/PyTorch-Part2/image-20210914222323808.png" alt="image-20210914222323808" style="zoom: 67%;">
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show_confMat</span>(<span class="params">confusion_mat, classes_name, set_name, out_dir</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    可视化混淆矩阵，保存png格式</span></span><br><span class="line"><span class="string">    :param confusion_mat: nd-array</span></span><br><span class="line"><span class="string">    :param classes_name: list,各类别名称</span></span><br><span class="line"><span class="string">    :param set_name: str, eg: &#x27;valid&#x27;, &#x27;train&#x27;</span></span><br><span class="line"><span class="string">    :param out_dir: str, png输出的文件夹</span></span><br><span class="line"><span class="string">    :return:</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment"># 归一化</span></span><br><span class="line">    confusion_mat_N = confusion_mat.copy()</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(classes_name)):</span><br><span class="line">        confusion_mat_N[i, :] = confusion_mat[i, :] / confusion_mat[i, :].<span class="built_in">sum</span>()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 获取颜色</span></span><br><span class="line">    cmap = plt.cm.get_cmap(<span class="string">&#x27;Greys&#x27;</span>)  <span class="comment"># 更多颜色: http://matplotlib.org/examples/color/colormaps_reference.html</span></span><br><span class="line">    plt.imshow(confusion_mat_N, cmap=cmap)</span><br><span class="line">    plt.colorbar()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 设置文字</span></span><br><span class="line">    xlocations = np.array(<span class="built_in">range</span>(<span class="built_in">len</span>(classes_name)))</span><br><span class="line">    plt.xticks(xlocations, classes_name, rotation=<span class="number">60</span>)</span><br><span class="line">    plt.yticks(xlocations, classes_name)</span><br><span class="line">    plt.xlabel(<span class="string">&#x27;Predict label&#x27;</span>)</span><br><span class="line">    plt.ylabel(<span class="string">&#x27;True label&#x27;</span>)</span><br><span class="line">    plt.title(<span class="string">&#x27;Confusion_Matrix_&#x27;</span> + set_name)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 打印数字</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(confusion_mat_N.shape[<span class="number">0</span>]):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(confusion_mat_N.shape[<span class="number">1</span>]):</span><br><span class="line">            plt.text(x=j, y=i, s=<span class="built_in">int</span>(confusion_mat[i, j]), va=<span class="string">&#x27;center&#x27;</span>, ha=<span class="string">&#x27;center&#x27;</span>, color=<span class="string">&#x27;red&#x27;</span>, fontsize=<span class="number">10</span>)</span><br><span class="line">    <span class="comment"># 保存</span></span><br><span class="line">    plt.savefig(os.path.join(out_dir, <span class="string">&#x27;Confusion_Matrix_&#x27;</span> + set_name + <span class="string">&#x27;.png&#x27;</span>))</span><br><span class="line">    plt.close()</span><br></pre></td></tr></table></figure>
+<h3 id="wandb-待补充"><a href="#wandb-待补充" class="headerlink" title="wandb(待补充)"></a>wandb(待补充)</h3><blockquote>
+<p>GitHub：<a target="_blank" rel="noopener" href="https://github.com/wandb/client">https://github.com/wandb/client</a></p>
+<p>文档：<a target="_blank" rel="noopener" href="https://docs.wandb.ai/">https://docs.wandb.ai/</a></p>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">NephrenCake</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://nephrencake.gitee.io/2021/09/PyTorch-Part2/">https://nephrencake.gitee.io/2021/09/PyTorch-Part2/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://nephrencake.gitee.io" target="_blank">浅幽丶奈芙莲的个人博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/2021/09/PyTorch-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/%E4%BA%8Ced10.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/09/PyTorch-Part3/"><img class="prev-cover" src="/2021/09/PyTorch-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/%E4%BA%8Ced10.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">PyTorch-Part3</div></div></a></div><div class="next-post pull-right"><a href="/2021/09/PyTorch-Part1/"><img class="next-cover" src="/2021/09/PyTorch-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/%E4%BA%8Ced10.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">PyTorch-Part1</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#PyTorch-Part2%E2%80%94%E2%80%94Pytorch%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83"><span class="toc-number">1.</span> <span class="toc-text">PyTorch-Part2——Pytorch模型训练</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE-Data"><span class="toc-number">1.1.</span> <span class="toc-text">数据(Data)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E5%88%92%E5%88%86"><span class="toc-number">1.1.1.</span> <span class="toc-text">数据集划分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PyTorch%E8%AF%BB%E5%8F%96%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="toc-number">1.1.2.</span> <span class="toc-text">PyTorch读取数据集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#transforms-%E7%9A%84%E4%BA%8C%E5%8D%81%E4%BA%8C%E4%B8%AA%E6%96%B9%E6%B3%95-%E5%B9%B2%E8%B4%A7"><span class="toc-number">1.1.3.</span> <span class="toc-text">transforms 的二十二个方法(干货)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97-Normalize-%E6%89%80%E7%94%A8%E5%9D%87%E5%80%BC%E5%92%8C%E6%96%B9%E5%B7%AE"><span class="toc-number">1.1.4.</span> <span class="toc-text">计算 Normalize 所用均值和方差</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B-Model"><span class="toc-number">1.2.</span> <span class="toc-text">模型(Model)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E5%AE%9A%E4%B9%89"><span class="toc-number">1.2.1.</span> <span class="toc-text">模型定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Sequential"><span class="toc-number">1.2.2.</span> <span class="toc-text">Sequential</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%83%E5%80%BC%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">1.2.3.</span> <span class="toc-text">权值初始化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9D%83%E5%80%BC%E5%88%9D%E5%A7%8B%E5%8C%96%E6%B5%81%E7%A8%8B"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">权值初始化流程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9D%83%E5%80%BC%E5%88%9D%E5%A7%8B%E5%8C%96%E7%9A%84%E5%8D%81%E7%A7%8D%E6%96%B9%E6%B3%95-%E5%B9%B2%E8%B4%A7"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">权值初始化的十种方法(干货)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E5%8A%A0%E8%BD%BD%E4%B8%8E%E4%BF%9D%E5%AD%98-Finetune"><span class="toc-number">1.2.4.</span> <span class="toc-text">模型加载与保存 Finetune</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8D%E5%90%8C%E5%B1%82%E8%AE%BE%E7%BD%AE%E4%B8%8D%E5%90%8C%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%8E%87"><span class="toc-number">1.2.5.</span> <span class="toc-text">不同层设置不同的学习率</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0-Loss-Function"><span class="toc-number">1.3.</span> <span class="toc-text">损失函数(Loss Function)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#PyTorch-%E7%9A%84%E5%8D%81%E4%B8%83%E4%B8%AA%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0-%E5%B9%B2%E8%B4%A7"><span class="toc-number">1.3.1.</span> <span class="toc-text">PyTorch 的十七个损失函数(干货)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E5%99%A8-Optimizer"><span class="toc-number">1.4.</span> <span class="toc-text">优化器(Optimizer)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E5%99%A8%E7%B1%BB"><span class="toc-number">1.4.1.</span> <span class="toc-text">优化器类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E7%BB%84"><span class="toc-number">1.4.1.1.</span> <span class="toc-text">参数组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E5%99%A8%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-number">1.4.1.2.</span> <span class="toc-text">优化器常用方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PyTorch-%E7%9A%84%E5%8D%81%E4%B8%AA%E4%BC%98%E5%8C%96%E5%99%A8-%E5%B9%B2%E8%B4%A7"><span class="toc-number">1.4.2.</span> <span class="toc-text">PyTorch 的十个优化器(干货)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PyTorch-%E7%9A%84%E5%85%AD%E4%B8%AA%E5%AD%A6%E4%B9%A0%E7%8E%87%E8%B0%83%E6%95%B4%E6%96%B9%E6%B3%95-%E5%B9%B2%E8%B4%A7"><span class="toc-number">1.4.3.</span> <span class="toc-text">PyTorch 的六个学习率调整方法(干货)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#scheduler-step"><span class="toc-number">1.4.4.</span> <span class="toc-text">scheduler.step()</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="toc-number">1.5.</span> <span class="toc-text">可视化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#TensorBoardX"><span class="toc-number">1.5.1.</span> <span class="toc-text">TensorBoardX</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-number">1.5.1.1.</span> <span class="toc-text">常用方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A2%AF%E5%BA%A6%E5%8F%8A%E6%9D%83%E5%80%BC%E5%88%86%E5%B8%83%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="toc-number">1.5.1.2.</span> <span class="toc-text">梯度及权值分布可视化</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.5.1.2.1.</span> <span class="toc-text">代码实现</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8F%AF%E8%A7%86%E5%8C%96%E5%88%86%E6%9E%90"><span class="toc-number">1.5.1.2.2.</span> <span class="toc-text">可视化分析</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E6%9D%83%E5%80%BC-weights-%E7%9A%84%E7%9B%91%E6%8E%A7"><span class="toc-number">1.5.1.2.2.1.</span> <span class="toc-text">权值 weights 的监控</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%81%8F%E7%BD%AE-bias-%E7%9A%84%E7%9B%91%E6%8E%A7"><span class="toc-number">1.5.1.2.2.2.</span> <span class="toc-text">偏置 bias 的监控</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E6%A2%AF%E5%BA%A6%E7%9A%84%E7%9B%91%E6%8E%A7"><span class="toc-number">1.5.1.2.2.3.</span> <span class="toc-text">梯度的监控</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E6%96%87%E6%9C%AB%E6%80%9D%E8%80%83%EF%BC%9A"><span class="toc-number">1.5.1.2.2.4.</span> <span class="toc-text">文末思考：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B7%B7%E6%B7%86%E7%9F%A9%E9%98%B5%E5%8F%8A%E5%85%B6%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="toc-number">1.5.1.3.</span> <span class="toc-text">混淆矩阵及其可视化</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#wandb-%E5%BE%85%E8%A1%A5%E5%85%85"><span class="toc-number">1.5.2.</span> <span class="toc-text">wandb(待补充)</span></a></li></ol></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 By NephrenCake</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">这里是浅幽丶奈芙莲的个人博客~</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> {preloader.endLoading()})</script><div class="js-pjax"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><canvas class="fireworks" mobile="true"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script></div></body></html>

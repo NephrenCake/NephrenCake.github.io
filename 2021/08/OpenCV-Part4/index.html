@@ -1,0 +1,361 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>OpenCV-Part4 | 浅幽丶奈芙莲的个人博客</title><meta name="author" content="NephrenCake"><meta name="copyright" content="NephrenCake"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="图像处理（下）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenCV-Part4">
+<meta property="og:url" content="https://nephrencake.gitee.io/2021/08/OpenCV-Part4/index.html">
+<meta property="og:site_name" content="浅幽丶奈芙莲的个人博客">
+<meta property="og:description" content="图像处理（下）">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://nephrencake.gitee.io/2021/08/OpenCV-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/%E4%BA%8Ced08.jpg">
+<meta property="article:published_time" content="2021-08-31T15:15:26.000Z">
+<meta property="article:modified_time" content="2021-10-26T15:11:10.744Z">
+<meta property="article:author" content="NephrenCake">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://nephrencake.gitee.io/2021/08/OpenCV-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/%E4%BA%8Ced08.jpg"><link rel="shortcut icon" href="/img/favicon.jpg"><link rel="canonical" href="https://nephrencake.gitee.io/2021/08/OpenCV-Part4/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}
+
+// https://stackoverflow.com/questions/16839698/jquery-getscript-alternative-in-native-javascript
+const getScript = url => new Promise((resolve, reject) => {
+  const script = document.createElement('script')
+  script.src = url
+  script.async = true
+  script.onerror = reject
+  script.onload = script.onreadystatechange = function() {
+    const loadState = this.readyState
+    if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+    script.onload = script.onreadystatechange = null
+    resolve()
+  }
+  document.head.appendChild(script)
+})</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-10-26 23:11:10'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><link rel="stylesheet" href="/css/background.css"><link rel="stylesheet" href="/css/mouse.css"><link rel="stylesheet" href="/css/scrollbar.css"><link rel="stylesheet" href="/css/font.css"><link rel="stylesheet" href="/css/iconfont.css"><meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="浅幽丶奈芙莲的个人博客" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">79</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">9</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/photo/"><i class="fa-fw fas fa-heart"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/2021/08/OpenCV-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/%E4%BA%8Ced08.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">浅幽丶奈芙莲的个人博客</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/photo/"><i class="fa-fw fas fa-heart"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">OpenCV-Part4</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-08-31T15:15:26.000Z" title="发表于 2021-08-31 23:15:26">2021-08-31</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-10-26T15:11:10.744Z" title="更新于 2021-10-26 23:11:10">2021-10-26</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/OpenCV/">OpenCV</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4.5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>18分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="OpenCV-Part4——图像处理（下）"><a href="#OpenCV-Part4——图像处理（下）" class="headerlink" title="OpenCV-Part4——图像处理（下）"></a>OpenCV-Part4——图像处理（下）</h1><p>[TOC]</p>
+<h2 id="直方图"><a href="#直方图" class="headerlink" title="直方图"></a>直方图</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><ul>
+<li><p>直方图，是在X轴上具有像素值（不总是从0到255的范围），在Y轴上具有图像中相应像素数的图。</p>
+</li>
+<li><p>直方图，可以用来总体了解图像的强度分布。</p>
+</li>
+<li><p>直方图只是理解图像的另一种方式。通过查看图像的直方图，可以直观地了解该图像的对比度，亮度，强度分布等。</p>
+</li>
+<li><p><img src="/2021/08/OpenCV-Part4/histogram_sample.jpg" alt="img"></p>
+<p>如图，此直方图是针对灰度图像而非彩色图像绘制的。其左侧区域显示图像中较暗像素的数量，而右侧区域则显示明亮像素的数量。</p>
+<p>从该直方图中，可以看到暗区域多于亮区域，而中间灰度值的数量就非常少。</p>
+</li>
+<li><p>有关直方图的术语：</p>
+<ul>
+<li>BINS：像素值的区间段数。将整个直方图在 x 轴上分成 n 个子部分，每个子部分的值就是其中所有像素数的总和，每个子部分都称为一个 BIN 。当 x 轴采用 255 个值来展示直方图时，BINS=255。可用于对具体像素精度不在乎，而意图找固定区间段划分的像素总量的情况。在 OpenCV 中也称作 histSize 。</li>
+<li>DIMS：收集数据的参数量。当仅收集关于强度值的一件事的数据时，这里是1。</li>
+<li>RANGE：测量的强度值范围。通常为[0, 256]，即所有强度值。</li>
+</ul>
+</li>
+</ul>
+<h3 id="查找并绘制直方图"><a href="#查找并绘制直方图" class="headerlink" title="查找并绘制直方图"></a>查找并绘制直方图</h3><h4 id="OpenCV计算直方图"><a href="#OpenCV计算直方图" class="headerlink" title="OpenCV计算直方图"></a>OpenCV计算直方图</h4><ul>
+<li><code>cv2.calcHist(images，channels，mask，histSize，ranges，hist，accumulate)</code>：查找直方图。<ul>
+<li><code>images</code>：<code>uint8</code>或<code>float32</code>类型的源图像。需要由列表[img]包裹。</li>
+<li><code>channels</code>：计算直方图的通道索引。对于灰度图像，则其值为[0]。对于彩色图像，可以传递[0]、[1]或[2]分别计算蓝色，绿色或红色通道的直方图。需要由列表[channels]包裹。</li>
+<li><code>mask</code>：图像掩码。None：查找完整图像的直方图。否则为查找特定区域mask掩码的直方图。</li>
+<li><code>histSize</code>：像素值的区间段数。需要放在方括号中。对于全尺寸，我们通过[256]。需要由列表[histSize]包裹。</li>
+<li><code>ranges</code>：测量的强度值范围。通常为<code>[0, 256]</code>。</li>
+</ul>
+</li>
+<li>Numpy 也有计算直方图的函数，但是 <code>cv2.calcHist()</code> 比 <code>np.histogram()</code> 快大约40倍。因此，尽可能使用OpenCV函数。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">img = cv2.imread(<span class="string">&#x27;home.jpg&#x27;</span>, <span class="number">0</span>)</span><br><span class="line">hist = cv2.calcHist([img], channels=[<span class="number">0</span>], mask=<span class="literal">None</span>, histSize=[<span class="number">256</span>], ranges=[<span class="number">0</span>, <span class="number">256</span>])</span><br></pre></td></tr></table></figure>
+<h4 id="Matplotlib绘制直方图"><a href="#Matplotlib绘制直方图" class="headerlink" title="Matplotlib绘制直方图"></a>Matplotlib绘制直方图</h4><ol>
+<li><p><code>matplotlib.pyplot.hist()</code> ：Matplotlib自带直方图绘图功能，能够直接找到直方图并将其绘制。而无需使用 <code>cv2.calcHist() </code>查找直方图。</p>
+<ul>
+<li><pre><code class="python">import numpy as np
+import cv2
+from matplotlib import pyplot as plt
+
+image = cv2.imread(&#39;home.jpg&#39;)
+# numpy的ravel函数功能是将多维数组降为一维数组
+plt.hist(image.ravel(), bins=256, range=[0, 256], histtype=&quot;step&quot;, color=&#39;black&#39;)  # 对整图的，需要注意和灰度是有区别的！
+plt.hist(image[:, :, 0].ravel(), bins=256, range=[0, 256], histtype=&quot;step&quot;, color=&#39;blue&#39;)
+plt.hist(image[:, :, 1].ravel(), bins=256, range=[0, 256], histtype=&quot;step&quot;, color=&#39;green&#39;)
+plt.hist(image[:, :, 2].ravel(), bins=256, range=[0, 256], histtype=&quot;step&quot;, color=&#39;red&#39;)
+plt.show()
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">   </span><br><span class="line">2. &#96;cv2.calcHist()&#96;+&#96;plt.plot()&#96;：先找到直方图数据，再使用matplotlib的法线图。分离了数据和画图，更符合程序解耦设计。</span><br><span class="line"></span><br><span class="line">   - &#96;&#96;&#96;python</span><br><span class="line">     import numpy as np</span><br><span class="line">     import cv2</span><br><span class="line">     from matplotlib import pyplot as plt</span><br><span class="line">     </span><br><span class="line">     image &#x3D; cv2.imread(&#39;home.jpg&#39;)</span><br><span class="line">     color &#x3D; [&quot;blue&quot;, &quot;green&quot;, &quot;red&quot;]</span><br><span class="line">     ranges &#x3D; [0, 256]</span><br><span class="line">     # 同时列出数据下标和数据</span><br><span class="line">     for i, color in enumerate(color):</span><br><span class="line">         hist &#x3D; cv2.calcHist([image], channels&#x3D;[i], mask&#x3D;None, histSize&#x3D;[256], ranges&#x3D;ranges)</span><br><span class="line">         print(type(hist), hist.shape)  # &lt;class &#39;numpy.ndarray&#39;&gt;  (256, 1)</span><br><span class="line">         plt.plot(hist, color&#x3D;color)</span><br><span class="line">         plt.xlim(ranges)</span><br><span class="line">     plt.show()</span><br></pre></td></tr></table></figure>
+![img](OpenCV-Part4/histogram_rgb_plot.jpg)
+</code></pre>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="直方图均衡化"><a href="#直方图均衡化" class="headerlink" title="直方图均衡化"></a>直方图均衡化</h3><h4 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h4><ul>
+<li>直方图均衡化，可以使限制在某一区间的色彩亮度均衡到整个色彩区间上，使像素在直方图上的分布更均匀。</li>
+<li>直方图均衡化，是用来改善图像的全局亮度和对比度的。例如，在对人脸数据进行训练之前，对人脸图像进行直方图均衡化处理，使其具有相同的光照条件。</li>
+<li><img src="/2021/08/OpenCV-Part4/histogram_equalization.png" alt="img"></li>
+</ul>
+<h4 id="全局均衡化"><a href="#全局均衡化" class="headerlink" title="全局均衡化"></a>全局均衡化</h4><ul>
+<li><code>cv2.equalizeHist()</code>：只能输入灰度图像，输出直方图均衡化后的图像。 </li>
+<li><code>np.hstack((img1, img2))</code>：横向拼接。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">equ = cv2.equalizeHist(img)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;equalization&#x27;</span>, np.hstack((img, equ)))  <span class="comment"># 并排显示</span></span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/2021/08/OpenCV-Part4/equalization_opencv.jpg" alt="img"></p>
+<h4 id="自适应直方图均衡化-CLAHE"><a href="#自适应直方图均衡化-CLAHE" class="headerlink" title="自适应直方图均衡化(CLAHE)"></a>自适应直方图均衡化(CLAHE)</h4><ul>
+<li>当一张图同时拥有较多暗部和亮部时，全局均衡化极其容易丢失信息。</li>
+<li>自适应直方图均衡，可以将图像分成称为 tiles 的小块（在 OpenCV 中，tileSize 默认为 8x8 ）。并在每个较小的区域中，进行直方图均衡。</li>
+<li>如果在 tiles 中有噪音，则应用了对比度限制：任何直方图 bin 超出指定的对比度限制（在OpenCV中默认为40），则在应用直方图均衡之前，将这些像素裁剪并均匀地分布到其他bin。</li>
+<li><code>cv2.createCLAHE(clipLimit, tileGridSize)</code>：CLAHE 自适应直方图均衡化。<ul>
+<li><code>clipLimit</code>：颜色对比度的阈值。</li>
+<li><code>titleGridSize</code>：进行像素均衡化的网格大小。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cl1 = cv2.createCLAHE(clipLimit=<span class="number">2.0</span>, tileGridSize=(<span class="number">8</span>, <span class="number">8</span>)).apply(img)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;equalization&#x27;</span>, np.hstack((img, cl1)))  <span class="comment"># 并排显示</span></span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<img src="/2021/08/OpenCV-Part4/image-20210902221852779.png" alt="image-20210902221852779" style="zoom:67%;">
+
+<h3 id="二维直方图"><a href="#二维直方图" class="headerlink" title="二维直方图"></a>二维直方图</h3><h4 id="定义-2"><a href="#定义-2" class="headerlink" title="定义"></a>定义</h4><ul>
+<li>上述都是在计算一维直方图，因为仅考虑一个特征，即像素的灰度强度值。</li>
+<li>但是在二维直方图中，需要考虑两个特征：每个像素的 <code>色相(Hue)</code> 和 <code>饱和度(Saturation)</code> 值。</li>
+<li>二维直方图，通常用于查找颜色直方图。</li>
+</ul>
+<h4 id="查找并绘制直方图-1"><a href="#查找并绘制直方图-1" class="headerlink" title="查找并绘制直方图"></a>查找并绘制直方图</h4><h5 id="OpenCV计算二维直方图"><a href="#OpenCV计算二维直方图" class="headerlink" title="OpenCV计算二维直方图"></a>OpenCV计算二维直方图</h5><ul>
+<li><p>对于颜色直方图，我们需要将图像从BGR转换为HSV。对于一维直方图，我们从BGR转换为灰度</p>
+</li>
+<li><p><code>cv2.calcHist()</code>：对于二维直方图，使用相同的函数，但其参数将进行如下修改：</p>
+<ul>
+<li><code>channels=[0, 1]</code>：因为需要同时处理H和S平面。</li>
+<li><code>histSize=[180, 256]</code>：对于H平面为180，对于S平面为256。</li>
+<li><code>ranges=[0, 180, 0, 256]</code>：色相值介于0和180之间，饱和度介于0和256之间。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;home.jpg&#x27;</span>)</span><br><span class="line">hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)</span><br><span class="line">hist = cv2.calcHist([hsv], channels=[<span class="number">0</span>, <span class="number">1</span>], mask=<span class="literal">None</span>, histSize=[<span class="number">180</span>, <span class="number">256</span>], ranges=[<span class="number">0</span>, <span class="number">180</span>, <span class="number">0</span>, <span class="number">256</span>])</span><br></pre></td></tr></table></figure>
+<h5 id="Matplotlib绘制二维直方图"><a href="#Matplotlib绘制二维直方图" class="headerlink" title="Matplotlib绘制二维直方图"></a>Matplotlib绘制二维直方图</h5><ul>
+<li>matplotlib.pyplot.imshow()：绘制2D直方图。</li>
+<li>使用此功能时，插值法应采用最近邻以获得更好的结果。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">&quot;test.jpg&quot;</span>)</span><br><span class="line">hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)</span><br><span class="line">hist = cv2.calcHist([hsv], channels=[<span class="number">0</span>, <span class="number">1</span>], mask=<span class="literal">None</span>, histSize=[<span class="number">180</span>, <span class="number">256</span>], ranges=[<span class="number">0</span>, <span class="number">180</span>, <span class="number">0</span>, <span class="number">256</span>])</span><br><span class="line">plt.imshow(hist, interpolation=<span class="string">&#x27;nearest&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>下面是输入图像及其颜色直方图。X轴显示S值，Y轴显示色相。</p>
+<img src="http://qiniu.aihubs.net/2dhist_matplotlib.jpg" alt="img" style="zoom:200%;">
+</li>
+<li><p>在该直方图中，可以在H = 100 和 S = 200 附近看到一些较高的值，对应于天空的蓝色。同样，在 H = 25 和 S = 100 附近可以看到另一个峰值，对应于宫殿的黄色。</p>
+</li>
+</ul>
+<h3 id="YUV色彩空间对彩色图像做直方图均衡化"><a href="#YUV色彩空间对彩色图像做直方图均衡化" class="headerlink" title="YUV色彩空间对彩色图像做直方图均衡化"></a>YUV色彩空间对彩色图像做直方图均衡化</h3><ul>
+<li><p>YUV色彩空间是把亮度（Luma）与色度（Chroma）分离。</p>
+<ul>
+<li>“Y”表示亮度，也就是灰度值。</li>
+<li>“U”表示蓝色通道与亮度的差值。</li>
+<li>“V”表示红色通道与亮度的差值。</li>
+</ul>
+</li>
+<li><p>对彩色图像进行直方图均衡化时，先将图像从RGB空间转到YUV空间，然后对亮度Y通道进行直方图均衡化得到通道Y”，然后将Y”UV通道进行合并。</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;input.jpg&#x27;</span>)</span><br><span class="line"></span><br><span class="line">img_yuv = cv2.cvtColor(img, cv2.COLOR_BGR2YUV)</span><br><span class="line"><span class="comment"># equalize the histogram of the Y channel</span></span><br><span class="line">img_yuv[:, :, <span class="number">0</span>] = cv2.createCLAHE(clipLimit=<span class="number">2.0</span>, tileGridSize=(<span class="number">8</span>, <span class="number">8</span>)).apply(img_yuv[:, :, <span class="number">0</span>])</span><br><span class="line"><span class="comment"># convert the YUV image back to RGB format</span></span><br><span class="line">img_output = cv2.cvtColor(img_yuv, cv2.COLOR_YUV2BGR)</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;Color input image&#x27;</span>, img)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;Histogram equalized&#x27;</span>, img_output)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="直方图比较"><a href="#直方图比较" class="headerlink" title="直方图比较"></a>直方图比较</h3><ul>
+<li>对输入的两张图像进行直方图均衡化后，可以对两个图像的直方图进行对比，从对比的结果得到一些的结论。</li>
+<li><code>cv2.compareHist(H1, H2, method)</code>：对比两个图像的直方图。<code>method</code>有三中可用：<ul>
+<li><code>cv2.HISTCMP_BHATTACHARYYA</code>：巴氏距离，越小越相似。</li>
+<li><code>cv2.HISTCMP_CORREL</code>：相关性，越大越相似。</li>
+<li><code>cv2.HISTCMP_CHISQR</code>：卡方，越大越不相似。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create_rgb_hist</span>(<span class="params">image</span>):</span></span><br><span class="line">    h, w, c = image.shape</span><br><span class="line">    rgbHist = np.zeros([<span class="number">16</span> * <span class="number">16</span> * <span class="number">16</span>, <span class="number">1</span>], np.float32)</span><br><span class="line">    bsize = <span class="number">256</span> / <span class="number">16</span></span><br><span class="line">    <span class="keyword">for</span> row <span class="keyword">in</span> <span class="built_in">range</span>(h):</span><br><span class="line">        <span class="keyword">for</span> col <span class="keyword">in</span> <span class="built_in">range</span>(w):</span><br><span class="line">            b = image[row, col, <span class="number">0</span>]</span><br><span class="line">            g = image[row, col, <span class="number">1</span>]</span><br><span class="line">            r = image[row, col, <span class="number">2</span>]</span><br><span class="line">            index = np.<span class="built_in">int</span>(b / bsize) * <span class="number">16</span> * <span class="number">16</span> + np.<span class="built_in">int</span>(g / bsize) * <span class="number">16</span> + np.<span class="built_in">int</span>(r / bsize)</span><br><span class="line">            rgbHist[np.<span class="built_in">int</span>(index), <span class="number">0</span>] = rgbHist[np.<span class="built_in">int</span>(index), <span class="number">0</span>] + <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> rgbHist</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hist_compare</span>(<span class="params">image1, image2</span>):</span></span><br><span class="line">    hist1 = create_rgb_hist(image1)</span><br><span class="line">    hist2 = create_rgb_hist(image2)</span><br><span class="line">    match1 = cv2.compareHist(hist1, hist2, cv2.HISTCMP_BHATTACHARYYA)</span><br><span class="line">    match2 = cv2.compareHist(hist1, hist2, cv2.HISTCMP_CORREL)</span><br><span class="line">    match3 = cv2.compareHist(hist1, hist2, cv2.HISTCMP_CHISQR)</span><br><span class="line">    <span class="comment"># 巴氏距离越小越相似，相关性越大越相似，卡方越大越不相似</span></span><br><span class="line">    print(<span class="string">&quot;巴氏距离&quot;</span>, match1)</span><br><span class="line">    print(<span class="string">&quot;相关性&quot;</span>, match2)</span><br><span class="line">    print(<span class="string">&quot;卡方&quot;</span>, match3)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    img1 = cv2.imread(<span class="string">&quot;img5.jpg&quot;</span>)</span><br><span class="line">    img2 = cv2.imread(<span class="string">&quot;img6.jpg&quot;</span>)</span><br><span class="line">    cv2.imshow(<span class="string">&quot;img1&quot;</span>, img1)</span><br><span class="line">    cv2.imshow(<span class="string">&quot;img2&quot;</span>, img2)</span><br><span class="line">    hist_compare(img1, img2)</span><br><span class="line">    cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">    cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<p><img src="https://img2018.cnblogs.com/blog/760885/201906/760885-20190626155749111-319065259.png" alt="img"></p>
+<h3 id="直方图反投影"><a href="#直方图反投影" class="headerlink" title="直方图反投影"></a>直方图反投影</h3><h4 id="定义-3"><a href="#定义-3" class="headerlink" title="定义"></a>定义</h4><ul>
+<li>直方图反投影，常用于图像分割或在图像中查找感兴趣的对象。本质是定位模板图像在输入图像的位置。</li>
+<li>直方图反投影，一般使用的是颜色直方图，颜色直方图比灰度直方图更容易定义对象。</li>
+<li>流程：1. 选定一个目标图像，这个图像应包含并尽可能填充我们的检测目标对象；2. 创建该图像的直方图；3. 将该直方图反投影到需要检测的测试图像上，计算出每个像素属于该目标的概率。</li>
+<li>直方图反投影可以与 camshift 算法等配合使用。</li>
+<li>我选择 U-Net。</li>
+</ul>
+<h4 id="OpenCV的反投影"><a href="#OpenCV的反投影" class="headerlink" title="OpenCV的反投影"></a>OpenCV的反投影</h4><ul>
+<li><code>cv2.calcBackProject(images, channels, hist, ranges, scale, dst)</code>：<ul>
+<li><code>hist</code>：目标进行归一化后的直方图。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line">roi = cv2.imread(<span class="string">&#x27;rose_red.png&#x27;</span>)</span><br><span class="line">hsv = cv2.cvtColor(roi, cv2.COLOR_BGR2HSV)</span><br><span class="line">target = cv2.imread(<span class="string">&#x27;rose.png&#x27;</span>)</span><br><span class="line">hsvt = cv2.cvtColor(target, cv2.COLOR_BGR2HSV)</span><br><span class="line"><span class="comment"># 1. 计算检测目标的直方图</span></span><br><span class="line">roihist = cv2.calcHist([hsv], [<span class="number">0</span>, <span class="number">1</span>], <span class="literal">None</span>, [<span class="number">180</span>, <span class="number">256</span>], [<span class="number">0</span>, <span class="number">180</span>, <span class="number">0</span>, <span class="number">256</span>])</span><br><span class="line"><span class="comment"># 2. 归一化目标直方图</span></span><br><span class="line">cv2.normalize(roihist, roihist, <span class="number">0</span>, <span class="number">255</span>, cv2.NORM_MINMAX)</span><br><span class="line"><span class="comment"># 3. 反传算法</span></span><br><span class="line">dst = cv2.calcBackProject([hsvt], channels=[<span class="number">0</span>, <span class="number">1</span>], hist=roihist, ranges=[<span class="number">0</span>, <span class="number">180</span>, <span class="number">0</span>, <span class="number">256</span>], scale=<span class="number">1</span>)</span><br><span class="line"><span class="comment"># 4. 用圆盘卷积核对概率图像进行均值滤波</span></span><br><span class="line">disc = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (<span class="number">5</span>, <span class="number">5</span>))</span><br><span class="line">cv2.filter2D(dst, -<span class="number">1</span>, disc, dst)</span><br><span class="line"><span class="comment"># 5. 应用阈值作，获得mask</span></span><br><span class="line">ret, thresh = cv2.threshold(dst, <span class="number">50</span>, <span class="number">255</span>, <span class="number">0</span>)</span><br><span class="line">thresh = cv2.merge((thresh, thresh, thresh))</span><br><span class="line">res = cv2.bitwise_and(target, thresh)</span><br><span class="line">res = np.vstack((target, thresh, res))  <span class="comment"># 上下拼接</span></span><br><span class="line">cv2.imwrite(<span class="string">&#x27;res.jpg&#x27;</span>, res)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>如下示例中，蓝色矩形的区域为目标对象，使用直方图反投影提取整个地面。</p>
+<img src="/2021/08/OpenCV-Part4/backproject_opencv.jpg" alt="img" style="zoom: 33%;">
+
+</li>
+</ul>
+<h2 id="傅里叶变换"><a href="#傅里叶变换" class="headerlink" title="傅里叶变换"></a>傅里叶变换</h2><h3 id="定义-4"><a href="#定义-4" class="headerlink" title="定义"></a>定义</h3><ul>
+<li><p>傅立叶变换，可以用于分析各种滤波器的频率特性。</p>
+</li>
+<li><p>对于正弦信号：如果幅度在短时间内变化快，则为高频信号；如果变化慢，则为低频信号。</p>
+<p>可以将相同的想法扩展到图像：图像中的振幅在边缘点或噪声急剧变化，边缘和噪声就是图像中的高频内容；如果图像中幅度没有太大变化，则就是低频分量。</p>
+</li>
+<li><p>傅里叶变换，可以将一幅图片分解为正弦和余弦两个分量，即可以将一幅图像从其空间域（spatial domain）转换为频域（frequency domain）。</p>
+</li>
+</ul>
+<blockquote>
+<p>详细讲解傅里叶的文章：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/19759362">https://zhuanlan.zhihu.com/p/19759362</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/28478034">https://zhuanlan.zhihu.com/p/28478034</a></li>
+</ul>
+</blockquote>
+<ul>
+<li><p><img src="/2021/08/OpenCV-Part4/bb8de9d8a622ec08852a334ed34f404b_b.jpg" alt="img"></p>
+</li>
+<li><p>正弦波就是一个圆周运动在一条直线上的投影。所以频域的基本单元也可以理解为一个始终在旋转的圆：</p>
+<img src="/2021/08/OpenCV-Part4/Fourier_series_square_wave_circles_animation.gif" alt="File:Fourier series square wave circles animation.gif" style="zoom: 80%;">
+</li>
+<li><p>时域与频域之间的联系：</p>
+<img src="/2021/08/OpenCV-Part4/Fourier_series_and_transform.gif" alt="File:Fourier series and transform.gif" style="zoom:80%;">
+
+</li>
+</ul>
+<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><ol>
+<li><p>灰度图 与 傅里叶变换：</p>
+<ul>
+<li><p>可以看到白色区域大多在中心，显示低频率的内容比较多。</p>
+</li>
+<li><img src="/2021/08/OpenCV-Part4/image-20210903141954326.png" alt="image-20210903141954326" style="zoom: 30%;">
+</li>
+</ul>
+</li>
+<li><p>傅里叶变换删去低频内容：</p>
+<ul>
+<li><p>删除图像中的低频内容，即将HPF应用于图像，本质是提取边缘。</p>
+</li>
+<li><img src="/2021/08/OpenCV-Part4/image-20210903142034836.png" alt="image-20210903142034836" style="zoom: 67%;">
+</li>
+</ul>
+</li>
+<li><p>傅里叶变换删去高频内容：</p>
+<ul>
+<li><p>删除图像中的高频内容，即将LPF应用于图像，本质是模糊图像。</p>
+</li>
+<li><img src="/2021/08/OpenCV-Part4/image-20210903142118824.png" alt="image-20210903142118824" style="zoom: 33%;">
+</li>
+</ul>
+</li>
+<li><p>各滤波器是 HPF（High Pass Filter）还是 LPF（Low Pass Filter）：</p>
+<ul>
+<li><p>白点在中间的就是 LPF ，白点在四周的就是 HPF。</p>
+</li>
+<li><img src="http://qiniu.aihubs.net/fft5.jpg" alt="img" style="zoom:80%;">
+
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><ul>
+<li>对于图像，可以使用2D离散傅里叶变换（DFT, 2D Discrete Fourier Transform）查找频域。同时，可以使用快速傅立叶变换（FFT, Fast Fourier Transform）的快速算法用于DFT的计算。</li>
+<li>OpenCV使用 <code>cv2.dft()</code>、<code>cv2.idft()</code> 实现傅里叶变换，效率更高。</li>
+<li>Numpy使用 <code>np.ifft2()</code>、<code>np.fft.ifftshift()</code> 实现傅里叶变换，使用更友好。</li>
+<li>DFT的性能优化：在一定的阵列尺寸下，DFT计算的性能较好。当数组大小为2的幂时，速度最快。大小为2、3和5的乘积的数组也可以非常有效地处理。<br>为达到最佳性能，可以通过OpenCV提供的函数 <code>cv2.getOptimalDFTSize()</code> 寻找最佳尺寸。<br>然后将图像填充成最佳性能大小的阵列：1. 对于OpenCV，必须手动填充零；2. 对于Numpy，可以指定FFT计算的新大小，自动填充零。</li>
+<li>通过使用最优阵列，大概能提升4倍的效率。而OpenCV本身也比Numpy效率快近3倍。</li>
+</ul>
+<h4 id="Numpy中的傅里叶变换"><a href="#Numpy中的傅里叶变换" class="headerlink" title="Numpy中的傅里叶变换"></a>Numpy中的傅里叶变换</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;test.jpg&#x27;</span>, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. 使用Numpy实现傅里叶变换 fft.fft2()</span></span><br><span class="line">f = np.fft.fft2(img)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 一旦得到结果，零频率分量（直流分量）将出现在左上角。</span></span><br><span class="line"><span class="comment"># 如果要将其置于中心，则需要使用 np.fft.fftshift() 将结果在两个方向上移动。</span></span><br><span class="line"><span class="comment"># 一旦找到了频率变换，就能找到幅度谱。</span></span><br><span class="line">fshift = np.fft.fftshift(f)</span><br><span class="line">magnitude_spectrum = <span class="number">20</span> * np.log(np.<span class="built_in">abs</span>(fshift))</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">121</span>), plt.imshow(img, cmap=<span class="string">&#x27;gray&#x27;</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;Input Image&#x27;</span>), plt.xticks([]), plt.yticks([])</span><br><span class="line">plt.subplot(<span class="number">122</span>), plt.imshow(magnitude_spectrum, cmap=<span class="string">&#x27;gray&#x27;</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;Magnitude Spectrum&#x27;</span>), plt.xticks([]), plt.yticks([])</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 找到了频率变换，就可以进行高通滤波和重建图像，也就是求逆DFT</span></span><br><span class="line">rows, cols = img.shape</span><br><span class="line">crow, ccol = rows // <span class="number">2</span>, cols // <span class="number">2</span></span><br><span class="line">fshift[crow - <span class="number">30</span>:crow + <span class="number">30</span>, ccol - <span class="number">30</span>:ccol + <span class="number">30</span>] = <span class="number">0</span></span><br><span class="line">f_ishift = np.fft.ifftshift(fshift)</span><br><span class="line">img_back = np.fft.ifft2(f_ishift)</span><br><span class="line">img_back = np.<span class="built_in">abs</span>(img_back)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. 众所周知，高通滤波是一种边缘检测操作。这也表明大部分图像数据存在于频谱的低频区域。</span></span><br><span class="line"><span class="comment"># 仔细观察结果可以看到最后一张用JET颜色显示的图像，有一些瑕疵，即显示了一些波纹状的结构，这是振铃效应。</span></span><br><span class="line"><span class="comment"># 这是由于用矩形窗口mask造成的，掩码mask被转换为sinc形状，从而导致此问题。所以矩形窗口不用于过滤，更好的选择是高斯mask。</span></span><br><span class="line">plt.subplot(<span class="number">131</span>), plt.imshow(img, cmap=<span class="string">&#x27;gray&#x27;</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;Input Image&#x27;</span>), plt.xticks([]), plt.yticks([])</span><br><span class="line">plt.subplot(<span class="number">132</span>), plt.imshow(img_back, cmap=<span class="string">&#x27;gray&#x27;</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;Image after HPF&#x27;</span>), plt.xticks([]), plt.yticks([])</span><br><span class="line">plt.subplot(<span class="number">133</span>), plt.imshow(img_back)</span><br><span class="line">plt.title(<span class="string">&#x27;Result in JET&#x27;</span>), plt.xticks([]), plt.yticks([])</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h4 id="OpenCV中的傅里叶变换"><a href="#OpenCV中的傅里叶变换" class="headerlink" title="OpenCV中的傅里叶变换"></a>OpenCV中的傅里叶变换</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;test.jpg&#x27;</span>, <span class="number">0</span>)</span><br><span class="line">rows, cols = img.shape</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. 计算DFT效率最佳的尺寸</span></span><br><span class="line">nrows = cv2.getOptimalDFTSize(rows)</span><br><span class="line">ncols = cv2.getOptimalDFTSize(cols)</span><br><span class="line">print(<span class="string">f&quot;rows: <span class="subst">&#123;rows&#125;</span>-&gt;<span class="subst">&#123;nrows&#125;</span>; cols: <span class="subst">&#123;cols&#125;</span>-&gt;<span class="subst">&#123;ncols&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 将大小扩充成2、3和5的乘积</span></span><br><span class="line">nimg = np.zeros((nrows, ncols))</span><br><span class="line">nimg[:rows, :cols] = img</span><br><span class="line">img = nimg</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. OpenCV计算快速傅里叶变换: 输入图像应首先转换为 np.float32 ，然后使用函数 cv2.dft() 和 cv2.idft() 。</span></span><br><span class="line"><span class="comment"># 返回结果与Numpy相同，但有两个通道。第一个通道为有结果的实部，第二个通道为有结果的虚部。</span></span><br><span class="line">dft = cv2.dft(np.float32(img), flags=cv2.DFT_COMPLEX_OUTPUT)</span><br><span class="line">dft_shift = np.fft.fftshift(dft)</span><br><span class="line">magnitude_spectrum = <span class="number">20</span> * np.log(cv2.magnitude(dft_shift[:, :, <span class="number">0</span>], dft_shift[:, :, <span class="number">1</span>]))</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">121</span>), plt.imshow(img, cmap=<span class="string">&#x27;gray&#x27;</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;Input Image&#x27;</span>), plt.xticks([]), plt.yticks([])</span><br><span class="line">plt.subplot(<span class="number">122</span>), plt.imshow(magnitude_spectrum, cmap=<span class="string">&#x27;gray&#x27;</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;Magnitude Spectrum&#x27;</span>), plt.xticks([]), plt.yticks([])</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. 删除图像中的高频内容(将LPF应用于图像/模糊图像)</span></span><br><span class="line"><span class="comment"># 首先创建一个在低频时具有高值的mask掩码，中心正方形为1，其他均为0。即传递LF内容，在HF区域为0。</span></span><br><span class="line">rows, cols = img.shape</span><br><span class="line">crow, ccol = rows // <span class="number">2</span>, cols // <span class="number">2</span></span><br><span class="line">mask = np.zeros((rows, cols, <span class="number">2</span>), np.uint8)</span><br><span class="line">mask[crow - <span class="number">30</span>:crow + <span class="number">30</span>, ccol - <span class="number">30</span>:ccol + <span class="number">30</span>] = <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 5. 应用掩码Mask和求逆DTF</span></span><br><span class="line">fshift = dft_shift * mask</span><br><span class="line">f_ishift = np.fft.ifftshift(fshift)</span><br><span class="line">img_back = cv2.idft(f_ishift)</span><br><span class="line">img_back = cv2.magnitude(img_back[:, :, <span class="number">0</span>], img_back[:, :, <span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">121</span>), plt.imshow(img, cmap=<span class="string">&#x27;gray&#x27;</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;Input Image&#x27;</span>), plt.xticks([]), plt.yticks([])</span><br><span class="line">plt.subplot(<span class="number">122</span>), plt.imshow(img_back, cmap=<span class="string">&#x27;gray&#x27;</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;Magnitude Spectrum&#x27;</span>), plt.xticks([]), plt.yticks([])</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h4 id="HPF-or-LPF"><a href="#HPF-or-LPF" class="headerlink" title="HPF or LPF"></a>HPF or LPF</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 简单的均值滤波</span></span><br><span class="line">mean_filter = np.ones((<span class="number">3</span>, <span class="number">3</span>))</span><br><span class="line"><span class="comment"># 构建高斯滤波</span></span><br><span class="line">x = cv2.getGaussianKernel(<span class="number">5</span>, <span class="number">10</span>)</span><br><span class="line">gaussian = x * x.T</span><br><span class="line"><span class="comment"># 不同的边缘检测算法Scharr-x方向</span></span><br><span class="line">scharr = np.array([[-<span class="number">3</span>, <span class="number">0</span>, <span class="number">3</span>],</span><br><span class="line">                   [-<span class="number">10</span>, <span class="number">0</span>, <span class="number">10</span>],</span><br><span class="line">                   [-<span class="number">3</span>, <span class="number">0</span>, <span class="number">3</span>]])</span><br><span class="line"><span class="comment"># Sobel_x</span></span><br><span class="line">sobel_x = np.array([[-<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>],</span><br><span class="line">                    [-<span class="number">2</span>, <span class="number">0</span>, <span class="number">2</span>],</span><br><span class="line">                    [-<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>]])</span><br><span class="line"><span class="comment"># Sobel_y</span></span><br><span class="line">sobel_y = np.array([[-<span class="number">1</span>, -<span class="number">2</span>, -<span class="number">1</span>],</span><br><span class="line">                    [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">                    [<span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>]])</span><br><span class="line"><span class="comment"># 拉普拉斯</span></span><br><span class="line">laplacian = np.array([[<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>],</span><br><span class="line">                      [<span class="number">1</span>, -<span class="number">4</span>, <span class="number">1</span>],</span><br><span class="line">                      [<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>]])</span><br><span class="line"></span><br><span class="line">filters = [mean_filter, gaussian, laplacian, sobel_x, sobel_y, scharr]</span><br><span class="line">filter_name = [<span class="string">&#x27;mean_filter&#x27;</span>, <span class="string">&#x27;gaussian&#x27;</span>, <span class="string">&#x27;laplacian&#x27;</span>, <span class="string">&#x27;sobel_x&#x27;</span>, <span class="string">&#x27;sobel_y&#x27;</span>, <span class="string">&#x27;scharr_x&#x27;</span>]</span><br><span class="line">fft_filters = [np.fft.fft2(x) <span class="keyword">for</span> x <span class="keyword">in</span> filters]</span><br><span class="line">fft_shift = [np.fft.fftshift(y) <span class="keyword">for</span> y <span class="keyword">in</span> fft_filters]</span><br><span class="line">mag_spectrum = [np.log(np.<span class="built_in">abs</span>(z) + <span class="number">1</span>) <span class="keyword">for</span> z <span class="keyword">in</span> fft_shift]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">6</span>):</span><br><span class="line">    plt.subplot(<span class="number">2</span>, <span class="number">3</span>, i + <span class="number">1</span>), plt.imshow(mag_spectrum[i], cmap=<span class="string">&#x27;gray&#x27;</span>)</span><br><span class="line">    plt.title(filter_name[i]), plt.xticks([]), plt.yticks([])</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h2 id="模板匹配"><a href="#模板匹配" class="headerlink" title="模板匹配"></a>模板匹配</h2><ul>
+<li>模板匹配，在较大图像中查找模板图像位置的方法。</li>
+<li>我选择深度学习。</li>
+</ul>
+<h3 id="OpenCV中的模板匹配"><a href="#OpenCV中的模板匹配" class="headerlink" title="OpenCV中的模板匹配"></a>OpenCV中的模板匹配</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;test.jpg&#x27;</span>, <span class="number">0</span>)</span><br><span class="line">template = cv2.imread(<span class="string">&#x27;test2.png&#x27;</span>, <span class="number">0</span>)</span><br><span class="line">w, h = template.shape[::-<span class="number">1</span>]</span><br><span class="line"><span class="comment"># 列表中所有的6种比较方法</span></span><br><span class="line">methods = [<span class="string">&#x27;cv2.TM_CCOEFF&#x27;</span>, <span class="string">&#x27;cv2.TM_CCOEFF_NORMED&#x27;</span>, <span class="string">&#x27;cv2.TM_CCORR&#x27;</span>,</span><br><span class="line">           <span class="string">&#x27;cv2.TM_CCORR_NORMED&#x27;</span>, <span class="string">&#x27;cv2.TM_SQDIFF&#x27;</span>, <span class="string">&#x27;cv2.TM_SQDIFF_NORMED&#x27;</span>]</span><br><span class="line"><span class="keyword">for</span> meth <span class="keyword">in</span> methods:</span><br><span class="line">    img_ = img.copy()</span><br><span class="line">    method = <span class="built_in">eval</span>(meth)</span><br><span class="line">    <span class="comment"># 应用模板匹配</span></span><br><span class="line">    res = cv2.matchTemplate(img_, template, method)</span><br><span class="line">    min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(res)</span><br><span class="line">    <span class="comment"># 如果方法是TM_SQDIFF或TM_SQDIFF_NORMED，则取最小值</span></span><br><span class="line">    <span class="keyword">if</span> method <span class="keyword">in</span> [cv2.TM_SQDIFF, cv2.TM_SQDIFF_NORMED]:</span><br><span class="line">        top_left = min_loc</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        top_left = max_loc</span><br><span class="line">    bottom_right = (top_left[<span class="number">0</span>] + w, top_left[<span class="number">1</span>] + h)</span><br><span class="line">    cv2.rectangle(img_, top_left, bottom_right, <span class="number">255</span>, <span class="number">2</span>)</span><br><span class="line">    </span><br><span class="line">    plt.subplot(<span class="number">121</span>), plt.imshow(res, cmap=<span class="string">&#x27;gray&#x27;</span>)</span><br><span class="line">    plt.title(<span class="string">&#x27;Matching Result&#x27;</span>), plt.xticks([]), plt.yticks([])</span><br><span class="line">    plt.subplot(<span class="number">122</span>), plt.imshow(img_, cmap=<span class="string">&#x27;gray&#x27;</span>)</span><br><span class="line">    plt.title(<span class="string">&#x27;Detected Point&#x27;</span>), plt.xticks([]), plt.yticks([])</span><br><span class="line">    plt.suptitle(meth)</span><br><span class="line">    plt.show()</span><br></pre></td></tr></table></figure>
+<h3 id="多对象模板匹配"><a href="#多对象模板匹配" class="headerlink" title="多对象模板匹配"></a>多对象模板匹配</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">img_rgb = cv2.imread(<span class="string">&#x27;mario.png&#x27;</span>)</span><br><span class="line">img_gray = cv2.cvtColor(img_rgb, cv2.COLOR_BGR2GRAY)</span><br><span class="line">template = cv2.imread(<span class="string">&#x27;mario_coin.png&#x27;</span>, <span class="number">0</span>)</span><br><span class="line">w, h = template.shape[::-<span class="number">1</span>]</span><br><span class="line">res = cv2.matchTemplate(img_gray, template, cv2.TM_CCOEFF_NORMED)</span><br><span class="line">threshold = <span class="number">0.8</span></span><br><span class="line">loc = np.where(res &gt;= threshold)</span><br><span class="line"><span class="keyword">for</span> pt <span class="keyword">in</span> <span class="built_in">zip</span>(*loc[::-<span class="number">1</span>]):</span><br><span class="line">    cv2.rectangle(img_rgb, pt, (pt[<span class="number">0</span>] + w, pt[<span class="number">1</span>] + h), (<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>), <span class="number">2</span>)</span><br><span class="line">cv2.imwrite(<span class="string">&#x27;res.png&#x27;</span>, img_rgb)</span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">NephrenCake</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://nephrencake.gitee.io/2021/08/OpenCV-Part4/">https://nephrencake.gitee.io/2021/08/OpenCV-Part4/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://nephrencake.gitee.io" target="_blank">浅幽丶奈芙莲的个人博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/2021/08/OpenCV-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/%E4%BA%8Ced08.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/08/OpenCV-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/"><img class="prev-cover" src="/2021/08/OpenCV-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/%E4%BA%8Ced08.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">OpenCV-完结目录</div></div></a></div><div class="next-post pull-right"><a href="/2021/08/OpenCV-Part3/"><img class="next-cover" src="/2021/08/OpenCV-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/%E4%BA%8Ced08.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">OpenCV-Part3</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#OpenCV-Part4%E2%80%94%E2%80%94%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%EF%BC%88%E4%B8%8B%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">OpenCV-Part4——图像处理（下）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%B4%E6%96%B9%E5%9B%BE"><span class="toc-number">1.1.</span> <span class="toc-text">直方图</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-number">1.1.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E6%89%BE%E5%B9%B6%E7%BB%98%E5%88%B6%E7%9B%B4%E6%96%B9%E5%9B%BE"><span class="toc-number">1.1.2.</span> <span class="toc-text">查找并绘制直方图</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#OpenCV%E8%AE%A1%E7%AE%97%E7%9B%B4%E6%96%B9%E5%9B%BE"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">OpenCV计算直方图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Matplotlib%E7%BB%98%E5%88%B6%E7%9B%B4%E6%96%B9%E5%9B%BE"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">Matplotlib绘制直方图</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B4%E6%96%B9%E5%9B%BE%E5%9D%87%E8%A1%A1%E5%8C%96"><span class="toc-number">1.1.3.</span> <span class="toc-text">直方图均衡化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-1"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E5%9D%87%E8%A1%A1%E5%8C%96"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">全局均衡化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E9%80%82%E5%BA%94%E7%9B%B4%E6%96%B9%E5%9B%BE%E5%9D%87%E8%A1%A1%E5%8C%96-CLAHE"><span class="toc-number">1.1.3.3.</span> <span class="toc-text">自适应直方图均衡化(CLAHE)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E7%BB%B4%E7%9B%B4%E6%96%B9%E5%9B%BE"><span class="toc-number">1.1.4.</span> <span class="toc-text">二维直方图</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-2"><span class="toc-number">1.1.4.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E6%89%BE%E5%B9%B6%E7%BB%98%E5%88%B6%E7%9B%B4%E6%96%B9%E5%9B%BE-1"><span class="toc-number">1.1.4.2.</span> <span class="toc-text">查找并绘制直方图</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#OpenCV%E8%AE%A1%E7%AE%97%E4%BA%8C%E7%BB%B4%E7%9B%B4%E6%96%B9%E5%9B%BE"><span class="toc-number">1.1.4.2.1.</span> <span class="toc-text">OpenCV计算二维直方图</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Matplotlib%E7%BB%98%E5%88%B6%E4%BA%8C%E7%BB%B4%E7%9B%B4%E6%96%B9%E5%9B%BE"><span class="toc-number">1.1.4.2.2.</span> <span class="toc-text">Matplotlib绘制二维直方图</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#YUV%E8%89%B2%E5%BD%A9%E7%A9%BA%E9%97%B4%E5%AF%B9%E5%BD%A9%E8%89%B2%E5%9B%BE%E5%83%8F%E5%81%9A%E7%9B%B4%E6%96%B9%E5%9B%BE%E5%9D%87%E8%A1%A1%E5%8C%96"><span class="toc-number">1.1.5.</span> <span class="toc-text">YUV色彩空间对彩色图像做直方图均衡化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B4%E6%96%B9%E5%9B%BE%E6%AF%94%E8%BE%83"><span class="toc-number">1.1.6.</span> <span class="toc-text">直方图比较</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B4%E6%96%B9%E5%9B%BE%E5%8F%8D%E6%8A%95%E5%BD%B1"><span class="toc-number">1.1.7.</span> <span class="toc-text">直方图反投影</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-3"><span class="toc-number">1.1.7.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OpenCV%E7%9A%84%E5%8F%8D%E6%8A%95%E5%BD%B1"><span class="toc-number">1.1.7.2.</span> <span class="toc-text">OpenCV的反投影</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2"><span class="toc-number">1.2.</span> <span class="toc-text">傅里叶变换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-4"><span class="toc-number">1.2.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%88%E6%9E%9C"><span class="toc-number">1.2.2.</span> <span class="toc-text">效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.2.3.</span> <span class="toc-text">实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Numpy%E4%B8%AD%E7%9A%84%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">Numpy中的傅里叶变换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OpenCV%E4%B8%AD%E7%9A%84%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">OpenCV中的傅里叶变换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#HPF-or-LPF"><span class="toc-number">1.2.3.3.</span> <span class="toc-text">HPF or LPF</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E6%9D%BF%E5%8C%B9%E9%85%8D"><span class="toc-number">1.3.</span> <span class="toc-text">模板匹配</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#OpenCV%E4%B8%AD%E7%9A%84%E6%A8%A1%E6%9D%BF%E5%8C%B9%E9%85%8D"><span class="toc-number">1.3.1.</span> <span class="toc-text">OpenCV中的模板匹配</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E5%AF%B9%E8%B1%A1%E6%A8%A1%E6%9D%BF%E5%8C%B9%E9%85%8D"><span class="toc-number">1.3.2.</span> <span class="toc-text">多对象模板匹配</span></a></li></ol></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 By NephrenCake</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">这里是浅幽丶奈芙莲的个人博客~</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> {preloader.endLoading()})</script><div class="js-pjax"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><canvas class="fireworks" mobile="true"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script></div></body></html>
