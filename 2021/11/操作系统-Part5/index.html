@@ -1,0 +1,642 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>操作系统-Part5 | 浅幽丶奈芙莲的个人博客</title><meta name="author" content="NephrenCake"><meta name="copyright" content="NephrenCake"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="I&#x2F;O 管理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作系统-Part5">
+<meta property="og:url" content="https://nephrencake.gitee.io/2021/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-Part5/index.html">
+<meta property="og:site_name" content="浅幽丶奈芙莲的个人博客">
+<meta property="og:description" content="I&#x2F;O 管理">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://nephrencake.gitee.io/2021/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/%E4%BA%8Ced12.jpg">
+<meta property="article:published_time" content="2021-11-01T01:44:00.000Z">
+<meta property="article:modified_time" content="2021-11-16T08:41:16.716Z">
+<meta property="article:author" content="NephrenCake">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://nephrencake.gitee.io/2021/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/%E4%BA%8Ced12.jpg"><link rel="shortcut icon" href="/img/favicon.jpg"><link rel="canonical" href="https://nephrencake.gitee.io/2021/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-Part5/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}
+
+// https://stackoverflow.com/questions/16839698/jquery-getscript-alternative-in-native-javascript
+const getScript = url => new Promise((resolve, reject) => {
+  const script = document.createElement('script')
+  script.src = url
+  script.async = true
+  script.onerror = reject
+  script.onload = script.onreadystatechange = function() {
+    const loadState = this.readyState
+    if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+    script.onload = script.onreadystatechange = null
+    resolve()
+  }
+  document.head.appendChild(script)
+})</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-11-16 16:41:16'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><link rel="stylesheet" href="/css/background.css"><link rel="stylesheet" href="/css/mouse.css"><link rel="stylesheet" href="/css/scrollbar.css"><link rel="stylesheet" href="/css/font.css"><link rel="stylesheet" href="/css/iconfont.css"><meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="浅幽丶奈芙莲的个人博客" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">85</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">9</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/photo/"><i class="fa-fw fas fa-heart"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/2021/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/%E4%BA%8Ced12.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">浅幽丶奈芙莲的个人博客</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/photo/"><i class="fa-fw fas fa-heart"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">操作系统-Part5</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-11-01T01:44:00.000Z" title="发表于 2021-11-01 09:44:00">2021-11-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-11-16T08:41:16.716Z" title="更新于 2021-11-16 16:41:16">2021-11-16</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">5.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>16分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="操作系统-Part5——I-O-管理"><a href="#操作系统-Part5——I-O-管理" class="headerlink" title="操作系统-Part5——I/O 管理"></a>操作系统-Part5——I/O 管理</h1><p>[TOC]</p>
+<h2 id="I-O-管理概述"><a href="#I-O-管理概述" class="headerlink" title="I/O 管理概述"></a>I/O 管理概述</h2><h3 id="I-O-设备的基本概念和分类"><a href="#I-O-设备的基本概念和分类" class="headerlink" title="I/O 设备的基本概念和分类"></a>I/O 设备的基本概念和分类</h3><p><img src="/2021/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-Part5/image-20211115162634513.png" alt="image-20211115162634513"></p>
+<ul>
+<li>UNIX 系统将外部设备抽象为一种特殊的文件，用户可以使用与文件操作相同的方式对外部设备进行操作。<ul>
+<li>Write 操作：向外部设备写出数据</li>
+<li>Read 操作：从外部设备读入数据</li>
+</ul>
+</li>
+<li>I/O 设备的分类<ul>
+<li>按使用特性<ul>
+<li>人机交互类外设</li>
+<li>存储设备</li>
+<li>网络通信设备</li>
+</ul>
+</li>
+<li>按传输速率分类<ul>
+<li>低速设备（鼠标、键盘）</li>
+<li>中速设备（激光打印机）</li>
+<li>高速设备（磁盘）</li>
+</ul>
+</li>
+<li>按信息交换的单位分类<ul>
+<li>块设备（磁盘）<ul>
+<li>传输速率较高，可寻址</li>
+</ul>
+</li>
+<li>字符设备（鼠标、键盘）<ul>
+<li>传输速率较慢，不可寻址</li>
+<li>常采用中断驱动方式</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="I-O-控制器"><a href="#I-O-控制器" class="headerlink" title="I/O 控制器"></a>I/O 控制器</h3><p><img src="/2021/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-Part5/image-20211115171623799.png" alt="image-20211115171623799"></p>
+<ul>
+<li>I/O 设备的组成<ul>
+<li>机械部件<ul>
+<li>主要用来执行具体 I/O 操作。</li>
+</ul>
+</li>
+<li>电子部件<ul>
+<li>通常是一块插入主板扩充槽的印刷电路板。</li>
+<li>包括 I/O 控制器（设备控制器）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>I/O 控制器的功能：<ul>
+<li>接受和识别 CPU 的命令<ul>
+<li>CPU发来的 read/write 命令，I/O 控制器中会有相应的<strong>控制寄存器</strong>来存放命令和参数。</li>
+</ul>
+</li>
+<li>想 CPU 报告设备的状态<ul>
+<li>I/O 控制器中会有相应的状态寄存器，用于记录 I/O 设备的当前状态。</li>
+</ul>
+</li>
+<li>数据交换<ul>
+<li>I/O 控制器中设置相应的数据寄存器。用于暂存输入输出时的数据。</li>
+</ul>
+</li>
+<li>地址识别<ul>
+<li>为了区分设备控制器中的各个寄存器，也需要给各个寄存器设置特定的地址</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>I/O 控制器的组成<ul>
+<li><img src="/2021/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-Part5/image-20211115171448414.png" alt="image-20211115171448414"></li>
+<li>一个 I/O 控制器可能会对应多个设备；</li>
+<li>数据寄存器、控制寄存器、状态寄存器可能有多个（<strong>每个控制/状态寄存器对应一个具体的设备</strong>），且这些寄存器都要有相应的地址，才能方便CPU操作。<ul>
+<li>有的计算机会让这些寄存器占用内存地址的一部分，称为<strong>内存映像 I/O</strong>；另一些计算机则采用 I/O 专用地址，即<strong>寄存器独立编址</strong>。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>内存映像 I/O v.s. 寄存器独立编址<ul>
+<li><img src="/2021/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-Part5/image-20211115171837978.png" alt="image-20211115171837978"></li>
+</ul>
+</li>
+</ul>
+<h3 id="I-O-控制方式"><a href="#I-O-控制方式" class="headerlink" title="I/O 控制方式"></a>I/O 控制方式</h3><p><img src="/2021/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-Part5/image-20211115201702719.png" alt="image-20211115201702719"></p>
+<ul>
+<li>程序直接控制方式<ul>
+<li>完成一次读/写操作的流程<ul>
+<li><img src="/2021/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-Part5/image-20211115194455982.png" alt="image-20211115194455982" style="zoom:50%;"></li>
+</ul>
+</li>
+<li>CPU 干预的频率<ul>
+<li>很频繁，I/O 操作<strong>开始之前</strong>、<strong>完成之后</strong>需要 CPU 介入，并且在<strong>等待 I/O 完成的过程中</strong> CPU 需要不断地轮询检查。</li>
+</ul>
+</li>
+<li>数据传送的单位<ul>
+<li>每次读/写<strong>一个字</strong></li>
+</ul>
+</li>
+<li>数据的流向<ul>
+<li>读操作（数据输入）：I/O 设备 -&gt; CPU -&gt; 内存</li>
+<li>写操作（数据输出）：内存 -&gt; CPU -&gt; I/O 设备</li>
+<li>每个字的读/写都需要 CPU 的帮助</li>
+</ul>
+</li>
+<li>主要缺点和主要优点<ul>
+<li>优点：实现简单。</li>
+<li>缺点：CPU 和 I/O 设备<strong>只能串行工作</strong>，CPU 需要一直轮询检查，长期处于<strong>忙等</strong>状态 ，CPU <strong>利用率低</strong>。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>中断驱动方式<ul>
+<li>完成一次读/写操作的流程<ul>
+<li><img src="/2021/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-Part5/image-20211115195236013.png" alt="image-20211115195236013" style="zoom:50%;"></li>
+<li>引入<strong>中断机制</strong>。将<strong>等待 I/O 的进程阻塞</strong>，<strong>在每个指令周期的末尾检查中断</strong>；</li>
+</ul>
+</li>
+<li>CPU 干预的频率<ul>
+<li>每次 I/O 操作<strong>开始之前</strong>、<strong>完成之后</strong>需要 CPU 介入。</li>
+<li>而等待 I/O 完成的过程中 CPU 可以切换到别的进程执行。</li>
+</ul>
+</li>
+<li>数据传送的单位<ul>
+<li>每次读/写一个字</li>
+</ul>
+</li>
+<li>数据的流向<ul>
+<li>读操作（数据输入）：I/O 设备 -&gt; CPU -&gt; 内存</li>
+<li>写操作（数据输出）：内存 -&gt; CPU -&gt; I/O 设备</li>
+</ul>
+</li>
+<li>主要缺点和主要优点<ul>
+<li>优点：通过 I/O 控制器<strong>主动发出中断信号</strong>报告 I/O 已完成，CPU 不再需要不停地轮询。CPU 和 I/O 设备并行工作，CPU 利用率明显提升。</li>
+<li>缺点：每个字<strong>在 I/O 设备与内存之间的传输，都需要经过 CPU</strong>。而<strong>频繁的中断处理会消耗较多的 CPU 时间</strong>。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>DMA（ Direct Memory Access，直接存储器存取）方式<ul>
+<li>DMA 控制器<ul>
+<li><img src="/2021/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-Part5/image-20211115200414017.png" alt="image-20211115200414017" style="zoom:80%;"></li>
+<li>DR（Data Register，数据寄存器）：暂存从设备到内存，或从内存到设备的数据。</li>
+<li>MAR（Memory Address Register，内存地址寄存器）：在输入时，MAR 表示数据应放到内存中的什么位置；输出时 MAR 表示要输出的数据放在内存中的什么位置。</li>
+<li>DC（Data Counter，数据计数器）：表示剩余要读/写的字节数。</li>
+<li>CR（Command Register，命令/状态寄存器）：用于存放 CPU 发来的 I/O 命令，或设备的状态信息。</li>
+</ul>
+</li>
+<li>完成一次读/写操作的流程<ul>
+<li><img src="/2021/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-Part5/image-20211115195617190.png" alt="image-20211115195617190" style="zoom:50%;"></li>
+<li>DMA 读写完之后，向 CPU 发出中断信号</li>
+</ul>
+</li>
+<li>CPU 干预的频率<ul>
+<li>仅在传送一个或多个数据块的<strong>开始</strong>和<strong>结束</strong>时，才需要 CPU 干预。</li>
+</ul>
+</li>
+<li>数据传送的单位<ul>
+<li>每次读/写<strong>一个或多个块</strong></li>
+<li>注意：<strong>每次读写的只能是连续的多个块，且这些块读入内存后在内存中也必须是连续的</strong>。</li>
+</ul>
+</li>
+<li>数据的流向（不再需要经过CPU）<ul>
+<li>读操作（数据输入）：I/O 设备 -&gt; 内存</li>
+<li>写操作（数据输出）：内存 -&gt; I/O 设备</li>
+</ul>
+</li>
+<li>主要缺点和主要优点<ul>
+<li>优点：<ul>
+<li><strong>数据传输单位为“块”</strong>，而不是“字”。</li>
+<li>数据在 I/O 与内存之间的传输不需要经过 CPU，<strong>CPU 介入频率降低</strong>，<strong>数据传输效率增加</strong>。</li>
+<li><strong>CPU 和 I/O 设备的并行性得到提升</strong>。</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>CPU 每发出一条 I/O 指令，<strong>只能读/写一个或多个连续（而不能离散）的数据块</strong>。</li>
+<li>如果<strong>要读/写多个离散存储的数据块，或者要将数据分别写到不同的内存区域</strong>时，CPU 要<strong>分别发出多条 I/O 指令，进行多次中断处理</strong>才能完成。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>通道控制方式<ul>
+<li>通道（弱化 CPU）可以识别并执行一系列通道指令<ul>
+<li><img src="/2021/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-Part5/image-20211115201531964.png" alt="image-20211115201531964" style="zoom:80%;"></li>
+<li>CPU 向通道发出 I/O 指令。指明<strong>通道程序在内存中的位置</strong>，并指明要<strong>操作的是哪个 I/O 设备</strong>。</li>
+<li>通道执行内存中的通道程序（其中指明了要<strong>读入/写出多少数据</strong>，读/写的数据应<strong>放在内存的位置</strong>等信息，<strong>相当于任务清单</strong>）</li>
+<li>通道执行完规定的任务后，向 CPU 发出中断信号</li>
+</ul>
+</li>
+<li>完成一次读/写操作的流程<ul>
+<li><img src="/2021/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-Part5/image-20211115200740547.png" alt="image-20211115200740547" style="zoom:50%;"></li>
+</ul>
+</li>
+<li>CPU 干预的频率<ul>
+<li>极低，通道会根据 CPU 的指示执行相应的通道程序，只有完成一组数据块的读/写后才需要发出中断信号，请求 CPU 干预。</li>
+</ul>
+</li>
+<li>数据传送的单位<ul>
+<li>每次读/写<strong>一组数据块</strong></li>
+</ul>
+</li>
+<li>数据的流向（在通道的控制下进行）<ul>
+<li>读操作（数据输入）：I/O 设备 -&gt; 内存</li>
+<li>写操作（数据输出）：内存 -&gt; I/O 设备</li>
+</ul>
+</li>
+<li>主要缺点和主要优点<ul>
+<li>缺点：实现复杂，需要专门的通道硬件支持</li>
+<li>优点：<strong>CPU、通道、I/O 设备可并行工作，资源利用率很高</strong>。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="I-O-软件层次结构"><a href="#I-O-软件层次结构" class="headerlink" title="I/O 软件层次结构"></a>I/O 软件层次结构</h3><img src="/2021/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-Part5/image-20211115202052358.png" alt="image-20211115202052358" style="zoom:80%;">
+
+<ul>
+<li><p>用户层软件</p>
+<ul>
+<li>用户层软件<strong>实现了与用户交互的接口</strong>，用户可直接<strong>使用该层提供的、与 I/O 操作相关的库函数</strong>对设备进行操作</li>
+<li>用户层软件将用户请求翻译成格式化的 I/O 请求，并通过<strong>系统调用</strong>请求操作系统内核的服务</li>
+</ul>
+</li>
+<li><p>设备独立性软件</p>
+<ul>
+<li>设备独立性软件，又称设备无关性软件。与设备的硬件特性无关的功能几乎都在这一层实现。</li>
+<li>主要实现的功能：<ul>
+<li><strong>向上层提供统一的调用接口</strong>（如 read/write 系统调用）</li>
+<li><strong>设备的保护</strong>（访问权限）</li>
+<li><strong>差错处理</strong></li>
+<li><strong>设备的分配与回收</strong>（临界资源）</li>
+<li><strong>数据缓冲区管理</strong>（屏蔽设备之间数据交换单位大小和传输速度的差异）</li>
+<li><strong>建立逻辑设备表</strong>（LUT，Logical UnitTable），包含逻辑设备名到物理设备名的<strong>映射关系</strong>、根据设备类型选择<strong>调用相应的驱动程序</strong>。<ul>
+<li><img src="/2021/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-Part5/image-20211115203148579.png" alt="image-20211115203148579" style="zoom: 67%;"></li>
+<li>操作系统系统可以采用两种方式管理逻辑设备表（LUT）： <ol>
+<li><strong>整个系统</strong>设置一张 LUT，意味着所有用户不能使用相同的逻辑设备名，因此只适用于单用户操作系统。</li>
+<li><strong>每个用户</strong>设置一张 LUT，各个用户使用的逻辑设备名可以重复，适用于多用户操作系统。系统在用户登录时为其建立一个用户管理进程，而 LUT 就存放在用户管理进程的 PCB 中。</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>设备驱动程序</p>
+<ul>
+<li>负责对硬件设备的具体控制，将上层发出的一系列命令转化成特定（不同厂家）设备的命令。</li>
+<li>包括<strong>设置设备寄存器</strong>、<strong>检查设备状态</strong>等</li>
+<li>驱动程序一般会以一个独立进程的方式存在。</li>
+</ul>
+</li>
+<li><p>中断处理程序</p>
+<ul>
+<li><img src="/2021/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-Part5/image-20211115205824849.png" alt="image-20211115205824849" style="zoom:80%;"></li>
+<li>当 I/O 任务完成时，I/O 控制器会发送一个中断信号，系统会根据中断信号类型找到相应的中断处理程序并执行。</li>
+</ul>
+</li>
+<li><p>最常考的是设备<strong>独立性软件、设备驱动程序</strong>这两层。</p>
+<ul>
+<li>直接涉及到硬件具体细节、且与中断无关的操作肯定是在<strong>设备驱动程序层</strong>完成的</li>
+<li>没有涉及硬件的、对各种设备都需要进行的管理工作都是在<strong>设备独立性软件层</strong>完成的</li>
+<li><img src="/2021/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-Part5/image-20211115210124001.png" alt="image-20211115210124001"></li>
+</ul>
+</li>
+</ul>
+<h2 id="I-O-核心子系统"><a href="#I-O-核心子系统" class="headerlink" title="I/O 核心子系统"></a>I/O 核心子系统</h2><h3 id="I-O-子系统概述"><a href="#I-O-子系统概述" class="headerlink" title="I/O 子系统概述"></a>I/O 子系统概述</h3><ul>
+<li><img src="/2021/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-Part5/image-20211115210745581.png" alt="image-20211115210745581" style="zoom:80%;"></li>
+<li>考研中，需要重点理解和掌握的功能是：<ul>
+<li><strong>I/O 调度</strong><ul>
+<li>类比磁盘调度</li>
+<li>先来先服务算法、优先级算法、短作业优先等</li>
+</ul>
+</li>
+<li><strong>设备保护</strong><ul>
+<li>类比文件保护功能</li>
+<li>设备被看做是一种特殊的文件，每个设备也会有对应的 FCB。</li>
+<li>当用户请求访问某个设备时，系统根据 FCB 中记录的信息来判断该用户是否有相应的访问权限，以此实现“设备保护”的功能。</li>
+</ul>
+</li>
+<li><strong>假脱机技术</strong>（SPOOLing技术）</li>
+<li><strong>设备分配与回收</strong></li>
+<li><strong>缓冲区管理</strong>（即缓冲与高速缓存）</li>
+</ul>
+</li>
+</ul>
+<h3 id="假脱机技术"><a href="#假脱机技术" class="headerlink" title="假脱机技术"></a>假脱机技术</h3><p><img src="/2021/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-Part5/image-20211115210955966.png" alt="image-20211115210955966"></p>
+<ul>
+<li>脱机技术 —— 脱离主机的控制进行的输入/输出操作。<ul>
+<li><img src="/2021/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-Part5/image-20211115214348914.png" alt="image-20211115214348914" style="zoom: 67%;"></li>
+<li>缓解 CPU 与慢速 I/O 设备的速度矛盾。</li>
+<li>实现 I/O 设备与 CPU 的并行。</li>
+</ul>
+</li>
+<li>假脱机技术（SPOOLing 技术）<ul>
+<li><img src="/2021/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-Part5/image-20211115213754105.png" alt="image-20211115213754105" style="zoom:67%;"></li>
+<li>输入井：模拟脱机<strong>输入时的磁带</strong>，用于收容 I/O 设备输入的数据</li>
+<li>输出井：模拟脱机<strong>输出时的磁带</strong>，用于收容用户进程输出的数据</li>
+<li>在<strong>磁盘上</strong>开辟出两个存储区域 —— 输入井和输出井。</li>
+<li>输入进程：模拟脱机<strong>输入时的外围控制机</strong></li>
+<li>输出进程：模拟脱机<strong>输出时的外围控制机</strong></li>
+<li>要实现 SPOOLing 技术，<strong>必须要有多道程序技术的支持</strong>。系统会建立输入进程和输出进程。</li>
+<li>输入缓冲区：用于暂存从输入设备输入的数据，之后再转存到输入井中</li>
+<li>输出缓冲区：用于暂存从输出井送来的数据，之后再传送到输出设备上</li>
+<li>输入缓冲区和输出缓冲区是<strong>在内存中</strong>的缓冲区</li>
+</ul>
+</li>
+<li>共享打印机<ul>
+<li>SPOOLing 技术可以把一台物理设备<strong>虚拟</strong>成逻辑上的多台设备，可以<strong>将独占式设备改造成共享设备</strong>。<ol>
+<li><strong>在磁盘输出井中</strong>为进程申请一个空闲缓冲区（这个缓冲区是在磁盘上的），并将要打印的数据送入其中；</li>
+<li>为用户进程申请一张空白的打印请求表，并将用户的打印请求填入表中（用来说明用户的打印数据存放位置等信息），再将该表挂到假脱机文件队列上。</li>
+<li>当打印机空闲时，<strong>输出进程会从文件队列的队头取出一张打印请求表</strong>，并根据表中的要求将要打印的数据<strong>从输出井传送到输出缓冲区</strong>，再输出到打印机进行打印。</li>
+</ol>
+</li>
+<li><img src="/2021/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-Part5/image-20211116140746931.png" alt="image-20211116140746931"></li>
+</ul>
+</li>
+</ul>
+<h3 id="设备的分配与回收"><a href="#设备的分配与回收" class="headerlink" title="设备的分配与回收"></a>设备的分配与回收</h3><p><img src="/2021/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-Part5/image-20211116141015539.png" alt="image-20211116141015539"></p>
+<ul>
+<li><p><strong>设备分配时应考虑的因素</strong></p>
+<ul>
+<li>设备的固有属性<ul>
+<li><strong>独占设备</strong>：一个时段只能分配给一个进程，只允许各个进程串行使用（如打印机）</li>
+<li><strong>共享设备</strong>：可同时分配给多个进程使用（如磁盘），各进程往往是宏观上同时共享使用设备，而微观上交替使用。</li>
+<li><strong>虚拟设备</strong>：采用 SPOOLing 技术将独占设备改造成虚拟的共享设备，可同时分配给多个进程使用（如采用 SPOOLing 技术实现的共享打印机）</li>
+</ul>
+</li>
+<li>设备分配算法<ul>
+<li><strong>先来先服务</strong></li>
+<li><strong>优先级高者优先</strong></li>
+<li><strong>短任务优先</strong></li>
+<li>……</li>
+</ul>
+</li>
+<li>设备分配中的安全性<ul>
+<li><strong>安全分配方式</strong>：为进程分配一个 I/O 设备后就将进程阻塞，本次 I/O 完成后才将进程唤醒。<ul>
+<li><strong>一个时段内每个进程只能使用一个设备</strong></li>
+<li>优点：破坏了“请求和保持”条件，<strong>不会死锁</strong></li>
+<li>缺点：对于一个进程来说，CPU 和 I/O 设备只能<strong>串行</strong>工作</li>
+</ul>
+</li>
+<li><strong>不安全分配方式</strong>：进程发出 I/O 请求后，系统为其分配 I/O 设备，并且进程可继续执行，之后还可以发出新的 I/O 请求。只有某个 I/O 请求得不到满足时才将进程阻塞。<ul>
+<li><strong>一个进程可以同时使用多个设备</strong></li>
+<li>优点：进程的计算任务和 I/O 任务可以<strong>并行</strong>处理</li>
+<li>缺点：<strong>有可能发生死锁</strong>（死锁避免、死锁的检测和解除）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>静态分配与动态分配</strong></p>
+<ul>
+<li>静态分配：进程<strong>运行前为其分配全部所需资源</strong>，运行结束后归还资源<ul>
+<li>破坏了“请求和保持”条件，不会发生死锁</li>
+</ul>
+</li>
+<li>动态分配：进程<strong>运行过程中动态申请</strong>设备资源</li>
+</ul>
+</li>
+<li><p><strong>设备分配管理中的数据结构</strong></p>
+<ul>
+<li><strong>设备、控制器、通道</strong>之间的关系：<ul>
+<li>一个通道控制多个控制器，一个控制器控制多个设备</li>
+<li><img src="/2021/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-Part5/image-20211116142938193.png" alt="image-20211116142938193" style="zoom: 67%;"></li>
+</ul>
+</li>
+<li><strong>设备控制表（DCT）</strong>：系统为每个设备配置一张 DCT，用于记录设备情况<ul>
+<li>系统会根据阻塞原因不同，将进程 PCB 挂到不同的阻塞队列中</li>
+<li><img src="/2021/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-Part5/image-20211116143032613.png" alt="image-20211116143032613" style="zoom: 80%;"></li>
+</ul>
+</li>
+<li><strong>控制器控制表（COCT）</strong>：每个设备控制器都会对应一张 COCT。操作系统根据 COCT 的信息对控制器进行操作和管理。<ul>
+<li><img src="/2021/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-Part5/image-20211116143127155.png" alt="image-20211116143127155" style="zoom:80%;"></li>
+</ul>
+</li>
+<li><strong>通道控制表（CHCT）</strong>：每个通道都会对应一张 CHCT。操作系统根据 CHCT 的信息对通道进行操作和管理。<ul>
+<li><img src="/2021/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-Part5/image-20211116143209860.png" alt="image-20211116143209860" style="zoom:80%;"></li>
+</ul>
+</li>
+<li><strong>系统设备表（SDT）</strong>：记录了<strong>系统中全部设备</strong>的情况，每个设备对应一个表目。<ul>
+<li><img src="/2021/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-Part5/image-20211116143256935.png" alt="image-20211116143256935" style="zoom:80%;"></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>设备分配的步骤</strong></p>
+<ul>
+<li><p>步骤：</p>
+<ol>
+<li>根据进程请求的<strong>物理设备名</strong>查找 SDT（注：物理设备名是进程请求分配设备时提供的参数）</li>
+<li>根据 SDT 找到 DCT，若<strong>设备</strong>忙碌则将进程 PCB 挂到<strong>设备等待队列</strong>中，不忙碌则将<strong>设备</strong>分配给进程。</li>
+<li>根据 DCT 找到 COCT，若<strong>控制器</strong>忙碌则将进程 PCB 挂到<strong>控制器等待队列</strong>中，不忙碌则将<strong>控制器</strong>分配给进程。</li>
+<li>根据 COCT 找到 CHCT，若<strong>通道</strong>忙碌则将进程 PCB 挂到<strong>通道等待队列</strong>中，不忙碌则将<strong>通道</strong>分配给进程。</li>
+</ol>
+</li>
+<li><p>注意：<strong>只有设备、控制器、通道三者都分配成功时，这次设备分配才算成功，之后便可启动 I/O 设备进行数据传送</strong>。</p>
+</li>
+<li><p>缺点：</p>
+<ul>
+<li>用户编程时必须使用<strong>物理设备名</strong>，底层细节对用户不透明，不方便编程 </li>
+<li>若换了一个<strong>物理设备</strong>，则程序无法运行</li>
+<li>若进程<strong>请求的物理设备</strong>正在忙碌，则即使系统中还有<strong>同类型的设备</strong>，进程也必须阻塞等待</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>设备分配步骤的改进方法</strong></p>
+<ul>
+<li>改进方法：建立逻辑设备名与物理设备名的映射机制，用户编程时只需提供<strong>逻辑设备名</strong>。<ul>
+<li><img src="/2021/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-Part5/image-20211116144907464.png" alt="image-20211116144907464"></li>
+</ul>
+</li>
+<li>分配步骤<ol>
+<li>根据进程请求的<strong>逻辑设备名</strong>查找 SDT（注：用户编程时提供的逻辑设备名其实就是“设备类型”）</li>
+<li>查找 SDT，找到用户进程<strong>指定类型的且空闲</strong>的设备，将其及其 DCT 分配给该进程。<ul>
+<li>操作系统<strong>在逻辑设备表（LUT）中新增一个表项</strong>，<strong>记录该次调用的逻辑设备名和物理设备名的映射关系</strong>，</li>
+<li>在这一步，操作系统动态分配物理设备，并返回相应 DCT。</li>
+<li>之后用户进程再次通过相同的逻辑设备名，操作系统通过 LUT 表的记录也可以找到对应的物理设备。</li>
+</ul>
+</li>
+<li>根据 DCT 找到 COCT，若控制器忙碌则将进程 PCB 挂到控制器等待队列中，不忙碌则将控制器分配给进程。</li>
+<li>根据 COCT 找到 CHCT，若通道忙碌则将进程 PCB 挂到通道等待队列中，不忙碌则将通道分配给进程。</li>
+</ol>
+</li>
+<li>逻辑设备表的设置问题： <ul>
+<li>整个系统只有一张 LUT：各用户所用的<strong>逻辑设备名不允许重复</strong>，适用于单用户操作系统</li>
+<li>每个用户一张 LUT：<strong>不同用户的逻辑设备名可重复</strong>，适用于多用户操作系统</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="缓冲区管理"><a href="#缓冲区管理" class="headerlink" title="缓冲区管理"></a>缓冲区管理</h3><p><img src="/2021/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-Part5/image-20211116150127920.png" alt="image-20211116150127920"></p>
+<ul>
+<li>缓冲区的定义<ul>
+<li>缓冲区是一个<strong>存储区域</strong>，可以<strong>由专门的硬件寄存器</strong>组成，也可利用<strong>内存</strong>作为缓冲区。<ul>
+<li>使用硬件作为缓冲区的成本较高，容量也较小，一般仅用在对速度要求非常高的场合（如，存储器管理中所用的联想寄存器，快表）</li>
+<li>一般情况下，更多的是利用内存作为缓冲区，“设备独立性软件”的缓冲区管理就是要组织管理好内存中的缓冲区</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>缓冲区的作用<ul>
+<li>缓和 CPU 与 I/O 设备之间速度不匹配的矛盾</li>
+<li>减少对 CPU 的中断频率，放宽对 CPU 中断响应时间的限制<ul>
+<li>字符型设备，每输出完一个字符就要向 CPU 发送一次中断信号</li>
+</ul>
+</li>
+<li>解决数据粒度不匹配的问题<ul>
+<li>输出进程每次可以生成一块数据，但 I/O 设备每次只能输出一个字符</li>
+</ul>
+</li>
+<li>提高 CPU 和 I/O 设备之间的并行性</li>
+</ul>
+</li>
+<li>单缓冲<ul>
+<li>单缓冲策略，操作系统会在<strong>主存中为其分配一个缓冲区</strong>。</li>
+<li>注意：<ul>
+<li><strong>当缓冲区数据非空时，不能往缓冲区冲入数据，只能从缓冲区把数据传出</strong>；</li>
+<li><strong>当缓冲区为空时，可以往缓冲区冲入数据，但必须把缓冲区充满以后，才能从缓冲区把数据传出</strong>。</li>
+<li>一般来说，一个缓冲区的大小就是一个块，用户进程的工作区大小与缓冲区相同</li>
+</ul>
+</li>
+<li><img src="/2021/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-Part5/image-20211116154946154.png" alt="image-20211116154946154" style="zoom:67%;"></li>
+<li><img src="/2021/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-Part5/image-20211116154847194.png" alt="image-20211116154847194"></li>
+<li>技巧：假定一个初始状态，分析下次到达相同状态需要多少时间，这就是处理<strong>一块数据平均所需时间</strong>。<ul>
+<li><strong>采用单缓冲策略，处理一块数据平均耗时 Max(C, T)+M</strong>。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>双缓冲<ul>
+<li>双缓冲策略，操作系统会在主存中为其分配两个缓冲区</li>
+<li><img src="/2021/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-Part5/image-20211116155441445.png" alt="image-20211116155441445" style="zoom:67%;"></li>
+<li><img src="/2021/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-Part5/image-20211116155706436.png" alt="image-20211116155706436"></li>
+<li>当 M+C&gt;T，则<strong>很难有回到初始状态</strong>，但是通过图中观察可发现，周期为 M+C。<ul>
+<li>**采用双缓冲策略，处理一个数据块的平均耗时为 Max (T, C+M)**。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>使用单/双缓冲在通信时的区别<ul>
+<li>两台机器之间<strong>通信</strong>时，可以配置缓冲区用于数据的发送和接受。<ul>
+<li>若两个相互通信的机器只设置<strong>单缓冲区</strong>，在任一时刻只能实现<strong>数据的单向传输</strong>。</li>
+<li>若两个相互通信的机器设置<strong>双缓冲区</strong>，则同一时刻可以实现<strong>双向的数据传输</strong>。</li>
+<li>管道通信中的“管道”其实就是缓冲区。要实现数据的双向传输，必须设置两个管道</li>
+<li>==这里与part2说法冲突todo==</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>循环缓冲<ul>
+<li>将多个大小相等的缓冲区链接成一个循环队列。</li>
+<li><img src="/2021/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-Part5/image-20211116162507957.png" alt="image-20211116162507957" style="zoom:80%;"></li>
+</ul>
+</li>
+<li>缓冲池<ul>
+<li>缓冲池由系统中共用的缓冲区组成。这些缓冲区按使用状况可以分为：空缓冲队列、装满输入数据的缓冲队列（输入队列）、装满输出数据的缓冲队列（输出队列）。</li>
+<li>另外，根据一个缓冲区在实际运算中扮演的功能不同，又设置了四种工作缓冲区：用于收容输入数据的工作缓冲区（hin）、用于提取输入数据的工作缓冲区（sin）、用于收容输出数据的工作缓冲区（hout）、用于提取输出数据的工作缓冲区（sout）</li>
+<li><img src="/2021/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-Part5/image-20211116163116910.png" alt="image-20211116163116910" style="zoom:80%;">
+
+</li>
+</ul>
+</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">NephrenCake</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://nephrencake.gitee.io/2021/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-Part5/">https://nephrencake.gitee.io/2021/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-Part5/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://nephrencake.gitee.io" target="_blank">浅幽丶奈芙莲的个人博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/2021/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/%E4%BA%8Ced12.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/"><img class="prev-cover" src="/2021/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/%E4%BA%8Ced12.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">操作系统-完结目录</div></div></a></div><div class="next-post pull-right"><a href="/2021/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-Part4/"><img class="next-cover" src="/2021/11/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C%E7%BB%93%E7%9B%AE%E5%BD%95/%E4%BA%8Ced12.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">操作系统-Part4</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-Part5%E2%80%94%E2%80%94I-O-%E7%AE%A1%E7%90%86"><span class="toc-number">1.</span> <span class="toc-text">操作系统-Part5——I&#x2F;O 管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#I-O-%E7%AE%A1%E7%90%86%E6%A6%82%E8%BF%B0"><span class="toc-number">1.1.</span> <span class="toc-text">I&#x2F;O 管理概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#I-O-%E8%AE%BE%E5%A4%87%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E5%92%8C%E5%88%86%E7%B1%BB"><span class="toc-number">1.1.1.</span> <span class="toc-text">I&#x2F;O 设备的基本概念和分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#I-O-%E6%8E%A7%E5%88%B6%E5%99%A8"><span class="toc-number">1.1.2.</span> <span class="toc-text">I&#x2F;O 控制器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#I-O-%E6%8E%A7%E5%88%B6%E6%96%B9%E5%BC%8F"><span class="toc-number">1.1.3.</span> <span class="toc-text">I&#x2F;O 控制方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#I-O-%E8%BD%AF%E4%BB%B6%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84"><span class="toc-number">1.1.4.</span> <span class="toc-text">I&#x2F;O 软件层次结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#I-O-%E6%A0%B8%E5%BF%83%E5%AD%90%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.2.</span> <span class="toc-text">I&#x2F;O 核心子系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#I-O-%E5%AD%90%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0"><span class="toc-number">1.2.1.</span> <span class="toc-text">I&#x2F;O 子系统概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%81%87%E8%84%B1%E6%9C%BA%E6%8A%80%E6%9C%AF"><span class="toc-number">1.2.2.</span> <span class="toc-text">假脱机技术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E5%A4%87%E7%9A%84%E5%88%86%E9%85%8D%E4%B8%8E%E5%9B%9E%E6%94%B6"><span class="toc-number">1.2.3.</span> <span class="toc-text">设备的分配与回收</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%93%E5%86%B2%E5%8C%BA%E7%AE%A1%E7%90%86"><span class="toc-number">1.2.4.</span> <span class="toc-text">缓冲区管理</span></a></li></ol></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 By NephrenCake</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">这里是浅幽丶奈芙莲的个人博客~</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> {preloader.endLoading()})</script><div class="js-pjax"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><canvas class="fireworks" mobile="true"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script></div></body></html>
