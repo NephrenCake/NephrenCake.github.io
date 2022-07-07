@@ -781,6 +781,13 @@
   </url>
   
   <url>
+    <loc>https://nephrencake.gitee.io/tags/Docker/</loc>
+    <lastmod>2022-07-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://nephrencake.gitee.io/tags/Git/</loc>
     <lastmod>2022-07-07</lastmod>
     <changefreq>daily</changefreq>
@@ -789,13 +796,6 @@
   
   <url>
     <loc>https://nephrencake.gitee.io/tags/Linux/</loc>
-    <lastmod>2022-07-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://nephrencake.gitee.io/tags/Docker/</loc>
     <lastmod>2022-07-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -860,14 +860,7 @@
   </url>
   
   <url>
-    <loc>https://nephrencake.gitee.io/categories/Git%E5%9F%BA%E7%A1%80/</loc>
-    <lastmod>2022-07-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://nephrencake.gitee.io/categories/Linux%E5%9F%BA%E7%A1%80/</loc>
+    <loc>https://nephrencake.gitee.io/categories/Docker%E5%9F%BA%E7%A1%80/</loc>
     <lastmod>2022-07-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -881,7 +874,14 @@
   </url>
   
   <url>
-    <loc>https://nephrencake.gitee.io/categories/Docker%E5%9F%BA%E7%A1%80/</loc>
+    <loc>https://nephrencake.gitee.io/categories/Git%E5%9F%BA%E7%A1%80/</loc>
+    <lastmod>2022-07-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://nephrencake.gitee.io/categories/Linux%E5%9F%BA%E7%A1%80/</loc>
     <lastmod>2022-07-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -930,13 +930,6 @@
   </url>
   
   <url>
-    <loc>https://nephrencake.gitee.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</loc>
-    <lastmod>2022-07-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://nephrencake.gitee.io/categories/Python%E5%90%8E%E7%AB%AF%E9%83%A8%E7%BD%B2/</loc>
     <lastmod>2022-07-07</lastmod>
     <changefreq>daily</changefreq>
@@ -951,7 +944,7 @@
   </url>
   
   <url>
-    <loc>https://nephrencake.gitee.io/categories/%E8%80%83%E7%A0%94%E4%BD%9C%E6%88%98%E8%AE%B0%E5%BD%95/</loc>
+    <loc>https://nephrencake.gitee.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</loc>
     <lastmod>2022-07-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -959,6 +952,13 @@
   
   <url>
     <loc>https://nephrencake.gitee.io/categories/C/</loc>
+    <lastmod>2022-07-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://nephrencake.gitee.io/categories/%E8%80%83%E7%A0%94%E4%BD%9C%E6%88%98%E8%AE%B0%E5%BD%95/</loc>
     <lastmod>2022-07-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
