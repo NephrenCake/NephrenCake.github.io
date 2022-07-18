@@ -767,13 +767,6 @@
 
   
   <url>
-    <loc>https://nephrencake.github.io/tags/Algorithms/</loc>
-    <lastmod>2022-07-18</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://nephrencake.github.io/tags/AI/</loc>
     <lastmod>2022-07-18</lastmod>
     <changefreq>daily</changefreq>
@@ -781,14 +774,14 @@
   </url>
   
   <url>
-    <loc>https://nephrencake.github.io/tags/Git/</loc>
+    <loc>https://nephrencake.github.io/tags/Hexo/</loc>
     <lastmod>2022-07-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://nephrencake.github.io/tags/Hexo/</loc>
+    <loc>https://nephrencake.github.io/tags/Git/</loc>
     <lastmod>2022-07-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -816,14 +809,14 @@
   </url>
   
   <url>
-    <loc>https://nephrencake.github.io/tags/MarkDown/</loc>
+    <loc>https://nephrencake.github.io/tags/Web/</loc>
     <lastmod>2022-07-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://nephrencake.github.io/tags/Web/</loc>
+    <loc>https://nephrencake.github.io/tags/MarkDown/</loc>
     <lastmod>2022-07-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -836,21 +829,14 @@
     <priority>0.6</priority>
   </url>
   
+  <url>
+    <loc>https://nephrencake.github.io/tags/Algorithms/</loc>
+    <lastmod>2022-07-18</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
 
-  
-  <url>
-    <loc>https://nephrencake.github.io/categories/C/</loc>
-    <lastmod>2022-07-18</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://nephrencake.github.io/categories/%E8%80%83%E7%A0%94%E4%BD%9C%E6%88%98%E8%AE%B0%E5%BD%95/</loc>
-    <lastmod>2022-07-18</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
   
   <url>
     <loc>https://nephrencake.github.io/categories/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</loc>
@@ -861,20 +847,6 @@
   
   <url>
     <loc>https://nephrencake.github.io/categories/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5/</loc>
-    <lastmod>2022-07-18</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://nephrencake.github.io/categories/Git%E5%9F%BA%E7%A1%80/</loc>
-    <lastmod>2022-07-18</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://nephrencake.github.io/categories/Linux%E5%9F%BA%E7%A1%80/</loc>
     <lastmod>2022-07-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -895,7 +867,28 @@
   </url>
   
   <url>
+    <loc>https://nephrencake.github.io/categories/Git%E5%9F%BA%E7%A1%80/</loc>
+    <lastmod>2022-07-18</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://nephrencake.github.io/categories/Linux%E5%9F%BA%E7%A1%80/</loc>
+    <lastmod>2022-07-18</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://nephrencake.github.io/categories/Docker%E5%9F%BA%E7%A1%80/</loc>
+    <lastmod>2022-07-18</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://nephrencake.github.io/categories/Django/</loc>
     <lastmod>2022-07-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -930,7 +923,7 @@
   </url>
   
   <url>
-    <loc>https://nephrencake.github.io/categories/Django/</loc>
+    <loc>https://nephrencake.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/</loc>
     <lastmod>2022-07-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -958,7 +951,14 @@
   </url>
   
   <url>
-    <loc>https://nephrencake.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/</loc>
+    <loc>https://nephrencake.github.io/categories/C/</loc>
+    <lastmod>2022-07-18</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://nephrencake.github.io/categories/%E8%80%83%E7%A0%94%E4%BD%9C%E6%88%98%E8%AE%B0%E5%BD%95/</loc>
     <lastmod>2022-07-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

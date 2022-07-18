@@ -1,11 +1,34 @@
-@font-face{
-            font-family: 'HYLeMiaoTiW';
-            src : url('../font/HYLeMiaoTiW.ttf');
-        }
+/*@font-face {*/
+/*    font-family: 'FZSJ-MIAOWANGT';*/
+/*    src: url('../font/FZSJ-MIAOWANGT.TTF');*/
+/*}*/
+/*.fontFail {*/
+/*    font-family: FZSJ-MIAOWANGT;*/
+/*}*/
 
+/*@font-face {*/
+/*    font-family: 'HYLeMiaoTiW';*/
+/*    src: url('../font/HYLeMiaoTiW.ttf');*/
+/*}*/
+/*.fontFail {*/
+/*    font-family: HYLeMiaoTiW;*/
+/*}*/
+
+@font-face {
+    font-family: 'FZRuiZYJW_Xian';
+    src: url('../font/FZRuiZYJW_Xian.TTF')
+}
 .fontFail {
-            font-family: HYLeMiaoTiW;
-        }
+    font-family: FZRuiZYJW_Xian;
+}
+
+@font-face {
+    font-family: 'FZLanTYJW_Zhun';
+    src: url('../font/FZLanTYJW_Zhun.TTF')
+}
+.fontFail {
+    font-family: FZLanTYJW_Zhun;
+}
 
 /*body{*/
 /*    font-family: "HYLeMiaoTiW";*/
