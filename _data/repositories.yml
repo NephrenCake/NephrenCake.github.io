@@ -1,0 +1,11 @@
+github_users: []
+
+repo_description_lines_max: 2
+
+github_repos:
+  - rednote-machine-learning/RedKnot
+  - Prism-Shadow/GDPevo
+  - redai-studio/HYPIC
+  - sysdomlab/Hermes
+  - Time-Rune/ExFold-MoE
+  - sysdomlab/Ares
